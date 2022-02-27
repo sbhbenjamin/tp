@@ -387,6 +387,96 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 
   Use case resumes from step 3.
 
+**Use case: UC05 - Adding a tag to the task**
+
+**MSS**
+
+1.  User chooses to add a tag to an existing task.
+2.  User enters the request to add the tag to the task.
+3.  Harmonia adds the tag to the task.
+4.  Harmonia informs the user that the tag has been successfully added to the task.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters new data.
+  
+  Steps 2a1-2a2 are repeated until valid data is inputted. 
+
+  Use case resumes from step 3.
+
+**Use case: UC06 - Editing a task**
+
+**MSS**
+
+1.  User chooses to edit a task from the task list.
+2.  User enters the request to edit the task with the updated details.
+3.  Harmonia updates the task.
+4.  Harmonia informs the user that the task has been successfully updated.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters new data.
+
+  Steps 2a1-2a2 are repeated until valid data is inputted.
+
+  Use case resumes from step 3.
+
+**Use case: UC07 - List out all the tasks**
+
+**MSS**
+
+1.  User chooses lists out all the tasks.
+2.  User enters the request to list tasks.
+3.  Harmonia lists out the task.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters new data.
+
+  Steps 2a1-2a2 are repeated until valid data is inputted.
+
+  Use case resumes from step 3.
+
+**Use case: UC08 - Searching for a task by keyword/tag**
+
+**MSS**
+
+1.  User enters the request to search for task(s) by keyword/tag.
+2.  Harmonia shows a list of tasks that match the specified keyword/tag.
+3.  Harmonia informs the user that the search result has been displayed successfully.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new command.
+
+  Steps 2a1-2a2 are repeated until valid data is inputted.
+
+  Use case resumes from step 3.
+
+* 2b. Harmonia detects that the tag does not exist.
+    * 2b1. Harmonia outputs an error message.
+    * 2b2. User enters a new command.
+
+  Steps 2a1-2a2 are repeated until valid data is inputted.
+
+  Use case resumes from step 3.
+
 ### Non-Functional Requirements
 
 1. Should work on most *Mainstream* OS as long as it has Java `11` or above installed.
