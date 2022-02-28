@@ -6,30 +6,48 @@ title: Harmonia User Guide
 Harmonia is a **desktop app for managing tasks related to your academic life, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Harmonia can get your task management done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------   
+## Table of Contents
+- [Quick Start](#quick-start)
+- [Features](#features)
+  - [Adding a task: add](#adding-a-task-add) 
+  - [Listing all tasks: list](#listing-all-tasks-list)
+  - [Deleting a task: delete](#deleting-a-task-delete)
+  - [Locating a task: find](#locating-a-task-find)
+  - [Marking as complete: mark](#marking-as-complete--mark)
+  - [Marking as complete: unmark](#marking-as-incomplete--unmark)
+  - [Editing a task: edit](#editing-a-task--edit)
+  - [Exiting the program: exit](#exiting-the-program--exit)
+  - [Saving the data](#saving-the-data)
+- [Command Summary](#command-summary)
+
+
 ## Quick start
 
 1. Ensure that you have Java `11` or above installed in your Computer.
 2. Download the latest `Harmonia.jar` from [here](https://github.com/AY2122S2-CS2103T-T09-1/tp.git)
 3. Copy the file to the folder you want to use as the home folder for your Harmonia.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br></br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    ![Ui](images/Ui.png)
-5. Type the command in the command box and press Enter to execute it. E.g type `list` to list down all the tasks
+5. Type the command in the command box and press Enter to execute it. (E.g type `list` to list down all the tasks)
 
 --------------------------------------------------------------------------------------------------------------------   
 ## Features
 
-###Adding a task: `add`
+### Adding a task: `add`
+
 Adds a task into the Harmonia.
 
 Format:  `add d/DESCRIPTION`  
 Example: `add d/CS2103T tp meeting`
 
-###Listing all tasks: `list`
+### Listing all tasks: `list`
+
 Shows a list of all the existing tasks in the task list.
 
 Format: `list`
 
-###Deleting a task: `delete`
+### Deleting a task: `delete`
+
 Deletes a specified task from Harmonia.
 
 Format: `delete INDEX`
@@ -39,7 +57,8 @@ Format: `delete INDEX`
 
 Example: `delete 3` deletes the 3rd task in the task list
 
-###Locating a task: `find`
+### Locating a task: `find`
+
 Finds a task which description or tag contains the given keywords.
 
 Format:
