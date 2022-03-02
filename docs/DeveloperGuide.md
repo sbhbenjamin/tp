@@ -287,7 +287,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 | `* * *`   | user           | search for tasks that fall within a specific time range     | find the tasks that lie between a specific period                              |
 | `* * *`   | user           | view upcoming deadlines                                     | prioritise what tasks I need to do first                                       |
 | `* * *`   | user           | view tags I have already added when creating a new task     | know how to tag new tasks and avoid creating similar tags                      |
-| `* * *`   | user           | view all of my upcoming–deadlines and longer-term deadlines | have a more holistic view of all events in the short-term and long-term future |
+| `* * *`   | user           | view all of my upcoming deadlines and longer-term deadlines | have a more holistic view of all events in the short-term and long-term future |
 | `* * *`   | user           | access the user guide through the interface                 | access the documentation without having to search online for it                |
 | `* * *`   | user           | sort my tasks by certain filters                            | organise my view the way I prefer                                              |
 | `* * *`   | user           | label my tasks with priorities                              | keep track of which tasks are more important                                   |
