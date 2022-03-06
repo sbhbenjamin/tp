@@ -303,179 +303,292 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 
 (For all use cases below, the **System** is `Harmonia` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Adding a task**
+**Use case: UC01 - Add a task**
 
 **MSS**
-
-1.  User chooses to add a task.
-2.  User enters the task description.
-3.  Harmonia adds the task.
-4.  Harmonia informs the user that the task has been successfully added.
-
+1. User chooses to add a task.
+2. User enters the task description.
+3. Harmonia adds the task.
+4. Harmonia informs the user that the task has been successfully added.
+ 
     Use case ends.
 
 **Extensions**
-
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters new data.
-  
-    Steps 2a1-2a2 are repeated until valid data is inputted.
-
+    * 2a2. User enters a new request.
+    Steps 2a1-2a2 are repeated until valid request is inputted.
     Use case resumes from step 3.
 
-**Use case: UC02 - Deleting a task**
+<br/>
+
+**Use case: UC02 - Delete a task**
 
 **MSS**
-
-1.  User chooses to remove a task from the task list.
-2.  User enters the request to remove the task.
-3.  Harmonia deletes the task.
-4.  Harmonia informs the user that the task has been successfully deleted.
-
+1. User chooses to remove a task from the task list.
+2. User enters the request to remove the task.
+3. Harmonia deletes the task.
+4. Harmonia informs the user that the task has been successfully deleted.
+ 
     Use case ends.
 
 **Extensions**
-
-* 2a. Harmonia detects an error in the entered index.
-    * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters new data.
-
-    Steps 2a1-2a2 are repeated until a valid index is inputted.    
-
-    Use case resumes from step 3.
-
-**Use case: UC03 - Marking a task as complete**
-
-**MSS**
-
-1.  User chooses to mark a task as complete from the task list.
-2.  User enters the request to mark a task based on its index in the task list.
-3.  Harmonia marks the task as complete.
-4.  Harmonia informs the user that the task has been successfully marked.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. Harmonia detects an error in the entered index.
-    * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters new data.
-    
-    Steps 2a1-2a2 are repeated until a valid index is inputted.
-
-    Use case resumes from step 3.
-
-**Use case: UC04 - Unmarking a task from completion**
-
-**MSS**
-
-1.  User chooses to unmark a task from completion from the task list.
-2.  User enters the request to unmark a task based on its index in the task list.
-3.  Harmonia unmarks the task to become uncompleted.
-4.  Harmonia informs the user that the task has been successfully unmarked.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. Harmonia detects an error in the entered index.
-    * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters new data.
-
-  Steps 2a1-2a2 are repeated until a valid index is inputted.
-
-  Use case resumes from step 3.
-
-**Use case: UC05 - Adding a tag to the task**
-
-**MSS**
-
-1.  User chooses to add a tag to an existing task.
-2.  User enters the request to add the tag to the task.
-3.  Harmonia adds the tag to the task.
-4.  Harmonia informs the user that the tag has been successfully added to the task.
-
-    Use case ends.
-
-**Extensions**
-
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters new data.
-  
-  Steps 2a1-2a2 are repeated until valid data is inputted. 
-
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
-**Use case: UC06 - Editing a task**
+<br/>
+
+**Use case: UC03 - Mark a task as complete**
 
 **MSS**
-
-1.  User chooses to edit a task from the task list.
-2.  User enters the request to edit the task with the updated details.
-3.  Harmonia updates the task.
-4.  Harmonia informs the user that the task has been successfully updated.
-
+1. User chooses to mark a task as complete from the task list.
+2. User enters the request to mark a task based on its index in the task list.
+3. Harmonia marks the task as complete.
+4. Harmonia informs the user that the task has been successfully marked.
+ 
     Use case ends.
 
 **Extensions**
-
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters new data.
-
-  Steps 2a1-2a2 are repeated until valid data is inputted.
-
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
-**Use case: UC07 - List out all the tasks**
+<br/>
+
+**Use case: UC04 - Unmark a task from completion**
 
 **MSS**
-
-1.  User chooses lists out all the tasks.
-2.  User enters the request to list tasks.
-3.  Harmonia lists out the task.
-
+1. User chooses to unmark a task from completion from the task list.
+2. User enters the request to unmark a task based on its index in the task list.
+3. Harmonia marks the task as incomplete.
+4. Harmonia informs the user that the task has been successfully unmarked.
+ 
     Use case ends.
 
 **Extensions**
-
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters new data.
-
-  Steps 2a1-2a2 are repeated until valid data is inputted.
-
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
-**Use case: UC08 - Searching for a task by keyword/tag**
+<br/>
+
+**Use case: UC05 - Add a tag to the task**
 
 **MSS**
+1. User chooses to add a tag to an existing task.
+2. User enters the request to add the tag to the task.
+3. Harmonia adds the tag to the task.
+4. Harmonia informs the user that the tag has been successfully added to the task.
+ 
+    Use case ends.
 
-1.  User enters the request to search for task(s) by keyword/tag.
-2.  Harmonia shows a list of tasks that match the specified keyword/tag.
-3.  Harmonia informs the user that the search result has been displayed successfully.
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC06 - Edit a task**
+
+**MSS**
+1. User chooses to edit a task from the task list.
+2. User enters the request to edit the task with the updated details.
+3. Harmonia updates the task.
+4. Harmonia informs the user that the task has been successfully updated.
 
     Use case ends.
 
 **Extensions**
-
 * 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC07 - List all tasks**
+
+**MSS**
+1. User chooses lists out all the tasks.
+2. User enters the request to list tasks.
+3. Harmonia lists out the task.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC08 - Search for a task by keyword/tag**
+
+**MSS**
+1. User enters the request to search for task(s) by keyword/tag.
+2. Harmonia shows a list of tasks that match the specified keyword/tag.
+3. Harmonia informs the user that the search result has been displayed successfully.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects that the keyword is missing.
     * 2a1. Harmonia outputs an error message.
     * 2a2. User enters a new command.
-
   Steps 2a1-2a2 are repeated until valid data is inputted.
-
   Use case resumes from step 3.
 
 * 2b. Harmonia detects that the tag does not exist.
     * 2b1. Harmonia outputs an error message.
     * 2b2. User enters a new command.
-
   Steps 2a1-2a2 are repeated until valid data is inputted.
-
   Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC09 - Undo the previous change**
+
+**Preconditions:** Changes were made by the user.
+
+**MSS**
+1. User chooses to undo the previous change.
+2. User enters the request to undo the previous change.
+3. Harmonia restores the state before the previous change.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia is unable to recognize the request entered by the user.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC10 - Search for tasks within date range**
+
+**MSS**
+1. User chooses to search for tasks that fall within a specific date range.
+2. User enters the request to search for the tasks by date range.
+3. Harmonia displays the tasks that match the criteria.
+4. Harmonia informs the user that the result has been displayed successfully.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC11 - Sort tasks**
+
+**MSS**
+1. User chooses to sort the task by a certain property.
+2. User enters the request to sort the task based on a property.
+3. Harmonia displays the tasks based on the property.
+4. Harmonia informs the user that the sort has been performed successfully.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC12 - Set repeated occurrences of a task**
+
+**MSS**
+1. User chooses the set repeated occurrence of a task. 
+2. User enters the request to set repeated occurrences of a task. 
+3. Harmonia sets the task as a repeated occurrence. 
+4. Harmonia informs the user that the task has been added as a repeated occurrence.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+      Steps 2a1-2a2 are repeated until valid request is inputted.
+      Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC13 - Categorise task according to priority**
+
+**MSS**
+1. User chooses to assign a priority to a task.
+2. Harmonia enters the requests to assign priority to the task.
+3. Harmonia informs the priority of the task has been updated.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+      Steps 2a1-2a2 are repeated until valid request is inputted.
+      Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC14 - View user guide**
+
+**MSS**
+1. User chooses to view the user guide.
+2. User requests to view the user guide.
+3. Harmonia outputs a message with a URL to the user guide.
+4. User copies the URL to the user guide.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+      Steps 2a1-2a2 are repeated until valid request is inputted.
+      Use case resumes from step 3.
+    
+<br/>
+  
+**Use case: UC15 - Add multiple tags to a task**
+
+**MSS**
+1. User chooses to add multiple tags to an existing task. 
+2. User requests to add multiple tags to a task. 
+3. Harmonia adds the different tags to the task. 
+4. Harmonia informs the user that the tags have been successfully added to the task.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+      Steps 2a1-2a2 are repeated until valid request is inputted.
+      Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
