@@ -14,7 +14,8 @@ public class Deadline {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Deadlines should be in the format YYYY-MM-DD";
-    public final LocalDate value;
+    public final String value;
+    private final LocalDate localDateValue;
 
     /**
      * Constructs a {@code Deadline}. Accepts date in the format of yyyy-mm-dd.
@@ -24,7 +25,8 @@ public class Deadline {
     public Deadline(String deadline) {
         requireNonNull(deadline);
         checkArgument(isValidDeadline(deadline), MESSAGE_CONSTRAINTS);
-        value = LocalDate.parse(deadline);
+        value = deadline;
+        localDateValue = LocalDate.parse(deadline);
     }
 
     /**
@@ -41,14 +43,14 @@ public class Deadline {
 
     @Override
     public String toString() {
-        return value.toString();
+        return localDateValue.toString();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Deadline // instanceof handles nulls
-                && value.equals(((Deadline) other).value)); // state check
+                && localDateValue.equals(((Deadline) other).localDateValue)); // state check
     }
 
     @Override
