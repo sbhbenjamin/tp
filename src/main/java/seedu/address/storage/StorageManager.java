@@ -7,13 +7,12 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTaskList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of TaskList data in local storage.
  */
 public class StorageManager implements Storage {
 
@@ -55,7 +54,7 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyTaskList> readOnlyTaskList() throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskList> readTaskList() throws DataConversionException, IOException {
         return readTaskList(taskListStorage.getTaskListFilePath());
     }
 
@@ -75,5 +74,4 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         taskListStorage.saveTaskList(taskList, filePath);
     }
-
 }

@@ -35,5 +35,13 @@ public interface TaskListStorage {
      * @param taskList cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
+    void saveTaskList(ReadOnlyTaskList taskList) throws IOException;
+
+
+    /**
+     * Saves the given {@link ReadOnlyTaskList} to the storage.
+     * @param taskList cannot be null.
+     * @throws IOException if there was any problem writing to the file.
+     */
     void saveTaskList(ReadOnlyTaskList taskList, Path filePath) throws IOException;
 }
