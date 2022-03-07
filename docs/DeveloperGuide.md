@@ -420,9 +420,9 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Use case: UC07 - List all tasks**
 
 **MSS**
-1. User chooses lists out all the tasks.
-2. User enters the request to list tasks.
-3. Harmonia lists out the task.
+1. User chooses to list out all tasks.
+2. User enters the request to list all tasks.
+3. Harmonia lists out all tasks.
 
     Use case ends.
 
@@ -520,7 +520,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Use case: UC12 - Set repeated occurrences of a task**
 
 **MSS**
-1. User chooses the set repeated occurrence of a task. 
+1. User chooses to set repeated occurrences of a task. 
 2. User enters the request to set repeated occurrences of a task. 
 3. Harmonia sets the task as a repeated occurrence. 
 4. Harmonia informs the user that the task has been added as a repeated occurrence.
@@ -540,8 +540,9 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 
 **MSS**
 1. User chooses to assign a priority to a task.
-2. Harmonia enters the requests to assign priority to the task.
-3. Harmonia informs the priority of the task has been updated.
+2. User enters the request to assign priority to the task.
+3. Harmonia assigns priority to the task.
+4. Harmonia informs the user that the priority of the task has been updated.
 
     Use case ends.
 
