@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
 public class Description {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Descriptions should not be blank or starting with white spaces," +
+            "Description should not be blank or start with white spaces," +
                     " and the length should be less than 256 characters.";
 
     /*

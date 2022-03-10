@@ -8,17 +8,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
 /**
- * Adds a person to the address book.
+ * Adds a task to the task list.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
@@ -32,7 +31,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + " " + "participation points";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in Harmonia";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in Harmonia";
 
     private final Task toAdd;
 
@@ -49,7 +48,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasTask(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
         model.addTask(toAdd);
