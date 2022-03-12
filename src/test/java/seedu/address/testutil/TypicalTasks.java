@@ -50,7 +50,7 @@ public class TypicalTasks {
             .withDeadline(VALID_DEADLINE_BOB).withCompletionStatus(VALID_COMPLETION_STATUS_BOB).withTags(VALID_TAG_TUT, VALID_TAG_FRIEND)
             .build();
 
-    public static final String KEYWORD_MATCHING_MeetAlice = "NUS"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_NUS = "NUS"; // A keyword that matches MEIER
 
     private TypicalTasks() {} // prevents instantiation
 
