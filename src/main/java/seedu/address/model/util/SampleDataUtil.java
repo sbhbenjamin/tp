@@ -26,7 +26,7 @@ public class SampleDataUtil {
             new Task(new Name("Review individual projects"),
                 new Description("Review two ips that are sent to my email, for 4 participation points"),
                 new CompletionStatus("true"), new Deadline("2022-03-13"),
-                getTagSet("CS2103T", "participation points")),
+                getTagSet("CS2103T", "participation")),
             new Task(new Name("Revise for Midterm Test"), new Description("Chapters 1-5"),
                 new CompletionStatus("false"), new Deadline("2022-03-25"), getTagSet("CS2102")),
             new Task(new Name("Complete Assignment"),
