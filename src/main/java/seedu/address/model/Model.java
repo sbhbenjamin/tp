@@ -76,6 +76,12 @@ public interface Model {
      */
     void setTask(Task target, Task editedTask);
 
+    /**
+     * Marks the given task as complete.
+     * The {@code target} task must exist in the task list.
+     */
+    void markTask(Task target, Task markedTask);
+
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 

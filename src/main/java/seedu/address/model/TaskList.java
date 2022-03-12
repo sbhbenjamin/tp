@@ -93,6 +93,16 @@ public class TaskList implements ReadOnlyTaskList {
         tasks.remove(key);
     }
 
+    /**
+     * Replaces the given task {@code target} in the list with {@code markedTask} which is marked as complete.
+     * {@code target} must exist in the task list.
+     * Task must not already be marked as complete.
+     */
+    public void markTask(Task target, Task markedTask) {
+        requireNonNull(markedTask);
+        tasks.mark(target, markedTask);
+    }
+
     //// util methods
 
     @Override
