@@ -35,7 +35,7 @@ public class CompletionStatus {
 
     @Override
     public String toString() {
-        return booleanValue ? "[X]" : "[ ]";
+        return booleanValue ? "True" : "False";
     }
 
     @Override

@@ -37,6 +37,14 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     * Returns true if the list contains an exactly the same task as the given argument.
+     */
+    public boolean strictContains(Task toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::equals);
+    }
+
+    /**
      * Adds a task to the list.
      * The task must not already exist in the list.
      */
@@ -110,7 +118,7 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new TaskNotFoundException();
         }
 
-        if (contains(markedTask)) {
+        if (strictContains(markedTask)) {
             throw new DuplicateTaskException();
         }
 

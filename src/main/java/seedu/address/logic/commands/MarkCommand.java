@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.List;
 import java.util.Set;
@@ -64,12 +65,13 @@ public class MarkCommand extends Command {
         Task taskToMark = lastShownList.get(targetIndex.getZeroBased());
         Task markedTask = createMarkedTask(taskToMark);
 
-        if (model.hasTask(markedTask)) {
+        if (taskToMark.equals(markedTask)) {
             throw new CommandException(MESSAGE_TASK_ALREADY_COMPLETED);
         }
 
         model.markTask(taskToMark, markedTask);
-        return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToMark));
+        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, markedTask));
     }
 
     @Override
