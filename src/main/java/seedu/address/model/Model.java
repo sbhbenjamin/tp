@@ -77,10 +77,11 @@ public interface Model {
     void setTask(Task target, Task editedTask);
 
     /**
-     * Marks the given task as complete.
-     * The {@code target} task must exist in the task list.
+     * Replaces the task {@code target} in the list with {@code editedTask} under stricter conditions.
+     * {@code target} must exist in the list.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the list.
      */
-    void markTask(Task target, Task markedTask);
+    void strictSetTask(Task target, Task editedTask);
 
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();

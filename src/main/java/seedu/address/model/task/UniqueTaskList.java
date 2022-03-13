@@ -106,23 +106,24 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Replaces the given task {@code target} in the list with {@code markedTask} which is marked as complete.
-     * {@code target} must exist in the task list.
-     * Task must not already be marked as complete.
+     * Replaces the task {@code target} in the list with {@code editedTask} under stricter conditions
+     * by using {@link Task#equals(Object) equals}.
+     * {@code target} must exist in the list.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the list.
      */
-    public void mark(Task target, Task markedTask) {
-        requireAllNonNull(target, markedTask);
+    public void strictSetTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
         int index = internalList.indexOf(target);
 
         if (index == -1) {
             throw new TaskNotFoundException();
         }
 
-        if (strictContains(markedTask)) {
+        if (strictContains(editedTask)) {
             throw new DuplicateTaskException();
         }
 
-        internalList.set(index, markedTask);
+        internalList.set(index, editedTask);
     }
 
     /**

@@ -94,13 +94,13 @@ public class TaskList implements ReadOnlyTaskList {
     }
 
     /**
-     * Replaces the given task {@code target} in the list with {@code markedTask} which is marked as complete.
-     * {@code target} must exist in the task list.
-     * Task must not already be marked as complete.
+     * Replaces the task {@code target} in the list with {@code editedTask} under stricter conditions.
+     * {@code target} must exist in the list.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the list.
      */
-    public void markTask(Task target, Task markedTask) {
-        requireNonNull(markedTask);
-        tasks.mark(target, markedTask);
+    public void strictSetTask(Task target, Task editedTask) {
+        requireNonNull(editedTask);
+        tasks.strictSetTask(target, editedTask);
     }
 
     //// util methods
