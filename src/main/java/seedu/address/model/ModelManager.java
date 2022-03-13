@@ -111,10 +111,15 @@ public class ModelManager implements Model {
         taskList.setTask(target, editedTask);
     }
 
+    /**
+     * Replaces the task {@code target} in the list with {@code editedTask} under stricter conditions.
+     * {@code target} must exist in the list.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the list.
+     */
     @Override
-    public void markTask(Task target, Task markedTask) {
+    public void strictSetTask(Task target, Task markedTask) {
         requireAllNonNull(target, markedTask);
-        taskList.markTask(target, markedTask);
+        taskList.strictSetTask(target, markedTask);
     }
 
     //=========== Filtered Task List Accessors =============================================================

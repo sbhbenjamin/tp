@@ -18,40 +18,40 @@ import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
 
 /**
- * Marks a task identified using it's displayed index from the task list as completed.
+ * Marks a task identified using it's displayed index from the task list as uncompleted.
  */
-public class MarkCommand extends Command {
+public class UnmarkCommand extends Command {
 
-    public static final String COMMAND_WORD = "mark";
+    public static final String COMMAND_WORD = "unmark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the task identified by the index number used in the displayed task list as completed.\n"
+            + ": Marks the task identified by the index number used in the displayed task list as uncompleted.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_TASK_SUCCESS = "Completed Task: %1$s";
-    public static final String MESSAGE_TASK_ALREADY_COMPLETED = "This task is already marked as complete.";
+    public static final String MESSAGE_MARK_TASK_SUCCESS = "Uncompleted Task: %1$s";
+    public static final String MESSAGE_TASK_ALREADY_UNCOMPLETED = "This task is already marked as incomplete.";
 
     private final Index targetIndex;
 
-    public MarkCommand(Index targetIndex) {
+    public UnmarkCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
     /**
-     * Creates a marked iteration of the Task provided.
+     * Creates a unmarked iteration of the Task provided.
      * @param task task to be copied.
      * @return marked task.
      */
-    private Task createMarkedTask(Task task) {
+    private Task createUnmarkedTask(Task task) {
         Name name = task.getName();
         Description description = task.getDescription();
-        CompletionStatus completionStatus = new CompletionStatus("true");
+        CompletionStatus completionStatus = new CompletionStatus("false");
         Deadline deadline = task.getDeadline();
         Set<Tag> tags = task.getTags();
 
-        Task markedTask = new Task(name, description, completionStatus, deadline, tags);
-        return markedTask;
+        Task unmarkedTask = new Task(name, description, completionStatus, deadline, tags);
+        return unmarkedTask;
     }
 
     @Override
@@ -62,22 +62,22 @@ public class MarkCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-        Task taskToMark = lastShownList.get(targetIndex.getZeroBased());
-        Task markedTask = createMarkedTask(taskToMark);
+        Task taskToUnmark = lastShownList.get(targetIndex.getZeroBased());
+        Task unmarkedTask = createUnmarkedTask(taskToUnmark);
 
-        if (taskToMark.equals(markedTask)) {
-            throw new CommandException(MESSAGE_TASK_ALREADY_COMPLETED);
+        if (taskToUnmark.equals(unmarkedTask)) {
+            throw new CommandException(MESSAGE_TASK_ALREADY_UNCOMPLETED);
         }
 
-        model.strictSetTask(taskToMark, markedTask);
+        model.strictSetTask(taskToUnmark, unmarkedTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, markedTask));
+        return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, unmarkedTask));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof MarkCommand // instanceof handles nulls
-                && targetIndex.equals(((MarkCommand) other).targetIndex)); // state check
+                || (other instanceof UnmarkCommand // instanceof handles nulls
+                && targetIndex.equals(((UnmarkCommand) other).targetIndex)); // state check
     }
 }
