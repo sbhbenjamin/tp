@@ -26,7 +26,7 @@ import seedu.address.testutil.TaskBuilder;
 public class AddCommandTest {
 
     @Test
-    public void constructor_null_task_throwsNullPointerException() {
+    public void constructor_nullTask_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
@@ -61,8 +61,8 @@ public class AddCommandTest {
         assertTrue(addEatCommand.equals(addEatCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(eat);
-        assertTrue(addEatCommand.equals(addAliceCommandCopy));
+        AddCommand addEatCommandCopy = new AddCommand(eat);
+        assertTrue(addEatCommand.equals(addEatCommandCopy));
 
         // different types -> returns false
         assertFalse(addEatCommand.equals(1));
