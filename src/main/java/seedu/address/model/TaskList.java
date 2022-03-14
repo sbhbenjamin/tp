@@ -93,6 +93,16 @@ public class TaskList implements ReadOnlyTaskList {
         tasks.remove(key);
     }
 
+    /**
+     * Replaces the task {@code target} in the list with {@code editedTask} under stricter conditions.
+     * {@code target} must exist in the list.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the list.
+     */
+    public void strictSetTask(Task target, Task editedTask) {
+        requireNonNull(editedTask);
+        tasks.strictSetTask(target, editedTask);
+    }
+
     //// util methods
 
     @Override
