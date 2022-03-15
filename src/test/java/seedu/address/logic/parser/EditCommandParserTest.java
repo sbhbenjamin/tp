@@ -76,7 +76,8 @@
 //    @Test
 //    public void parse_invalidValue_failure() {
 //        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-//        assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS); // invalid description
+//        assertParseFailure(
+//                parser, "1" + INVALID_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS); // invalid description
 //        assertParseFailure(parser, "1" + INVALID_DEADLINE_DESC, Deadline.MESSAGE_CONSTRAINTS); // invalid deadline
 //        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 //
@@ -174,7 +175,8 @@
 //        // no other valid values specified
 //        Index targetIndex = INDEX_FIRST_TASK;
 //        String userInput = targetIndex.getOneBased() + INVALID_DESCRIPTION_DESC + DESCRIPTION_DESC_MIDTERM;
-//        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_MIDTERM).build();
+//        EditTaskDescriptor descriptor =
+//                new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_MIDTERM).build();
 //        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 //        assertParseSuccess(parser, userInput, expectedCommand);
 //
