@@ -35,12 +35,13 @@
 //        assertFalse(DESC_TUTORIAL.equals(DESC_MIDTERM));
 //
 //        // different name -> returns false
-//        EditTaskDescriptor editedTutorial =
-//                new EditTaskDescriptorBuilder(DESC_TUTORIAL).withName(VALID_NAME_MIDTERM).build();
+//        EditTaskDescriptor editedTutorial = new EditTaskDescriptorBuilder(DESC_TUTORIAL)
+//                .withName(VALID_NAME_MIDTERM).build();
 //        assertFalse(DESC_TUTORIAL.equals(editedTutorial));
 //
 //        // different description -> returns false
-//        editedTutorial = new EditTaskDescriptorBuilder(DESC_TUTORIAL).withDescription(VALID_DESCRIPTION_MIDTERM).build();
+//        editedTutorial = new EditTaskDescriptorBuilder(DESC_TUTORIAL)
+//                .withDescription(VALID_DESCRIPTION_MIDTERM).build();
 //        assertFalse(DESC_TUTORIAL.equals(editedTutorial));
 //
 //        // different deadline -> returns false
