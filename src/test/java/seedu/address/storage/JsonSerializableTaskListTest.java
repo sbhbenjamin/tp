@@ -22,7 +22,8 @@ public class JsonSerializableTaskListTest {
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
-        JsonSerializableTaskList dataFromFile = JsonUtil.readJsonFile(TYPICAL_TASKS_FILE, JsonSerializableTaskList.class).get();
+        JsonSerializableTaskList dataFromFile = JsonUtil.readJsonFile(TYPICAL_TASKS_FILE,
+                JsonSerializableTaskList.class).get();
         TaskList taskListFromFile = dataFromFile.toModelType();
         TaskList typicalTaskList = TypicalTasks.getTypicalTaskList();
         assertEquals(taskListFromFile, typicalTaskList);

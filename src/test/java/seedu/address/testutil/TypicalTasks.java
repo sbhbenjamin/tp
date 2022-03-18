@@ -73,8 +73,8 @@ public class TypicalTasks {
      */
     public static TaskList getTypicalTaskList() {
         TaskList tl = new TaskList();
-        for (Task Task : getTypicalTasks()) {
-            tl.addTask(Task);
+        for (Task task : getTypicalTasks()) {
+            tl.addTask(task);
         }
         return tl;
     }
