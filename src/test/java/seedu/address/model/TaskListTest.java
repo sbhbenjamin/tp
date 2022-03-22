@@ -46,11 +46,11 @@ public class TaskListTest {
     @Test
     public void resetData_withDuplicateTasks_throwsDuplicateTaskException() {
         // Two tasks with the same identity fields
-        Task editedAlice = new TaskBuilder(CS2105_MIDTERM)
+        Task editedCS2105 = new TaskBuilder(CS2105_MIDTERM)
                 .withDescription(VALID_DESCRIPTION_MIDTERM)
                 .withTags(VALID_TAG_TEST)
                 .build();
-        List<Task> newTasks = Arrays.asList(CS2105_MIDTERM, editedAlice);
+        List<Task> newTasks = Arrays.asList(CS2105_MIDTERM, editedCS2105);
         TaskListStub newData = new TaskListStub(newTasks);
 
         assertThrows(DuplicateTaskException.class, () -> taskList.resetData(newData));
@@ -75,9 +75,9 @@ public class TaskListTest {
     @Test
     public void hasTask_taskWithSameIdentityFieldsInTaskList_returnsTrue() {
         taskList.addTask(CS2105_MIDTERM);
-        Task editedAlice = new TaskBuilder(CS2105_MIDTERM).withDescription(VALID_DESCRIPTION_MIDTERM)
+        Task editedCS2105 = new TaskBuilder(CS2105_MIDTERM).withDescription(VALID_DESCRIPTION_MIDTERM)
                 .withTags(VALID_TAG_TEST).build();
-        assertTrue(taskList.hasTask(editedAlice));
+        assertTrue(taskList.hasTask(editedCS2105));
     }
 
     @Test

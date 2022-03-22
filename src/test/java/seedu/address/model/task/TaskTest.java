@@ -59,8 +59,8 @@ public class TaskTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Task aliceCopy = new TaskBuilder(CS2105_MIDTERM).build();
-        assertTrue(CS2105_MIDTERM.equals(aliceCopy));
+        Task midtermCopy = new TaskBuilder(CS2105_MIDTERM).build();
+        assertTrue(CS2105_MIDTERM.equals(midtermCopy));
 
         // same object -> returns true
         assertTrue(CS2105_MIDTERM.equals(CS2105_MIDTERM));

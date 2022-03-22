@@ -42,9 +42,9 @@ public class UniqueTaskListTest {
     @Test
     public void contains_taskWithSameIdentityFieldsInList_returnsTrue() {
         uniqueTaskList.add(CS2105_MIDTERM);
-        Task editedAlice = new TaskBuilder(CS2105_MIDTERM).withDescription(VALID_DESCRIPTION_MIDTERM)
+        Task editedCS2105 = new TaskBuilder(CS2105_MIDTERM).withDescription(VALID_DESCRIPTION_MIDTERM)
                 .withTags(VALID_TAG_TEST).build();
-        assertTrue(uniqueTaskList.contains(editedAlice));
+        assertTrue(uniqueTaskList.contains(editedCS2105));
     }
 
     @Test
@@ -85,11 +85,11 @@ public class UniqueTaskListTest {
     @Test
     public void setTask_editedTaskHasSameIdentity_success() {
         uniqueTaskList.add(CS2105_MIDTERM);
-        Task editedAlice = new TaskBuilder(CS2105_MIDTERM).withDescription(VALID_DESCRIPTION_MIDTERM)
+        Task editedCS2105 = new TaskBuilder(CS2105_MIDTERM).withDescription(VALID_DESCRIPTION_MIDTERM)
                 .withTags(VALID_TAG_TEST).build();
-        uniqueTaskList.setTask(CS2105_MIDTERM, editedAlice);
+        uniqueTaskList.setTask(CS2105_MIDTERM, editedCS2105);
         UniqueTaskList expectedUniqueTaskList = new UniqueTaskList();
-        expectedUniqueTaskList.add(editedAlice);
+        expectedUniqueTaskList.add(editedCS2105);
         assertEquals(expectedUniqueTaskList, uniqueTaskList);
     }
 

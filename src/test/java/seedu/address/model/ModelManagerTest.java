@@ -74,7 +74,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasTask_nullPerson_throwsNullPointerException() {
+    public void hasTask_nullTask_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasTask(null));
     }
 
