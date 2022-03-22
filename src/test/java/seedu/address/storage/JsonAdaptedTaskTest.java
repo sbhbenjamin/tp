@@ -34,7 +34,7 @@ public class JsonAdaptedTaskTest {
             .collect(Collectors.toList());
 
     @Test
-    public void toModelType_validPersonDetails_returnsPerson() throws Exception {
+    public void toModelType_validTaskDetails_returnsTask() throws Exception {
         JsonAdaptedTask task = new JsonAdaptedTask(CS2105_MIDTERM);
         assertEquals(CS2105_MIDTERM, task.toModelType());
     }

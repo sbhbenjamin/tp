@@ -21,7 +21,7 @@ public class JsonSerializableTaskListTest {
     private static final Path DUPLICATE_TASK_FILE = TEST_DATA_FOLDER.resolve("duplicateTaskTaskList.json");
 
     @Test
-    public void toModelType_typicalPersonsFile_success() throws Exception {
+    public void toModelType_typicalTasksFile_success() throws Exception {
         JsonSerializableTaskList dataFromFile = JsonUtil.readJsonFile(TYPICAL_TASKS_FILE,
                 JsonSerializableTaskList.class).get();
         TaskList taskListFromFile = dataFromFile.toModelType();
@@ -30,14 +30,14 @@ public class JsonSerializableTaskListTest {
     }
 
     @Test
-    public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
+    public void toModelType_invalidTasksFile_throwsIllegalValueException() throws Exception {
         JsonSerializableTaskList dataFromFile = JsonUtil.readJsonFile(INVALID_TASK_FILE,
                 JsonSerializableTaskList.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
     @Test
-    public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
+    public void toModelType_duplicateTasks_throwsIllegalValueException() throws Exception {
         JsonSerializableTaskList dataFromFile = JsonUtil.readJsonFile(DUPLICATE_TASK_FILE,
                 JsonSerializableTaskList.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableTaskList.MESSAGE_DUPLICATE_TASK,
