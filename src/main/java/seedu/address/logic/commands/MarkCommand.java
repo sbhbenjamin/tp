@@ -43,7 +43,7 @@ public class MarkCommand extends Command {
      * @param task task to be copied.
      * @return marked task.
      */
-    public static Task createMarkedTask(Task task) {
+    private static Task createMarkedTask(Task task) {
         Name name = task.getName();
         Description description = task.getDescription();
         CompletionStatus completionStatus = new CompletionStatus("true");
