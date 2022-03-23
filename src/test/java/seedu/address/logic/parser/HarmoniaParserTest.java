@@ -4,12 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +26,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.TagContainsKeywordsPredicate;
 import seedu.address.model.task.NameContainsKeywordsPredicate;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
@@ -71,10 +74,19 @@ public class HarmoniaParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        List<String> nameKeywords = Arrays.asList("foo", "bar", "baz");
+        List<String> tagKeywords = Arrays.asList("tag1", "tag2");
+        List<String> tagKeywordsWithPrefix = tagKeywords.stream().map(k -> PREFIX_TAG + k).collect(Collectors.toList());
+
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD + " "
+                        + nameKeywords.stream().collect(Collectors.joining(" ")) + " "
+                        + tagKeywordsWithPrefix.stream().collect(Collectors.joining(" ")));
+
+        List<String> allKeywords = Stream.concat(nameKeywords.stream(), tagKeywordsWithPrefix.stream())
+                .collect(Collectors.toList());
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(allKeywords),
+                new TagContainsKeywordsPredicate(tagKeywords)), command);
     }
 
     @Test
