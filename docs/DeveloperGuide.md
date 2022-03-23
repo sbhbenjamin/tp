@@ -262,7 +262,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**:  
+**Value proposition**:
 Harmonia is the easiest way for students to manage the complexity associated with their schooling years – from the plethora of assignments, ad-hoc consultations and events, to deadlines. This app will only help to manage tasks, and does not act as a calendar notifying the user of any upcoming event/deadline.
 
 
@@ -310,7 +310,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 2. User enters the task description.
 3. Harmonia adds the task.
 4. Harmonia informs the user that the task has been successfully added.
- 
+
     Use case ends.
 
 **Extensions**
@@ -329,7 +329,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 2. User enters the request to remove the task.
 3. Harmonia deletes the task.
 4. Harmonia informs the user that the task has been successfully deleted.
- 
+
     Use case ends.
 
 **Extensions**
@@ -348,7 +348,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 2. User enters the request to mark a task based on its index in the task list.
 3. Harmonia marks the task as complete.
 4. Harmonia informs the user that the task has been successfully marked.
- 
+
     Use case ends.
 
 **Extensions**
@@ -367,7 +367,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 2. User enters the request to unmark a task based on its index in the task list.
 3. Harmonia marks the task as incomplete.
 4. Harmonia informs the user that the task has been successfully unmarked.
- 
+
     Use case ends.
 
 **Extensions**
@@ -386,7 +386,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 2. User enters the request to add the tag to the task.
 3. Harmonia adds the tag to the task.
 4. Harmonia informs the user that the tag has been successfully added to the task.
- 
+
     Use case ends.
 
 **Extensions**
@@ -520,9 +520,9 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Use case: UC12 - Set repeated occurrences of a task**
 
 **MSS**
-1. User chooses to set repeated occurrences of a task. 
-2. User enters the request to set repeated occurrences of a task. 
-3. Harmonia sets the task as a repeated occurrence. 
+1. User chooses to set repeated occurrences of a task.
+2. User enters the request to set repeated occurrences of a task.
+3. Harmonia sets the task as a repeated occurrence.
 4. Harmonia informs the user that the task has been added as a repeated occurrence.
 
     Use case ends.
@@ -571,15 +571,15 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
     * 2a2. User enters a new request.
       Steps 2a1-2a2 are repeated until valid request is inputted.
       Use case resumes from step 3.
-    
+
 <br/>
-  
+
 **Use case: UC15 - Add multiple tags to a task**
 
 **MSS**
-1. User chooses to add multiple tags to an existing task. 
-2. User requests to add multiple tags to a task. 
-3. Harmonia adds the different tags to the task. 
+1. User chooses to add multiple tags to an existing task.
+2. User requests to add multiple tags to a task.
+3. Harmonia adds the different tags to the task.
 4. Harmonia informs the user that the tags have been successfully added to the task.
 
     Use case ends.
