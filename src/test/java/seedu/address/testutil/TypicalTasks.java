@@ -42,7 +42,8 @@ public class TypicalTasks {
             .withDescription("V1.2b completion").withDeadline("2022-03-13").withCompletionStatus("false")
             .withPriority("low").withTags("CS2103T").build();
     public static final Task MEET_ALICE = new TaskBuilder().withName("Meet Alice")
-            .withPriority("low").withDescription("Meeting Alice at NUS").withDeadline("2022-04-01").withCompletionStatus("false").build();
+            .withPriority("low").withDescription("Meeting Alice at NUS").withDeadline("2022-04-01")
+            .withCompletionStatus("false").build();
     public static final Task BUY_ART_SUPPLIES = new TaskBuilder().withName("Buy Art Supplies")
             .withDescription("Buy Art supplies for art project").withDeadline("2022-03-21")
             .withPriority("low").withCompletionStatus("false").build();

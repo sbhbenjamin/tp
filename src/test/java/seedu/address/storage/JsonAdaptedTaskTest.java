@@ -72,7 +72,8 @@ public class JsonAdaptedTaskTest {
     @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
         JsonAdaptedTask task =
-                new JsonAdaptedTask(VALID_NAME, null, VALID_COMPLETION_STATUS, VALID_DEADLINE, VALID_PRIORITY, VALID_TAGS);
+                new JsonAdaptedTask(VALID_NAME, null, VALID_COMPLETION_STATUS, VALID_DEADLINE,
+                        VALID_PRIORITY, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
@@ -106,7 +107,8 @@ public class JsonAdaptedTaskTest {
     @Test
     public void toModelType_nullDeadline_throwsIllegalValueException() {
         JsonAdaptedTask task =
-                new JsonAdaptedTask(VALID_NAME, VALID_DESCRIPTION, VALID_COMPLETION_STATUS, null, VALID_PRIORITY, VALID_TAGS);
+                new JsonAdaptedTask(VALID_NAME, VALID_DESCRIPTION, VALID_COMPLETION_STATUS, null,
+                        VALID_PRIORITY, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Deadline.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
