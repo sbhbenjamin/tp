@@ -26,6 +26,10 @@ public class FindCommand extends Command {
     private final NameContainsKeywordsPredicate namePredicate;
     private final TagContainsKeywordsPredicate tagPredicate;
 
+    /**
+     * @param namePredicate predicate that tests whether task name contains any given keywords
+     * @param tagPredicate predicate that tests whether tags contain any given keywords
+     */
     public FindCommand(NameContainsKeywordsPredicate namePredicate, TagContainsKeywordsPredicate tagPredicate) {
         this.namePredicate = namePredicate;
         this.tagPredicate = tagPredicate;
