@@ -19,7 +19,7 @@ import seedu.address.model.task.Name;
 
 
 public class JsonAdaptedTaskTest {
-    private static final String INVALID_NAME = "T@sk";
+    private static final String INVALID_NAME = "ㅊㅋㅌㅍㅎ";
     private static final String INVALID_DESCRIPTION = "";
     private static final String INVALID_COMPLETION_STATUS = "unknown";
     private static final String INVALID_DEADLINE = "example.com";

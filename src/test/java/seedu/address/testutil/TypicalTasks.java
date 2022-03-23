@@ -28,7 +28,6 @@ public class TypicalTasks {
             .withCompletionStatus("false").withDeadline("2022-03-03")
             .withDescription("Lecture 1-5, Tutorial 1-4")
             .withTags("CS2105", "exam").build();
-
     /** Task with Completion Status set to true **/
     public static final Task CS2105_FINALS = new TaskBuilder().withName("CS2105 Finals")
             .withCompletionStatus("true")
