@@ -30,6 +30,10 @@ public class TypicalTasks {
             .withTags("CS2105", "exam").build();
     public static final Task CS2105_FINALS = new TaskBuilder().withName("CS2105 Finals")
             .withCompletionStatus("false")
+
+    /** Task with Completion Status set to true **/
+    public static final Task CS2105_FINALS = new TaskBuilder().withName("CS2105 Finals")
+            .withCompletionStatus("true")
             .withDeadline("2022-11-11").withDescription("All lectures and tutorials")
             .withTags("CS2105", "exam").build();
     public static final Task CS2105_TUTORIAL = new TaskBuilder().withName("CS2105 Tutorial")
@@ -71,8 +75,8 @@ public class TypicalTasks {
      */
     public static TaskList getTypicalTaskList() {
         TaskList tl = new TaskList();
-        for (Task Task : getTypicalTasks()) {
-            tl.addTask(Task);
+        for (Task task : getTypicalTasks()) {
+            tl.addTask(task);
         }
         return tl;
     }
