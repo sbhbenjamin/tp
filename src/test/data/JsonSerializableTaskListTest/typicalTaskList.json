@@ -4,30 +4,35 @@
     "description" : "V1.2b completion",
     "isCompleted" : "false",
     "deadline" : "2022-03-13",
+    "priority": "low",
     "tagged" : [ "CS2103T" ]
   }, {
     "name" : "CS2105 Finals",
     "description" : "All lectures and tutorials",
     "isCompleted" : "true",
     "deadline" : "2022-11-11",
+    "priority": "low",
     "tagged" : [ "CS2105", "exam" ]
   },{
     "name" : "CS2105 Midterm",
     "description" : "Lecture 1-5, Tutorial 1-4",
     "isCompleted" : "false",
     "deadline" : "2022-03-03",
+    "priority": "low",
     "tagged" : [ "CS2105", "exam" ]
   }, {
     "name" : "CS2105 Tutorial",
     "description" : "Week 9 Tutorial",
     "isCompleted" : "false",
     "deadline" : "2022-03-16",
+    "priority": "low",
     "tagged" : [ "CS2105" ]
   }, {
     "name" : "Meet Alice",
     "description" : "Meeting Alice at NUS",
     "isCompleted" : "false",
     "deadline" : "2022-04-01",
+    "priority": "low",
     "tagged" : [ ]
   } ]
 }
