@@ -39,6 +39,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label deadline;
     @FXML
+    private FlowPane priority;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -52,6 +54,8 @@ public class TaskCard extends UiPart<Region> {
         description.setText(task.getDescription().value);
         completionStatus.setText((task.getCompletionStatus().value == "true") ? "Completed" : "Incomplete");
         deadline.setText(task.getDeadline().value);
+        priority.getChildren().add(new Label(task.getPriority().value));
+
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

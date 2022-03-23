@@ -31,6 +31,7 @@
       <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
       <Label fx:id="completionStatus" styleClass="cell_small_label" text="\$completionStatus" />
       <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
+      <FlowPane fx:id="priority" />
     </VBox>
   </GridPane>
 </HBox>
