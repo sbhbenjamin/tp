@@ -35,7 +35,7 @@ public enum Priority {
     }
 
     /**
-     * Returns the enum based on its value
+     * Returns the enum based on its value.
      */
     public static Priority valueOfLabel(String label) {
         requireNonNull(label);

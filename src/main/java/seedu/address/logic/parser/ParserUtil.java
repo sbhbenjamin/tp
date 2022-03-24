@@ -102,11 +102,12 @@ public class ParserUtil {
     public static Priority parsePriority(String priority) throws ParseException {
         requireNonNull(priority);
         String trimmedPriority = priority.trim();
-        if (!Priority.isValidPriority(trimmedPriority)) {
+        String lowercasePriority = trimmedPriority.toLowerCase();
+        if (!Priority.isValidPriority(lowercasePriority)) {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
 
-        return Priority.valueOfLabel(trimmedPriority);
+        return Priority.valueOfLabel(lowercasePriority);
     }
 
     /**
