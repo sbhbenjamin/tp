@@ -30,20 +30,25 @@ public class TypicalTasks {
             .withDescription("Lecture 1-5, Tutorial 1-4")
             .withPriority("low")
             .withTags("CS2105", "exam").build();
+  
     /** Task with Completion Status set to true **/
     public static final Task CS2105_FINALS = new TaskBuilder().withName("CS2105 Finals")
             .withCompletionStatus("true")
             .withDeadline("2022-11-11").withDescription("All lectures and tutorials")
             .withPriority("low").withTags("CS2105", "exam").build();
+  
     public static final Task CS2105_TUTORIAL = new TaskBuilder().withName("CS2105 Tutorial")
             .withDescription("Week 9 Tutorial").withDeadline("2022-03-16").withCompletionStatus("false")
             .withPriority("low").withTags("CS2105").build();
+  
     public static final Task CS2103T_PROJECT = new TaskBuilder().withName("CS2103T Project")
             .withDescription("V1.2b completion").withDeadline("2022-03-13").withCompletionStatus("false")
             .withPriority("low").withTags("CS2103T").build();
+  
     public static final Task MEET_ALICE = new TaskBuilder().withName("Meet Alice")
             .withPriority("low").withDescription("Meeting Alice at NUS").withDeadline("2022-04-01")
             .withCompletionStatus("false").build();
+
     public static final Task BUY_ART_SUPPLIES = new TaskBuilder().withName("Buy Art Supplies")
             .withDescription("Buy Art supplies for art project").withDeadline("2022-03-21")
             .withPriority("low").withCompletionStatus("false").build();

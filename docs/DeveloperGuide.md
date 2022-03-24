@@ -238,6 +238,168 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Priority
+
+#### What is the feature about
+Provides a way to attach priorities to `Tasks`. The current implementation allows it to be set to 3 values: `low`, `medium` and `high`.
+
+#### How the feature is implemented
+The feature was implemented using an `enum` class. To maintain consistency with other properties among the `Task`, the class was also implemented with `isValidPriority()` that functions as a validity checker and `valueOfLabel()` to retrieve the enum constant corresponding to a given `String` input.
+
+![PriorityEnum](images/PriorityDiagram.png)
+
+#### Why it is implemented that way
+The design of the priority feature was built using an enum as a `Priority` is only designed to support one out of a small set of possible values – in this case, `low`, `medium` and `high`. Appropriately, the `enum` type enables us to define a finite set of values, providing a higher level of type-safety as compared to literal values such as `String` or `Integer`.
+
+In this case, the `enum` type also increases the extensibility of the feature. If we wanted to add more fields to the priority (i.e. `lower` and `higher`), all we have to do is to add those fields as `enum` constants.
+
+
+#### Design considerations:
+
+**Aspect: How the priority is saved:**
+
+* **Alternative 1 (current choice):** Use an enum.
+    * Pros:
+      * Allows for code that is clearer and more readable
+      * More extensible
+      * Compile-time type safety
+      * Reduction in memory-use. When we create a new object, we only refer to the static `enum` constant, instead of creating a new `Priority` object.
+    * Cons: -
+* **Alternative 2:** Use `int` or `String`
+  itself.
+    * Pros:
+      * Easier to write (in the beginning)
+    * Cons:
+      * Lacks compile-time type safety
+      * Using an integer to represent a priority level could be less descriptive as to what it exactly represents
+      * More tedious to extend. To implement this, we might have to use conditionals to check if the `String` or `int` input corresponds with the accepted values in our `Priority` design. This can pose a problem when we try to extend the number of properties a `Priority` field can take. In this case, we might have to increase the number of conditionals, which could reduce readability and make the code more prone to errors.
+      * Possibly increases memory use. If we use `String` or `int` types, we might have to instantiate new `Priority` classes every time we create a new `Task` object.
+
+### Mark/unmark feature
+
+#### What is the feature about
+Provides a way to mark `Task` objects as either completed or uncompleted.
+
+#### How the feature is implemented
+The first stage of the implementation `mark` feature involves parsing the user input. `MarkCommandParser` is used to parse and check whether the user input is valid. After which a `MarkCommand` object is created with the respective task index. The second stage requires `MarkCommand#execute()` to be called. The execution would update `TaskList` by replacing task to be marked by the copy of it with the `CompletionStatus` set to `true`.
+
+The `unmark` feature follows a similar implementation involving `UnmarkCommandParser`, `UnmarkCommand`.
+
+<img src="images/MarkSequenceDiagram.png" width="574" />
+
+#### Why it is implemented that way
+It is designed to preserve the Command Design Pattern. Through the implementation of the `MarkCommmandParser` and `UnmarkCommandParser`, we can enforce the input format of mark command. Furthermore, isolating `MarkCommand` and `UnmarkCommand` into separate classes, we narrow down functionality of each class. This gives the application more control by limiting the outcome in successful execution. For example, successful execution of MarkCommand will only lead to the task being marked as complete.Whereas an alternative design combining mark and unmark functionality together will lead vague outcome (application unaware whether the task is marked as complete or incomplete after execution).
+
+#### Design considerations:
+
+**Aspect: How the functionality of mark/unmark is broken down:**
+
+* **Alternative 1 (current choice):** Use two separate Command classes: `MarkCommand` and `UnmarkCommand`.
+    * Pros:
+        * More control over the final outcome of the Command execution (Knowledge whether task is completed or uncompleted after execution)
+        * Ability to check whether a task is either `MarkCommand` or `UnamrkCommand` during runtime
+        * Ability to extend either mark or unmark functionality isolated from each other
+      * Cons:
+        * Makes the code more bloated with similar looking code (for each class)
+* **Alternative 2:** Use a single `Command` to toggle `Task` as either complete or incomplete.
+    * Pros:
+        * Less redundant code
+        * Easier to extend if both mark and unmark are required to change synchronously
+    * Cons:
+        * No exact knowledge whether the execution of command mark task as complete or incomplete
+
+
+### \[Proposed\] Search by date
+
+#### What is the feature about
+Supports the searching of tasks by a date range. If the deadline of a task falls within the specified time range, it is displayed in the result.
+
+#### How the feature is implemented
+This feature will be incorporated with the current `FindCommand`. By adding additional checks for flags (`/start` and `/end`) in the FindCommandParser, the tasks will be filtered accordingly. A new `TimeRangePredicate` class will be added to abstract out the details on time range. Hence, the predicate will be applied to the filtered task list that is displayed to the user.
+
+Additionally, there will be checks for duplicate start and end date, such that the user can specify one start date and one end date at most.
+
+#### Why it is implemented that way
+Searching based on a time range is a similar operation to `find`, hence it is intuitive to incorporate them. The presence of start/end date is optional, to provide more flexibility. However, we do not allow multiple start/end date, to avoid confusion.
+
+#### Design considerations:
+
+**Aspect: Command to be used for searching by date:**
+
+* **Alternative 1 (current choice):** Incorporate with the original `find` (current choice).
+    * Pros:
+        * Does not increase the size of the command set.
+        * More intuitive, as the user does not have to remember another similar command.
+    * Cons:
+        * The parsing of an `AddCommand` becomes slightly more complicated.
+* **Alternative 2:** Create a new command `search`
+  itself.
+    * Pros:
+        * Less modification on current implementation.
+    * Cons:
+        * Increase the size of command sets.
+        * Could cause confusion with another similar command `find`, which compromises user experience.
+
+### Search by tags
+
+#### What is the feature about
+
+This feature allows the user to search for tasks with at least one of its tag matching the specified keyword.
+
+#### How the feature is implemented
+
+The search by tags feature uses the `find` command and prefix `t/` before the keyword.
+
+Given below is an example usage scenario of how the find mechanism behaves at each step to search for tasks by tags:
+
+Step 1. User inputs `find t/CS2103T` to find tasks that have a 'CS2103T' tag.
+
+Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
+
+Step 3. The first word of the user input is `find`, which matches the command for `FindCommand`. This initialises `FindCommandParser`.
+
+Step 4. `FindCommandParser#parse()` is called and keywords with prefix `t/` are extracted out as a list of keywords to search for. This list of keywords are used to initialise a `TagContainsKeywordPredicate`.
+
+Step 5. A `FindCommand` is initialised using the `TagContainsKeywordPredicate` and returned to `LogicManager` for execution.
+
+Step 6. After `FindCommand#execute()` is called, `model#updateFilteredTaskList()` is invoked to filter the task list using the given `TagContainsKeywordPredicate`. The command result is returned and displayed to the user.
+
+The following is the sequence diagram summarising the above steps:
+
+![SearchByTagSequenceDiagram](images/SearchByTagSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How tags are matched:**
+
+* **Alternative 1 (current choice):** Ignore case and require full match with at least one of the task's tags.
+    * Pros:
+      * Easy to implement.
+      * Consistent with how keywords are matched with task names in the search by keywords feature.
+      * Gives the most specific list of tasks if the user is able to remember the exact tag that one is searching for.
+    * Cons:
+      * May not find any match if users only enter a part of the tag (e.g. `cs2103` will not match with `cs2103t`).
+
+* **Alternative 2:** Ignore case and allow partial match with at least one of the task's tags.
+    * Pros:
+      * Gives a list of possible tasks even if the user is unable to remember the exact full tag.
+    * Cons:
+      * More difficult to implement.
+      * May give additional tasks that the user is not searching for (e.g. user searches for tasks with tag `data` but result list shows all tasks with tags `data` and `database`).
+
+**Aspect: User does not specify tag after `t/` prefix:**
+
+* **Alternative 1 (current choice):** Ignores the empty tag. `find t/` gives an empty result list. `find t/cs2103t t/` gives a list of tasks with tag `cs2103t`.
+    * Pros:
+      * If user searches for multiple tags, the valid tags will still be matched.
+    * Cons:
+      * No error message to inform user on invalid tag.
+
+* **Alternative 2:** Ignores other valid tags and outputs an error message to inform user on invalid command format.
+    * Pros:
+      * Ensures user does not unintentionally leave a tag value empty.
+    * Cons:
+      * Other valid tags are not matched until user corrects command.
 
 --------------------------------------------------------------------------------------------------------------------
 

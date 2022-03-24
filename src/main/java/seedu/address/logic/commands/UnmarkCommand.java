@@ -30,7 +30,7 @@ public class UnmarkCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_TASK_SUCCESS = "Uncompleted Task: %1$s";
+    public static final String MESSAGE_UNMARK_TASK_SUCCESS = "Uncompleted Task: %1$s";
     public static final String MESSAGE_TASK_ALREADY_UNCOMPLETED = "This task is already marked as incomplete.";
 
     private final Index targetIndex;
@@ -44,7 +44,7 @@ public class UnmarkCommand extends Command {
      * @param task task to be copied.
      * @return marked task.
      */
-    private Task createUnmarkedTask(Task task) {
+    private static Task createUnmarkedTask(Task task) {
         Name name = task.getName();
         Description description = task.getDescription();
         CompletionStatus completionStatus = new CompletionStatus("false");
@@ -73,7 +73,7 @@ public class UnmarkCommand extends Command {
 
         model.strictSetTask(taskToUnmark, unmarkedTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, unmarkedTask));
+        return new CommandResult(String.format(MESSAGE_UNMARK_TASK_SUCCESS, unmarkedTask));
     }
 
     @Override
