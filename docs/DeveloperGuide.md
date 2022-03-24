@@ -259,7 +259,7 @@ In this case, the `enum` type also increases the extensibility of the feature. I
 **Aspect: How the priority is saved:**
 
 * **Alternative 1 (current choice):** Use an enum.
-    * Pros: 
+    * Pros:
       * Allows for code that is clearer and more readable
       * More extensible
       * Compile-time type safety
@@ -274,7 +274,6 @@ In this case, the `enum` type also increases the extensibility of the feature. I
       * Using an integer to represent a priority level could be less descriptive as to what it exactly represents
       * More tedious to extend. To implement this, we might have to use conditionals to check if the `String` or `int` input corresponds with the accepted values in our `Priority` design. This can pose a problem when we try to extend the number of properties a `Priority` field can take. In this case, we might have to increase the number of conditionals, which could reduce readability and make the code more prone to errors.
       * Possibly increases memory use. If we use `String` or `int` types, we might have to instantiate new `Priority` classes every time we create a new `Task` object.
-      
 
 --------------------------------------------------------------------------------------------------------------------
 
