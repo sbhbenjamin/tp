@@ -281,7 +281,7 @@ In this case, the `enum` type also increases the extensibility of the feature. I
 Provides a way to mark `Task` objects as either completed or uncompleted.
 
 #### How the feature is implemented
-The first stage of the implementation `mark` feature involves parsing the user input. `MarkCommandParser` is used to parse and check whether the user input is valid. After which a `MarkCommand` object is created with the respective task index. The second stage requires `MarkCommand#execute()` to be called. The execution would update `TaskList` by replacing task to be marked by the copy of it with the `CompletionStatus` set to `true`. 
+The first stage of the implementation `mark` feature involves parsing the user input. `MarkCommandParser` is used to parse and check whether the user input is valid. After which a `MarkCommand` object is created with the respective task index. The second stage requires `MarkCommand#execute()` to be called. The execution would update `TaskList` by replacing task to be marked by the copy of it with the `CompletionStatus` set to `true`.
 
 The `unmark` feature follows a similar implementation involving `UnmarkCommandParser`, `UnmarkCommand`.
 
@@ -304,7 +304,7 @@ It is designed to preserve the Command Design Pattern. Through the implementatio
 * **Alternative 2:** Use a single `Command` to toggle `Task` as either complete or incomplete.
     * Pros:
         * Less redundant code
-        * Easier to extend if both mark and unmark are required to change synchronously 
+        * Easier to extend if both mark and unmark are required to change synchronously
     * Cons:
         * No exact knowledge whether the execution of command mark task as complete or incomplete
 
@@ -320,7 +320,7 @@ This feature will be incorporated with the current `FindCommand`. By adding addi
 Additionally, there will be checks for duplicate start and end date, such that the user can specify one start date and one end date at most.
 
 #### Why it is implemented that way
-Searching based on a time range is a similar operation to `find`, hence it is intuitive to incorporate them. The presence of start/end date is optional, to provide more flexibility. However, we do not allow multiple start/end date, to avoid confusion. 
+Searching based on a time range is a similar operation to `find`, hence it is intuitive to incorporate them. The presence of start/end date is optional, to provide more flexibility. However, we do not allow multiple start/end date, to avoid confusion.
 
 #### Design considerations:
 
@@ -330,7 +330,7 @@ Searching based on a time range is a similar operation to `find`, hence it is in
     * Pros:
         * Does not increase the size of the command set.
         * More intuitive, as the user does not have to remember another similar command.
-    * Cons: 
+    * Cons:
         * The parsing of an `AddCommand` becomes slightly more complicated.
 * **Alternative 2:** Create a new command `search`
   itself.
@@ -381,7 +381,7 @@ The following is the sequence diagram summarising the above steps:
       * May not find any match if users only enter a part of the tag (e.g. `cs2103` will not match with `cs2103t`).
 
 * **Alternative 2:** Ignore case and allow partial match with at least one of the task's tags.
-    * Pros: 
+    * Pros:
       * Gives a list of possible tasks even if the user is unable to remember the exact full tag.
     * Cons:
       * More difficult to implement.
@@ -390,15 +390,15 @@ The following is the sequence diagram summarising the above steps:
 **Aspect: User does not specify tag after `t/` prefix:**
 
 * **Alternative 1 (current choice):** Ignores the empty tag. `find t/` gives an empty result list. `find t/cs2103t t/` gives a list of tasks with tag `cs2103t`.
-    * Pros: 
+    * Pros:
       * If user searches for multiple tags, the valid tags will still be matched.
-    * Cons: 
+    * Cons:
       * No error message to inform user on invalid tag.
 
 * **Alternative 2:** Ignores other valid tags and outputs an error message to inform user on invalid command format.
-    * Pros: 
+    * Pros:
       * Ensures user does not unintentionally leave a tag value empty.
-    * Cons: 
+    * Cons:
       * Other valid tags are not matched until user corrects command.
 
 --------------------------------------------------------------------------------------------------------------------
