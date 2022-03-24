@@ -238,6 +238,43 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Priority
+
+#### What is the feature about
+Provides a way to attach priorities to `Tasks`. The current implementation allows it to be set to 3 values: `low`, `medium` and `high`.
+
+#### How the feature is implemented
+The feature was implemented using an `enum` class. To maintain consistency with other properties among the `Task`, the class was also implemented with `isValidPriority()` that functions as a validity checker and `valueOfLabel()` to retrieve the enum constant corresponding to a given `String` input.
+
+![PriorityEnum](images/PriorityDiagram.png)
+
+#### Why it is implemented that way
+The design of the priority feature was built using an enum as a `Priority` is only designed to support one out of a small set of possible values – in this case, `low`, `medium` and `high`. Appropriately, the `enum` type enables us to define a finite set of values, providing a higher level of type-safety as compared to literal values such as `String` or `Integer`.
+
+In this case, the `enum` type also increases the extensibility of the feature. If we wanted to add more fields to the priority (i.e. `lower` and `higher`), all we have to do is to add those fields as `enum` constants.
+
+
+#### Design considerations:
+
+**Aspect: How the priority is saved:**
+
+* **Alternative 1 (current choice):** Use an enum.
+    * Pros:
+      * Allows for code that is clearer and more readable
+      * More extensible
+      * Compile-time type safety
+      * Reduction in memory-use. When we create a new object, we only refer to the static `enum` constant, instead of creating a new `Priority` object.
+    * Cons: -
+* **Alternative 2:** Use `int` or `String`
+  itself.
+    * Pros:
+      * Easier to write (in the beginning)
+    * Cons:
+      * Lacks compile-time type safety
+      * Using an integer to represent a priority level could be less descriptive as to what it exactly represents
+      * More tedious to extend. To implement this, we might have to use conditionals to check if the `String` or `int` input corresponds with the accepted values in our `Priority` design. This can pose a problem when we try to extend the number of properties a `Priority` field can take. In this case, we might have to increase the number of conditionals, which could reduce readability and make the code more prone to errors.
+      * Possibly increases memory use. If we use `String` or `int` types, we might have to instantiate new `Priority` classes every time we create a new `Task` object.
+
 ### Mark/unmark feature
 
 #### What is the feature about
@@ -270,6 +307,39 @@ It is designed to preserve the Command Design Pattern. Through the implementatio
         * Easier to extend if both mark and unmark are required to change synchronously 
     * Cons:
         * No exact knowledge whether the execution of command mark task as complete or incomplete
+
+
+### \[Proposed\] Search by date
+
+#### What is the feature about
+Supports the searching of tasks by a date range. If the deadline of a task falls within the specified time range, it is displayed in the result.
+
+#### How the feature is implemented
+This feature will be incorporated with the current `FindCommand`. By adding additional checks for flags (`/start` and `/end`) in the FindCommandParser, the tasks will be filtered accordingly. A new `TimeRangePredicate` class will be added to abstract out the details on time range. Hence, the predicate will be applied to the filtered task list that is displayed to the user.
+
+Additionally, there will be checks for duplicate start and end date, such that the user can specify one start date and one end date at most.
+
+#### Why it is implemented that way
+Searching based on a time range is a similar operation to `find`, hence it is intuitive to incorporate them. The presence of start/end date is optional, to provide more flexibility. However, we do not allow multiple start/end date, to avoid confusion. 
+
+#### Design considerations:
+
+**Aspect: Command to be used for searching by date:**
+
+* **Alternative 1 (current choice):** Incorporate with the original `find` (current choice).
+    * Pros:
+        * Does not increase the size of the command set.
+        * More intuitive, as the user does not have to remember another similar command.
+    * Cons: 
+        * The parsing of an `AddCommand` becomes slightly more complicated.
+* **Alternative 2:** Create a new command `search`
+  itself.
+    * Pros:
+        * Less modification on current implementation.
+    * Cons:
+        * Increase the size of command sets.
+        * Could cause confusion with another similar command `find`, which compromises user experience.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

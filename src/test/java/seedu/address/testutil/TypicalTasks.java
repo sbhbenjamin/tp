@@ -39,8 +39,9 @@ public class TypicalTasks {
     public static final Task CS2103T_PROJECT = new TaskBuilder().withName("CS2103T Project")
             .withDescription("V1.2b completion").withDeadline("2022-03-13").withCompletionStatus("false")
             .withTags("CS2103T").build();
+    /** Task with Completion Status set to true **/
     public static final Task MEET_ALICE = new TaskBuilder().withName("Meet Alice")
-            .withDescription("Meeting Alice at NUS").withDeadline("2022-04-01").withCompletionStatus("false").build();
+            .withDescription("Meeting Alice at NUS").withDeadline("2022-04-01").withCompletionStatus("true").build();
     public static final Task BUY_ART_SUPPLIES = new TaskBuilder().withName("Buy Art Supplies")
             .withDescription("Buy Art supplies for art project").withDeadline("2022-03-21")
             .withCompletionStatus("false").build();

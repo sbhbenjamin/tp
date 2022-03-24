@@ -26,7 +26,7 @@
   }, {
     "name" : "Meet Alice",
     "description" : "Meeting Alice at NUS",
-    "isCompleted" : "false",
+    "isCompleted" : "true",
     "deadline" : "2022-04-01",
     "tagged" : [ ]
   } ]
