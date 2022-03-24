@@ -238,7 +238,38 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Mark/unmark feature
 
+#### What is the feature about
+Provides a way to mark `Task` objects as either completed or uncompleted.
+
+#### How the feature is implemented
+The first stage of the implementation `mark` feature involves parsing the user input. `MarkCommandParser` is used to parse and check whether the user input is valid. After which a `MarkCommand` object is created with the respective task index. The second stage requires `MarkCommand#execute()` to be called. The execution would update `TaskList` by replacing task to be marked by the copy of it with the `CompletionStatus` set to `true`. 
+
+The `unmark` feature follows a similar implementation involving `UnmarkCommandParser`, `UnmarkCommand`.
+
+<img src="images/MarkSequenceDiagram.png" width="574" />
+
+#### Why it is implemented that way
+It is designed to preserve the Command Design Pattern. Through the implementation of the `MarkCommmandParser` and `UnmarkCommandParser`, we can enforce the input format of mark command. Furthermore, isolating `MarkCommand` and `UnmarkCommand` into separate classes, we narrow down functionality of each class. This gives the application more control by limiting the outcome in successful execution. For example, successful execution of MarkCommand will only lead to the task being marked as complete.Whereas an alternative design combining mark and unmark functionality together will lead vague outcome (application unaware whether the task is marked as complete or incomplete after execution).
+
+#### Design considerations:
+
+**Aspect: How the functionality of mark/unmark is broken down:**
+
+* **Alternative 1 (current choice):** Use two separate Command classes: `MarkCommand` and `UnmarkCommand`
+    * Pros:
+        * More control over the final outcome of the Command execution (Knowledge whether task is completed or uncompleted after execution)
+        * Ability to check whether a task is either `MarkCommand` or `UnamrkCommand` during runtime
+        * Ability to extend either mark or unmark functionality isolated from each other
+      * Cons:
+        * Makes the code more bloated with similar looking code (for each class)
+* **Alternative 2:** Use a single `Command` to toggle `Task` as either complete or incomplete:
+    * Pros:
+        * Less redundant code.
+        * Easier to extend if both mark and unmark are required to change synchronously 
+    * Cons:
+        * No exact knowledge whether the execution of command mark task as complete or incomplete. 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
