@@ -298,7 +298,7 @@ Searching based on a time range is a similar operation to `find`, hence it is in
         * More intuitive, as the user does not have to remember another similar command.
     * Cons: 
         * The parsing of an `AddCommand` becomes slightly more complicated.
-* **Alternative 2:** Create a new command `search'
+* **Alternative 2:** Create a new command `search`
   itself.
     * Pros:
         * Less modification on current implementation.
