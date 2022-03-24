@@ -3,9 +3,10 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -33,7 +34,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         List<String> nameKeywords = Arrays.asList(allKeywords);
 
-        List<String> tagKeywords = new ArrayList<>();
+        Set<String> tagKeywords = new HashSet<>();
         for (String keyword : allKeywords) {
             if (keyword.startsWith(PREFIX_TAG.toString())) {
                 String keywordWithoutPrefix = keyword.replace(PREFIX_TAG.toString(), "");

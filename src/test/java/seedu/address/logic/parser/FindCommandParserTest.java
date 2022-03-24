@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +30,7 @@ public class FindCommandParserTest {
         // both name and tag keywords specified
         FindCommand expectedFindCommand = new FindCommand(
                 new NameContainsKeywordsPredicate(Arrays.asList("Tutorial", "Midterm", "t/CS2103T", "t/Test")),
-                new TagContainsKeywordsPredicate(Arrays.asList("CS2103T", "Test")));
+                new TagContainsKeywordsPredicate(new HashSet<>(Arrays.asList("CS2103T", "Test"))));
 
         // name and tag keywords specified, no leading and trailing whitespaces
         assertParseSuccess(parser, "Tutorial Midterm" + TAG_DESC_CS2103T + TAG_DESC_TEST, expectedFindCommand);
@@ -43,7 +43,7 @@ public class FindCommandParserTest {
         // only name keywords
         expectedFindCommand = new FindCommand(
                 new NameContainsKeywordsPredicate(Arrays.asList("Tutorial", "Midterm")),
-                new TagContainsKeywordsPredicate(Collections.emptyList()));
+                new TagContainsKeywordsPredicate(new HashSet<>()));
 
         assertParseSuccess(parser, "Tutorial Midterm", expectedFindCommand);
 
@@ -51,7 +51,7 @@ public class FindCommandParserTest {
         // only tag keywords
         expectedFindCommand = new FindCommand(
                 new NameContainsKeywordsPredicate(Arrays.asList("t/CS2103T", "t/Test")),
-                new TagContainsKeywordsPredicate(Arrays.asList("CS2103T", "Test")));
+                new TagContainsKeywordsPredicate(new HashSet<>(Arrays.asList("CS2103T", "Test"))));
 
         assertParseSuccess(parser, TAG_DESC_CS2103T + TAG_DESC_TEST, expectedFindCommand);
 
@@ -59,7 +59,7 @@ public class FindCommandParserTest {
         // name keywords and empty tag
         expectedFindCommand = new FindCommand(
                 new NameContainsKeywordsPredicate(Arrays.asList("Tutorial", "Midterm", "t/")),
-                new TagContainsKeywordsPredicate(Collections.emptyList()));
+                new TagContainsKeywordsPredicate(new HashSet<>()));
 
         assertParseSuccess(parser, "Tutorial Midterm t/ ", expectedFindCommand);
     }

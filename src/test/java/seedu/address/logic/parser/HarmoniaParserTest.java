@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -86,7 +87,7 @@ public class HarmoniaParserTest {
         List<String> allKeywords = Stream.concat(nameKeywords.stream(), tagKeywordsWithPrefix.stream())
                 .collect(Collectors.toList());
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(allKeywords),
-                new TagContainsKeywordsPredicate(tagKeywords)), command);
+                new TagContainsKeywordsPredicate(new HashSet<>(tagKeywords))), command);
     }
 
     @Test

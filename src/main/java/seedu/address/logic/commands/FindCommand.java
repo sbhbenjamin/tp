@@ -21,14 +21,19 @@ public class FindCommand extends Command {
             + "Parameters (must contain at least one keyword): "
             + "[NAME_KEYWORD] "
             + "[" + PREFIX_TAG + "TAG_KEYWORD]\n"
-            + "Example: " + COMMAND_WORD + " tutorial assignment t/test";
+            + "Example: " + COMMAND_WORD + " tutorial assignment t/test t/CS2103T";
 
+    /** Predicate that tests whether task name contains any given keyword */
     private final NameContainsKeywordsPredicate namePredicate;
+
+    /** Predicate that tests whether tag contains any given keywords */
     private final TagContainsKeywordsPredicate tagPredicate;
 
     /**
-     * @param namePredicate predicate that tests whether task name contains any given keywords
-     * @param tagPredicate predicate that tests whether tags contain any given keywords
+     * Constructor for FindCommand.
+     *
+     * @param namePredicate predicate that tests whether task name contains any given keywords.
+     * @param tagPredicate predicate that tests whether tag contains any given keywords.
      */
     public FindCommand(NameContainsKeywordsPredicate namePredicate, TagContainsKeywordsPredicate tagPredicate) {
         this.namePredicate = namePredicate;

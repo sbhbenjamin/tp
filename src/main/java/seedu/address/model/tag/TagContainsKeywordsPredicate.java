@@ -1,6 +1,5 @@
 package seedu.address.model.tag;
 
-import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -11,9 +10,15 @@ import seedu.address.model.task.Task;
  * Tests that a {@code Task}'s {@code Tags} matches any of the keywords given.
  */
 public class TagContainsKeywordsPredicate implements Predicate<Task> {
-    private final List<String> keywords;
 
-    public TagContainsKeywordsPredicate(List<String> keywords) {
+    private final Set<String> keywords;
+
+    /**
+     * Constructor for TagContainsKeywordsPredicate.
+     *
+     * @param keywords The set of keywords to search for.
+     */
+    public TagContainsKeywordsPredicate(Set<String> keywords) {
         this.keywords = keywords;
     }
 

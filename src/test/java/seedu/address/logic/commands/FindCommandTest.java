@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalTasks.getTypicalTaskList;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,9 +37,9 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate secondNamePredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("secondName"));
         TagContainsKeywordsPredicate firstTagPredicate =
-                new TagContainsKeywordsPredicate(Collections.singletonList("firstTag"));
+                new TagContainsKeywordsPredicate(new HashSet<>(Collections.singletonList("firstTag")));
         TagContainsKeywordsPredicate secondTagPredicate =
-                new TagContainsKeywordsPredicate(Collections.singletonList("secondTag"));
+                new TagContainsKeywordsPredicate(new HashSet<>(Collections.singletonList("secondTag")));
 
         FindCommand findFirstCommand = new FindCommand(firstNamePredicate, firstTagPredicate);
         FindCommand findSecondCommand = new FindCommand(secondNamePredicate, secondTagPredicate);
@@ -116,6 +117,6 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code TagContainsKeywordsPredicate}.
      */
     private TagContainsKeywordsPredicate prepareTagPredicate(String userInput) {
-        return new TagContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+        return new TagContainsKeywordsPredicate(new HashSet<>(Arrays.asList(userInput.split("\\s+"))));
     }
 }
