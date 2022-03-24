@@ -66,26 +66,23 @@ public class MarkCommand extends Command {
         List<Task> lastShownList = model.getFilteredTaskList();
         ArrayList<Task> markedTasks = new ArrayList<>();
 
-        /**
-         * to mark each index in the task list individually.
-         */
+
+        // to mark each index in the task list individually.
         for (int i = 0; i < targetIndexes.size(); i++) {
             if (targetIndexes.get(i).getZeroBased() >= lastShownList.size()) {
-                /**
-                 * in the case where the first few inputted indexes are marked successfully, but one of the latter
-                 * inputted indexes throw an error. Harmonia informs the user of the index that caused the error and also
-                 * informs the user of the tasks that it marked successfully
-                 */
+
+                // in the case where the first few inputted indexes are marked successfully, but one of the latter
+                // inputted indexes throw an error. Harmonia informs the user of the index that caused the error and
+                // also informs the user of the tasks that it marked successfully
                 if (markedTasks.size() > 1) {
                     throw new CommandException("Index " + targetIndexes.get(i).getOneBased() + " :"
-                            + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX + "\n" +
-                             markedTasksToString(markedTasks.subList(0, markedTasks.size()-1)));
+                            + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX + "\n"
+                            + markedTasksToString(markedTasks.subList(0, markedTasks.size() - 1)));
                 }
-                /**
-                 * in the case where the first inputted index is unsuccessfully marked, none of the other indexes inputted
-                 * after the first inputted index will be processed, and an error is thrown to inform the user of the
-                 * inputted index that caused the error
-                 */
+
+                // in the case where the first inputted index is unsuccessfully marked, none of the other indexes
+                // inputted after the first inputted index will be processed, and an error is thrown to inform the
+                // user of the inputted index that caused the error
                 else {
                     throw new CommandException("Index " + targetIndexes.get(i).getOneBased() + " :"
                             + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -99,22 +96,19 @@ public class MarkCommand extends Command {
             if (taskToMark.equals(markedTask)) {
                 //todo: limitation now is that if "mark 1 2 3" and index 2 is marked already, then only 1 will be marked
                 //todo: successfully, 3 will not be marked
-                /**
-                 * in the case where the first few inputted indexes are marked successfully, but one of the latter
-                 * inputted indexes throw an error. Harmonia informs the user of the index that caused the error and also
-                 * informs the user of the tasks that it marked successfully
-                 */
+
+                // in the case where the first few inputted indexes are marked successfully, but one of the latter
+                // inputted indexes throw an error. Harmonia informs the user of the index that caused the error and
+                // also informs the user of the tasks that it marked successfully
                 if (markedTasks.size() > 1) {
                     throw new CommandException("Index " + targetIndexes.get(i).getOneBased() + ": "
-                            + MESSAGE_TASK_ALREADY_COMPLETED + "\n" +
-                            markedTasksToString(markedTasks.subList(0, markedTasks.size()-1)));
+                            + MESSAGE_TASK_ALREADY_COMPLETED + "\n"
+                            + markedTasksToString(markedTasks.subList(0, markedTasks.size() - 1)));
 
                 }
-                /**
-                 * in the case where the first inputted index is unsuccessfully marked, none of the other indexes inputted
-                 * after the first inputted index will be processed, and an error is thrown to inform the user of the
-                 * inputted index that caused the error
-                 */
+                // in the case where the first inputted index is unsuccessfully marked, none of the other indexes
+                // inputted after the first inputted index will be processed, and an error is thrown to inform the
+                // user of the inputted index that caused the error
                 else {
                     throw new CommandException("Index " + targetIndexes.get(i).getOneBased() + ": "
                             + MESSAGE_TASK_ALREADY_COMPLETED);
@@ -136,7 +130,7 @@ public class MarkCommand extends Command {
     private String markedTasksToString(List<Task> unmarkedTasks) {
         String str = "Uncompleted Tasks: \n";
         for (int i = 0; i < unmarkedTasks.size(); i++) {
-            str += (i+1) + ". " + unmarkedTasks.get(i) + "\n";
+            str += (i + 1) + ". " + unmarkedTasks.get(i) + "\n";
         }
         return str;
     }

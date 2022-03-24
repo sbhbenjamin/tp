@@ -2,11 +2,12 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.UnmarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import java.util.ArrayList;
 
 /**
  * Parses input arguments and creates a new UnmarkCommand object

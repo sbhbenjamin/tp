@@ -68,22 +68,19 @@ public class UnmarkCommand extends Command {
 
         for (int i = 0; i < targetIndexes.size(); i++) {
             if (targetIndexes.get(i).getZeroBased() >= lastShownList.size()) {
-                /**
-                 * in the case where the first few inputted indexes are marked successfully, but one of the latter
-                 * inputted indexes throw an error. Harmonia informs the user of the index that caused the error and also
-                 * informs the user of the tasks that it marked successfully
-                 */
+
+                // in the case where the first few inputted indexes are marked successfully, but one of the latter
+                // inputted indexes throw an error. Harmonia informs the user of the index that caused the error and
+                // also informs the user of the tasks that it marked successfully
                 if (unmarkedTasks.size() > 1) {
                     throw new CommandException("Index " + targetIndexes.get(i).getOneBased() + " :"
-                            + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX + "\n" +
-                            unmarkedTasksToString(unmarkedTasks.subList(0, unmarkedTasks.size()-1)));
+                            + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX + "\n"
+                            + unmarkedTasksToString(unmarkedTasks.subList(0, unmarkedTasks.size() - 1)));
                 }
 
-                /**
-                 * in the case where the first inputted index is unsuccessfully marked, none of the other indexes inputted
-                 * after the first inputted index will be processed, and an error is thrown to inform the user of the
-                 * inputted index that caused the error
-                 */
+                // in the case where the first inputted index is unsuccessfully marked, none of the other indexes
+                // inputted after the first inputted index will be processed, and an error is thrown to inform the user
+                // of the inputted index that caused the error
                 else {
                     throw new CommandException("Index " + targetIndexes.get(i).getOneBased() + " :"
                             + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -94,24 +91,23 @@ public class UnmarkCommand extends Command {
             unmarkedTasks.add(unmarkedTask);
 
             if (taskToUnmark.equals(unmarkedTask)) {
-                //todo: limitation now is that if "unmark 1 2 3" and index 2 is unmarked already, then only 1 will be unmarked
-                //todo: successfully, 3 will not be unmarked
-                /**
-                 * in the case where the first few inputted indexes are marked successfully, but one of the latter
-                 * inputted indexes throw an error. Harmonia informs the user of the index that caused the error and also
-                 * informs the user of the tasks that it marked successfully
-                 */
+                //todo: limitation now is that if "unmark 1 2 3" and index 2 is unmarked already, then only 1 will
+                //todo: be unmarked successfully, 3 will not be unmarked
+
+                // in the case where the first few inputted indexes are marked successfully, but one of the latter
+                // inputted indexes throw an error. Harmonia informs the user of the index that caused the error and
+                // also informs the user of the tasks that it marked successfully
                 if (unmarkedTasks.size() > 1) {
                     throw new CommandException("Index " + targetIndexes.get(i).getOneBased() + ": "
-                            + MESSAGE_TASK_ALREADY_UNCOMPLETED + "\n" +
-                            unmarkedTasksToString(unmarkedTasks.subList(0, unmarkedTasks.size()-1)));
+                            + MESSAGE_TASK_ALREADY_UNCOMPLETED + "\n"
+                            + unmarkedTasksToString(unmarkedTasks.subList(0, unmarkedTasks.size() - 1)));
                 }
 
-                /**
-                 * in the case where the first inputted index is unsuccessfully marked, none of the other indexes inputted
-                 * after the first inputted index will be processed, and an error is thrown to inform the user of the
-                 * inputted index that caused the error
-                 */
+
+                // in the case where the first inputted index is unsuccessfully marked, none of the other indexes
+                // inputted after the first inputted index will be processed, and an error is thrown to inform the user
+                // of the inputted index that caused the error
+
                 else {
                     throw new CommandException("Index " + targetIndexes.get(i).getOneBased() + ": "
                             + MESSAGE_TASK_ALREADY_UNCOMPLETED);
@@ -133,7 +129,7 @@ public class UnmarkCommand extends Command {
     private String unmarkedTasksToString(List<Task> unmarkedTasks) {
         String str = "Uncompleted Tasks: \n";
         for (int i = 0; i < unmarkedTasks.size(); i++) {
-            str += (i+1) + ". " + unmarkedTasks.get(i) + "\n";
+            str += (i + 1) + ". " + unmarkedTasks.get(i) + "\n";
         }
         return str;
     }

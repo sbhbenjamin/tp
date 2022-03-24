@@ -1,12 +1,10 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.parser.exceptions.ParseException;
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses through the second part of the user input (after the command) and determine which indexes are to be called in
