@@ -1,0 +1,10 @@
+@startuml
+enum Priority {
+    LOW
+    MEDIUM
+    HIGH
+
+    + {method} isValidPriority : boolean
+    + {method} valueOfLabel : Priority
+}
+@enduml
