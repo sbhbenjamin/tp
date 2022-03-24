@@ -309,26 +309,32 @@ The following is the sequence diagram summarising the above steps:
 
 * **Alternative 1 (current choice):** Ignore case and require full match with at least one of the task's tags.
     * Pros:
-        * Easy to implement.
-        * Consistent with how keywords are matched with task names in the search by keywords feature.
-        * Gives the most specific list of tasks if the user is able to remember the exact tag that one is searching for.
-    * Cons: May not find any match if users only enter a part of the tag (e.g. `cs2103` will not match with `cs2103t`).
+      * Easy to implement.
+      * Consistent with how keywords are matched with task names in the search by keywords feature.
+      * Gives the most specific list of tasks if the user is able to remember the exact tag that one is searching for.
+    * Cons:
+      * May not find any match if users only enter a part of the tag (e.g. `cs2103` will not match with `cs2103t`).
 
 * **Alternative 2:** Ignore case and allow partial match with at least one of the task's tags.
-    * Pros: Gives a list of possible tasks even if the user is unable to remember the exact full tag.
+    * Pros: 
+      * Gives a list of possible tasks even if the user is unable to remember the exact full tag.
     * Cons:
-        * More difficult to implement.
-        * May give additional tasks that the user is not searching for (e.g. user searches for tasks with tag `data` but result list shows all tasks with tags `data` and `database`).
+      * More difficult to implement.
+      * May give additional tasks that the user is not searching for (e.g. user searches for tasks with tag `data` but result list shows all tasks with tags `data` and `database`).
 
 **Aspect: User does not specify tag after `t/` prefix:**
 
 * **Alternative 1 (current choice):** Ignores the empty tag. `find t/` gives an empty result list. `find t/cs2103t t/` gives a list of tasks with tag `cs2103t`.
-    * Pros: If user searches for multiple tags, the valid tags will still be matched.
-    * Cons: No error message to inform user on invalid tag.
+    * Pros: 
+      * If user searches for multiple tags, the valid tags will still be matched.
+    * Cons: 
+      * No error message to inform user on invalid tag.
 
 * **Alternative 2:** Ignores other valid tags and outputs an error message to inform user on invalid command format.
-    * Pros: Ensures user does not unintentionally leave a tag value empty.
-    * Cons: Other valid tags are not matched until user corrects command.
+    * Pros: 
+      * Ensures user does not unintentionally leave a tag value empty.
+    * Cons: 
+      * Other valid tags are not matched until user corrects command.
 
 --------------------------------------------------------------------------------------------------------------------
 
