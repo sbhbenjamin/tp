@@ -18,7 +18,7 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names or tags contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: "
+            + "Parameters (must contain at least one keyword): "
             + "[NAME_KEYWORD] "
             + "[" + PREFIX_TAG + "TAG_KEYWORD]\n"
             + "Example: " + COMMAND_WORD + " tutorial assignment t/test";
