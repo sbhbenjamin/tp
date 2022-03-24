@@ -104,12 +104,12 @@ public class HarmoniaParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
-    @Test
-    public void parseCommand_mark() throws Exception {
-        MarkCommand command = (MarkCommand) parser.parseCommand(
-                MarkCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased());
-        assertEquals(new MarkCommand(INDEX_FIRST_TASK), command);
-    }
+//    @Test
+//    public void parseCommand_mark() throws Exception {
+//        MarkCommand command = (MarkCommand) parser.parseCommand(
+//                MarkCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased());
+//        assertEquals(new MarkCommand(INDEX_FIRST_TASK), command);
+//    }
 
     @Test
     public void parseCommand_unmark() throws Exception {

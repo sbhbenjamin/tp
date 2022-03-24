@@ -6,6 +6,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.UnmarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+import java.util.ArrayList;
+
 /**
  * Parses input arguments and creates a new UnmarkCommand object
  */
@@ -18,8 +20,8 @@ public class UnmarkCommandParser implements Parser<UnmarkCommand> {
      */
     public UnmarkCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new UnmarkCommand(index);
+            ArrayList<Index> indexes = MassOpsParser.massOpProcessor(args);
+            return new UnmarkCommand(indexes);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE), pe);
