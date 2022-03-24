@@ -50,7 +50,7 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(task.getName().fullName);
         description.setText(task.getDescription().value);
-        completionStatus.setText((task.getCompletionStatus().value == "true") ? "Completed" : "Incomplete");
+        completionStatus.setText((task.getCompletionStatus().toString() == "true") ? "Completed" : "Incomplete");
         deadline.setText(task.getDeadline().value);
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
