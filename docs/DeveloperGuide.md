@@ -275,6 +275,61 @@ In this case, the `enum` type also increases the extensibility of the feature. I
       * More tedious to extend. To implement this, we might have to use conditionals to check if the `String` or `int` input corresponds with the accepted values in our `Priority` design. This can pose a problem when we try to extend the number of properties a `Priority` field can take. In this case, we might have to increase the number of conditionals, which could reduce readability and make the code more prone to errors.
       * Possibly increases memory use. If we use `String` or `int` types, we might have to instantiate new `Priority` classes every time we create a new `Task` object.
 
+### Search by tags feature
+
+#### What is the feature about
+
+This feature allows the user to search for tasks with at least one of its tag matching the specified keyword.
+
+#### How the feature is implemented
+
+The search by tags feature uses the `find` command and prefix `t/` before the keyword.
+
+Given below is an example usage scenario of how the find mechanism behaves at each step to search for tasks by tags:
+
+Step 1. User inputs `find t/CS2103T` to find tasks that have a 'CS2103T' tag.
+
+Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
+
+Step 3. The first word of the user input is `find`, which matches the command for `FindCommand`. This initialises `FindCommandParser`.
+
+Step 4. `FindCommandParser#parse()` is called and keywords with prefix `t/` are extracted out as a list of keywords to search for. This list of keywords are used to initialise a `TagContainsKeywordPredicate`.
+
+Step 5. A `FindCommand` is initialised using the `TagContainsKeywordPredicate` and returned to `LogicManager` for execution.
+
+Step 6. After `FindCommand#execute()` is called, `model#updateFilteredTaskList()` is invoked to filter the task list using the given `TagContainsKeywordPredicate`. The command result is returned and displayed to the user.
+
+The following is the sequence diagram summarising the above steps:
+
+![SearchByTagSequenceDiagram](images/SearchByTagSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How tags are matched:**
+
+* **Alternative 1 (current choice):** Ignore case and require full match with at least one of the task's tags.
+    * Pros:
+        * Easy to implement.
+        * Consistent with how keywords are matched with task names in the search by keywords feature.
+        * Gives the most specific list of tasks if the user is able to remember the exact tag that one is searching for.
+    * Cons: May not find any match if users only enter a part of the tag (e.g. `cs2103` will not match with `cs2103t`).
+
+* **Alternative 2:** Ignore case and allow partial match with at least one of the task's tags.
+    * Pros: Gives a list of possible tasks even if the user is unable to remember the exact full tag.
+    * Cons:
+        * More difficult to implement.
+        * May give additional tasks that the user is not searching for (e.g. user searches for tasks with tag `data` but result list shows all tasks with tags `data` and `database`).
+
+**Aspect: User does not specify tag after `t/` prefix:**
+
+* **Alternative 1 (current choice):** Ignores the empty tag. `find t/` gives an empty result list. `find t/cs2103t t/` gives a list of tasks with tag `cs2103t`.
+    * Pros: If user searches for multiple tags, the valid tags will still be matched.
+    * Cons: No error message to inform user on invalid tag.
+
+* **Alternative 2:** Ignores other valid tags and outputs an error message to inform user on invalid command format.
+    * Pros: Ensures user does not unintentionally leave a tag value empty.
+    * Cons: Other valid tags are not matched until user corrects command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
