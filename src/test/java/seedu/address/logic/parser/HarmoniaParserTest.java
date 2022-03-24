@@ -110,13 +110,13 @@ public class HarmoniaParserTest {
 //                MarkCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased());
 //        assertEquals(new MarkCommand(INDEX_FIRST_TASK), command);
 //    }
-
-    @Test
-    public void parseCommand_unmark() throws Exception {
-        UnmarkCommand command = (UnmarkCommand) parser.parseCommand(
-                UnmarkCommand.COMMAND_WORD + " " + INDEX_SECOND_TASK.getOneBased());
-        assertEquals(new UnmarkCommand(INDEX_SECOND_TASK), command);
-    }
+//
+//    @Test
+//    public void parseCommand_unmark() throws Exception {
+//        UnmarkCommand command = (UnmarkCommand) parser.parseCommand(
+//                UnmarkCommand.COMMAND_WORD + " " + INDEX_SECOND_TASK.getOneBased());
+//        assertEquals(new UnmarkCommand(INDEX_SECOND_TASK), command);
+//    }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
