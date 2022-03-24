@@ -696,7 +696,6 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-
 ### Mass Operations [Proposed]
 
 #### What is the feature about
@@ -705,8 +704,8 @@ users have to mark and unmark multiple tasks as completed or uncompleted individ
 
 #### How the feature is implemented
 
-The feature is to be implemented with the addition of a `MassOpsParser` class which parses through user inputs 
-consisting of multiple indexes and processes the indexes to return an `ArrayList` of `Indexes` for `MarkCommand` and 
+The feature is to be implemented with the addition of a `MassOpsParser` class which parses through user inputs
+consisting of multiple indexes and processes the indexes to return an `ArrayList` of `Indexes` for `MarkCommand` and
 `UnmarkCommand` to execute on.
 
 ##### MassOps: Marking tasks
@@ -725,7 +724,7 @@ into `indexes`, an `ArrayList<Index>` containing the indexes to be marked.
 Step 5. `MarkCommand` is invoked upon `indexes` and returned to LogicManager.
 
 Step 6. After `MarkCommand#execute()` is executed, Harmonia retrieves each task to be marked from `lastShowList` and
-`createMarkedTask` is called to mark each task respectively. 
+`createMarkedTask` is called to mark each task respectively.
 
 Step 7. Each command result is stored in `markedTasks` which is returned and displayed to the user at the
 end of the execution.
@@ -743,7 +742,7 @@ Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#pa
 
 Step 3. The first word of the user input is `unmark`, which matches the command for `UnmarkCommand`.
 
-Step 4. `UnmarkCommandParser#parse()` is called and `MassOpsParser#massOpsProcessor` is invoked to process the user 
+Step 4. `UnmarkCommandParser#parse()` is called and `MassOpsParser#massOpsProcessor` is invoked to process the user
 input to be stored temporarily in `indexes`, an `ArrayList<Index>` containing the indexes to be unmarked.
 
 Step 5. `UnmarkCommand` is invoked upon `indexes` and returned to LogicManager.
@@ -769,4 +768,4 @@ Step 7. Each command result is stored in an `ArrayList` which is returned and di
     * Cons:
         * May be very time-consuming for the user and becomes less user-friendly as the user has to manually mark or
         * unmark multiple tasks one at a time if they want to do it in batches
-        
+
