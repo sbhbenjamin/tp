@@ -11,10 +11,4 @@ public class CliSyntax {
     public static final Prefix PREFIX_DEADLINE = new Prefix("dl/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
-
-    /* Definition for other fields */
-    public static final Prefix PREFIX_DATE_START = new Prefix("start/");
-    public static final Prefix PREFIX_DATE_END = new Prefix("end/");
-    public static final Prefix PREFIX_DATE_FROM = new Prefix("from/");  // Equivalent to "start/"
-    public static final Prefix PREFIX_DATE_TO = new Prefix("to/");      // Equivalent to "end/"
 }
