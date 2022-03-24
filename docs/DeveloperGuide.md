@@ -257,19 +257,19 @@ It is designed to preserve the Command Design Pattern. Through the implementatio
 
 **Aspect: How the functionality of mark/unmark is broken down:**
 
-* **Alternative 1 (current choice):** Use two separate Command classes: `MarkCommand` and `UnmarkCommand`
+* **Alternative 1 (current choice):** Use two separate Command classes: `MarkCommand` and `UnmarkCommand`.
     * Pros:
         * More control over the final outcome of the Command execution (Knowledge whether task is completed or uncompleted after execution)
         * Ability to check whether a task is either `MarkCommand` or `UnamrkCommand` during runtime
         * Ability to extend either mark or unmark functionality isolated from each other
       * Cons:
         * Makes the code more bloated with similar looking code (for each class)
-* **Alternative 2:** Use a single `Command` to toggle `Task` as either complete or incomplete:
+* **Alternative 2:** Use a single `Command` to toggle `Task` as either complete or incomplete.
     * Pros:
-        * Less redundant code.
+        * Less redundant code
         * Easier to extend if both mark and unmark are required to change synchronously 
     * Cons:
-        * No exact knowledge whether the execution of command mark task as complete or incomplete. 
+        * No exact knowledge whether the execution of command mark task as complete or incomplete
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
