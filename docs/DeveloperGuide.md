@@ -275,6 +275,71 @@ In this case, the `enum` type also increases the extensibility of the feature. I
       * More tedious to extend. To implement this, we might have to use conditionals to check if the `String` or `int` input corresponds with the accepted values in our `Priority` design. This can pose a problem when we try to extend the number of properties a `Priority` field can take. In this case, we might have to increase the number of conditionals, which could reduce readability and make the code more prone to errors.
       * Possibly increases memory use. If we use `String` or `int` types, we might have to instantiate new `Priority` classes every time we create a new `Task` object.
 
+### Mark/unmark feature
+
+#### What is the feature about
+Provides a way to mark `Task` objects as either completed or uncompleted.
+
+#### How the feature is implemented
+The first stage of the implementation `mark` feature involves parsing the user input. `MarkCommandParser` is used to parse and check whether the user input is valid. After which a `MarkCommand` object is created with the respective task index. The second stage requires `MarkCommand#execute()` to be called. The execution would update `TaskList` by replacing task to be marked by the copy of it with the `CompletionStatus` set to `true`. 
+
+The `unmark` feature follows a similar implementation involving `UnmarkCommandParser`, `UnmarkCommand`.
+
+<img src="images/MarkSequenceDiagram.png" width="574" />
+
+#### Why it is implemented that way
+It is designed to preserve the Command Design Pattern. Through the implementation of the `MarkCommmandParser` and `UnmarkCommandParser`, we can enforce the input format of mark command. Furthermore, isolating `MarkCommand` and `UnmarkCommand` into separate classes, we narrow down functionality of each class. This gives the application more control by limiting the outcome in successful execution. For example, successful execution of MarkCommand will only lead to the task being marked as complete.Whereas an alternative design combining mark and unmark functionality together will lead vague outcome (application unaware whether the task is marked as complete or incomplete after execution).
+
+#### Design considerations:
+
+**Aspect: How the functionality of mark/unmark is broken down:**
+
+* **Alternative 1 (current choice):** Use two separate Command classes: `MarkCommand` and `UnmarkCommand`.
+    * Pros:
+        * More control over the final outcome of the Command execution (Knowledge whether task is completed or uncompleted after execution)
+        * Ability to check whether a task is either `MarkCommand` or `UnamrkCommand` during runtime
+        * Ability to extend either mark or unmark functionality isolated from each other
+      * Cons:
+        * Makes the code more bloated with similar looking code (for each class)
+* **Alternative 2:** Use a single `Command` to toggle `Task` as either complete or incomplete.
+    * Pros:
+        * Less redundant code
+        * Easier to extend if both mark and unmark are required to change synchronously 
+    * Cons:
+        * No exact knowledge whether the execution of command mark task as complete or incomplete
+
+
+### \[Proposed\] Search by date
+
+#### What is the feature about
+Supports the searching of tasks by a date range. If the deadline of a task falls within the specified time range, it is displayed in the result.
+
+#### How the feature is implemented
+This feature will be incorporated with the current `FindCommand`. By adding additional checks for flags (`/start` and `/end`) in the FindCommandParser, the tasks will be filtered accordingly. A new `TimeRangePredicate` class will be added to abstract out the details on time range. Hence, the predicate will be applied to the filtered task list that is displayed to the user.
+
+Additionally, there will be checks for duplicate start and end date, such that the user can specify one start date and one end date at most.
+
+#### Why it is implemented that way
+Searching based on a time range is a similar operation to `find`, hence it is intuitive to incorporate them. The presence of start/end date is optional, to provide more flexibility. However, we do not allow multiple start/end date, to avoid confusion. 
+
+#### Design considerations:
+
+**Aspect: Command to be used for searching by date:**
+
+* **Alternative 1 (current choice):** Incorporate with the original `find` (current choice).
+    * Pros:
+        * Does not increase the size of the command set.
+        * More intuitive, as the user does not have to remember another similar command.
+    * Cons: 
+        * The parsing of an `AddCommand` becomes slightly more complicated.
+* **Alternative 2:** Create a new command `search`
+  itself.
+    * Pros:
+        * Less modification on current implementation.
+    * Cons:
+        * Increase the size of command sets.
+        * Could cause confusion with another similar command `find`, which compromises user experience.
+
 ### Search by tags
 
 #### What is the feature about
