@@ -1,0 +1,9 @@
+{
+  "tasks" : [ {
+    "name" : "Task with invalid name field: T@sk",
+    "description" : "All lectures and tutorials",
+    "isCompleted" : "true",
+    "deadline" : "2022-11-11",
+    "tagged" : [ "CS2105", "exam" ]
+  }]
+}
