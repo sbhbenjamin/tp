@@ -69,4 +69,9 @@ shadowJar {
     archiveName = 'harmonia.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
+
 defaultTasks 'clean', 'test'
