@@ -1,11 +1,16 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.TagContainsKeywordsPredicate;
 import seedu.address.model.task.NameContainsKeywordsPredicate;
 
 /**
@@ -25,9 +30,22 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] allKeywords = trimmedArgs.split("\\s+");
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        List<String> nameKeywords = Arrays.asList(allKeywords);
+
+        Set<String> tagKeywords = new HashSet<>();
+        for (String keyword : allKeywords) {
+            if (keyword.startsWith(PREFIX_TAG.toString())) {
+                String keywordWithoutPrefix = keyword.replace(PREFIX_TAG.toString(), "");
+                if (!keywordWithoutPrefix.equals("")) {
+                    tagKeywords.add(keywordWithoutPrefix);
+                }
+            }
+        }
+
+        return new FindCommand(new NameContainsKeywordsPredicate(nameKeywords),
+                new TagContainsKeywordsPredicate(tagKeywords));
     }
 
 }

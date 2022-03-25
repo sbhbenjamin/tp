@@ -1,34 +1,67 @@
-//package seedu.address.logic.parser;
-//
-//import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-//import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-//import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-//
-//import java.util.Arrays;
-//
-//import org.junit.jupiter.api.Test;
-//
-//import seedu.address.logic.commands.FindCommand;
-//import seedu.address.model.task.NameContainsKeywordsPredicate;
-//
-//public class FindCommandParserTest {
-//
-//    private FindCommandParser parser = new FindCommandParser();
-//
-//    @Test
-//    public void parse_emptyArg_throwsParseException() {
-//        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-//    }
-//
-//    @Test
-//    public void parse_validArgs_returnsFindCommand() {
-//        // no leading and trailing whitespaces
-//        FindCommand expectedFindCommand =
-//                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Tutorial", "Midterm")));
-//        assertParseSuccess(parser, "Tutorial Midterm", expectedFindCommand);
-//
-//        // multiple whitespaces between keywords
-//        assertParseSuccess(parser, " \n Tutorial \n \t Midterm  \t", expectedFindCommand);
-//    }
-//
-//}
+package seedu.address.logic.parser;
+
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_CS2103T;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_TEST;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.Arrays;
+import java.util.HashSet;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.tag.TagContainsKeywordsPredicate;
+import seedu.address.model.task.NameContainsKeywordsPredicate;
+
+public class FindCommandParserTest {
+
+    private FindCommandParser parser = new FindCommandParser();
+
+    @Test
+    public void parse_emptyArg_throwsParseException() {
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindCommand() {
+        // both name and tag keywords specified
+        FindCommand expectedFindCommand = new FindCommand(
+                new NameContainsKeywordsPredicate(Arrays.asList("Tutorial", "Midterm", "t/CS2103T", "t/Test")),
+                new TagContainsKeywordsPredicate(new HashSet<>(Arrays.asList("CS2103T", "Test"))));
+
+        // name and tag keywords specified, no leading and trailing whitespaces
+        assertParseSuccess(parser, "Tutorial Midterm" + TAG_DESC_CS2103T + TAG_DESC_TEST, expectedFindCommand);
+
+        // name and tag keywords specified, multiple whitespaces between keywords
+        assertParseSuccess(parser, " \n Tutorial \n \t Midterm \t" + TAG_DESC_CS2103T + "\n\t" + TAG_DESC_TEST,
+                expectedFindCommand);
+
+
+        // only name keywords
+        expectedFindCommand = new FindCommand(
+                new NameContainsKeywordsPredicate(Arrays.asList("Tutorial", "Midterm")),
+                new TagContainsKeywordsPredicate(new HashSet<>()));
+
+        assertParseSuccess(parser, "Tutorial Midterm", expectedFindCommand);
+
+
+        // only tag keywords
+        expectedFindCommand = new FindCommand(
+                new NameContainsKeywordsPredicate(Arrays.asList("t/CS2103T", "t/Test")),
+                new TagContainsKeywordsPredicate(new HashSet<>(Arrays.asList("CS2103T", "Test"))));
+
+        assertParseSuccess(parser, TAG_DESC_CS2103T + TAG_DESC_TEST, expectedFindCommand);
+
+
+        // name keywords and empty tag
+        expectedFindCommand = new FindCommand(
+                new NameContainsKeywordsPredicate(Arrays.asList("Tutorial", "Midterm", "t/")),
+                new TagContainsKeywordsPredicate(new HashSet<>()));
+
+        assertParseSuccess(parser, "Tutorial Midterm t/ ", expectedFindCommand);
+    }
+
+}
