@@ -275,6 +275,77 @@ In this case, the `enum` type also increases the extensibility of the feature. I
       * More tedious to extend. To implement this, we might have to use conditionals to check if the `String` or `int` input corresponds with the accepted values in our `Priority` design. This can pose a problem when we try to extend the number of properties a `Priority` field can take. In this case, we might have to increase the number of conditionals, which could reduce readability and make the code more prone to errors.
       * Possibly increases memory use. If we use `String` or `int` types, we might have to instantiate new `Priority` classes every time we create a new `Task` object.
 
+
+### \[Proposed\] Mass Operations
+
+#### What is the feature about
+This feature provides a way for users to mark and unmark multiple `Tasks` at a time. For the current implementation of
+mark and unmark, users have to type in a command for each task that they wish to mark or unmark, one at a time.
+
+#### How the feature is implemented
+
+The feature is to be implemented with the addition of a `MassOpsParser` class which parses through user inputs
+consisting of multiple indexes and processes the indexes to return an `ArrayList` of `Indexes` for `MarkCommand` and
+`UnmarkCommand` to execute on.
+
+##### MassOperations: Marking tasks
+Given below is an example usage scenario of how the MassOps mechanism behaves at each step to mark tasks in
+the task list.
+
+Step 1. User inputs `mark 1 2 3` to unmark tasks 1, 2 and 3 of the task list.
+
+Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
+
+Step 3. The first word of the user input is `mark`, which matches the command for `MarkCommand`.
+
+Step 4. `MarkCommandParser#parse()` is called and `MassOpsParser#massOpsProcessor` is invoked to process the user input
+into `indexes`, an `ArrayList<Index>` containing the indexes to be marked.
+
+Step 5. `MarkCommand` is invoked upon `indexes` and returned to LogicManager.
+
+Step 6. After `MarkCommand#execute()` is executed, Harmonia retrieves each task to be marked from `lastShowList` and
+`createMarkedTask` is called to mark each task respectively.
+
+Step 7. Each command result is stored in `markedTasks` which is returned and displayed to the user at the
+end of the execution.
+
+![MassOpsMark](images/MassOpsMark.png)
+
+##### MassOperations: Unmarking tasks
+Given below is an example usage scenario of how the MassOps mechanism behaves at each step to unmark tasks in
+the task list.
+
+Step 1. User inputs `unmark 1 2 3` to mark tasks 1, 2 and 3 of the task list.
+
+Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
+
+Step 3. The first word of the user input is `unmark`, which matches the command for `UnmarkCommand`.
+
+Step 4. `UnmarkCommandParser#parse()` is called and `MassOpsParser#massOpsProcessor` is invoked to process the user
+input to be stored temporarily in `indexes`, an `ArrayList<Index>` containing the indexes to be unmarked.
+
+Step 5. `UnmarkCommand` is invoked upon `indexes` and returned to LogicManager.
+
+Step 6. After `UnmarkCommand#execute()` is executed, `model#updateFilteredTaskList()` is invoked to get the updated task
+list, from which Harmonia will retrieve the respective tasks to be unmarked.
+
+Step 7. Each command result is stored in an `ArrayList` which is returned and displayed to the user.
+
+![MassOpsUnmark](images/MassOpsUnmark.png)
+
+#### Design considerations:
+
+**Aspect: The number of indexes to be marked/unmarked at a time**
+
+* **Alternative 1 (current choice):** Ignore case and only allow users to mark or unmark tasks one at a time.
+    * Pros:
+        * Easy to implement.
+        * Consistent with how delete and find are working now, just deleting one task and finding one keyword at a time.
+        * Ensures that there is no confusion in which tasks are successfully marked or unmarked and which tasks are unsuccessfully marked or unmarked when multiple indexes are provided in the command
+    * Cons:
+        * May be very time-consuming for the user and becomes less user-friendly as the user has to manually mark or
+        * unmark multiple tasks one at a time if they want to do it in batches
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -695,77 +766,4 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
-
-### Mass Operations [Proposed]
-
-#### What is the feature about
-Provides a way for users to mark and unmark multiple `Task` at a time. The current implementation of mark and unmark
-users have to mark and unmark multiple tasks as completed or uncompleted individually, one at a time.
-
-#### How the feature is implemented
-
-The feature is to be implemented with the addition of a `MassOpsParser` class which parses through user inputs
-consisting of multiple indexes and processes the indexes to return an `ArrayList` of `Indexes` for `MarkCommand` and
-`UnmarkCommand` to execute on.
-
-##### MassOps: Marking tasks
-Given below is an example usage scenario of how the MassOps mechanism behaves at each step to mark tasks in
-the task list.
-
-Step 1. User inputs `mark 1 2 3` to mark tasks 1, 2 and 3 of the task list.
-
-Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
-
-Step 3. The first word of the user input is `mark`, which matches the command for `MarkCommand`.
-
-Step 4. `MarkCommandParser#parse()` is called and `MassOpsParser#massOpsProcessor` is invoked to process the user input
-into `indexes`, an `ArrayList<Index>` containing the indexes to be marked.
-
-Step 5. `MarkCommand` is invoked upon `indexes` and returned to LogicManager.
-
-Step 6. After `MarkCommand#execute()` is executed, Harmonia retrieves each task to be marked from `lastShowList` and
-`createMarkedTask` is called to mark each task respectively.
-
-Step 7. Each command result is stored in `markedTasks` which is returned and displayed to the user at the
-end of the execution.
-
-![MassOpsMark]
-(images/MassOpsMark.png)
-
-##### MassOps: Unmarking tasks
-Given below is an example usage scenario of how the MassOps mechanism behaves at each step to unmark tasks in
-the task list.
-
-Step 1. User inputs `unmark 1 2 3` to mark tasks 1, 2 and 3 of the task list.
-
-Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
-
-Step 3. The first word of the user input is `unmark`, which matches the command for `UnmarkCommand`.
-
-Step 4. `UnmarkCommandParser#parse()` is called and `MassOpsParser#massOpsProcessor` is invoked to process the user
-input to be stored temporarily in `indexes`, an `ArrayList<Index>` containing the indexes to be unmarked.
-
-Step 5. `UnmarkCommand` is invoked upon `indexes` and returned to LogicManager.
-
-Step 6. After `MarkCommand#execute()` is executed, `model#updateFilteredTaskList()` is invoked to get the updated task
-list, from which Harmonia will retrieve the respective tasks to be unmarked.
-
-Step 7. Each command result is stored in an `ArrayList` which is returned and displayed to the user.
-
-![MassOpsUnmark]
-(images/MassOpsUnmark.png)
-
-#### Design considerations:
-
-**Aspect: The number of indexes to be marked/unmarked at a time**
-
-* **Alternative 1 (current choice):** Ignore case and only allow users to mark or unmark tasks one at a time.
-    * Pros:
-        * Easy to implement.
-        * Consistent with how delete and find are working now, just deleting one task and finding one keyword at a time.
-        * Ensures that there is no confusion in which tasks are successfully marked or unmarked and which tasks are
-        * unsuccessfully marked or unmarked when multiple indexes are provided in the command
-    * Cons:
-        * May be very time-consuming for the user and becomes less user-friendly as the user has to manually mark or
-        * unmark multiple tasks one at a time if they want to do it in batches
 
