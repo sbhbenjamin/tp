@@ -15,6 +15,7 @@ import seedu.address.model.task.CompletionStatus;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.Task;
 
 /**
@@ -48,9 +49,10 @@ public class UnmarkCommand extends Command {
         Description description = task.getDescription();
         CompletionStatus completionStatus = new CompletionStatus("false");
         Deadline deadline = task.getDeadline();
+        Priority priority = task.getPriority();
         Set<Tag> tags = task.getTags();
 
-        Task unmarkedTask = new Task(name, description, completionStatus, deadline, tags);
+        Task unmarkedTask = new Task(name, description, completionStatus, deadline, priority, tags);
         return unmarkedTask;
     }
 

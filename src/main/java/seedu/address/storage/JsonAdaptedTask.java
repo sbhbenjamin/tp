@@ -15,6 +15,7 @@ import seedu.address.model.task.CompletionStatus;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.Task;
 
 /**
@@ -28,6 +29,7 @@ class JsonAdaptedTask {
     private final String description;
     private final String isCompleted;
     private final String deadline;
+    private final String priority;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -36,11 +38,13 @@ class JsonAdaptedTask {
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("name") String name, @JsonProperty("description") String description,
                              @JsonProperty("isCompleted") String isCompleted, @JsonProperty("deadline") String deadline,
+                             @JsonProperty("priority") String priority,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.description = description;
         this.isCompleted = isCompleted;
         this.deadline = deadline;
+        this.priority = priority;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -54,6 +58,7 @@ class JsonAdaptedTask {
         description = task.getDescription().value;
         isCompleted = task.getCompletionStatus().value;
         deadline = task.getDeadline().value;
+        priority = task.getPriority().value;
         tagged.addAll(task.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -105,8 +110,17 @@ class JsonAdaptedTask {
         }
         final Deadline modelDeadline = new Deadline(deadline);
 
+        if (priority == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Priority.class.getSimpleName()));
+        }
+        if (!Priority.isValidPriority(priority)) {
+            throw new IllegalValueException(Priority.MESSAGE_CONSTRAINTS);
+        }
+        final Priority modelPriority = Priority.valueOfLabel(priority);
+
 
         final Set<Tag> modelTags = new HashSet<>(taskTags);
-        return new Task(modelName, modelDescription, modelIsCompleted, modelDeadline, modelTags);
+        return new Task(modelName, modelDescription, modelIsCompleted, modelDeadline, modelPriority, modelTags);
     }
 }

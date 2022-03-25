@@ -20,6 +20,7 @@ public class Task {
     private final Description description;
     private final CompletionStatus isCompleted;
     private final Deadline deadline;
+    private final Priority priority;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -27,12 +28,14 @@ public class Task {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Description description, CompletionStatus isCompleted, Deadline deadline, Set<Tag> tags) {
+    public Task(Name name, Description description, CompletionStatus isCompleted, Deadline deadline,
+                Priority priority, Set<Tag> tags) {
         requireAllNonNull(name, description, tags);
         this.name = name;
         this.description = description;
         this.isCompleted = isCompleted;
         this.deadline = deadline;
+        this.priority = priority;
         this.tags.addAll(tags);
     }
 
@@ -46,6 +49,10 @@ public class Task {
 
     public CompletionStatus getCompletionStatus() {
         return isCompleted;
+    }
+
+    public Priority getPriority() {
+        return priority;
     }
 
     public Deadline getDeadline() {
@@ -92,13 +99,14 @@ public class Task {
                 && otherTask.getDescription().equals(getDescription())
                 && otherTask.getCompletionStatus().equals(getCompletionStatus())
                 && otherTask.getDeadline().equals(getDeadline())
+                && otherTask.getPriority().equals(getPriority())
                 && otherTask.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, description, isCompleted, deadline, tags);
+        return Objects.hash(name, description, isCompleted, deadline, priority, tags);
     }
 
     @Override
@@ -110,7 +118,9 @@ public class Task {
                 .append("; Completion Status: ")
                 .append(getCompletionStatus())
                 .append("; Deadline: ")
-                .append(getDeadline());
+                .append(getDeadline())
+                .append("; Priority: ")
+                .append(getPriority());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
