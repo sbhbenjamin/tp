@@ -41,8 +41,13 @@ public class NameContainsKeywordsPredicateTest {
 
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
+
+        // Zero keywords
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
+        assertTrue(predicate.test(new TaskBuilder().withName("CS3240").build()));
+
         // One keyword
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(
+        predicate = new NameContainsKeywordsPredicate(
                 Collections.singletonList("CS2103T"));
         assertTrue(predicate.test(new TaskBuilder().withName("CS2103T tutorial").build()));
 
@@ -61,12 +66,9 @@ public class NameContainsKeywordsPredicateTest {
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
-        // Zero keywords
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new TaskBuilder().withName("CS3240").build()));
 
         // Non-matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("CS3240"));
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("CS3240"));
         assertFalse(predicate.test(new TaskBuilder().withName("CS2103T Tutorial").build()));
 
         // Keywords match description, completion status, deadline and tags, but does not match name
