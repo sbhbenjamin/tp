@@ -82,7 +82,8 @@ public class HarmoniaParserTest {
         List<String> nameKeywords = Arrays.asList("foo", "bar", "baz");
         List<String> tagKeywords = Arrays.asList("tag1", "tag2");
         List<String> tagKeywordsWithPrefix = tagKeywords.stream().map(k -> PREFIX_TAG + k).collect(Collectors.toList());
-        List<String> nameKeywordsWithPrefix = nameKeywords.stream().map(k -> PREFIX_NAME + k).collect(Collectors.toList());
+        List<String> nameKeywordsWithPrefix = nameKeywords.stream().map(k -> PREFIX_NAME + k)
+                .collect(Collectors.toList());
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " "
                         + nameKeywordsWithPrefix.stream().collect(Collectors.joining(" ")) + " "

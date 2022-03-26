@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
-import seedu.address.model.task.Deadline;
 import seedu.address.model.task.DeadlineInRangePredicate;
 import seedu.address.model.task.NameContainsKeywordsPredicate;
 
