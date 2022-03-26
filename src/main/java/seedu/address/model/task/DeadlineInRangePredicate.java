@@ -1,10 +1,10 @@
 package seedu.address.model.task;
 
-import java.util.Optional;
-import java.util.function.Predicate;
-
 import static seedu.address.model.task.Deadline.MAX_DEADLINE;
 import static seedu.address.model.task.Deadline.MIN_DEADLINE;
+
+import java.util.Optional;
+import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Task}'s {@code Deadline} is within the range given.
