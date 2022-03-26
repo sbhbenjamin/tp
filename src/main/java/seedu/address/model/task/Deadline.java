@@ -12,10 +12,11 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline implements Comparable<Deadline> {
 
-    static final Deadline MIN_DEADLINE = new Deadline(LocalDate.MIN);
-    static final Deadline MAX_DEADLINE = new Deadline(LocalDate.MAX);
     public static final String MESSAGE_CONSTRAINTS =
             "Deadlines should be in the format YYYY-MM-DD";
+    static final Deadline MIN_DEADLINE = new Deadline(LocalDate.MIN);
+    static final Deadline MAX_DEADLINE = new Deadline(LocalDate.MAX);
+
     public final String value;
     private final LocalDate localDateValue;
 
