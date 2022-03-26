@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -131,7 +132,15 @@ public class ParserUtil {
     public static Set<String> parseKeywords(Collection<String> keywords) throws ParseException {
         requireNonNull(keywords);
         final Set<String> keywordSet = new HashSet<>();
-        keywordSet.addAll(keywords);
+        for (String keyword : keywords) {
+            if (keyword.isEmpty()) {
+                throw new ParseException("A keyword can't be empty!");
+            }
+            if (keyword.split("\\s+").length > 1) {
+                throw new ParseException("A keyword can't contain any whitespace!");
+            }
+            keywordSet.add(keyword);
+        }
         return keywordSet;
     }
 }

@@ -59,27 +59,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             endDate = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_END).get());
         }
 
-//        String trimmedArgs = args.trim();
-//        if (trimmedArgs.isEmpty()) {
-//            throw new ParseException(
-//                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-//        }
-//
-//        String[] allKeywords = trimmedArgs.split("\\s+");
-//
-//        List<String> nameKeywords = Arrays.asList(allKeywords);
-//
-//        Set<String> tagKeywords = new HashSet<>();
-//        for (String keyword : allKeywords) {
-//            if (keyword.startsWith(PREFIX_TAG.toString())) {
-//                String keywordWithoutPrefix = keyword.replace(PREFIX_TAG.toString(), "");
-//                if (!keywordWithoutPrefix.equals("")) {
-//                    tagKeywords.add(keywordWithoutPrefix);
-//                }
-//            }
-//        }
-
-
         return new FindCommand(new NameContainsKeywordsPredicate(new ArrayList<>(nameKeywords)),
                 new TagContainsKeywordsPredicate(tagKeywords),
                 new DeadlineInRangePredicate(startDate, endDate));
