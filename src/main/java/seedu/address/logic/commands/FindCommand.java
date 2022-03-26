@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -24,12 +25,12 @@ public class FindCommand extends Command {
             + "If a range of date is specified, only the tasks with a deadline that falls within the range "
             + "will be displayed.\n"
             + "Parameters (must contain at least one keyword): "
-            + "[NAME_KEYWORD] "
-            + "[" + PREFIX_TAG + "TAG_KEYWORD]"
-            + "[" + PREFIX_START + "YYYY-MM-DD]"
+            + "[" + PREFIX_NAME + "NAME_KEYWORD] "
+            + "[" + PREFIX_TAG + "TAG_KEYWORD] "
+            + "[" + PREFIX_START + "YYYY-MM-DD] "
             + "[" + PREFIX_END + "YYYY-MM-DD]\n"
             + "Example: " + COMMAND_WORD
-            + " tutorial assignment t/test t/CS2103T start/2022-03-23 end/2022-03-28";
+            + " tutorial n/assignment t/test t/CS2103T start/2022-03-23 end/2022-03-28";
 
     /** Predicate that tests whether task name contains any given keyword */
     private final NameContainsKeywordsPredicate namePredicate;
@@ -59,7 +60,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredTaskList(namePredicate.or(tagPredicate).and(deadlinePredicate));
+        model.updateFilteredTaskList((namePredicate.or(tagPredicate)).and(deadlinePredicate));
         return new CommandResult(
                 String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredTaskList().size()));
     }

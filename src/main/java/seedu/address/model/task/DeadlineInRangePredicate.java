@@ -30,6 +30,7 @@ public class DeadlineInRangePredicate implements Predicate<Task> {
     @Override
     public boolean test(Task task) {
         Deadline deadline = task.getDeadline();
+        System.out.println("deadline test: " + task.toString());
         return deadline.compareTo(startDate.orElse(MIN_DEADLINE)) >= 0
                 && deadline.compareTo(endDate.orElse(MAX_DEADLINE)) <= 0;
     }

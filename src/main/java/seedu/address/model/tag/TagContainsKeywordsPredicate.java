@@ -25,6 +25,7 @@ public class TagContainsKeywordsPredicate implements Predicate<Task> {
     @Override
     public boolean test(Task task) {
         Set<Tag> tags = task.getTags();
+        System.out.println("tag test: " + task.toString());
         for (Tag tag : tags) {
             boolean containsKeyword = keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword));

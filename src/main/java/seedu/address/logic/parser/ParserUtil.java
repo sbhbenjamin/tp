@@ -124,4 +124,14 @@ public class ParserUtil {
         }
         return new Deadline(trimmedDeadline);
     }
+
+    /**
+     * Parses {@code Collection<String> keywords} into a {@code Set<String>}.
+     */
+    public static Set<String> parseKeywords(Collection<String> keywords) throws ParseException {
+        requireNonNull(keywords);
+        final Set<String> keywordSet = new HashSet<>();
+        keywordSet.addAll(keywords);
+        return keywordSet;
+    }
 }
