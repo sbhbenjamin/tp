@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Parser;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.CompletionStatus;
@@ -64,81 +65,141 @@ public class MarkCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Task> lastShownList = model.getFilteredTaskList();
-        ArrayList<Task> markedTasks = new ArrayList<>();
+        List<Task> markedTasks = new ArrayList<>();
+        List<Index> alreadyMarkedIndexes = new ArrayList<>();
+        List<Index> outOfBoundsIndexes = new ArrayList<>();
 
 
         // to mark each index in the task list individually.
         for (int i = 0; i < targetIndexes.size(); i++) {
-            if (targetIndexes.get(i).getZeroBased() >= lastShownList.size()) {
+            Index index = targetIndexes.get(i);
 
-                // in the case where the first few inputted indexes are marked successfully, but one of the latter
-                // inputted indexes throw an error. Harmonia informs the user of the index that caused the error and
-                // also informs the user of the tasks that it marked successfully
-                if (markedTasks.size() > 1) {
-                    throw new CommandException("Index " + targetIndexes.get(i).getOneBased() + " :"
-                            + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX + "\n"
-                            + markedTasksToString(markedTasks.subList(0, markedTasks.size() - 1)));
-                }
+            if (isValidIndex(index, lastShownList) == 1) { //index marked already
+                alreadyMarkedIndexes.add(index);
+            } else if (isValidIndex(index, lastShownList) == -1) { //index out of bounds
+                outOfBoundsIndexes.add(index);
+            } else { //valid index
+                Task taskToMark = lastShownList.get(index.getZeroBased());
+                Task markedTask = createMarkedTask(taskToMark);
+                markedTasks.add(markedTask);
 
-                // in the case where the first inputted index is unsuccessfully marked, none of the other indexes
-                // inputted after the first inputted index will be processed, and an error is thrown to inform the
-                // user of the inputted index that caused the error
-                else {
-                    throw new CommandException("Index " + targetIndexes.get(i).getOneBased() + " :"
-                            + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-                }
+                model.strictSetTask(taskToMark, markedTask);
+                model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
             }
-
-            Task taskToMark = lastShownList.get(targetIndexes.get(i).getZeroBased());
-            Task markedTask = createMarkedTask(taskToMark);
-            markedTasks.add(markedTask);
-
-            if (taskToMark.equals(markedTask)) {
-                //todo: limitation now is that if "mark 1 2 3" and index 2 is marked already, then only 1 will be marked
-                //todo: successfully, 3 will not be marked
-
-                // in the case where the first few inputted indexes are marked successfully, but one of the latter
-                // inputted indexes throw an error. Harmonia informs the user of the index that caused the error and
-                // also informs the user of the tasks that it marked successfully
-                if (markedTasks.size() > 1) {
-                    throw new CommandException("Index " + targetIndexes.get(i).getOneBased() + ": "
-                            + MESSAGE_TASK_ALREADY_COMPLETED + "\n"
-                            + markedTasksToString(markedTasks.subList(0, markedTasks.size() - 1)));
-
-                }
-                // in the case where the first inputted index is unsuccessfully marked, none of the other indexes
-                // inputted after the first inputted index will be processed, and an error is thrown to inform the
-                // user of the inputted index that caused the error
-                else {
-                    throw new CommandException("Index " + targetIndexes.get(i).getOneBased() + ": "
-                            + MESSAGE_TASK_ALREADY_COMPLETED);
-                }
-            }
-
-            model.strictSetTask(taskToMark, markedTask);
-            model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         }
-
-        return new CommandResult(markedTasksToString(markedTasks.subList(0, markedTasks.size())));
+        return result(markedTasks, alreadyMarkedIndexes, outOfBoundsIndexes);
     }
 
     /**
      * Converts the list of successfully marked tasks into a string to be returned to the user
-     * @param unmarkedTasks
+     * @param markedTasks
      * @return
      */
-    private String markedTasksToString(List<Task> unmarkedTasks) {
-        String str = "Uncompleted Tasks: \n";
-        for (int i = 0; i < unmarkedTasks.size(); i++) {
-            str += (i + 1) + ". " + unmarkedTasks.get(i) + "\n";
+    private String markedTasksToString(List<Task> markedTasks) {
+        String str = "Successfully Marked Tasks: \n";
+        for (int i = 0; i < markedTasks.size(); i++) {
+            str += (i + 1) + ". " + markedTasks.get(i) + "\n";
         }
         return str;
     }
+
+    /**
+     * Converts a list of indexes to a string to be returned to the user.
+     * @param indexes
+     * @return
+     */
+    private String indexesToString(List<Index> indexes) {
+        String str = "" + indexes.get(0).getOneBased();
+        for (int i = 1; i < indexes.size(); i++) {
+            int index = indexes.get(i).getOneBased();
+            if (indexes.size() > 1 && i == indexes.size() - 1) {
+                str += " and " + index;
+            } else {
+                str += ", " + index;
+            }
+        }
+        return str;
+    }
+
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof MarkCommand // instanceof handles nulls
                 && targetIndexes.equals(((MarkCommand) other).targetIndexes)); // state check
+    }
+
+    /**
+     * Checks if index is a valid index to mark.
+     * If index > size of targetIndexes, return -1.
+     * If index is already marked, return 1.
+     * If index is a valid index, return 0.
+     *
+     * @return an int representing validity of the index
+     */
+    private int isValidIndex(Index index, List<Task> taskList) {
+        if (index.getZeroBased() > taskList.size() - 1 || index.getZeroBased() < 0) { //index out of bounds
+            return -1;
+        } else if (taskList.get(index.getZeroBased()).getCompletionStatus().toString().equals("true")) {
+            //already marked index
+            return 1;
+        } else { //valid index
+            return 0;
+        }
+    }
+
+    /**
+     * Processes the lists containing the results of the marking of indexes and returns the result to the user.
+     * @param markedTasks
+     * @param alreadyMarkedIndexes
+     * @param outOfBoundsIndexes
+     * @return CommandResult
+     * @throws CommandException
+     */
+    private CommandResult result(List<Task> markedTasks, List<Index> alreadyMarkedIndexes,
+                                 List<Index> outOfBoundsIndexes) throws CommandException{
+        if (!markedTasks.isEmpty()) { //have successfully marked tasks
+            if (!alreadyMarkedIndexes.isEmpty() && !outOfBoundsIndexes.isEmpty()) {
+                //successfully marked tasks, already marked indexes and out of bound indexes
+                throw new CommandException("Index " + indexesToString(outOfBoundsIndexes) + ": "
+                        + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX + "\n"
+                        + "Index " + indexesToString(alreadyMarkedIndexes) + " :"
+                        + MESSAGE_TASK_ALREADY_COMPLETED + "\n" + markedTasksToString(markedTasks));
+
+            } else if (!alreadyMarkedIndexes.isEmpty() && outOfBoundsIndexes.isEmpty()) {
+                //successfully marked tasks and already marked indexes
+                throw new CommandException("Index " + indexesToString(alreadyMarkedIndexes) + ": "
+                        + MESSAGE_TASK_ALREADY_COMPLETED + "\n" + markedTasksToString(markedTasks));
+
+            } else if (alreadyMarkedIndexes.isEmpty() && !outOfBoundsIndexes.isEmpty()) {
+                //successfully marked tasks and out of bound indexes
+                throw new CommandException("Index " + indexesToString(outOfBoundsIndexes) + ": "
+                        + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX + "\n"
+                        + markedTasksToString(markedTasks));
+
+            } else if (alreadyMarkedIndexes.isEmpty() && outOfBoundsIndexes.isEmpty()) {
+                //successfully marked tasks only
+                return new CommandResult(markedTasksToString(markedTasks));
+            }
+        } else { //no successfully marked tasks
+            if (!alreadyMarkedIndexes.isEmpty() && !outOfBoundsIndexes.isEmpty()) {
+                //already marked indexes and out of bounds indexes
+                throw new CommandException("Index " + indexesToString(outOfBoundsIndexes) + ": "
+                        + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX + "\n"
+                        + "Index " + indexesToString(alreadyMarkedIndexes) + " :"
+                        + MESSAGE_TASK_ALREADY_COMPLETED);
+
+            } else if (!alreadyMarkedIndexes.isEmpty() && outOfBoundsIndexes.isEmpty()) {
+                //already marked indexes
+                throw new CommandException("Index " + indexesToString(alreadyMarkedIndexes) + ": "
+                        + MESSAGE_TASK_ALREADY_COMPLETED);
+
+            } else if (alreadyMarkedIndexes.isEmpty() && !outOfBoundsIndexes.isEmpty()) {
+                //out of bounds indexes
+                throw new CommandException("Index " + indexesToString(outOfBoundsIndexes) + ": "
+                        + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            }
+        }
+        return null;
     }
 }
