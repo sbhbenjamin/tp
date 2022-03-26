@@ -10,12 +10,14 @@ import java.time.format.DateTimeParseException;
  * Represents a Task's deadline in the task list.
  * Guarantees: immutable; is valid as declared in {@link #isValidDeadline(String)}
  */
-public class Deadline {
+public class Deadline implements Comparable<Deadline> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Deadlines should be in the format YYYY-MM-DD";
     public final String value;
     private final LocalDate localDateValue;
+    static final Deadline MIN_DEADLINE = new Deadline(LocalDate.MIN);
+    static final Deadline MAX_DEADLINE = new Deadline(LocalDate.MAX);
 
     /**
      * Constructs a {@code Deadline}. Accepts date in the format of yyyy-mm-dd.
@@ -27,6 +29,17 @@ public class Deadline {
         checkArgument(isValidDeadline(deadline), MESSAGE_CONSTRAINTS);
         value = deadline;
         localDateValue = LocalDate.parse(deadline);
+    }
+
+    /**
+     * Constructs a {@code Deadline} using {@code LocalDate}.
+     *
+     * @param localDate a non-null {@code LocalDate}
+     */
+    private Deadline(LocalDate localDate) {
+        requireNonNull(localDate);
+        this.localDateValue = localDate;
+        this.value = localDate.toString();  // Not used.
     }
 
     /**
@@ -58,4 +71,8 @@ public class Deadline {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Deadline d) {
+        return this.localDateValue.compareTo(d.localDateValue);
+    }
 }
