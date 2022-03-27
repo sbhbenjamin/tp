@@ -34,11 +34,17 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 ## Features
 
 ### Adding a task: `add`
+Adds a task into the Harmonia, with a name, description, deadline, priority, and optionally some tags.
 
-Adds a task into the Harmonia.
+Format:  `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
+`DEADLINE` should be in the format `‘YYYY-MM-DD’`.
+`PRIORITY` should be one of `low`, `medium`,`high`.
+`TAG` should not contain any space.
 
-Format:  `add d/DESCRIPTION`
-Example: `add d/CS2103T tp meeting`
+Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`
+
+![UserGuide-add](images/UserGuide-add.png)
+Figure 3.1: Example of Harmonia after adding a task
 
 ### Listing all tasks: `list`
 
@@ -73,27 +79,25 @@ Example:
 
 ### Marking as complete : `mark`
 
-Marks specified task from the existing task list from as complete.
+Marks the task at the given index of the existing task list as complete. At least 1 index has to be provided, but
+multiple indexes can be provided as well to mark multiple tasks as complete at a time.
+Format: `mark INDEX [INDEX]...`
+Example:  
+- `mark 3` marks the task at the third index of the task list as complete.
+- `mark 1 2 3` marks the tasks at the first, second and third index of the list as complete.
 
-Format: `mark INDEX`
-- Marks the task at the specified `INDEX` as complete.
-- The index refers to the index number shown in the displayed task list.
-- The index **must be a positive integer** 1, 2, 3,
-
-
-Example: `list` followed by `mark 2` marks the 2nd task in the task list as complete.
+Note: You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to mark.
 
 ### Marking as incomplete : `unmark`
 
-Marks specified task from the existing task list from as incomplete.
+Marks the task at the given index of the existing task list as incomplete. At least 1 index has to be provided,
+but multiple indexes can be provided as well to mark multiple tasks as incomplete at a time.
 
-Format: `unmark INDEX`
-- Marks the task at the specified `INDEX` as incomplete.
-- The index refers to the index number shown in the displayed task list.
-- The index **must be a positive integer** 1, 2, 3,
-
-
-Example: `list` followed by `unmark 3` marks the 3rd task in the task list as incomplete.
+Format: `unmark INDEX [INDEX]...`
+Example:
+- `unmark 3` marks the task at the third index of the task list as incomplete.
+- `unmark 1 2 3` marks the tasks at the first, second and third index of the list as incomplete.
+Note: You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to unmark.
 
 ### Editing a task : `edit`
 
@@ -121,13 +125,13 @@ Harmonia's data is saved in the hard disk automatically after any command change
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add d/DESCRIPTION` <br> e.g., `add d/read book`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [d/DESCRIPTION] [t/TAG]`<br> e.g.,`edit 2 n/CS2101 meeting t/CS2101`
-**Mark**| `mark INDEX` <br> e.g., `mark 3`
-**Unmark**| `unmark INDEX` <br> e.g., `unmark 3`
-**List**| `list`
-**Find** | `find KEYWORD [MORE_KEYWORDS]` <br> `find t/[TAG]` <br> e.g., `find book` <br> e.g., `find book read` <br> e.g., `find t/CS2103T`
-**Exit** | `exit`
+| Action     | Format, Examples                                                                                                                  |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add d/DESCRIPTION` <br> e.g., `add d/read book`                                                                                  |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                               |
+| **Edit**   | `edit INDEX [d/DESCRIPTION] [t/TAG]`<br> e.g.,`edit 2 n/CS2101 meeting t/CS2101`                                                  |
+| **Mark**   | `mark INDEX` <br> e.g., `mark 3`                                                                                                  |
+| **Unmark** | `unmark INDEX` <br> e.g., `unmark 3`                                                                                              |
+| **List**   | `list`                                                                                                                            |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]` <br> `find t/[TAG]` <br> e.g., `find book` <br> e.g., `find book read` <br> e.g., `find t/CS2103T` |
+| **Exit**   | `exit`                                                                                                                            |
