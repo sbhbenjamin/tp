@@ -160,7 +160,7 @@ public class UnmarkCommand extends Command {
      */
     private CommandResult result(List<Task> unmarkedTasks, List<Index> unmarkedTasksIndexes,
                                  List<Index> alreadyUnmarkedIndexes,
-                                 List<Index> outOfBoundsIndexes) throws CommandException{
+                                 List<Index> outOfBoundsIndexes) throws CommandException {
         StringBuilder errorString = new StringBuilder();
 
         if (!alreadyUnmarkedIndexes.isEmpty()) {
