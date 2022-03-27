@@ -37,9 +37,9 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 Adds a task into the Harmonia, with a name, description, deadline, priority, and optionally some tags.
 
 Format:  `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
-`DEADLINE` should be in the format `‘YYYY-MM-DD’`.
-`PRIORITY` should be one of `low`, `medium`,`high`.
-`TAG` should not contain any space.
+- `DEADLINE` should be in the format `‘YYYY-MM-DD’`.
+- `PRIORITY` should be one of `low`, `medium`,`high`.
+- `TAG` should not contain any space.
 
 Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`
 
@@ -80,24 +80,26 @@ Example:
 ### Marking as complete : `mark`
 
 Marks the task at the given index of the existing task list as complete. At least 1 index has to be provided, but
-multiple indexes can be provided as well to mark multiple tasks as complete at a time.
-Format: `mark INDEX [INDEX]...`
+multiple indexes can be provided as well to mark multiple tasks as complete at a time.  
+
+Format: `mark INDEX [INDEX]...`  
 Example:  
 - `mark 3` marks the task at the third index of the task list as complete.
 - `mark 1 2 3` marks the tasks at the first, second and third index of the list as complete.
 
-Note: You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to mark.
+💡Note: You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to mark.
 
 ### Marking as incomplete : `unmark`
 
 Marks the task at the given index of the existing task list as incomplete. At least 1 index has to be provided,
 but multiple indexes can be provided as well to mark multiple tasks as incomplete at a time.
 
-Format: `unmark INDEX [INDEX]...`
+Format: `unmark INDEX [INDEX]...`  
 Example:
 - `unmark 3` marks the task at the third index of the task list as incomplete.
-- `unmark 1 2 3` marks the tasks at the first, second and third index of the list as incomplete.
-Note: You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to unmark.
+- `unmark 1 2 3` marks the tasks at the first, second and third index of the list as incomplete.  
+
+💡Note: You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to unmark.
 
 ### Editing a task : `edit`
 
