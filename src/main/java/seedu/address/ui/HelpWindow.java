@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -15,7 +19,7 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
+    public static final String USERGUIDE_URL = "https://ay2122s2-cs2103t-t09-1.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
@@ -23,6 +27,9 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private Button copyButton;
+
+    @FXML
+    private Button openButton;
 
     @FXML
     private Label helpMessage;
@@ -98,5 +105,19 @@ public class HelpWindow extends UiPart<Stage> {
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
+    }
+
+    /**
+     * Opens the URL to the user guide using the default browser.
+     */
+    @FXML
+    private void openUrl() {
+        try {
+            logger.info("Opening URL to user guide using default browser");
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            desktop.browse(new URI(USERGUIDE_URL));
+        } catch (URISyntaxException | IOException e) {
+            logger.info("Error opening URL: " + e.getMessage());
+        }
     }
 }
