@@ -92,8 +92,7 @@ You can key `list` to see the sequence of tasks in the list to check the index o
 
 ### 3.7 Marking as incomplete : `unmark`
 
-Marks the task at the given index of the existing task list as incomplete. At least 1 index has to be provided,
-but multiple indexes can be provided as well to mark multiple tasks as incomplete at a time.
+Marks the task at the given index of the existing task list as incomplete. At least 1 index has to be provided, but multiple indexes can be provided as well to mark multiple tasks as incomplete at a time.
 
 Format: `unmark INDEX [INDEX]...`  
 Example:
