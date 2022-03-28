@@ -34,7 +34,7 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
    ![Ui](images/Ui.png)
    *Figure 2.1: Harmonia's GUI*
 
-5. Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br> 
+5. Type the command in the command box and press <kbd>↵Enter</kbd> to execute it.<br> 
 Here are a few example commands you can try:
 - `list`
   - Lists out all tasks.
