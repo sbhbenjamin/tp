@@ -63,11 +63,11 @@ Here are a few example commands you can try:
   e.g. if the command specifies `n/NAME d/DESCRIPTION`, `d/DESCRIPTION n/NAME` is also acceptable.
 
 - `INDEX` refers to the numbering of an item in a list, as shown in the displayed task list.<br>
-e.g. in a list of tasks:<br>
-1. Do homework
-2. Clean room
-3. Walk dog<br>
-Index 2 here refers to the second item in the list, "Clean room".
+  e.g. in a list of tasks:<br>
+       1. Do homework<br>
+       2. Clean room<br>
+       3. Walk dog<br>
+       Index 2 here refers to the second item in the list, "Clean room".
 
 - Extraneous parameters for commands that do not take in any parameters (such as `help` and `exit`) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
