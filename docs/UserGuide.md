@@ -104,7 +104,7 @@ Format: `edit INDEX [n/NAME] [d/DESCRIPTION] [dl/DEADLINE] [p/PRIORITY] [t/TAG].
 - `PRIORITY` should be one of `low`, `medium`, `high`.
 - `TAG` should not contain any space.
 
-Examples:
+Example:
 - `edit 1 d/Prepare for CS2103T tutorial`
 - `edit 2 n/CS2103T meeting t/CS2103T`
 
@@ -166,7 +166,7 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…` <br> e.g., `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [d/DESCRIPTION] [t/TAG]`<br> e.g.,`edit 2 n/CS2101 meeting t/CS2101`
+**Edit** | `edit INDEX [n/NAME] [d/DESCRIPTION] [dl/DEADLINE] [p/PRIORITY] [t/TAG]..`<br> e.g.,`edit 2 n/CS2101 meeting t/CS2101`
 **Mark**| `mark INDEX [INDEX]...` <br> e.g., `mark 3` <br> e.g., `mark 1 2 3`
 **Unmark**| `unmark INDEX [INDEX]...` <br> e.g., `unmark 3` <br> e.g., `unmark 1 2 3`
 **List**| `list` <br> `list t/`
