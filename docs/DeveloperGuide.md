@@ -238,6 +238,240 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### \[Proposed\] Mass Operations
+
+#### What is the feature about
+This feature provides a way for users to mark and unmark multiple `Tasks` at a time. For the current implementation of
+mark and unmark, users have to type in a command for each task that they wish to mark or unmark, one at a time.
+
+#### How the feature is implemented
+
+The feature is to be implemented with the addition of a `MassOpsParser` class which parses through user inputs
+consisting of multiple indexes and processes the indexes to return an `ArrayList` of `Indexes` for `MarkCommand` and
+`UnmarkCommand` to execute on.
+
+##### MassOperations: Marking tasks
+Given below is an example usage scenario of how the MassOps mechanism behaves at each step to mark tasks in
+the task list.
+
+Step 1. User inputs `mark 1 2 3` to unmark tasks 1, 2 and 3 of the task list.
+
+Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
+
+Step 3. The first word of the user input is `mark`, which matches the command for `MarkCommand`.
+
+Step 4. `MarkCommandParser#parse()` is called and `MassOpsParser#massOpsProcessor` is invoked to process the user input
+into `indexes`, an `ArrayList<Index>` containing the indexes to be marked.
+
+Step 5. `MarkCommand` is invoked upon `indexes` and returned to LogicManager.
+
+Step 6. After `MarkCommand#execute()` is executed, Harmonia retrieves each task to be marked from `lastShowList` and
+`createMarkedTask` is called to mark each task respectively.
+
+Step 7. Each command result is stored in `markedTasks` which is returned and displayed to the user at the
+end of the execution.
+
+![MassOpsMark](images/MassOpsMark.png)
+
+##### MassOperations: Unmarking tasks
+Given below is an example usage scenario of how the MassOps mechanism behaves at each step to unmark tasks in
+the task list.
+
+Step 1. User inputs `unmark 1 2 3` to mark tasks 1, 2 and 3 of the task list.
+
+Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
+
+Step 3. The first word of the user input is `unmark`, which matches the command for `UnmarkCommand`.
+
+Step 4. `UnmarkCommandParser#parse()` is called and `MassOpsParser#massOpsProcessor` is invoked to process the user
+input to be stored temporarily in `indexes`, an `ArrayList<Index>` containing the indexes to be unmarked.
+
+Step 5. `UnmarkCommand` is invoked upon `indexes` and returned to LogicManager.
+
+Step 6. After `UnmarkCommand#execute()` is executed, `model#updateFilteredTaskList()` is invoked to get the updated task
+list, from which Harmonia will retrieve the respective tasks to be unmarked.
+
+Step 7. Each command result is stored in an `ArrayList` which is returned and displayed to the user.
+
+![MassOpsUnmark](images/MassOpsUnmark.png)
+
+#### Design considerations:
+
+**Aspect: The number of indexes to be marked/unmarked at a time**
+
+* **Alternative 1 (current choice):** Ignore case and only allow users to mark or unmark tasks one at a time.
+    * Pros:
+        * Easy to implement.
+        * Consistent with how delete and find are working now, just deleting one task and finding one keyword at a time.
+        * Ensures that there is no confusion in which tasks are successfully marked or unmarked and which tasks are unsuccessfully marked or unmarked when multiple indexes are provided in the command
+    * Cons:
+        * May be very time-consuming for the user and becomes less user-friendly as the user has to manually mark or
+        * unmark multiple tasks one at a time if they want to do it in batches
+
+
+### Priority
+
+#### What is the feature about
+Provides a way to attach priorities to `Tasks`. The current implementation allows it to be set to 3 values: `low`, `medium` and `high`.
+
+#### How the feature is implemented
+The feature was implemented using an `enum` class. To maintain consistency with other properties among the `Task`, the class was also implemented with `isValidPriority()` that functions as a validity checker and `valueOfLabel()` to retrieve the enum constant corresponding to a given `String` input.
+
+![PriorityEnum](images/PriorityDiagram.png)
+
+#### Why it is implemented that way
+The design of the priority feature was built using an enum as a `Priority` is only designed to support one out of a small set of possible values – in this case, `low`, `medium` and `high`. Appropriately, the `enum` type enables us to define a finite set of values, providing a higher level of type-safety as compared to literal values such as `String` or `Integer`.
+
+In this case, the `enum` type also increases the extensibility of the feature. If we wanted to add more fields to the priority (i.e. `lower` and `higher`), all we have to do is to add those fields as `enum` constants.
+
+
+#### Design considerations:
+
+**Aspect: How the priority is saved:**
+
+* **Alternative 1 (current choice):** Use an enum.
+    * Pros:
+      * Allows for code that is clearer and more readable
+      * More extensible
+      * Compile-time type safety
+      * Reduction in memory-use. When we create a new object, we only refer to the static `enum` constant, instead of creating a new `Priority` object.
+    * Cons: -
+* **Alternative 2:** Use `int` or `String`
+  itself.
+    * Pros:
+      * Easier to write (in the beginning)
+    * Cons:
+      * Lacks compile-time type safety
+      * Using an integer to represent a priority level could be less descriptive as to what it exactly represents
+      * More tedious to extend. To implement this, we might have to use conditionals to check if the `String` or `int` input corresponds with the accepted values in our `Priority` design. This can pose a problem when we try to extend the number of properties a `Priority` field can take. In this case, we might have to increase the number of conditionals, which could reduce readability and make the code more prone to errors.
+      * Possibly increases memory use. If we use `String` or `int` types, we might have to instantiate new `Priority` classes every time we create a new `Task` object.
+
+
+### Mark/unmark feature
+
+#### What is the feature about
+Provides a way to mark `Task` objects as either completed or uncompleted.
+
+#### How the feature is implemented
+The first stage of the implementation `mark` feature involves parsing the user input. `MarkCommandParser` is used to parse and check whether the user input is valid. After which a `MarkCommand` object is created with the respective task index. The second stage requires `MarkCommand#execute()` to be called. The execution would update `TaskList` by replacing task to be marked by the copy of it with the `CompletionStatus` set to `true`.
+
+The `unmark` feature follows a similar implementation involving `UnmarkCommandParser`, `UnmarkCommand`.
+
+<img src="images/MarkSequenceDiagram.png" width="574" />
+
+#### Why it is implemented that way
+It is designed to preserve the Command Design Pattern. Through the implementation of the `MarkCommmandParser` and `UnmarkCommandParser`, we can enforce the input format of mark command. Furthermore, isolating `MarkCommand` and `UnmarkCommand` into separate classes, we narrow down functionality of each class. This gives the application more control by limiting the outcome in successful execution. For example, successful execution of MarkCommand will only lead to the task being marked as complete.Whereas an alternative design combining mark and unmark functionality together will lead vague outcome (application unaware whether the task is marked as complete or incomplete after execution).
+
+#### Design considerations:
+
+**Aspect: How the functionality of mark/unmark is broken down:**
+
+* **Alternative 1 (current choice):** Use two separate Command classes: `MarkCommand` and `UnmarkCommand`.
+    * Pros:
+        * More control over the final outcome of the Command execution (Knowledge whether task is completed or uncompleted after execution)
+        * Ability to check whether a task is either `MarkCommand` or `UnamrkCommand` during runtime
+        * Ability to extend either mark or unmark functionality isolated from each other
+      * Cons:
+        * Makes the code more bloated with similar looking code (for each class)
+* **Alternative 2:** Use a single `Command` to toggle `Task` as either complete or incomplete.
+    * Pros:
+        * Less redundant code
+        * Easier to extend if both mark and unmark are required to change synchronously
+    * Cons:
+        * No exact knowledge whether the execution of command mark task as complete or incomplete
+
+
+### \[Proposed\] Search by date
+
+#### What is the feature about
+Supports the searching of tasks by a date range. If the deadline of a task falls within the specified time range, it is displayed in the result.
+
+#### How the feature is implemented
+This feature will be incorporated with the current `FindCommand`. By adding additional checks for flags (`/start` and `/end`) in the FindCommandParser, the tasks will be filtered accordingly. A new `TimeRangePredicate` class will be added to abstract out the details on time range. Hence, the predicate will be applied to the filtered task list that is displayed to the user.
+
+Additionally, there will be checks for duplicate start and end date, such that the user can specify one start date and one end date at most.
+
+#### Why it is implemented that way
+Searching based on a time range is a similar operation to `find`, hence it is intuitive to incorporate them. The presence of start/end date is optional, to provide more flexibility. However, we do not allow multiple start/end date, to avoid confusion.
+
+#### Design considerations:
+
+**Aspect: Command to be used for searching by date:**
+
+* **Alternative 1 (current choice):** Incorporate with the original `find` (current choice).
+    * Pros:
+        * Does not increase the size of the command set.
+        * More intuitive, as the user does not have to remember another similar command.
+    * Cons:
+        * The parsing of an `AddCommand` becomes slightly more complicated.
+* **Alternative 2:** Create a new command `search`
+  itself.
+    * Pros:
+        * Less modification on current implementation.
+    * Cons:
+        * Increase the size of command sets.
+        * Could cause confusion with another similar command `find`, which compromises user experience.
+
+### Search by tags
+
+#### What is the feature about
+
+This feature allows the user to search for tasks with at least one of its tag matching the specified keyword.
+
+#### How the feature is implemented
+
+The search by tags feature uses the `find` command and prefix `t/` before the keyword.
+
+Given below is an example usage scenario of how the find mechanism behaves at each step to search for tasks by tags:
+
+Step 1. User inputs `find t/CS2103T` to find tasks that have a 'CS2103T' tag.
+
+Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
+
+Step 3. The first word of the user input is `find`, which matches the command for `FindCommand`. This initialises `FindCommandParser`.
+
+Step 4. `FindCommandParser#parse()` is called and keywords with prefix `t/` are extracted out as a list of keywords to search for. This list of keywords are used to initialise a `TagContainsKeywordPredicate`.
+
+Step 5. A `FindCommand` is initialised using the `TagContainsKeywordPredicate` and returned to `LogicManager` for execution.
+
+Step 6. After `FindCommand#execute()` is called, `model#updateFilteredTaskList()` is invoked to filter the task list using the given `TagContainsKeywordPredicate`. The command result is returned and displayed to the user.
+
+The following is the sequence diagram summarising the above steps:
+
+![SearchByTagSequenceDiagram](images/SearchByTagSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How tags are matched:**
+
+* **Alternative 1 (current choice):** Ignore case and require full match with at least one of the task's tags.
+    * Pros:
+      * Easy to implement.
+      * Consistent with how keywords are matched with task names in the search by keywords feature.
+      * Gives the most specific list of tasks if the user is able to remember the exact tag that one is searching for.
+    * Cons:
+      * May not find any match if users only enter a part of the tag (e.g. `cs2103` will not match with `cs2103t`).
+
+* **Alternative 2:** Ignore case and allow partial match with at least one of the task's tags.
+    * Pros:
+      * Gives a list of possible tasks even if the user is unable to remember the exact full tag.
+    * Cons:
+      * More difficult to implement.
+      * May give additional tasks that the user is not searching for (e.g. user searches for tasks with tag `data` but result list shows all tasks with tags `data` and `database`).
+
+**Aspect: User does not specify tag after `t/` prefix:**
+
+* **Alternative 1 (current choice):** Ignores the empty tag. `find t/` gives an empty result list. `find t/cs2103t t/` gives a list of tasks with tag `cs2103t`.
+    * Pros:
+      * If user searches for multiple tags, the valid tags will still be matched.
+    * Cons:
+      * No error message to inform user on invalid tag.
+
+* **Alternative 2:** Ignores other valid tags and outputs an error message to inform user on invalid command format.
+    * Pros:
+      * Ensures user does not unintentionally leave a tag value empty.
+    * Cons:
+      * Other valid tags are not matched until user corrects command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -256,72 +490,356 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
+* students who have a need to manage a significant number of tasks of different types
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+Harmonia is the easiest way for students to manage the complexity associated with their schooling years – from the plethora of assignments, ad-hoc consultations and events, to deadlines. This app will only help to manage tasks, and does not act as a calendar notifying the user of any upcoming event/deadline.
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Medium-low (nice to have but difficult) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority  | As a …​        | I want to …​                                                | So that I can…​                                                                |
+|-----------|----------------|-------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `* * * *` | user           | add a new task                                              |                                                                                |
+| `* * * *` | user           | delete a task                                               | remove tasks that I no longer need                                             |
+| `* * * *` | user           | mark a task as complete                                     |                                                                                |
+| `* * * *` | user           | mark a task as incomplete                                   |                                                                                |
+| `* * * *` | user           | see all my tasks when I start up the application            | view my tasks more conveniently without having to perform any extra operations |
+| `* * * *` | user           | tag a task                                                  | categorise my tasks according to my preferred system                           |
+| `* * * *` | user           | modify a task                                               | amend a mistake or update a task                                               |
+| `* * * *` | user           | search by tags                                              | find tasks related to a category                                               |
+| `* * * *` | user           | search by keywords                                          | find a specific task more easily                                               |
+| `* * * *` | new user       | have straightforward commands I can use                     | use the application more intuitively                                           |
+| `* * * *` | expert user    | modify the tasks in the data file directly                  | modify the tasks in a way that is not supported by the application             |
+| `* * *`   | user           | tag a task with multiple tags                               | categorise tasks under multiple categories at a time                           |
+| `* * *`   | user           | search for tasks that fall within a specific time range     | find the tasks that lie between a specific period                              |
+| `* * *`   | user           | view upcoming deadlines                                     | prioritise what tasks I need to do first                                       |
+| `* * *`   | user           | view tags I have already added when creating a new task     | know how to tag new tasks and avoid creating similar tags                      |
+| `* * *`   | user           | view all of my upcoming–deadlines and longer-term deadlines | have a more holistic view of all events in the short-term and long-term future |
+| `* * *`   | user           | access the user guide through the interface                 | access the documentation without having to search online for it                |
+| `* * *`   | user           | sort my tasks by certain filters                            | organise my view the way I prefer                                              |
+| `* * *`   | user           | label my tasks with priorities                              | keep track of which tasks are more important                                   |
+| `* * *`   | new user       | view suggestions if I type in the wrong command             | recover from mistakes and use the correct command more easily                  |
+| `* * *`   | potential user | see the app populated with sample data                      | easily see how the application would look like when in use                     |
+| `* *`     | user           | set repeated occurrence of a task                           | avoid having to add a task multiple times                                      |
+| `* *`     | new user       | revert changes made                                         | undo changes that were made by mistake                                         |
+| `* *`     | expert user    | use shortcuts                                               | perform operations more efficiently                                            |
+| `*`       | user           | bulk mark different tasks as complete                       | marking everything I finished a day with just one command                      |
+| `*`       | expert user    | delete multiple tasks at once                               | do not have to delete tasks one by one                                         |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Harmonia` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a task**
 
 **MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User chooses to add a task.
+2. User enters the task description.
+3. Harmonia adds the task.
+4. Harmonia informs the user that the task has been successfully added.
 
     Use case ends.
 
 **Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+    Steps 2a1-2a2 are repeated until valid request is inputted.
+    Use case resumes from step 3.
 
-* 2a. The list is empty.
+<br/>
 
-  Use case ends.
+**Use case: UC02 - Delete a task**
 
-* 3a. The given index is invalid.
+**MSS**
+1. User chooses to remove a task from the task list.
+2. User enters the request to remove the task.
+3. Harmonia deletes the task.
+4. Harmonia informs the user that the task has been successfully deleted.
 
-    * 3a1. AddressBook shows an error message.
+    Use case ends.
 
-      Use case resumes at step 2.
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
 
-*{More to be added}*
+<br/>
+
+**Use case: UC03 - Mark a task as complete**
+
+**MSS**
+1. User chooses to mark a task as complete from the task list.
+2. User enters the request to mark a task based on its index in the task list.
+3. Harmonia marks the task as complete.
+4. Harmonia informs the user that the task has been successfully marked.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC04 - Unmark a task from completion**
+
+**MSS**
+1. User chooses to unmark a task from completion from the task list.
+2. User enters the request to unmark a task based on its index in the task list.
+3. Harmonia marks the task as incomplete.
+4. Harmonia informs the user that the task has been successfully unmarked.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC05 - Add a tag to the task**
+
+**MSS**
+1. User chooses to add a tag to an existing task.
+2. User enters the request to add the tag to the task.
+3. Harmonia adds the tag to the task.
+4. Harmonia informs the user that the tag has been successfully added to the task.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC06 - Edit a task**
+
+**MSS**
+1. User chooses to edit a task from the task list.
+2. User enters the request to edit the task with the updated details.
+3. Harmonia updates the task.
+4. Harmonia informs the user that the task has been successfully updated.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC07 - List all tasks**
+
+**MSS**
+1. User chooses to list out all tasks.
+2. User enters the request to list all tasks.
+3. Harmonia lists out all tasks.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC08 - Search for a task by keyword/tag**
+
+**MSS**
+1. User enters the request to search for task(s) by keyword/tag.
+2. Harmonia shows a list of tasks that match the specified keyword/tag.
+3. Harmonia informs the user that the search result has been displayed successfully.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects that the keyword is missing.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new command.
+  Steps 2a1-2a2 are repeated until valid data is inputted.
+  Use case resumes from step 3.
+
+* 2b. Harmonia detects that the tag does not exist.
+    * 2b1. Harmonia outputs an error message.
+    * 2b2. User enters a new command.
+  Steps 2a1-2a2 are repeated until valid data is inputted.
+  Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC09 - Undo the previous change**
+
+**Preconditions:** Changes were made by the user.
+
+**MSS**
+1. User chooses to undo the previous change.
+2. User enters the request to undo the previous change.
+3. Harmonia restores the state before the previous change.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia is unable to recognize the request entered by the user.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC10 - Search for tasks within date range**
+
+**MSS**
+1. User chooses to search for tasks that fall within a specific date range.
+2. User enters the request to search for the tasks by date range.
+3. Harmonia displays the tasks that match the criteria.
+4. Harmonia informs the user that the result has been displayed successfully.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC11 - Sort tasks**
+
+**MSS**
+1. User chooses to sort the task by a certain property.
+2. User enters the request to sort the task based on a property.
+3. Harmonia displays the tasks based on the property.
+4. Harmonia informs the user that the sort has been performed successfully.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC12 - Set repeated occurrences of a task**
+
+**MSS**
+1. User chooses to set repeated occurrences of a task.
+2. User enters the request to set repeated occurrences of a task.
+3. Harmonia sets the task as a repeated occurrence.
+4. Harmonia informs the user that the task has been added as a repeated occurrence.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+      Steps 2a1-2a2 are repeated until valid request is inputted.
+      Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC13 - Categorise task according to priority**
+
+**MSS**
+1. User chooses to assign a priority to a task.
+2. User enters the request to assign priority to the task.
+3. Harmonia assigns priority to the task.
+4. Harmonia informs the user that the priority of the task has been updated.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+      Steps 2a1-2a2 are repeated until valid request is inputted.
+      Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC14 - View user guide**
+
+**MSS**
+1. User chooses to view the user guide.
+2. User requests to view the user guide.
+3. Harmonia outputs a message with a URL to the user guide.
+4. User copies the URL to the user guide.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+      Steps 2a1-2a2 are repeated until valid request is inputted.
+      Use case resumes from step 3.
+
+<br/>
+
+**Use case: UC15 - Add multiple tags to a task**
+
+**MSS**
+1. User chooses to add multiple tags to an existing task.
+2. User requests to add multiple tags to a task.
+3. Harmonia adds the different tags to the task.
+4. Harmonia informs the user that the tags have been successfully added to the task.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters a new request.
+      Steps 2a1-2a2 are repeated until valid request is inputted.
+      Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on most *Mainstream* OS as long as it has Java `11` or above installed.
+2. Should be able to accomplish most of the tasks faster using commands than using the mouse by users with above average typing speed for regular English text (i.e. not code, not system admin commands)
+3. Should respond within two seconds.
+4. Should be usable by a novice who has never used Harmonia before.
+5. Is not required to remind users about upcoming deadlines or events.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Task**: A piece of work that the user needs to complete
+* **Tag**: A label or category attached to a task to give additional information to it
+* **Keyword**: A word that the user queries to search for a task
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -366,7 +884,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -375,3 +893,4 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+

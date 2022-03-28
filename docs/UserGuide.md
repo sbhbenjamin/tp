@@ -1,59 +1,75 @@
-
-
---- layout: page    
+---
+layout: page
 title: User Guide
----   
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+---
 
-* Table of Contents    
-  {:toc}
+Harmonia is a **desktop app for managing tasks related to your academic life, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Harmonia can get your task management done faster than traditional GUI apps.
 
---------------------------------------------------------------------------------------------------------------------   
+--------------------------------------------------------------------------------------------------------------------
+## Table of Contents
+- [Quick Start](#quick-start)
+- [Features](#features)
+  - [Adding a task: add](#adding-a-task-add)
+  - [Listing all tasks: list](#listing-all-tasks-list)
+  - [Deleting a task: delete](#deleting-a-task-delete)
+  - [Locating a task: find](#locating-a-task-find)
+  - [Marking as complete: mark](#marking-as-complete--mark)
+  - [Marking as complete: unmark](#marking-as-incomplete--unmark)
+  - [Editing a task: edit](#editing-a-task--edit)
+  - [Exiting the program: exit](#exiting-the-program--exit)
+  - [Saving the data](#saving-the-data)
+- [Command Summary](#command-summary)
+
+
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
-
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
-
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>    
+1. Ensure that you have Java `11` or above installed in your Computer.
+2. Download the latest `Harmonia.jar` from [here](https://github.com/AY2122S2-CS2103T-T09-1/tp.git)
+3. Copy the file to the folder you want to use as the home folder for your Harmonia.
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    ![Ui](images/Ui.png)
+5. Type the command in the command box and press Enter to execute it. (E.g type `list` to list down all the tasks)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>    
-   Some example commands you can try:
-
-    * **`list`** : Lists all contacts.
-
-    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-
-    * **`clear`** : Deletes all contacts.
-
-    * **`exit`** : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
-
---------------------------------------------------------------------------------------------------------------------   
+--------------------------------------------------------------------------------------------------------------------
 ## Features
 
-<div markdown="block" class="alert alert-info">    
+### Adding a task: `add`
 
-**:information_source: Notes about the command format:**<br>
+Adds a task into the Harmonia.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>    
-  e.g. in `add d/DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `add d/CS2103T meeting`.
+Format:  `add d/DESCRIPTION`
+Example: `add d/CS2103T tp meeting`
 
-* Items in square brackets are optional.<br>    
-  e.g `d/DESCRIPTION [t/TAG]` can be used as `d/Meeting t/CS2103T` or as `d/Meeting`.
+### Listing all tasks: `list`
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>    
-  e.g. if you specify `t/CS2103T t/Assignment`, only `t/CS2103T` will be taken.
+Shows a list of all the existing tasks in the task list.
 
-* Extraneous parameters for commands that do not take in parameters (such as `list` and `exit`) will be ignored. <br>    
-  e.g. if the command specifies `list 123`, it will be interpreted as `list`.
+Format: `list`
 
-</div>    
+### Deleting a task: `delete`
+
+Deletes a specified task from Harmonia.
+
+Format: `delete INDEX`
+- Deletes the task at the specified `INDEX` from the task list.
+- The index refers to the index number shown in the displayed task list.
+- The index **must be a positive integer** 1, 2, 3
+
+Example: `delete 3` deletes the 3rd task in the task list
+
+### Locating a task: `find`
+
+Finds a task which description or tag contains the given keywords.
+
+Format:
+- `find KEYWORD [MORE KEYWORDS]`
+- `find t/TAG`
+
+Example:
+- `find book`
+- `find book read`
+- `find t/CS2103T`
+
 
 ### Marking as complete : `mark`
 
@@ -101,12 +117,12 @@ Format: `exit`
 ### Saving the data
 
 Harmonia's data is saved in the hard disk automatically after any command changes the data. There is no need to save manually.
-    
---------------------------------------------------------------------------------------------------------------------   
+
+--------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
 Action | Format, Examples
---------|------------------ 
+--------|------------------
 **Add** | `add d/DESCRIPTION` <br> e.g., `add d/read book`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [d/DESCRIPTION] [t/TAG]`<br> e.g.,`edit 2 n/CS2101 meeting t/CS2101`

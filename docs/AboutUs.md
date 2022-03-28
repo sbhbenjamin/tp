@@ -32,7 +32,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/thikhinab.png" width="200px">
 
-[[github](http://github.com/thikhinab)] 
+[[github](http://github.com/thikhinab)]
 [[portfolio](team/thikhinab.md)]
 
 * Role: Testing
