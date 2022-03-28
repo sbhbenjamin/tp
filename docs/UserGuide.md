@@ -6,32 +6,46 @@ title: User Guide
 Harmonia is a **desktop app for managing tasks related to your academic life, optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Harmonia can get your task management done faster than traditional GUI-based task managers. Harmonia is built by students, for students. With firsthand experience of what a student experiences, we seek to simplify the complexity associated with your academic and non-academic life.
 
 --------------------------------------------------------------------------------------------------------------------
-## Table of Contents
-- [Quick Start](#quick-start)
-- [Features](#features)
-  - [Adding a task: add](#adding-a-task-add)
-  - [Listing all tasks: list](#listing-all-tasks-list)
-  - [Deleting a task: delete](#deleting-a-task-delete)
-  - [Locating a task: find](#locating-a-task-find)
-  - [Marking as complete: mark](#marking-as-complete--mark)
-  - [Marking as complete: unmark](#marking-as-incomplete--unmark)
-  - [Editing a task: edit](#editing-a-task--edit)
-  - [Exiting the program: exit](#exiting-the-program--exit)
-  - [Saving the data](#saving-the-data)
-- [Command Summary](#command-summary)
+## Table of Contents (TOC)
+1. [About](#1-about)
+<br>   1.1. [Purpose](#11-purpose)
+<br>   1.2. [How to use this guide](#12-how-to-use-this-guide)
+<br>   1.3. [Typography](#13-typography)
+<br>   __1.3.1. [User Input](#131-user-input)
+<br>   __1.3.2. [User Input](#132-keyboard-input)
+<br>   1.4. [Special Sybols](#14-special-symbols)
+<br>   __1.4.1. [Note](#141-note)
+<br>   __1.4.2. [Warning](#142-warning)
+<br>   1.5. [Graphical User Interface (GUI)](#15-graphical-user-interface-gui)
+2. [Getting Started](#2-getting-started)
+3. [Features](#3-features)
+<br>   3.1. [Adding a task: add](#31-adding-a-task-add)
+<br>   3.2. [Listing all tasks: list](#32-listing-all-tasks-list)
+<br>   3.3. [[Coming Soon] Listing all tags: list t/](#33-coming-soon-listing-all-tags-list-t)
+<br>   3.4. [Deleting a task: delete](#34-deleting-a-task-delete)
+<br>   3.5. [Locating a task: find](#35-locating-a-task-find)
+<br>   3.6. [Marking as complete: mark](#36-marking-as-complete-mark)
+<br>   3.7. [Marking as incomplete: unmark](#37-marking-as-incomplete-unmark)
+<br>   3.8. [Editing a task: edit](#38-editing-a-task-edit)
+<br>   3.9. [[Coming soon] Sorting tasks: sort](#39-coming-soon-sorting-tasks-sort)
+<br>   3.10. [Viewing help: help](#310-viewing-help-help)
+<br>   3.11. [Exiting the program](#311-exiting-the-program-exit)
+<br>   3.12. [Saving the data](#312-saving-the-data)
+<br>   3.13. [Editing the data file](#313-editing-the-data-file)
+4. [Command Summary](#4-command-summary)
 
 ## 1. About
 
 ### 1.1 Purpose
 This user guide aims to teach you how to use Harmonia to systematically organize your student life. It walks you through all the commands Harmonia has and examples on how to use them. By the end of the guide, you should have a better understanding on how to use Harmonia to help you organise your life.
 
-### 1.2 How to use this guide 
+### 1.2 How to use this guide
 This guide is designed to be read from top to bottom. At the same time, this guide provides ease of navigation, where you can quickly access the segment you are looking for. To this end, the table of contents summarizes all the different sections of our user guide, and it links you to the section of the guide which you wish to look at in detail. After each section, there is also a “return to top” link which brings you back to the table of contents quickly.
 
 ### 1.3 Typography
 This user guide uses different typography to denote different types of information so that you can easily know if the instruction is actionable.
 
-#### 1.3.1 User Input 
+#### 1.3.1 User Input
 `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
 
 #### 1.3.2 Keyboard Input
@@ -51,15 +65,17 @@ Instructions that occur in a warning box you are advised to heed, or else uninte
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:** This is an example warning</div>
 
 ### 1.5 Graphical User Interface (GUI)
-Figure 1.5 depicts the user interface of Harmonia. The following descriptions explain the interface from top to bottom. 
-1. At the top of Harmonia is the toolbar, where you can access the `File` and `Help` options. 
-2. Below the toolbar is the **command box** where you can input your commands into. This will be the main way in which you will interact with Harmonia. 
-3. The result of the command will be output into the **command result box** beneath it. This will be especially useful in helping you understand whether your command has been successfully processed by Harmonia, or if there are any errors. 
-4. The mainframe of Harmonia is the **task list**, where you will be able to see all of your tasks. This frame will update accordingly to your commands, and acts as a visual representation of your data. 
+Figure 1.5 depicts the user interface of Harmonia. The following descriptions explain the interface from top to bottom.
+1. At the top of Harmonia is the toolbar, where you can access the `File` and `Help` options.
+2. Below the toolbar is the **command box** where you can input your commands into. This will be the main way in which you will interact with Harmonia.
+3. The result of the command will be output into the **command result box** beneath it. This will be especially useful in helping you understand whether your command has been successfully processed by Harmonia, or if there are any errors.
+4. The mainframe of Harmonia is the **task list**, where you will be able to see all of your tasks. This frame will update accordingly to your commands, and acts as a visual representation of your data.
 5. Beneath the mainframe is the status bar, which includes the location where the data file is stored.
 
   ![Harmonia UI](images/Harmonia.png)
   *Figure 1.5: Harmonia's GUI*
+
+[Return to TOC](#table-of-contents-toc)
 
 ## 2. Getting Started
 
@@ -74,7 +90,7 @@ Figure 1.5 depicts the user interface of Harmonia. The following descriptions ex
    ![Ui](images/Ui.png)
    *Figure 2.1: Harmonia's GUI*
 
-5. Type the command in the command box and press <kbd>↵Enter</kbd> to execute it.<br> 
+5. Type the command in the command box and press <kbd>↵Enter</kbd> to execute it.<br>
 Here are a few example commands you can try:
 - `list`
   - Lists out all tasks.
@@ -83,14 +99,16 @@ Here are a few example commands you can try:
 - `find n/tp`
   - Finds a task with the name `tp`.
 
+[Return to TOC](#table-of-contents-toc)
+
 --------------------------------------------------------------------------------------------------------------------
 ## 3. Features
 
 <div markdown="block" class="alert alert-primary">
 
-**:bulb: Notes about the command format:** 
+**:bulb: Notes about the command format:**
 
-- Words in `UPPER_CASE` are the parameters to be supplied by the user.<br> 
+- Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. `add n/NAME`, `NAME` is a parameter which can be used as `add n/Complete Tutorial`.
 
 - Items in square brackets are optional.<br>
@@ -114,6 +132,8 @@ Here are a few example commands you can try:
 
 </div>
 
+[Return to TOC](#table-of-contents-toc)
+
 ### 3.1 Adding a task: `add`
 Adds a task into Harmonia, with a name, description, deadline, priority, and optionally some tags.
 
@@ -127,17 +147,23 @@ Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl
 ![UserGuide-add](images/UserGuide-add.png)
 Figure 3.1: Example of Harmonia after adding a task
 
+[Return to TOC](#table-of-contents-toc)
+
 ### 3.2 Listing all tasks: `list`
 
 Shows a list of all the existing tasks in the task list.
 
 Format: `list`
 
+[Return to TOC](#table-of-contents-toc)
+
 ### 3.3 [Coming soon] Listing all tags: `list t/`
 
 Lists all existing tags used in the task list.
 
 Format: `list t/`
+
+[Return to TOC](#table-of-contents-toc)
 
 ### 3.4 Deleting a task: `delete`
 
@@ -150,6 +176,8 @@ Example: `delete 3` deletes the 3rd task in Harmonia.
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to delete.
 </div>
+
+[Return to TOC](#table-of-contents-toc)
 
 ### 3.5 Locating a task: `find`
 
@@ -171,12 +199,14 @@ Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27`
 You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to narrow down your search.
 </div>
 
-### 3.6 Marking as complete : `mark`
+[Return to TOC](#table-of-contents-toc)
 
-Marks the task at the given index of the existing task list as complete. At least 1 index has to be provided, but multiple indexes can be provided as well to mark multiple tasks as complete at a time.  
+### 3.6 Marking as complete: `mark`
 
-Format: `mark INDEX [INDEX]...`  
-Example:  
+Marks the task at the given index of the existing task list as complete. At least 1 index has to be provided, but multiple indexes can be provided as well to mark multiple tasks as complete at a time.
+
+Format: `mark INDEX [INDEX]...`
+Example:
 - `mark 3` marks the task at the third index of the task list as complete.
 - `mark 1 2 3` marks the tasks at the first, second and third index of the list as complete.
 
@@ -184,20 +214,24 @@ Example:
 You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to mark.
 </div>
 
-### 3.7 Marking as incomplete : `unmark`
+[Return to TOC](#table-of-contents-toc)
+
+### 3.7 Marking as incomplete: `unmark`
 
 Marks the task at the given index of the existing task list as incomplete. At least 1 index has to be provided, but multiple indexes can be provided as well to mark multiple tasks as incomplete at a time.
 
-Format: `unmark INDEX [INDEX]...`  
+Format: `unmark INDEX [INDEX]...`
 Example:
 - `unmark 3` marks the task at the third index of the task list as incomplete.
-- `unmark 1 2 3` marks the tasks at the first, second and third index of the list as incomplete.  
+- `unmark 1 2 3` marks the tasks at the first, second and third index of the list as incomplete.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to unmark.
 </div>
 
-### 3.8 Editing a task : `edit`
+[Return to TOC](#table-of-contents-toc)
+
+### 3.8 Editing a task: `edit`
 
 Edits an existing task in the task list.
 
@@ -214,7 +248,9 @@ Example:
 You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to edit.
 </div>
 
-### 3.9 [Coming soon] Sorting tasks : `sort`
+[Return to TOC](#table-of-contents-toc)
+
+### 3.9 [Coming soon] Sorting tasks: `sort`
 
 Sorts the tasks by the specified sort key and sort order and list them out.
 
@@ -226,7 +262,7 @@ Format: `sort by/SORT_KEY in/SORT_ORDER`
 - `SORT_ORDER` is the order in which the tasks are listed out.
   - `ascending`
   - `descending`
-  
+
 Example:
 - `sort by/deadline in/ascending`: lists the tasks with the earliest deadline first
 - `sort by/priority in/descending`: lists the tasks with the highest priority first
@@ -237,21 +273,29 @@ You can use the following abbreviations to sort tasks faster.
 - `desc` in place of `descending`
 </div>
 
+[Return to TOC](#table-of-contents-toc)
+
 ### 3.10 Viewing help: `help`
 
 Shows the link to the user guide.
 
 Format: `help`
 
-### 3.11 Exiting the program : `exit`
+[Return to TOC](#table-of-contents-toc)
+
+### 3.11 Exiting the program: `exit`
 
 Exits the program.
 
 Format: `exit`
 
+[Return to TOC](#table-of-contents-toc)
+
 ### 3.12 Saving the data
 
 Harmonia's data is saved in the hard disk automatically after any command changes the data. There is no need to save manually.
+
+[Return to TOC](#table-of-contents-toc)
 
 ### 3.13 Editing the data file
 
@@ -261,8 +305,10 @@ Harmonia's data is saved as JSON file ([Location of Harmonia.jar]/data/harmonia.
 If your changes to the data file makes its format invalid, Harmonia will discard all data and start with an empty data file at the next run.
 </div>
 
+[Return to TOC](#table-of-contents-toc)
+
 --------------------------------------------------------------------------------------------------------------------
-## Command summary
+## 4. Command summary
 
 Action | Format, Examples
 --------|------------------
@@ -276,3 +322,5 @@ Action | Format, Examples
 **Find** | `find [n/NAME_KEYWORD]... [t/TAG_KEYWORD]... [start/START_DATE] [end/END_DATE]` <br> e.g., `find n/book n/read` <br> e.g., `find t/test t/CS2103T` <br> e.g., `find start/2022-03-14 end/2022-03-18` <br> e.g., `find t/CS2103T` <br> e.g., `find n/book t/test start/2022-03-15`
 **Help** | `help`
 **Exit** | `exit`
+
+[Return to TOC](#table-of-contents-toc)
