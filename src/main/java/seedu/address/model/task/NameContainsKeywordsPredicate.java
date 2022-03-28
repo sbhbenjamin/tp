@@ -1,6 +1,5 @@
 package seedu.address.model.task;
 
-import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
