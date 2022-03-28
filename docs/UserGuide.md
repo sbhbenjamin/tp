@@ -168,7 +168,7 @@ Format: `find [n/NAME_KEYWORD]... [t/TAG_KEYWORD]... [start/START_DATE] [end/END
 Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-You can also search using multiple descriptors (e.g. find n/book t/CS2103T) to narrow down your search.
+You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to narrow down your search.
 </div>
 
 ### 3.6 Marking as complete : `mark`
