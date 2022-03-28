@@ -33,8 +33,8 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 --------------------------------------------------------------------------------------------------------------------
 ## Features
 
-### Adding a task: `add`
-Adds a task into the Harmonia, with a name, description, deadline, priority, and optionally some tags.
+### 3.1 Adding a task: `add`
+Adds a task into Harmonia, with a name, description, deadline, priority, and optionally some tags.
 
 Format:  `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
 - `DEADLINE` should be in the format `‘YYYY-MM-DD’`.
@@ -46,7 +46,7 @@ Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl
 ![UserGuide-add](images/UserGuide-add.png)
 Figure 3.1: Example of Harmonia after adding a task
 
-### Listing all tasks: `list`
+### 3.2 Listing all tasks: `list`
 
 Shows a list of all the existing tasks in the task list.
 
@@ -77,19 +77,20 @@ Example:
 - `find t/CS2103T`
 
 
-### Marking as complete : `mark`
+### 3.6 Marking as complete : `mark`
 
-Marks the task at the given index of the existing task list as complete. At least 1 index has to be provided, but
-multiple indexes can be provided as well to mark multiple tasks as complete at a time.  
+Marks the task at the given index of the existing task list as complete. At least 1 index has to be provided, but multiple indexes can be provided as well to mark multiple tasks as complete at a time.  
 
 Format: `mark INDEX [INDEX]...`  
 Example:  
 - `mark 3` marks the task at the third index of the task list as complete.
 - `mark 1 2 3` marks the tasks at the first, second and third index of the list as complete.
 
-💡Note: You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to mark.
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to mark.
+</div>
 
-### Marking as incomplete : `unmark`
+### 3.7 Marking as incomplete : `unmark`
 
 Marks the task at the given index of the existing task list as incomplete. At least 1 index has to be provided,
 but multiple indexes can be provided as well to mark multiple tasks as incomplete at a time.
@@ -99,7 +100,9 @@ Example:
 - `unmark 3` marks the task at the third index of the task list as incomplete.
 - `unmark 1 2 3` marks the tasks at the first, second and third index of the list as incomplete.  
 
-💡Note: You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to unmark.
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to unmark.
+</div>
 
 ### Editing a task : `edit`
 
