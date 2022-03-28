@@ -56,7 +56,7 @@ Figure 1.5 depicts the user interface of Harmonia. The following descriptions ex
 1. At the top of Harmonia is the toolbar, where you can access the `File` and `Help` options. 
 2. Below the toolbar is the **command box** where you can input your commands into. This will be the main way in which you will interact with Harmonia. 
 3. The result of the command will be output into the **command result box** beneath it. This will be especially useful in helping you understand whether your command has been successfully processed by Harmonia, or if there are any errors. 
-4. The mainframe of Harmonia is the **task list**, where you will be able to see all of your tasks. This frame will update accordingly your commands, and acts as a visual representation of your data. 
+4. The mainframe of Harmonia is the **task list**, where you will be able to see all of your tasks. This frame will update accordingly to your commands, and acts as a visual representation of your data. 
 5. Beneath the mainframe is the status bar, which includes the location where the data file is stored.
 
   ![Harmonia UI](images/Harmonia.png)
