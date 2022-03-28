@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.MassOpsParser;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.CompletionStatus;
@@ -41,7 +42,7 @@ public class UnmarkCommand extends Command {
      */
     public UnmarkCommand(List<Index> targetIndexes) {
         assert(targetIndexes != null && targetIndexes.size() != 0);
-        this.targetIndexes = targetIndexes;
+        this.targetIndexes = MassOpsParser.sortInAsc(targetIndexes);
     }
 
     /**
