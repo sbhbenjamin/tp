@@ -21,9 +21,12 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s2-cs2103t-t09-1.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String URL_ERROR_MESSAGE = "Unable to open URL to user guide using default browser.";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+
+    private static ErrorWindow errorWindow;
 
     @FXML
     private Button copyButton;
@@ -42,6 +45,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        errorWindow = new ErrorWindow(URL_ERROR_MESSAGE);
     }
 
     /**
@@ -86,6 +90,7 @@ public class HelpWindow extends UiPart<Stage> {
      * Hides the help window.
      */
     public void hide() {
+        errorWindow.hide();
         getRoot().hide();
     }
 
@@ -94,6 +99,17 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    /**
+     * Opens the error window or focuses on it if it's already opened.
+     */
+    public void handleError() {
+        if (!errorWindow.isShowing()) {
+            errorWindow.show();
+        } else {
+            errorWindow.focus();
+        }
     }
 
     /**
@@ -118,6 +134,7 @@ public class HelpWindow extends UiPart<Stage> {
             desktop.browse(new URI(USERGUIDE_URL));
         } catch (URISyntaxException | IOException e) {
             logger.info("Error opening URL: " + e.getMessage());
+            handleError();
         }
     }
 }
