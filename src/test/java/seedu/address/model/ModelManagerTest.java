@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalTasks.CS2107_ASSIGNMENT;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -119,7 +120,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = CS2107_ASSIGNMENT.getName().fullName.split("\\s+");
-        modelManager.updateFilteredTaskList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredTaskList(new NameContainsKeywordsPredicate(Set.of(keywords)));
         assertFalse(modelManager.equals(new ModelManager(taskList, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

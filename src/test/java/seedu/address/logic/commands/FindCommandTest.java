@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalTasks.getTypicalTaskList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,9 +36,9 @@ public class FindCommandTest {
     @Test
     public void equals() {
         NameContainsKeywordsPredicate firstNamePredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("firstName"));
+                new NameContainsKeywordsPredicate(Collections.singleton("firstName"));
         NameContainsKeywordsPredicate secondNamePredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("secondName"));
+                new NameContainsKeywordsPredicate(Collections.singleton("secondName"));
         TagContainsKeywordsPredicate firstTagPredicate =
                 new TagContainsKeywordsPredicate(new HashSet<>(Collections.singletonList("firstTag")));
         TagContainsKeywordsPredicate secondTagPredicate =
@@ -72,15 +73,15 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywordsAndVeryLargeDateRange_noTaskFound() {
-        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 5);
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(" ");
         TagContainsKeywordsPredicate tagPredicate = prepareTagPredicate(" ");
         DeadlineInRangePredicate deadlinePredicate =
                 new DeadlineInRangePredicate(null, null);
         FindCommand command = new FindCommand(namePredicate, tagPredicate, deadlinePredicate);
-        expectedModel.updateFilteredTaskList((namePredicate.or(tagPredicate)).and(deadlinePredicate));
+        expectedModel.updateFilteredTaskList(namePredicate.and(tagPredicate).and(deadlinePredicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredTaskList());
+        assertEquals(expectedModel.getFilteredTaskList(), model.getFilteredTaskList());
     }
 
     @Test
@@ -91,7 +92,7 @@ public class FindCommandTest {
         DeadlineInRangePredicate deadlinePredicate =
                 new DeadlineInRangePredicate(null, null);
         FindCommand command = new FindCommand(namePredicate, tagPredicate, deadlinePredicate);
-        expectedModel.updateFilteredTaskList((namePredicate.or(tagPredicate)).and(deadlinePredicate));
+        expectedModel.updateFilteredTaskList(namePredicate.and(tagPredicate).and(deadlinePredicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CS2103T_PROJECT, MEET_ALICE), model.getFilteredTaskList());
     }
@@ -104,22 +105,22 @@ public class FindCommandTest {
         DeadlineInRangePredicate deadlinePredicate =
                 new DeadlineInRangePredicate(null, null);
         FindCommand command = new FindCommand(namePredicate, tagPredicate, deadlinePredicate);
-        expectedModel.updateFilteredTaskList((namePredicate.or(tagPredicate)).and(deadlinePredicate));
+        expectedModel.updateFilteredTaskList(namePredicate.and(tagPredicate).and(deadlinePredicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CS2103T_PROJECT, CS2105_FINALS, CS2105_MIDTERM), model.getFilteredTaskList());
     }
 
     @Test
     public void execute_multipleNameKeywordsAndMultipleTagKeywordsAndVeryLargeDateRange_multipleTasksFound() {
-        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 4);
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 1);
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Alice Project");
         TagContainsKeywordsPredicate tagPredicate = prepareTagPredicate("exam cs2103t");
         DeadlineInRangePredicate deadlinePredicate =
                 new DeadlineInRangePredicate(null, null);
         FindCommand command = new FindCommand(namePredicate, tagPredicate, deadlinePredicate);
-        expectedModel.updateFilteredTaskList((namePredicate.or(tagPredicate)).and(deadlinePredicate));
+        expectedModel.updateFilteredTaskList(namePredicate.and(tagPredicate).and(deadlinePredicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CS2103T_PROJECT, CS2105_FINALS, CS2105_MIDTERM, MEET_ALICE),
+        assertEquals(expectedModel.getFilteredTaskList(),
                 model.getFilteredTaskList());
     }
 
@@ -127,7 +128,7 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
     private NameContainsKeywordsPredicate prepareNamePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+        return new NameContainsKeywordsPredicate(Set.of(userInput.split("\\s+")));
     }
 
     /**

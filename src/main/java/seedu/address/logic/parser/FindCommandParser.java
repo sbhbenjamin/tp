@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -50,7 +49,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             endDate = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_END).get());
         }
 
-        return new FindCommand(new NameContainsKeywordsPredicate(new ArrayList<>(nameKeywords)),
+        return new FindCommand(new NameContainsKeywordsPredicate(nameKeywords),
                 new TagContainsKeywordsPredicate(tagKeywords),
                 new DeadlineInRangePredicate(startDate, endDate));
     }

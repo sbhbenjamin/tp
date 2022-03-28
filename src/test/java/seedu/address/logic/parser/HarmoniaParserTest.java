@@ -88,9 +88,7 @@ public class HarmoniaParserTest {
                 FindCommand.COMMAND_WORD + " "
                         + nameKeywordsWithPrefix.stream().collect(Collectors.joining(" ")) + " "
                         + tagKeywordsWithPrefix.stream().collect(Collectors.joining(" ")));
-        List<String> allKeywords = Stream.concat(nameKeywords.stream(), tagKeywordsWithPrefix.stream())
-                .collect(Collectors.toList());
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(allKeywords),
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(new HashSet<>(nameKeywords)),
                 new TagContainsKeywordsPredicate(new HashSet<>(tagKeywords)),
                 new DeadlineInRangePredicate(null, null)), command);
     }
