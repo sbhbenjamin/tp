@@ -21,17 +21,58 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 - [Command Summary](#command-summary)
 
 
-## Quick start
+## 2. Getting Started
 
-1. Ensure that you have Java `11` or above installed in your Computer.
-2. Download the latest `Harmonia.jar` from [here](https://github.com/AY2122S2-CS2103T-T09-1/tp.git)
-3. Copy the file to the folder you want to use as the home folder for your Harmonia.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+1. Ensure that you have **Java 11** or above installed in your Computer.
+
+2. Download the latest Harmonia.jar from [here](https://github.com/AY2122S2-CS2103T-T09-1/tp/releases).
+
+3. Copy the file to the folder you want to use as the home folder for Harmonia.
+
+4. Double-click the file to start the app. The GUI similar to *Figure 2.1* should appear in a few seconds.
+
    ![Ui](images/Ui.png)
-5. Type the command in the command box and press Enter to execute it. (E.g type `list` to list down all the tasks)
+   *Figure 2.1: Harmonia's GUI*
+
+5. Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br> 
+Here are a few example commands you can try:
+- `list`
+  - Lists out all tasks.
+- `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T`
+  - Adds a task named `CS2103T tp meeting`, with a description of `read the weekly tasks before the meeting`. It has a deadline of `2022-03-27`, with a priority of `medium` and a tag of `CS2103T`.
+- `find n/tp`
+  - Finds a task with the name `tp`.
 
 --------------------------------------------------------------------------------------------------------------------
-## Features
+## 3. Features
+
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Notes about the command format:** 
+
+- Words in `UPPER_CASE` are the parameters to be supplied by the user.<br> 
+  e.g. `add n/NAME`, `NAME` is a parameter which can be used as `add n/Complete Tutorial`.
+
+- Items in square brackets are optional.<br>
+  e.g. `find [n/NAME] [t/TAG]` can be used as `find n/Complete Tutorial` or `find t/CS203T`.
+
+- Items followed by `...` can be used multiple times (including zero times).<br>
+  e.g. `[t/TAG]...` can be used as `t/CS2103T t/Tutorial`.
+
+- Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME d/DESCRIPTION`, `d/DESCRIPTION n/NAME` is also acceptable.
+
+- `INDEX` refers to the numbering of an item in a list, as shown in the displayed task list.<br>
+e.g. in a list of tasks:<br>
+1. Do homework
+2. Clean room
+3. Walk dog<br>
+Index 2 here refers to the second item in the list, "Clean room".
+
+- Extraneous parameters for commands that do not take in any parameters (such as `help` and `exit`) will be ignored.<br>
+  e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
+
+</div>
 
 ### Adding a task: `add`
 
