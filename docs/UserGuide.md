@@ -32,20 +32,20 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 <br>   3.11. [Exiting the program](#311-exiting-the-program-exit)
 <br>   3.12. [Saving the data](#312-saving-the-data)
 <br>   3.13. [Editing the data file](#313-editing-the-data-file)
-4. [Command Summary](#4-command-summary) 
-   
+4. [Command Summary](#4-command-summary)
+
 ## 1. About
 
 ### 1.1 Purpose
 This user guide aims to teach you how to use Harmonia to systematically organize your student life. It walks you through all the commands Harmonia has and examples on how to use them. By the end of the guide, you should have a better understanding on how to use Harmonia to help you organise your life.
 
-### 1.2 How to use this guide 
+### 1.2 How to use this guide
 This guide is designed to be read from top to bottom. At the same time, this guide provides ease of navigation, where you can quickly access the segment you are looking for. To this end, the table of contents summarizes all the different sections of our user guide, and it links you to the section of the guide which you wish to look at in detail. After each section, there is also a “return to top” link which brings you back to the table of contents quickly.
 
 ### 1.3 Typography
 This user guide uses different typography to denote different types of information so that you can easily know if the instruction is actionable.
 
-#### 1.3.1 User Input 
+#### 1.3.1 User Input
 `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
 
 #### 1.3.2 Keyboard Input
@@ -65,11 +65,11 @@ Instructions that occur in a warning box you are advised to heed, or else uninte
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:** This is an example warning</div>
 
 ### 1.5 Graphical User Interface (GUI)
-Figure 1.5 depicts the user interface of Harmonia. The following descriptions explain the interface from top to bottom. 
-1. At the top of Harmonia is the toolbar, where you can access the `File` and `Help` options. 
-2. Below the toolbar is the **command box** where you can input your commands into. This will be the main way in which you will interact with Harmonia. 
-3. The result of the command will be output into the **command result box** beneath it. This will be especially useful in helping you understand whether your command has been successfully processed by Harmonia, or if there are any errors. 
-4. The mainframe of Harmonia is the **task list**, where you will be able to see all of your tasks. This frame will update accordingly to your commands, and acts as a visual representation of your data. 
+Figure 1.5 depicts the user interface of Harmonia. The following descriptions explain the interface from top to bottom.
+1. At the top of Harmonia is the toolbar, where you can access the `File` and `Help` options.
+2. Below the toolbar is the **command box** where you can input your commands into. This will be the main way in which you will interact with Harmonia.
+3. The result of the command will be output into the **command result box** beneath it. This will be especially useful in helping you understand whether your command has been successfully processed by Harmonia, or if there are any errors.
+4. The mainframe of Harmonia is the **task list**, where you will be able to see all of your tasks. This frame will update accordingly to your commands, and acts as a visual representation of your data.
 5. Beneath the mainframe is the status bar, which includes the location where the data file is stored.
 
   ![Harmonia UI](images/Harmonia.png)
@@ -90,7 +90,7 @@ Figure 1.5 depicts the user interface of Harmonia. The following descriptions ex
    ![Ui](images/Ui.png)
    *Figure 2.1: Harmonia's GUI*
 
-5. Type the command in the command box and press <kbd>↵Enter</kbd> to execute it.<br> 
+5. Type the command in the command box and press <kbd>↵Enter</kbd> to execute it.<br>
 Here are a few example commands you can try:
 - `list`
   - Lists out all tasks.
@@ -106,9 +106,9 @@ Here are a few example commands you can try:
 
 <div markdown="block" class="alert alert-primary">
 
-**:bulb: Notes about the command format:** 
+**:bulb: Notes about the command format:**
 
-- Words in `UPPER_CASE` are the parameters to be supplied by the user.<br> 
+- Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. `add n/NAME`, `NAME` is a parameter which can be used as `add n/Complete Tutorial`.
 
 - Items in square brackets are optional.<br>
@@ -203,10 +203,10 @@ You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to
 
 ### 3.6 Marking as complete: `mark`
 
-Marks the task at the given index of the existing task list as complete. At least 1 index has to be provided, but multiple indexes can be provided as well to mark multiple tasks as complete at a time.  
+Marks the task at the given index of the existing task list as complete. At least 1 index has to be provided, but multiple indexes can be provided as well to mark multiple tasks as complete at a time.
 
-Format: `mark INDEX [INDEX]...`  
-Example:  
+Format: `mark INDEX [INDEX]...`
+Example:
 - `mark 3` marks the task at the third index of the task list as complete.
 - `mark 1 2 3` marks the tasks at the first, second and third index of the list as complete.
 
@@ -220,10 +220,10 @@ You can key `list` to see the sequence of tasks in the list to check the index o
 
 Marks the task at the given index of the existing task list as incomplete. At least 1 index has to be provided, but multiple indexes can be provided as well to mark multiple tasks as incomplete at a time.
 
-Format: `unmark INDEX [INDEX]...`  
+Format: `unmark INDEX [INDEX]...`
 Example:
 - `unmark 3` marks the task at the third index of the task list as incomplete.
-- `unmark 1 2 3` marks the tasks at the first, second and third index of the list as incomplete.  
+- `unmark 1 2 3` marks the tasks at the first, second and third index of the list as incomplete.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to unmark.
@@ -262,7 +262,7 @@ Format: `sort by/SORT_KEY in/SORT_ORDER`
 - `SORT_ORDER` is the order in which the tasks are listed out.
   - `ascending`
   - `descending`
-  
+
 Example:
 - `sort by/deadline in/ascending`: lists the tasks with the earliest deadline first
 - `sort by/priority in/descending`: lists the tasks with the highest priority first
