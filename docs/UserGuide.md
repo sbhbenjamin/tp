@@ -133,30 +133,43 @@ Shows a list of all the existing tasks in the task list.
 
 Format: `list`
 
-### Deleting a task: `delete`
+### 3.3 [Coming soon] Listing all tags: `list t/`
 
-Deletes a specified task from Harmonia.
+Lists all existing tags used in the task list.
+
+Format: `list t/`
+
+### 3.4 Deleting a task: `delete`
+
+Deletes the task at the given index of the existing task list from Harmonia.
 
 Format: `delete INDEX`
-- Deletes the task at the specified `INDEX` from the task list.
-- The index refers to the index number shown in the displayed task list.
-- The index **must be a positive integer** 1, 2, 3
 
-Example: `delete 3` deletes the 3rd task in the task list
+Example: `delete 3` deletes the 3rd task in Harmonia.
 
-### Locating a task: `find`
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+You can key list to see the sequence of tasks in the list to check the index of the task you wish to delete.
+</div>
 
-Finds a task which description or tag contains the given keywords.
+### 3.5 Locating a task: `find`
 
-Format:
-- `find KEYWORD [MORE KEYWORDS]`
-- `find t/TAG`
+Finds the tasks that match the given keyword(s) and is due within the time range specified from Harmonia.
 
-Example:
-- `find book`
-- `find book read`
-- `find t/CS2103T`
+Format: `find [n/NAME_KEYWORD]... [t/TAG_KEYWORD]... [start/START_DATE] [end/END_DATE]`
 
+* If only `NAME_KEYWORD` is used, Harmonia finds the tasks whose name contains any of the `NAME_KEYWORD` specified.
+
+* If only `TAG_KEYWORD` is used, Harmonia finds tasks whose tag contains any of the `TAG_KEYWORD` specified.
+
+* If only `START_DATE` or `END_DATE` is used, Harmonia finds the tasks whose deadline is between the `START_DATE` and `END_DATE`.
+
+* If only one of the `START_DATE` or `END_DATE` is specified, the unspecified field will be ignored, e.g. if only `START_DATE` is specified, then Harmonia finds all the tasks with a deadline that is not earlier than `START_DATE`.
+
+Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+You can also search using multiple descriptors (e.g. find n/book t/CS2103T) to narrow down your search.
+</div>
 
 ### 3.6 Marking as complete : `mark`
 
