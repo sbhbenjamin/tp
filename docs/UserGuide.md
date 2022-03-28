@@ -148,7 +148,7 @@ Format: `delete INDEX`
 Example: `delete 3` deletes the 3rd task in Harmonia.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-You can key list to see the sequence of tasks in the list to check the index of the task you wish to delete.
+You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to delete.
 </div>
 
 ### 3.5 Locating a task: `find`
