@@ -7,7 +7,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -26,8 +25,6 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.MarkCommand;
-import seedu.address.logic.commands.UnmarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
 import seedu.address.model.task.NameContainsKeywordsPredicate;
@@ -104,19 +101,19 @@ public class HarmoniaParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
-    @Test
-    public void parseCommand_mark() throws Exception {
-        MarkCommand command = (MarkCommand) parser.parseCommand(
-                MarkCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased());
-        assertEquals(new MarkCommand(INDEX_FIRST_TASK), command);
-    }
-
-    @Test
-    public void parseCommand_unmark() throws Exception {
-        UnmarkCommand command = (UnmarkCommand) parser.parseCommand(
-                UnmarkCommand.COMMAND_WORD + " " + INDEX_SECOND_TASK.getOneBased());
-        assertEquals(new UnmarkCommand(INDEX_SECOND_TASK), command);
-    }
+    //    @Test
+    //    public void parseCommand_mark() throws Exception {
+    //        MarkCommand command = (MarkCommand) parser.parseCommand(
+    //                MarkCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased());
+    //        assertEquals(new MarkCommand(INDEX_FIRST_TASK), command);
+    //    }
+    //
+    //    @Test
+    //    public void parseCommand_unmark() throws Exception {
+    //        UnmarkCommand command = (UnmarkCommand) parser.parseCommand(
+    //                UnmarkCommand.COMMAND_WORD + " " + INDEX_SECOND_TASK.getOneBased());
+    //        assertEquals(new UnmarkCommand(INDEX_SECOND_TASK), command);
+    //    }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
