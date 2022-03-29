@@ -24,6 +24,9 @@ public class TagContainsKeywordsPredicate implements Predicate<Task> {
 
     @Override
     public boolean test(Task task) {
+        if (keywords.size() == 0) {
+            return true;
+        }
         Set<Tag> tags = task.getTags();
         for (Tag tag : tags) {
             boolean containsKeyword = keywords.stream()
@@ -41,5 +44,4 @@ public class TagContainsKeywordsPredicate implements Predicate<Task> {
                 || (other instanceof TagContainsKeywordsPredicate // instanceof handles nulls
                 && keywords.equals(((TagContainsKeywordsPredicate) other).keywords)); // state check
     }
-
 }

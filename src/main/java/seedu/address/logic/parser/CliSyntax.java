@@ -12,4 +12,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
+    /* Prefix definitions for non-attribute fields */
+    public static final Prefix PREFIX_START = new Prefix("start/");
+    public static final Prefix PREFIX_END = new Prefix("end/");
 }
