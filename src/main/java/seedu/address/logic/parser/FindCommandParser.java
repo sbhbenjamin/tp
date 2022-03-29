@@ -27,8 +27,8 @@ import seedu.address.model.task.PriorityMatchedPredicate;
 public class FindCommandParser implements Parser<FindCommand> {
 
     private static final Prefix[] POSSIBLE_PREFIXES = new Prefix[] {
-            PREFIX_NAME, PREFIX_TAG, PREFIX_START,
-            PREFIX_END, PREFIX_DESCRIPTION, PREFIX_PRIORITY
+        PREFIX_NAME, PREFIX_TAG, PREFIX_START,
+        PREFIX_END, PREFIX_DESCRIPTION, PREFIX_PRIORITY
     };
 
     /**
