@@ -3,131 +3,324 @@ layout: page
 title: User Guide
 ---
 
-Harmonia is a **desktop app for managing tasks related to your academic life, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Harmonia can get your task management done faster than traditional GUI apps.
+Harmonia is a **desktop app for managing tasks related to your academic life, optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Harmonia can get your task management done faster than traditional GUI-based task managers. Harmonia is built by students, for students. With firsthand experience of what a student experiences, we seek to simplify the complexity associated with your academic and non-academic life.
 
 --------------------------------------------------------------------------------------------------------------------
-## Table of Contents
-- [Quick Start](#quick-start)
-- [Features](#features)
-  - [Adding a task: add](#adding-a-task-add)
-  - [Listing all tasks: list](#listing-all-tasks-list)
-  - [Deleting a task: delete](#deleting-a-task-delete)
-  - [Locating a task: find](#locating-a-task-find)
-  - [Marking as complete: mark](#marking-as-complete--mark)
-  - [Marking as complete: unmark](#marking-as-incomplete--unmark)
-  - [Editing a task: edit](#editing-a-task--edit)
-  - [Exiting the program: exit](#exiting-the-program--exit)
-  - [Saving the data](#saving-the-data)
-- [Command Summary](#command-summary)
+## Table of Contents (TOC)
+1. [About](#1-about)
+<br>   1.1. [Purpose](#11-purpose)
+<br>   1.2. [How to use this guide](#12-how-to-use-this-guide)
+<br>   1.3. [Typography](#13-typography)
+<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.3.1. [User Input](#131-user-input)
+<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.3.2. [User Input](#132-keyboard-input)
+<br>   1.4. [Special Sybols](#14-special-symbols)
+<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.4.1. [Note](#141-note)
+<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.4.2. [Warning](#142-warning)
+<br>   1.5. [Graphical User Interface (GUI)](#15-graphical-user-interface-gui)
+2. [Getting Started](#2-getting-started)
+3. [Features](#3-features)
+<br>   3.1. [Adding a task: add](#31-adding-a-task-add)
+<br>   3.2. [Listing all tasks: list](#32-listing-all-tasks-list)
+<br>   3.3. [[Coming Soon] Listing all tags: list t/](#33-coming-soon-listing-all-tags-list-t)
+<br>   3.4. [Deleting a task: delete](#34-deleting-a-task-delete)
+<br>   3.5. [Locating a task: find](#35-locating-a-task-find)
+<br>   3.6. [Marking as complete: mark](#36-marking-as-complete-mark)
+<br>   3.7. [Marking as incomplete: unmark](#37-marking-as-incomplete-unmark)
+<br>   3.8. [Editing a task: edit](#38-editing-a-task-edit)
+<br>   3.9. [[Coming soon] Sorting tasks: sort](#39-coming-soon-sorting-tasks-sort)
+<br>   3.10. [Viewing help: help](#310-viewing-help-help)
+<br>   3.11. [Exiting the program](#311-exiting-the-program-exit)
+<br>   3.12. [Saving the data](#312-saving-the-data)
+<br>   3.13. [Editing the data file](#313-editing-the-data-file)
+4. [Command Summary](#4-command-summary)
 
+## 1. About
 
-## Quick start
+### 1.1 Purpose
+This user guide aims to teach you how to use Harmonia to systematically organize your student life. It walks you through all the commands Harmonia has and examples on how to use them. By the end of the guide, you should have a better understanding on how to use Harmonia to help you organise your life.
 
-1. Ensure that you have Java `11` or above installed in your Computer.
-2. Download the latest `Harmonia.jar` from [here](https://github.com/AY2122S2-CS2103T-T09-1/tp.git)
-3. Copy the file to the folder you want to use as the home folder for your Harmonia.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+### 1.2 How to use this guide
+This guide is designed to be read from top to bottom. At the same time, this guide provides ease of navigation, where you can quickly access the segment you are looking for. To this end, the table of contents summarizes all the different sections of our user guide, and it links you to the section of the guide which you wish to look at in detail. After each section, there is a [Return to Top](#table-of-contents-toc) link enables you to quickly navigate back to the Table of Contents.
+
+### 1.3 Typography
+This user guide uses different typography to denote different types of information so that you can easily know if the instruction is actionable.
+
+#### 1.3.1 User Input
+This is an example of text denoted as user input: `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
+
+#### 1.3.2 Keyboard Input
+This is an example of text denoted as keyboard input: <kbd>↵Enter</kbd>
+
+### 1.4 Special Symbols
+This user guide denotes information that does not flow as part of the text using special symbols enclosed in a box.
+
+#### 1.4.1 Note
+Instructions or pieces of information that occur in an information box are additional information that can be useful to you.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:** This is an example note.</div>
+
+#### 1.4.2 Warning
+Instructions that occur in a warning box you are advised to heed, or else unintended consequences may occur.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:** This is an example warning</div>
+
+### 1.5 Graphical User Interface (GUI)
+Figure 1.5 depicts the user interface of Harmonia. The following descriptions explain the interface from top to bottom.
+1. At the top of Harmonia is the toolbar, where you can access the `File` and `Help` options.
+2. Below the toolbar is the **command box** where you can input your commands into. This will be the main way in which you will interact with Harmonia.
+3. The result of the command will be output into the **command result box** beneath it. This will be especially useful in helping you understand whether your command has been successfully processed by Harmonia, or if there are any errors.
+4. The mainframe of Harmonia is the **task list**, where you will be able to see all of your tasks. This frame will update accordingly to your commands, and acts as a visual representation of your data.
+5. Beneath the mainframe is the status bar, which includes the location where the data file is stored.
+
+  ![Harmonia UI](images/Harmonia.png)
+  *Figure 1.5: Harmonia's GUI*
+
+[Return to Top](#table-of-contents-toc)
+
+## 2. Getting Started
+
+1. Ensure that you have **Java 11** or above installed in your Computer.
+
+2. Download the latest Harmonia.jar from [here](https://github.com/AY2122S2-CS2103T-T09-1/tp/releases).
+
+3. Copy the file to the folder you want to use as the home folder for Harmonia.
+
+4. Double-click the file to start the app. The GUI similar to *Figure 2.1* should appear in a few seconds.
+
    ![Ui](images/Ui.png)
-5. Type the command in the command box and press Enter to execute it. (E.g type `list` to list down all the tasks)
+   *Figure 2.1: Harmonia's GUI*
+
+5. Type the command in the command box and press <kbd>↵Enter</kbd> to execute it.<br>
+Here are a few example commands you can try:
+- `list`
+  - Lists out all tasks.
+- `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T`
+  - Adds a task named `CS2103T tp meeting`, with a description of `read the weekly tasks before the meeting`. It has a deadline of `2022-03-27`, with a priority of `medium` and a tag of `CS2103T`.
+- `find n/tp`
+  - Finds a task with the name `tp`.
+
+[Return to Top](#table-of-contents-toc)
 
 --------------------------------------------------------------------------------------------------------------------
-## Features
+## 3. Features
 
-### Adding a task: `add`
+<div markdown="block" class="alert alert-primary">
 
-Adds a task into the Harmonia.
+**:bulb: Notes about the command format:**
 
-Format:  `add d/DESCRIPTION`
-Example: `add d/CS2103T tp meeting`
+- Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. `add n/NAME`, `NAME` is a parameter which can be used as `add n/Complete Tutorial`.
 
-### Listing all tasks: `list`
+- Items in square brackets are optional.<br>
+  e.g. `find [n/NAME] [t/TAG]` can be used as `find n/Complete Tutorial` or `find t/CS203T`.
+
+- Items followed by `...` can be used multiple times (including zero times).<br>
+  e.g. `[t/TAG]...` can be used as `t/CS2103T t/Tutorial`.
+
+- Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME d/DESCRIPTION`, `d/DESCRIPTION n/NAME` is also acceptable.
+
+- `INDEX` refers to the numbering of an item in a list, as shown in the displayed task list.<br>
+  e.g. in a list of tasks:<br>
+       1. Do homework<br>
+       2. Clean room<br>
+       3. Walk dog<br>
+       Index 2 here refers to the second item in the list, "Clean room".
+
+- Extraneous parameters for commands that do not take in any parameters (such as `help` and `exit`) will be ignored.<br>
+  e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
+
+</div>
+
+[Return to Top](#table-of-contents-toc)
+
+### 3.1 Adding a task: `add`
+Adds a task into Harmonia, with a name, description, deadline, priority, and optionally some tags.
+
+Format:  `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
+- `DEADLINE` should be in the format `‘YYYY-MM-DD’`.
+- `PRIORITY` should be one of `low`, `medium`,`high`.
+- `TAG` should not contain any space.
+
+Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`
+
+![UserGuide-add](images/UserGuide-add.png)
+Figure 3.1: Example of Harmonia after adding a task
+
+[Return to Top](#table-of-contents-toc)
+
+### 3.2 Listing all tasks: `list`
 
 Shows a list of all the existing tasks in the task list.
 
 Format: `list`
 
-### Deleting a task: `delete`
+[Return to Top](#table-of-contents-toc)
 
-Deletes a specified task from Harmonia.
+### 3.3 [Coming soon] Listing all tags: `list t/`
+
+Lists all existing tags used in the task list.
+
+Format: `list t/`
+
+[Return to Top](#table-of-contents-toc)
+
+### 3.4 Deleting a task: `delete`
+
+Deletes the task at the given index of the existing task list from Harmonia.
 
 Format: `delete INDEX`
-- Deletes the task at the specified `INDEX` from the task list.
-- The index refers to the index number shown in the displayed task list.
-- The index **must be a positive integer** 1, 2, 3
 
-Example: `delete 3` deletes the 3rd task in the task list
+Example: `delete 3` deletes the 3rd task in Harmonia.
 
-### Locating a task: `find`
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to delete.
+</div>
 
-Finds a task which description or tag contains the given keywords.
+[Return to Top](#table-of-contents-toc)
 
-Format:
-- `find KEYWORD [MORE KEYWORDS]`
-- `find t/TAG`
+### 3.5 Locating a task: `find`
+
+Finds the tasks that match the given keyword(s) and is due within the time range specified from Harmonia.
+
+Format: `find [n/NAME_KEYWORD]... [t/TAG_KEYWORD]... [start/START_DATE] [end/END_DATE]`
+
+* If only `NAME_KEYWORD` is used, Harmonia finds the tasks whose name contains any of the `NAME_KEYWORD` specified.
+
+* If only `TAG_KEYWORD` is used, Harmonia finds tasks whose tag contains any of the `TAG_KEYWORD` specified.
+
+* If only `START_DATE` or `END_DATE` is used, Harmonia finds the tasks whose deadline is between the `START_DATE` and `END_DATE`.
+
+* If only one of the `START_DATE` or `END_DATE` is specified, the unspecified field will be ignored, e.g. if only `START_DATE` is specified, then Harmonia finds all the tasks with a deadline that is not earlier than `START_DATE`.
+
+Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to narrow down your search.
+</div>
+
+[Return to Top](#table-of-contents-toc)
+
+### 3.6 Marking as complete: `mark`
+
+Marks the task at the given index of the existing task list as complete. At least 1 index has to be provided, but multiple indexes can be provided as well to mark multiple tasks as complete at a time.
+
+Format: `mark INDEX [INDEX]...`
+Example:
+- `mark 3` marks the task at the third index of the task list as complete.
+- `mark 1 2 3` marks the tasks at the first, second and third index of the list as complete.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to mark.
+</div>
+
+[Return to Top](#table-of-contents-toc)
+
+### 3.7 Marking as incomplete: `unmark`
+
+Marks the task at the given index of the existing task list as incomplete. At least 1 index has to be provided, but multiple indexes can be provided as well to mark multiple tasks as incomplete at a time.
+
+Format: `unmark INDEX [INDEX]...`
+Example:
+- `unmark 3` marks the task at the third index of the task list as incomplete.
+- `unmark 1 2 3` marks the tasks at the first, second and third index of the list as incomplete.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to unmark.
+</div>
+
+[Return to Top](#table-of-contents-toc)
+
+### 3.8 Editing a task: `edit`
+
+Edits an existing task in the task list.
+
+Format: `edit INDEX [n/NAME] [d/DESCRIPTION] [dl/DEADLINE] [p/PRIORITY] [t/TAG]...`
+- `DEADLINE` should be in the format `YYYY-MM-DD`.
+- `PRIORITY` should be one of `low`, `medium`, `high`.
+- `TAG` should not contain any space.
 
 Example:
-- `find book`
-- `find book read`
-- `find t/CS2103T`
+- `edit 1 d/Prepare for CS2103T tutorial`
+- `edit 2 n/CS2103T meeting t/CS2103T`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to edit.
+</div>
 
-### Marking as complete : `mark`
+[Return to Top](#table-of-contents-toc)
 
-Marks specified task from the existing task list from as complete.
+### 3.9 [Coming soon] Sorting tasks: `sort`
 
-Format: `mark INDEX`
-- Marks the task at the specified `INDEX` as complete.
-- The index refers to the index number shown in the displayed task list.
-- The index **must be a positive integer** 1, 2, 3,
+Sorts the tasks by the specified sort key and sort order and list them out.
 
+Format: `sort by/SORT_KEY in/SORT_ORDER`
+- `SORT_KEY` is the property of the task used for sorting. Currently, supported sort keys are:
+  - `deadline` - sort by the due date of the task
+  - `priority` - sort by the priority of the task
+  - `name` - sort by the name of the task
+- `SORT_ORDER` is the order in which the tasks are listed out.
+  - `ascending`
+  - `descending`
 
-Example: `list` followed by `mark 2` marks the 2nd task in the task list as complete.
+Example:
+- `sort by/deadline in/ascending`: lists the tasks with the earliest deadline first
+- `sort by/priority in/descending`: lists the tasks with the highest priority first
 
-### Marking as incomplete : `unmark`
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+You can use the following abbreviations to sort tasks faster.
+- `asc` in place of `ascending`
+- `desc` in place of `descending`
+</div>
 
-Marks specified task from the existing task list from as incomplete.
+[Return to Top](#table-of-contents-toc)
 
-Format: `unmark INDEX`
-- Marks the task at the specified `INDEX` as incomplete.
-- The index refers to the index number shown in the displayed task list.
-- The index **must be a positive integer** 1, 2, 3,
+### 3.10 Viewing help: `help`
 
+Shows the link to the user guide.
 
-Example: `list` followed by `unmark 3` marks the 3rd task in the task list as incomplete.
+Format: `help`
 
-### Editing a task : `edit`
+[Return to Top](#table-of-contents-toc)
 
-Edits the specified task in the task list.
-
-Format: `edit INDEX [d/DESCRIPTION] [t/TAG]`
-- Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index **must be a positive integer** 1, 2, 3, …​
-- At least one of the optional fields must be provided.
-- Existing values will be updated to the input values.
-- When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-- You can remove all the task’s tags by typing `t/` without specifying any tags after it.
-
-Example: `edit 2 d/Prepare for CS2103T Tutorial` Edits the description of the 2nd task to be `Prepare for CS2103T Tutorial`
-
-### Exiting the program : `exit`
+### 3.11 Exiting the program: `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+[Return to Top](#table-of-contents-toc)
+
+### 3.12 Saving the data
 
 Harmonia's data is saved in the hard disk automatically after any command changes the data. There is no need to save manually.
 
+[Return to Top](#table-of-contents-toc)
+
+### 3.13 Editing the data file
+
+Harmonia's data is saved as JSON file ([Location of Harmonia.jar]/data/harmonia.json). Advanced users are encouraged to update the data by editing JSON file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, Harmonia will discard all data and start with an empty data file at the next run.
+</div>
+
+[Return to Top](#table-of-contents-toc)
+
 --------------------------------------------------------------------------------------------------------------------
-## Command summary
+## 4. Command summary
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add d/DESCRIPTION` <br> e.g., `add d/read book`
+**Add** | `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…` <br> e.g., `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [d/DESCRIPTION] [t/TAG]`<br> e.g.,`edit 2 n/CS2101 meeting t/CS2101`
-**Mark**| `mark INDEX` <br> e.g., `mark 3`
-**Unmark**| `unmark INDEX` <br> e.g., `unmark 3`
-**List**| `list`
-**Find** | `find KEYWORD [MORE_KEYWORDS]` <br> `find t/[TAG]` <br> e.g., `find book` <br> e.g., `find book read` <br> e.g., `find t/CS2103T`
+**Edit** | `edit INDEX [n/NAME] [d/DESCRIPTION] [dl/DEADLINE] [p/PRIORITY] [t/TAG]...`<br> e.g.,`edit 2 n/CS2101 meeting t/CS2101`
+**Mark**| `mark INDEX [INDEX]...` <br> e.g., `mark 3` <br> e.g., `mark 1 2 3`
+**Unmark**| `unmark INDEX [INDEX]...` <br> e.g., `unmark 3` <br> e.g., `unmark 1 2 3`
+**List**| `list` <br> `list t/`
+**Sort**| `sort by/SORT_KEY in/SORT_ORDER` <br> e.g., `sort by/deadline in/descending` <br> e.g., `sort by/priority in/asc`
+**Find** | `find [n/NAME_KEYWORD]... [t/TAG_KEYWORD]... [start/START_DATE] [end/END_DATE]` <br> e.g., `find n/book n/read` <br> e.g., `find t/test t/CS2103T` <br> e.g., `find start/2022-03-14 end/2022-03-18` <br> e.g., `find t/CS2103T` <br> e.g., `find n/book t/test start/2022-03-15`
+**Help** | `help`
 **Exit** | `exit`
+
+[Return to Top](#table-of-contents-toc)

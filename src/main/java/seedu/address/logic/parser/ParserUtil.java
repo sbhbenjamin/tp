@@ -124,4 +124,22 @@ public class ParserUtil {
         }
         return new Deadline(trimmedDeadline);
     }
+
+    /**
+     * Parses {@code Collection<String> keywords} into a {@code Set<String>}.
+     */
+    public static Set<String> parseKeywords(Collection<String> keywords) throws ParseException {
+        requireNonNull(keywords);
+        final Set<String> keywordSet = new HashSet<>();
+        for (String keyword : keywords) {
+            if (keyword.isEmpty()) {
+                throw new ParseException("A keyword can't be empty!");
+            }
+            if (keyword.split("\\s+").length > 1) {
+                throw new ParseException("A keyword can't contain any whitespace!");
+            }
+            keywordSet.add(keyword);
+        }
+        return keywordSet;
+    }
 }
