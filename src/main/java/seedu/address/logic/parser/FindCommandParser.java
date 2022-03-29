@@ -1,8 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -14,12 +16,20 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.DeadlineInRangePredicate;
+import seedu.address.model.task.DescriptionContainsKeywordsPredicate;
 import seedu.address.model.task.NameContainsKeywordsPredicate;
+import seedu.address.model.task.Priority;
+import seedu.address.model.task.PriorityMatchedPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
+
+    private static final Prefix[] POSSIBLE_PREFIXES = new Prefix[] {
+            PREFIX_NAME, PREFIX_TAG, PREFIX_START,
+            PREFIX_END, PREFIX_DESCRIPTION, PREFIX_PRIORITY
+    };
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -28,16 +38,18 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG, PREFIX_START,
-                        PREFIX_END);
+                ArgumentTokenizer.tokenize(args, POSSIBLE_PREFIXES);
 
-        if (!anyPrefixPresent(argMultimap, PREFIX_NAME, PREFIX_TAG, PREFIX_START, PREFIX_END)
+        if (!anyPrefixPresent(argMultimap, POSSIBLE_PREFIXES)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         Set<String> nameKeywords = ParserUtil.parseKeywords(argMultimap.getAllValues(PREFIX_NAME));
         Set<String> tagKeywords = ParserUtil.parseKeywords(argMultimap.getAllValues(PREFIX_TAG));
+        Set<String> descriptionKeywords = ParserUtil.parseKeywords(argMultimap.getAllValues(PREFIX_DESCRIPTION));
+        Set<Priority> prioritySet = ParserUtil.parsePriorities(argMultimap.getAllValues(PREFIX_PRIORITY));
+
         Deadline startDate = null;
         Deadline endDate = null;
 
@@ -51,7 +63,9 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         return new FindCommand(new NameContainsKeywordsPredicate(nameKeywords),
                 new TagContainsKeywordsPredicate(tagKeywords),
-                new DeadlineInRangePredicate(startDate, endDate));
+                new DeadlineInRangePredicate(startDate, endDate),
+                new DescriptionContainsKeywordsPredicate(descriptionKeywords),
+                new PriorityMatchedPredicate(prioritySet));
     }
 
     /**
