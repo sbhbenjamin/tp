@@ -1,10 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
@@ -14,14 +20,6 @@ import seedu.address.model.task.DescriptionContainsKeywordsPredicate;
 import seedu.address.model.task.NameContainsKeywordsPredicate;
 import seedu.address.model.task.PriorityMatchedPredicate;
 import seedu.address.model.task.Task;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-
 
 /**
  * Finds and lists all tasks in task list whose name or tag contains any of the argument keywords.
