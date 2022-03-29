@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
@@ -37,7 +36,7 @@ public class FindCommand extends Command {
             + "[" + PREFIX_TAG + "TAG_KEYWORD]... "
             + "[" + PREFIX_START + "START_DATE] "
             + "[" + PREFIX_END + "END_DATE] "
-            + "[" + PREFIX_DESCRIPTION+ "DESCRIPTION_KEYWORD]... "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION_KEYWORD]... "
             + "[" + PREFIX_PRIORITY + "PRIORITY]...\n"
             + "Example: " + COMMAND_WORD
             + " n/complete n/review t/CS2105 t/CS3240 t/CS2103T "
