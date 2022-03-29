@@ -100,8 +100,11 @@ public class HarmoniaParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        ListCommand listTasksCommand = (ListCommand) parser.parseCommand(ListCommand.COMMAND_WORD);
+        ListCommand listTagsCommand = (ListCommand) parser.parseCommand(ListCommand.COMMAND_WORD
+                + " " + PREFIX_TAG);
+        assertEquals(new ListCommand(false), listTasksCommand);
+        assertEquals(new ListCommand(true), listTagsCommand);
     }
 
     @Test
