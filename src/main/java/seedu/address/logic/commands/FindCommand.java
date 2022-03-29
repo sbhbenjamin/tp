@@ -1,13 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
@@ -20,6 +12,14 @@ import seedu.address.model.task.Task;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.function.Predicate;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Finds and lists all tasks in task list whose name or tag contains any of the argument keywords.
@@ -125,6 +125,7 @@ public class FindCommand extends Command {
      * @param predicates the predicates to be combined
      * @return the combined predicate
      */
+    @SafeVarargs
     private Predicate<Task> interceptPredicates(Predicate<Task>... predicates) {
         return Arrays.stream(predicates).reduce(task -> true, Predicate::and);
     }
