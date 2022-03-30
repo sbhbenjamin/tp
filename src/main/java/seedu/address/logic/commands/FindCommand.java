@@ -33,11 +33,11 @@ public class FindCommand extends Command {
             + " and displays them as a list with index numbers.\n"
             + "Parameters (must contain at least one keyword): "
             + "[" + PREFIX_NAME + "NAME_KEYWORD]... "
-            + "[" + PREFIX_TAG + "TAG_KEYWORD]... "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION_KEYWORD]... "
             + "[" + PREFIX_START + "START_DATE] "
             + "[" + PREFIX_END + "END_DATE] "
-            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION_KEYWORD]... "
             + "[" + PREFIX_PRIORITY + "PRIORITY]...\n"
+            + "[" + PREFIX_TAG + "TAG_KEYWORD]... "
             + "Example: " + COMMAND_WORD
             + " n/complete n/review t/CS2105 t/CS3240 t/CS2103T "
             + "start/2022-03-11 end/2022-12-31 d/email p/low p/medium";
