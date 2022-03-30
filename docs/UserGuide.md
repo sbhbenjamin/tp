@@ -177,7 +177,7 @@ Example: `delete 3` deletes the 3rd task in Harmonia.
 You can key `list` to check the index of the task you wish to delete.
 </div>
 
-<div markdown="span" class="alert alert-primary">:warning: **Note:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 This action is irreversible and all deleted tasks cannot be retrieved.
 </div>
 
