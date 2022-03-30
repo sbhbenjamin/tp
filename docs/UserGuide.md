@@ -34,6 +34,8 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 <br>   3.13. [Editing the data file](#313-editing-the-data-file)
 4. [Command Summary](#4-command-summary)
 5. [Glossary](#5-glossary)
+<br>   5.1. [JSON file](#51-json-file)
+<br>   5.2 [Index](#52-index)
 
 ## 1. About
 
@@ -348,3 +350,16 @@ Action | Format, Examples
 In Harmonia, a JSON file is used to store the list of tasks. For each task, the JSON file stores the mapping between attributes (e.g. task name, description, etc.) and their values. If you are an advanced user, you may choose to update the data by editing the JSON file.
 
 [Return to Top](#table-of-contents-toc)
+
+### 5.2 Index
+
+Harmonia uses Indexes to help you address a task easily. An `Index` refers to the numbering of an item in a list, as shown in the displayed task list.<br>
+
+For example,  in a list of tasks:<br>
+1. Do homework<br>
+2. Clean room<br>
+3. Walk dog<br>
+Index 2 here refers to the second item in the list, "Clean room".
+
+[Return to Top](#table-of-contents-toc)
+
