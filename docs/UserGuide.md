@@ -139,7 +139,7 @@ Harmonia allows you to add a task with a name, description, deadline, priority, 
 
 Format:  `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
 - `DEADLINE` should be in the format `‘YYYY-MM-DD’`.
-- `PRIORITY` should be one of `low`, `medium`,`high`.
+- `PRIORITY` should be `low`, `medium` or `high`.
 - `TAG` should not contain any space.
 
 Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`
