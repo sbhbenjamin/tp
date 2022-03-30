@@ -293,6 +293,10 @@ Harmonia allows you to clear all tasks in the task list.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Do not use the clear command unless you are certain that you wish to erase all data. This action is irreversible and all erased data cannot be retrieved.
+</div>
+
 [Return to Top](#table-of-contents-toc)
 
 ### 3.12 Exiting the program: `exit`
