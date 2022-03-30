@@ -111,6 +111,18 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> priorities} into a {@code Set<Priority>}.
+     */
+    public static Set<Priority> parsePriorities(Collection<String> priorities) throws ParseException {
+        requireNonNull(priorities);
+        final Set<Priority> prioritySet = new HashSet<>();
+        for (String priority : priorities) {
+            prioritySet.add(parsePriority(priority));
+        }
+        return prioritySet;
+    }
+
+    /**
      * Parses a {@code String deadline} into a {@code Deadline}.
      * Leading and trailing whitespaces will be trimmed.
      *
