@@ -43,7 +43,7 @@ public class TagList {
     /**
      * Adds a tag to the tag list.
      */
-    public void addTag(Tag tag) {
+    private void addTag(Tag tag) {
         requireNonNull(tag);
         if (tags.containsKey(tag)) {
             int numOfTasksWithTag = tags.get(tag);
@@ -56,7 +56,7 @@ public class TagList {
     /**
      * Adds all tags of a given task to the tag list.
      */
-    public void addTag(Task task) {
+    public void addTagsOfTask(Task task) {
         Set<Tag> tagsInTask = task.getTags();
         tagsInTask.forEach(this::addTag);
     }
@@ -64,7 +64,7 @@ public class TagList {
     /**
      * Removes a tag from the tag list.
      */
-    public void removeTag(Tag tag) {
+    private void removeTag(Tag tag) {
         requireNonNull(tag);
         if (tags.containsKey(tag)) {
             int numTasksWithTag = tags.get(tag);
@@ -79,7 +79,7 @@ public class TagList {
     /**
      * Removes all tags from a given task from the tag list.
      */
-    public void removeTag(Task task) {
+    public void removeTagsOfTask(Task task) {
         Set<Tag> tagsInTask = task.getTags();
         tagsInTask.forEach(this::removeTag);
     }

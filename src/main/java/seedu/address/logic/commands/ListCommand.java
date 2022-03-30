@@ -11,7 +11,8 @@ import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
 /**
- * Lists all tasks in the task list to the user or lists all unique tags used in Harmonia in the command result box.
+ * Lists all tasks in the task list to the user.
+ * Can also list all unique tags used in Harmonia in the command result box.
  */
 public class ListCommand extends Command {
 
@@ -23,7 +24,7 @@ public class ListCommand extends Command {
             + "Parameters: [" + PREFIX_TAG + "]";
 
     public static final String LIST_TASKS_MESSAGE_SUCCESS = "Listed all tasks";
-    public static final String LIST_TAGS_MESSAGE_SUCCESS = "List of tags: %1$s";
+    public static final String LIST_TAGS_MESSAGE_SUCCESS = "All tags found: %1$s";
     public static final String LIST_TAGS_NO_TAGS_FOUND_MESSAGE = "No tags found.";
 
     private final Boolean isListTag;
@@ -47,7 +48,7 @@ public class ListCommand extends Command {
                 return new CommandResult(LIST_TAGS_NO_TAGS_FOUND_MESSAGE);
             }
 
-            String allTags = formatTagList(tagList);
+            String allTags = tagListToString(tagList);
             return new CommandResult(String.format(LIST_TAGS_MESSAGE_SUCCESS, allTags));
 
         } else {
@@ -60,9 +61,9 @@ public class ListCommand extends Command {
      * Formats tag list as text for viewing.
      *
      * @param tagList Tag list to be formatted.
-     * @return Tag list as a String with a whitespace between each tag.
+     * @return Tag list as a {@code String} with a whitespace between each tag.
      */
-    public String formatTagList(Set<Tag> tagList) {
+    public String tagListToString(Set<Tag> tagList) {
         final StringJoiner joiner = new StringJoiner(" ");
         for (Tag tag : tagList) {
             joiner.add(tag.toString());

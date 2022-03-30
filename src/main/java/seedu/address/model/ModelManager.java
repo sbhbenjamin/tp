@@ -101,13 +101,13 @@ public class ModelManager implements Model {
     @Override
     public void deleteTask(Task target) {
         taskList.removeTask(target);
-        tagList.removeTag(target);
+        tagList.removeTagsOfTask(target);
     }
 
     @Override
     public void addTask(Task task) {
         taskList.addTask(task);
-        tagList.addTag(task);
+        tagList.addTagsOfTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
