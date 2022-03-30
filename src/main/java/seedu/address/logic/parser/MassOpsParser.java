@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.TreeSet;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -18,9 +21,9 @@ public class MassOpsParser {
      * @return a {@code ArrayList<Index>} with the indexes to be performing mass ops on
      * @throws ParseException
      */
-    public static ArrayList<Index> massOpProcessor(String args) throws ParseException {
-        ArrayList<String> stringIndexes = new ArrayList<>(Arrays.asList(args.trim().split(" ")));
-        ArrayList<Index> indexes = new ArrayList<>();
+    public static List<Index> massOpProcessor(String args) throws ParseException {
+        List<String> stringIndexes = new ArrayList<>(Arrays.asList(args.trim().split(" ")));
+        List<Index> indexes = new ArrayList<>();
 
 
         for (int i = 0; i < stringIndexes.size(); i++) {
@@ -29,5 +32,29 @@ public class MassOpsParser {
         }
 
         return indexes;
+    }
+
+    /**
+     * Sorts the indexes in ascending order.
+     *
+     * @param indexes
+     * @return a {@code List<Indexes>} sorted in ascending order.
+     */
+    public static List<Index> sortInAsc(List<Index> indexes) {
+        TreeSet<Index> sorted = new TreeSet<>(indexes);
+        List<Index> ascIndexes = new ArrayList<>(sorted);
+        return ascIndexes;
+    }
+
+    /**
+     * Sorts the indexes in descending order.
+     *
+     * @param indexes
+     * @return a {@code List<Indexes>} sorted in descending order.
+     */
+    public static List<Index> sortInDesc(List<Index> indexes) {
+        List<Index> descIndexes = sortInAsc(indexes);
+        Collections.reverse(descIndexes);
+        return descIndexes;
     }
 }
