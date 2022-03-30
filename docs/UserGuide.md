@@ -13,7 +13,7 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 <br>   1.3. [Typography](#13-typography)
 <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.3.1. [User Input](#131-user-input)
 <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.3.2. [User Input](#132-keyboard-input)
-<br>   1.4. [Special Sybols](#14-special-symbols)
+<br>   1.4. [Special Symbols](#14-special-symbols)
 <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.4.1. [Note](#141-note)
 <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.4.2. [Warning](#142-warning)
 <br>   1.5. [Graphical User Interface (GUI)](#15-graphical-user-interface-gui)
@@ -69,7 +69,7 @@ Instructions that occur in a warning box you are advised to heed, or else uninte
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:** This is an example warning</div>
 
-### 1.5 Graphical User Interface (GUI)
+### 1.5 [Graphical User Interface (GUI)](#54-gui)
 Figure 1.5 depicts the user interface of Harmonia. The following descriptions explain the interface from top to bottom.
 1. At the top of Harmonia is the toolbar, where you can access the `File` and `Help` options.
 2. Below the toolbar is the **command box** where you can input your commands into. This will be the main way in which you will interact with Harmonia.
@@ -90,7 +90,7 @@ Figure 1.5 depicts the user interface of Harmonia. The following descriptions ex
 
 3. Copy the file to the folder you want to use as the home folder for Harmonia.
 
-4. Double-click the file to start the app. The GUI similar to *Figure 2.1* should appear in a few seconds.
+4. Double-click the file to start the app. The [GUI](#54-gui) similar to *Figure 2.1* should appear in a few seconds.
 
    ![Ui](images/Ui.png)
    *Figure 2.1: Harmonia's GUI*
@@ -100,7 +100,7 @@ Here are a few example commands you can try:
 - `list`
   - Lists out all tasks.
 - `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T`
-  - Adds a task named `CS2103T tp meeting`, with a description of `read the weekly tasks before the meeting`. It has a deadline of `2022-03-27`, with a priority of `medium` and a tag of `CS2103T`.
+  - Adds a task named `CS2103T tp meeting`, with a description of `read the weekly tasks before the meeting`. It has a deadline of `2022-03-27`, with a priority of `medium` and a [tag](#53-tag) of `CS2103T`.
 - `find n/tp`
   - Finds a task with the name `tp`.
 
@@ -125,7 +125,7 @@ Here are a few example commands you can try:
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME d/DESCRIPTION`, `d/DESCRIPTION n/NAME` is also acceptable.
 
-- `INDEX` refers to the numbering of an item in a list, as shown in the displayed task list.<br>
+- [`Index`](#52-index) refers to the numbering of an item in a list, as shown in the displayed task list.<br>
   e.g. in a list of tasks:<br>
        1. Do homework<br>
        2. Clean room<br>
@@ -140,7 +140,7 @@ Here are a few example commands you can try:
 [Return to Top](#table-of-contents-toc)
 
 ### 3.1 Adding a task: `add`
-Harmonia allows you to add a task with a name, description, deadline, priority, and optionally some tags.
+Harmonia allows you to add a task with a name, description, deadline, priority, and optionally some [tags](#53-tag).
 
 Format:  `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
 - `DEADLINE` should be in the format `‘YYYY-MM-DD’`.
@@ -162,7 +162,7 @@ Format: `list`
 
 [Return to Top](#table-of-contents-toc)
 
-### 3.3 [Coming soon] Listing all tags: `list t/`
+### 3.3 [Coming soon] Listing all [tags](#53-tag): `list t/`
 
 Lists all existing tags used in the task list.
 
@@ -172,7 +172,7 @@ Format: `list t/`
 
 ### 3.4 Deleting a task: `delete`
 
-Deletes the task at the given index of the existing task list from Harmonia.
+Deletes the task at the given [index](#52-index) of the existing task list from Harmonia.
 
 Format: `delete INDEX`
 
@@ -204,7 +204,7 @@ Format: `find [n/NAME_KEYWORD]... [d/DESCRIPTION_KEYWORD]... [start/START_DATE] 
 
 * If a `PRIORITY` is supplied by you, Harmonia finds the tasks whose priority matches the `PRIORITY` supplied by you. If multiple values of `PRIORITY` are supplied by you, Harmonia finds the tasks whose priority matches any of the values of `PRIORITY` supplied.
 
-* If a `TAG` is supplied by you, Harmonia finds tasks whose tag(s) contain the `TAG` specified. If multiple `TAG`s are supplied by you, Harmonia finds the tasks whose tag(s) contains any of the `TAG`s supplied.
+* If a `TAG` is supplied by you, Harmonia finds tasks whose [tag(s)](#53-tag) contain the `TAG` specified. If multiple `TAG`s are supplied by you, Harmonia finds the tasks whose tag(s) contains any of the `TAG`s supplied.
 
 Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27`
 
@@ -216,7 +216,7 @@ You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to
 
 ### 3.6 Marking as complete: `mark`
 
-Harmonia allows you to mark the tasks at the given indexes of the existing task list as complete. You have to provide one or more indexes to be marked.
+Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the existing task list as complete. You have to provide one or more indexes to be marked.
 Format: `mark INDEX [INDEX]...`
 Example:
 - `mark 3` marks the task at the third index of the task list as complete.
@@ -233,7 +233,7 @@ Figure 3.6: Example of Harmonia after marking a task
 
 ### 3.7 Marking as incomplete: `unmark`
 
-Harmonia allows you to mark the tasks at the given indexes of the existing task list as incomplete. You have to provide one or more indexes to be unmarked.
+Harmonia allows you to mark the tasks at the given [ndexes](#52-index) of the existing task list as incomplete. You have to provide one or more indexes to be unmarked.
 
 Format: `unmark INDEX [INDEX]...`
 Example:
@@ -263,7 +263,7 @@ Example:
 - `edit 2 n/CS2103T meeting t/CS2103T`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-You can key `list` to check the index of the task you wish to edit.
+You can key `list` to check the [index](#52-index) of the task you wish to edit.
 </div>
 
 [Return to Top](#table-of-contents-toc)
@@ -317,7 +317,7 @@ Harmonia's data is saved in the hard disk automatically after any command change
 
 ### 3.13 Editing the data file
 
-Harmonia's data is saved as JSON file ([Location of Harmonia.jar]/data/harmonia.json). Advanced users are encouraged to update the data by editing JSON file.
+Harmonia's data is saved as [JSON](#51-json-file) file ([Location of Harmonia.jar]/data/harmonia.json). Advanced users are encouraged to update the data by editing JSON file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, Harmonia will discard all data and start with an empty data file at the next run.
