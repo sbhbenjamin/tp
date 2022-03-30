@@ -33,6 +33,7 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 <br>   3.12. [Saving the data](#312-saving-the-data)
 <br>   3.13. [Editing the data file](#313-editing-the-data-file)
 4. [Command Summary](#4-command-summary)
+5. [Glossary](#5-glossary)
 
 ## 1. About
 
@@ -335,5 +336,15 @@ Action | Format, Examples
 **Find** | `find [n/NAME_KEYWORD]... [t/TAG_KEYWORD]... [start/START_DATE] [end/END_DATE]` <br> e.g., `find n/book n/read` <br> e.g., `find t/test t/CS2103T` <br> e.g., `find start/2022-03-14 end/2022-03-18` <br> e.g., `find t/CS2103T` <br> e.g., `find n/book t/test start/2022-03-15`
 **Help** | `help`
 **Exit** | `exit`
+
+[Return to Top](#table-of-contents-toc)
+
+## 5. Glossary
+
+### 5.1 JSON file
+
+[JSON (JavaScript Object Notation](https://www.json.org/json-en.html), is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values). [source: Wikipedia](https://en.wikipedia.org/wiki/JSON)
+
+In Harmonia, a JSON file is used to store the list of tasks. For each task, the JSON file stores the mapping between attributes (e.g. task name, description, etc.) and their values. If you are an advanced user, you may choose to update the data by editing the JSON file.
 
 [Return to Top](#table-of-contents-toc)
