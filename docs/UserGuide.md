@@ -248,7 +248,7 @@ You can key `list` to see the sequence of tasks in the list to check the index o
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 You should include the existing tag(s) in the command when adding a new tag. Otherwise, existing tags will be overwritten.<br>
-e.g. `edit 1 t/CS2103T t/Tutorial`, where `CS2103T` is an existing tag and `Tutorial` is a new tag to be added.
+e.g. `edit 1 t/CS2103T t/Tutorial`, edits the tags of the task at the first index where `CS2103T` is an existing tag and `Tutorial` is a new tag to be added.
 </div>
 
 
