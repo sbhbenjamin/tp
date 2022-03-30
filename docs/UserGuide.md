@@ -347,7 +347,7 @@ Action | Format, Examples
 
 ### 5.1 JSON file
 
-[JSON (JavaScript Object Notation](https://www.json.org/json-en.html), is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values). [source: Wikipedia](https://en.wikipedia.org/wiki/JSON)
+[JSON (JavaScript Object Notation](https://www.json.org/json-en.html), is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values). [(Source: Wikipedia)](https://en.wikipedia.org/wiki/JSON)
 
 In Harmonia, a JSON file is used to store the list of tasks. For each task, the JSON file stores the mapping between attributes (e.g. task name, description, etc.) and their values. If you are an advanced user, you may choose to update the data by editing the JSON file.
 
@@ -373,7 +373,7 @@ Harmonia uses tags to help you categorize your tasks. You may optionally assign 
 
 ### 5.4 GUI
 
-The graphical user interface (GUI) is a form of user interface that allows users to interact with electronic devices through graphical icons and audio indicator such as primary notation, instead of text-based user interfaces, typed command labels or text navigation. [source: Wikipedia](https://en.wikipedia.org/wiki/Graphical_user_interface)
+The graphical user interface (GUI) is a form of user interface that allows users to interact with electronic devices through graphical icons and audio indicator such as primary notation, instead of text-based user interfaces, typed command labels or text navigation. [(Source: Wikipedia)](https://en.wikipedia.org/wiki/Graphical_user_interface)
 
 Harmonia uses a simple GUI to help you interact with the application, while preserving the benefits of command line interface (CLI).
 
