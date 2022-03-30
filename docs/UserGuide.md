@@ -66,13 +66,17 @@ Instructions that occur in a warning box you are advised to heed, or else uninte
 
 ### 1.5 Graphical User Interface (GUI)
 Figure 1.5 depicts the user interface of Harmonia. The following descriptions explain the interface from top to bottom.
-1. At the top of Harmonia is the toolbar, where you can access the `File` and `Help` options.
-2. Below the toolbar is the **command box** where you can input your commands into. This will be the main way in which you will interact with Harmonia.
-3. The result of the command will be output into the **command result box** beneath it. This will be especially useful in helping you understand whether your command has been successfully processed by Harmonia, or if there are any errors.
-4. The mainframe of Harmonia is the **task list**, where you will be able to see all of your tasks. This frame will update accordingly to your commands, and acts as a visual representation of your data.
-5. Beneath the mainframe is the status bar, which includes the location where the data file is stored.
 
-  ![Harmonia UI](images/Harmonia.png)
+Component | Purpose
+--------|------------------
+**Toolbar** | The toolbar allows you to access `File` and `Help` options. 
+**Task List** | The mainframe of Harmonia, where you will be able to view all of your tasks. This list will update accordingly to your commands, especially when you `find` a task, or `sort` all of your tasks.
+**Result Display**| The result display is where you will find the output of your commands. This will be especially useful in helping you understand whether your command has been successfully processed by Harmonia, or if there are any errors.
+**Command Box** | The Command Box will be where you can input your commands. This will be the main way in which you will interact with Harmonia.
+**Status Bar**| The status bar includes the location where the data file is stored.
+
+
+  ![Harmonia UI](images/AnnotatedUi.png)
   *Figure 1.5: Harmonia's GUI*
 
 [Return to Top](#table-of-contents-toc)
@@ -85,10 +89,7 @@ Figure 1.5 depicts the user interface of Harmonia. The following descriptions ex
 
 3. Copy the file to the folder you want to use as the home folder for Harmonia.
 
-4. Double-click the file to start the app. The GUI similar to *Figure 2.1* should appear in a few seconds.
-
-   ![Ui](images/Ui.png)
-   *Figure 2.1: Harmonia's GUI*
+4. Double-click the file to start the app. The GUI similar to *Figure 1.5* should appear in a few seconds.
 
 5. Type the command in the command box and press <kbd>↵Enter</kbd> to execute it.<br>
 Here are a few example commands you can try:
