@@ -36,6 +36,8 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 5. [Glossary](#5-glossary)
 <br>   5.1. [JSON file](#51-json-file)
 <br>   5.2 [Index](#52-index)
+<br>   5.3 [Tag](#53-tag)
+<br>   5.4 [GUI](#54-gui)
 
 ## 1. About
 
@@ -353,7 +355,7 @@ In Harmonia, a JSON file is used to store the list of tasks. For each task, the 
 
 ### 5.2 Index
 
-Harmonia uses Indexes to help you address a task easily. An `Index` refers to the numbering of an item in a list, as shown in the displayed task list.<br>
+Harmonia uses indexes to help you address a task easily. An `Index` refers to the numbering of an item in a list, as shown in the displayed task list.<br>
 
 For example,  in a list of tasks:<br>
 1. Do homework<br>
@@ -363,3 +365,16 @@ Index 2 here refers to the second item in the list, "Clean room".
 
 [Return to Top](#table-of-contents-toc)
 
+### 5.3 Tag
+
+Harmonia uses tags to help you categorize your tasks. You may optionally assign one or more tags to a task through [Adding a task: add](#31-adding-a-task-add), and find your tasks with specified tag(s) through [Locating a task: find](#35-locating-a-task-find).
+
+[Return to Top](#table-of-contents-toc)
+
+### 5.4 GUI
+
+The graphical user interface (GUI) is a form of user interface that allows users to interact with electronic devices through graphical icons and audio indicator such as primary notation, instead of text-based user interfaces, typed command labels or text navigation. [source: Wikipedia](https://en.wikipedia.org/wiki/Graphical_user_interface)
+
+Harmonia uses a simple GUI to help you interact with the application, while preserving the benefits of command line interface (CLI).
+
+[Return to Top](#table-of-contents-toc)
