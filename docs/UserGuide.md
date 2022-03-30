@@ -246,7 +246,7 @@ Example:
 You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to edit.
 </div>
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 You should include the existing tag(s) in the command when adding a new tag. Otherwise, existing tags will be overwritten.<br>
 e.g. `edit 1 t/CS2103T t/Tutorial`, where `CS2103T` is an existing tag and `Tutorial` is a new tag to be added.
 </div>
@@ -293,7 +293,7 @@ Harmonia allows you to clear all tasks in the task list.
 
 Format: `clear`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 Do not use the clear command unless you are certain that you wish to erase all data. This action is irreversible and all erased data cannot be retrieved.
 </div>
 
