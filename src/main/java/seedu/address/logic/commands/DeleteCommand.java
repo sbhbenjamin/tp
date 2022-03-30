@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
 
         for (int i = 0; i < targetIndexes.size(); i++) {
             Index index = targetIndexes.get(i);
-            if (isValidIndex(index, lastShownList) == -1) {
+            if (!isValidIndex(index, lastShownList)) {
                 outOfBoundsIndexes.add(index);
             } else {
                 Task taskToDelete = lastShownList.get(index.getZeroBased());
@@ -61,8 +61,9 @@ public class DeleteCommand extends Command {
 
     /**
      * Converts the list of successfully deleted tasks into a string to be returned to the user
+     *
      * @param deletedTasks
-     * @return
+     * @return a {@code String} listings all the successfully deleted tasks.
      */
     private String deletedTasksToString(List<Task> deletedTasks, List<Index> deletedTasksIndexes) {
         String str = "Successfully Deleted Tasks: \n";
@@ -74,8 +75,9 @@ public class DeleteCommand extends Command {
 
     /**
      * Converts a list of indexes to a string to be returned to the user.
+     *
      * @param indexes
-     * @return
+     * @return a {@code String} of the list of indexes that are passed into the function.
      */
     private String indexesToString(List<Index> indexes) {
         String str = "" + indexes.get(0).getOneBased();
@@ -92,24 +94,28 @@ public class DeleteCommand extends Command {
 
     /**
      * Checks if index is a valid index to delete.
-     * If index > size of targetIndexes, return -1.
-     * If index is a valid index, return 0.
-     * @return an int representing validity of the index
+     * If index > size of targetIndexes, return false.
+     * If index is a valid index, return true.
+     *
+     * @param index
+     * @param taskList
+     * @return a boolean representing if the index is valid.
      */
-    private int isValidIndex(Index index, List<Task> taskList) {
+    private boolean isValidIndex(Index index, List<Task> taskList) {
         if (index.getZeroBased() > taskList.size() - 1 || index.getZeroBased() < 0) { //index out of bounds
-            return -1;
+            return false;
         } else { //valid index
-            return 0;
+            return true;
         }
     }
 
     /**
      * Processes the lists containing the results of the deleting of indexes and returns the result to the user.
+     *
      * @param deletedTasks
      * @param deletedTasksIndexes
      * @param outOfBoundsIndexes
-     * @return CommandResult
+     * @return CommandResult of deleting the inputted indexes.
      * @throws CommandException
      */
     private CommandResult result(List<Task> deletedTasks, List<Index> deletedTasksIndexes,

@@ -38,6 +38,7 @@ public class MarkCommand extends Command {
 
     /**
      * Constructor for marking multiple indexes.
+     *
      * @param targetIndexes an {@code ArrayList<Index>} which stores each index to be marked
      */
     public MarkCommand(List<Index> targetIndexes) {
@@ -47,6 +48,7 @@ public class MarkCommand extends Command {
 
     /**
      * Creates a marked iteration of the Task provided.
+     *
      * @param task task to be copied.
      * @return marked task.
      */
@@ -95,8 +97,9 @@ public class MarkCommand extends Command {
 
     /**
      * Converts the list of successfully marked tasks into a string to be returned to the user
+     *
      * @param markedTasks
-     * @return
+     * @return a {@code String} listings all the successfully marked tasks.
      */
     private String markedTasksToString(List<Task> markedTasks, List<Index> markedTasksIndexes) {
         String str = "Successfully Marked Tasks: \n";
@@ -108,8 +111,9 @@ public class MarkCommand extends Command {
 
     /**
      * Converts a list of indexes to a string to be returned to the user.
+     *
      * @param indexes
-     * @return
+     * @return a {@code String} of the list of indexes that are passed into the function.
      */
     private String indexesToString(List<Index> indexes) {
         String str = "" + indexes.get(0).getOneBased();
@@ -153,11 +157,12 @@ public class MarkCommand extends Command {
 
     /**
      * Processes the lists containing the results of the marking of indexes and returns the result to the user.
+     *
      * @param markedTasks
      * @param markedTasksIndexes
      * @param alreadyMarkedIndexes
      * @param outOfBoundsIndexes
-     * @return CommandResult
+     * @return CommandResult of the marking of the inputted indexes.
      * @throws CommandException
      */
     private CommandResult result(List<Task> markedTasks, List<Index> markedTasksIndexes,

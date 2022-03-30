@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 import seedu.address.commons.core.index.Index;
@@ -38,50 +36,25 @@ public class MassOpsParser {
 
     /**
      * Sorts the indexes in ascending order.
+     *
      * @param indexes
      * @return a {@code List<Indexes>} sorted in ascending order.
      */
     public static List<Index> sortInAsc(List<Index> indexes) {
-        List<Index> ascIndexes = new ArrayList<>();
-        TreeMap<Integer, Index> sorted = new TreeMap<>();
-
-        for (int i = 0; i < indexes.size(); i++) {
-            Index index = indexes.get(i);
-            sorted.put(index.getOneBased(), index);
-        }
-
-        SortedSet<Integer> keys = new TreeSet<>(sorted.keySet());
-
-        for (Integer key : keys) {
-            Index value = sorted.get(key);
-            ascIndexes.add(value);
-        }
-
+        TreeSet<Index> sorted = new TreeSet<>(indexes);
+        List<Index> ascIndexes = new ArrayList<>(sorted);
         return ascIndexes;
     }
 
     /**
      * Sorts the indexes in descending order.
+     *
      * @param indexes
      * @return a {@code List<Indexes>} sorted in descending order.
      */
     public static List<Index> sortInDesc(List<Index> indexes) {
-        List<Index> descIndexes = new ArrayList<>();
-        TreeMap<Integer, Index> sorted = new TreeMap<>();
-
-        for (int i = 0; i < indexes.size(); i++) {
-            Index index = indexes.get(i);
-            sorted.put(index.getOneBased(), index);
-        }
-
-        SortedSet<Integer> keys = new TreeSet<>(Collections.reverseOrder());
-        keys.addAll(sorted.keySet());
-
-        for (Integer key : keys) {
-            Index value = sorted.get(key);
-            descIndexes.add(value);
-        }
-
+        List<Index> descIndexes = sortInAsc(indexes);
+        Collections.reverse(descIndexes);
         return descIndexes;
     }
 }
