@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +30,12 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredTaskList();
+
+        List<Task> lastShownList = model.getSortedTaskList();
         List<Task> deletedTasks = new ArrayList<>();
         List<Index> deletedTasksIndexes = new ArrayList<>();
         List<Index> outOfBoundsIndexes = new ArrayList<>();
+
 
         for (int i = 0; i < targetIndexes.size(); i++) {
             Index index = targetIndexes.get(i);

@@ -2,15 +2,18 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.commands.sort.ComparatorFactory.DEFAULT_COMPARATOR;
 
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.tag.Tag;
@@ -25,7 +28,9 @@ public class ModelManager implements Model {
     private final TaskList taskList;
     private final UserPrefs userPrefs;
     private final FilteredList<Task> filteredTasks;
+    private final SortedList<Task> sortedTasks;
     private final TagList tagList;
+
 
     /**
      * Initializes a ModelManager with the given taskList and userPrefs.
@@ -38,6 +43,7 @@ public class ModelManager implements Model {
         this.taskList = new TaskList(taskList);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
+        sortedTasks = new SortedList<>(filteredTasks, DEFAULT_COMPARATOR);
         tagList = new TagList(this.taskList);
     }
 
@@ -147,6 +153,23 @@ public class ModelManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
 
+    //=========== Sorted Task List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
+     * {@code versionedTaskList}
+     */
+    @Override
+    public ObservableList<Task> getSortedTaskList() {
+        return sortedTasks;
+    }
+
+    @Override
+    public void updateSortedTaskList(Comparator<Task> comparator) {
+        requireNonNull(comparator);
+        sortedTasks.setComparator(comparator);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -163,7 +186,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return taskList.equals(other.taskList)
                 && userPrefs.equals(other.userPrefs)
-                && filteredTasks.equals(other.filteredTasks);
+                && filteredTasks.equals(other.filteredTasks)
+                && sortedTasks.equals(other.sortedTasks);
     }
 
     //=========== Tag List ==================================================================================
@@ -172,4 +196,5 @@ public class ModelManager implements Model {
     public Set<Tag> getTagList() {
         return Collections.unmodifiableSet(tagList.getTagList());
     }
+
 }

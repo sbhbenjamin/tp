@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Task's description in the task list.
  * Guarantees: immutable;
  */
-public class Description {
+public class Description implements Comparable<Description> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Description should not be blank or start with white spaces,"
@@ -54,5 +54,10 @@ public class Description {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Description d) {
+        return this.value.compareTo(d.value);
     }
 }

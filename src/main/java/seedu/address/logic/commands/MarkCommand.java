@@ -67,7 +67,7 @@ public class MarkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredTaskList();
+        List<Task> lastShownList = model.getSortedTaskList();
         List<Task> markedTasks = new ArrayList<>();
         List<Index> markedTasksIndexes = new ArrayList<>();
         List<Index> alreadyMarkedIndexes = new ArrayList<>();
@@ -89,9 +89,9 @@ public class MarkCommand extends Command {
                 markedTasksIndexes.add(index);
 
                 model.strictSetTask(taskToMark, markedTask);
-                model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
             }
         }
+        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         return result(markedTasks, markedTasksIndexes, alreadyMarkedIndexes, outOfBoundsIndexes);
     }
 
