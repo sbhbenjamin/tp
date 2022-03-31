@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.StringUtil.EMPTY_KEYWORD_MESSAGE;
+import static seedu.address.commons.util.StringUtil.INVALID_KEYWORD_MESSAGE;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -145,13 +147,17 @@ public class ParserUtil {
         final Set<String> keywordSet = new HashSet<>();
         for (String keyword : keywords) {
             if (keyword.isEmpty()) {
-                throw new ParseException("A keyword can't be empty!");
+                throw new ParseException(EMPTY_KEYWORD_MESSAGE);
             }
-            if (keyword.split("\\s+").length > 1) {
-                throw new ParseException("A keyword can't contain any whitespace!");
+            if (!isValidKeyword(keyword)) {
+                throw new ParseException(INVALID_KEYWORD_MESSAGE);
             }
             keywordSet.add(keyword);
         }
         return keywordSet;
+    }
+
+    private static boolean isValidKeyword(String keyword) {
+        return keyword.matches("\\p{Alnum}{1,63}");
     }
 }

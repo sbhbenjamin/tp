@@ -71,7 +71,7 @@ public class NameContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new TaskBuilder().withName("CS2103T Tutorial").build()));
 
         // Keywords match description, completion status, deadline and tags, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Set.of("G1", "true", "2022-10-22", "CS2103T"));
+        predicate = new NameContainsKeywordsPredicate(Set.of("G1", "true", "2022", "CS2103T"));
         assertFalse(predicate.test(new TaskBuilder()
                 .withName("Complete Tutorial")
                 .withDescription("Finish 3 parts of G1")
