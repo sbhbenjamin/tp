@@ -14,6 +14,7 @@ import seedu.address.logic.commands.sort.SortKey;
 import seedu.address.logic.commands.sort.SortOrder;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.CompletionStatus;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Name;
@@ -101,7 +102,7 @@ public class ParserUtil {
      * Parses a {@code String priority} into a {@code Priority}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code description} is invalid.
+     * @throws ParseException if the given {@code priority} is invalid.
      */
     public static Priority parsePriority(String priority) throws ParseException {
         requireNonNull(priority);
@@ -191,5 +192,25 @@ public class ParserUtil {
             throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
         }
         return SortOrder.valueOfLabel(trimmedSortOrder);
+    }
+
+    /**
+     * Parses a {@code String completionStatus} into a {@code CompletionStatus}.
+     * Leading and trailing whitespaces will be trimmed. Cases are ignored.
+     *
+     * @param completionStatus a string representing the completion status, should be either "true" or "false"
+     *
+     * @throws ParseException if the given {@code completionStatus} is invalid.
+     */
+    public static CompletionStatus parseCompletionStatus(String completionStatus) throws ParseException {
+
+        requireNonNull(completionStatus);
+        String trimmedCompletionStatus = completionStatus.trim();
+        String lowercaseCompletionStatus = trimmedCompletionStatus.toLowerCase();
+        if (!CompletionStatus.isValidCompletionStatus(lowercaseCompletionStatus)) {
+            throw new ParseException(CompletionStatus.MESSAGE_CONSTRAINTS);
+        }
+
+        return new CompletionStatus(lowercaseCompletionStatus);
     }
 }

@@ -195,7 +195,7 @@ This action is irreversible and all deleted tasks cannot be retrieved.
 
 Finds the tasks that match the given keyword(s) and is due within the time range specified from Harmonia.
 
-Format: `find [n/NAME_KEYWORD]... [d/DESCRIPTION_KEYWORD]... [start/START_DATE] [end/END_DATE] [p/PRIORITY]... [t/TAG]...`
+Format: `find [n/NAME_KEYWORD]... [d/DESCRIPTION_KEYWORD]... [start/START_DATE] [end/END_DATE] [p/PRIORITY]... [t/TAG]... [c/COMPLETION_STATUS]`
 
 * If a `NAME_KEYWORD` is supplied by you, Harmonia finds the tasks whose name contains the `NAME_KEYWORD` specified. If multiple `NAME_KEYWORD`s are supplied by you, Harmonia finds the tasks whose name contains any of the `NAME_KEYWORD`s supplied.
 
@@ -209,7 +209,9 @@ Format: `find [n/NAME_KEYWORD]... [d/DESCRIPTION_KEYWORD]... [start/START_DATE] 
 
 * If a `TAG` is supplied by you, Harmonia finds tasks whose [tag(s)](#53-tag) match the `TAG` specified. If multiple `TAG`s are supplied by you, Harmonia finds the tasks whose tag(s) match any of the `TAG`s supplied.
 
-Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27`
+* If a `COMPLETION_STATUS` is supplied by you, Harmonia finds tasks that match the `COMPLETION_STATUS` specified. Completion status can be either `true` or `false`.
+
+Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27 p/low p/medium c/true`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to narrow down your search.
