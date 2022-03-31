@@ -23,7 +23,8 @@ public class DescriptionContainsKeywordsPredicate implements Predicate<Task> {
             return true;
         }
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword));
+                .anyMatch(keyword -> StringUtil
+                        .containsWordIgnorePunctuationAndCase(task.getDescription().value, keyword));
     }
 
     @Override
