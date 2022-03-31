@@ -8,9 +8,9 @@ title: Harmonia
 
 ![Ui](images/Ui.png)
 
-Harmonia is a CLI-centric application for students to manage their academic and non-academic tasks and events.
+Harmonia is a CLI-centric application by students, **for students to manage their academic and non-academic tasks and events**.
 
-* If you are interested in using Harmonia, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested in using Harmonia, head over to the [_Getting Started_ section of the **User Guide**](UserGuide.html#2-getting-started).
 * If you are interested about developing Harmonia, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
