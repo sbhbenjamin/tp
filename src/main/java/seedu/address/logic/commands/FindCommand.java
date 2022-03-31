@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPLETION_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -15,6 +16,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
+import seedu.address.model.task.CompletionStatusPredicate;
 import seedu.address.model.task.DeadlineInRangePredicate;
 import seedu.address.model.task.DescriptionContainsKeywordsPredicate;
 import seedu.address.model.task.NameContainsKeywordsPredicate;
@@ -36,11 +38,12 @@ public class FindCommand extends Command {
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION_KEYWORD]... "
             + "[" + PREFIX_START + "START_DATE] "
             + "[" + PREFIX_END + "END_DATE] "
-            + "[" + PREFIX_PRIORITY + "PRIORITY]...\n"
+            + "[" + PREFIX_PRIORITY + "PRIORITY]..."
             + "[" + PREFIX_TAG + "TAG_KEYWORD]... "
+            + "[" + PREFIX_COMPLETION_STATUS + "COMPLETION_STATUS]\n"
             + "Example: " + COMMAND_WORD
             + " n/complete n/review t/CS2105 t/CS3240 t/CS2103T "
-            + "start/2022-03-11 end/2022-12-31 d/email p/low p/medium";
+            + "start/2022-03-11 end/2022-12-31 d/email p/low p/medium c/true";
 
     /** Predicate that tests whether task name contains any given keyword */
     private final NameContainsKeywordsPredicate namePredicate;
@@ -57,6 +60,9 @@ public class FindCommand extends Command {
     /** Predicate that tests whether the description of a task matches any of the keywords given */
     private final DescriptionContainsKeywordsPredicate descriptionPredicate;
 
+    /** Predicate that tests whether the completion status of a task matches the specified completion status */
+    private final CompletionStatusPredicate completionStatusPredicate;
+
     /**
      * Constructor for FindCommand.
      *
@@ -65,18 +71,21 @@ public class FindCommand extends Command {
      * @param deadlinePredicate predicate that tests whether the deadline is in the range
      * @param descriptionPredicate predicate that tests whether task description contains any given keywords
      * @param priorityPredicate predicate that tests whether the priority of a task matches any given priorities
+     * @param completionStatusPredicate predicate that tests whether the completion status matches the one specified
      */
     public FindCommand(NameContainsKeywordsPredicate namePredicate,
                        TagContainsKeywordsPredicate tagPredicate,
                        DeadlineInRangePredicate deadlinePredicate,
                        DescriptionContainsKeywordsPredicate descriptionPredicate,
-                       PriorityMatchedPredicate priorityPredicate) {
+                       PriorityMatchedPredicate priorityPredicate,
+                       CompletionStatusPredicate completionStatusPredicate) {
 
         this.namePredicate = namePredicate;
         this.tagPredicate = tagPredicate;
         this.deadlinePredicate = deadlinePredicate;
         this.descriptionPredicate = descriptionPredicate;
         this.priorityPredicate = priorityPredicate;
+        this.completionStatusPredicate = completionStatusPredicate;
     }
 
     /**
@@ -96,13 +105,14 @@ public class FindCommand extends Command {
         this.deadlinePredicate = deadlinePredicate;
         this.descriptionPredicate = new DescriptionContainsKeywordsPredicate(new HashSet<>());
         this.priorityPredicate = new PriorityMatchedPredicate(new HashSet<>());
+        this.completionStatusPredicate = new CompletionStatusPredicate(null);
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         Predicate<Task> combinedPredicate = interceptPredicates(namePredicate, tagPredicate,
-                deadlinePredicate, descriptionPredicate, priorityPredicate);
+                deadlinePredicate, descriptionPredicate, priorityPredicate, completionStatusPredicate);
         model.updateFilteredTaskList(combinedPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredTaskList().size()));

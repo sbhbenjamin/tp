@@ -18,4 +18,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_END = new Prefix("end/");
     public static final Prefix PREFIX_SORT_KEY = new Prefix("by/");
     public static final Prefix PREFIX_SORT_ORDER = new Prefix("in/");
+    public static final Prefix PREFIX_COMPLETION_STATUS = new Prefix("c/");
 }
