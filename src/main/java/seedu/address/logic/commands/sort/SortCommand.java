@@ -22,9 +22,11 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all tasks by the specified sort key and order "
             + "and displays them as a list with index numbers. "
-            + "Parameters: by/SORT_BY in/SORT_ORDER\n"
+            + "Parameters: "
+            + PREFIX_SORT_KEY + "SORT_BY "
+            + PREFIX_SORT_ORDER + "SORT_ORDER\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_SORT_KEY + "deadline" + " "
+            + PREFIX_SORT_KEY + "deadline "
             + PREFIX_SORT_ORDER + "desc";
 
 

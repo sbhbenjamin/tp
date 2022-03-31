@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
- * Sort Keys that can be used that can be used for sort keys.
+ * Sort Keys that can be used for sorting tasks.
  */
 public enum SortKey {
     NAME("name"),
