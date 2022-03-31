@@ -277,18 +277,12 @@ Format: `sort by/SORT_KEY in/SORT_ORDER`
   - `priority` - sort by the priority of the task
   - `name` - sort by the name of the task
 - `SORT_ORDER` is the order in which the tasks are listed out.
-  - `ascending`
-  - `descending`
+  - `asc` - sort in ascending order
+  - `desc` - sort in descending order
 
 Example:
-- `sort by/deadline in/ascending`: lists the tasks with the earliest deadline first
-- `sort by/priority in/descending`: lists the tasks with the highest priority first
-
-<div markdown="span" class="alert alert-primary">:bulb: **Note:**
-You can use the following abbreviations to sort tasks faster.
-- `asc` in place of `ascending`
-- `desc` in place of `descending`
-</div>
+- `sort by/deadline in/asc`: lists the tasks with the earliest deadline first
+- `sort by/priority in/desc`: lists the tasks with the highest priority first
 
 [Return to Top](#table-of-contents-toc)
 
@@ -347,7 +341,7 @@ Action | Format, Examples
 **Mark**| `mark INDEX [INDEX]...` <br> e.g., `mark 3` <br> e.g., `mark 1 2 3`
 **Unmark**| `unmark INDEX [INDEX]...` <br> e.g., `unmark 3` <br> e.g., `unmark 1 2 3`
 **List**| `list` <br> `list t/`
-**Sort**| `sort by/SORT_KEY in/SORT_ORDER` <br> e.g., `sort by/deadline in/descending` <br> e.g., `sort by/priority in/asc`
+**Sort**| `sort by/SORT_KEY in/SORT_ORDER` <br> e.g., `sort by/deadline in/desc` <br> e.g., `sort by/priority in/asc`
 **Find** | `find [n/NAME_KEYWORD]... [t/TAG_KEYWORD]... [start/START_DATE] [end/END_DATE]` <br> e.g., `find n/book n/read` <br> e.g., `find t/test t/CS2103T` <br> e.g., `find start/2022-03-14 end/2022-03-18` <br> e.g., `find t/CS2103T` <br> e.g., `find n/book t/test start/2022-03-15`
 **Help** | `help`
 **Clear** | `clear`
