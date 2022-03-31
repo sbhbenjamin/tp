@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-
 import java.util.Comparator;
 import java.util.Set;
 import java.util.function.Predicate;
