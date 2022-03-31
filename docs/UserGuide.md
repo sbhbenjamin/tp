@@ -21,13 +21,13 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 3. [Features](#3-features)
 <br>   3.1. [Adding a task: add](#31-adding-a-task-add)
 <br>   3.2. [Listing all tasks: list](#32-listing-all-tasks-list)
-<br>   3.3. [[Coming Soon] Listing all tags: list t/](#33-coming-soon-listing-all-tags-list-t)
+<br>   3.3. [Listing all tags: list t/](#33-listing-all-tags-list-t)
 <br>   3.4. [Deleting a task: delete](#34-deleting-a-task-delete)
 <br>   3.5. [Locating a task: find](#35-locating-a-task-find)
 <br>   3.6. [Marking as complete: mark](#36-marking-as-complete-mark)
 <br>   3.7. [Marking as incomplete: unmark](#37-marking-as-incomplete-unmark)
 <br>   3.8. [Editing a task: edit](#38-editing-a-task-edit)
-<br>   3.9. [[Coming soon] Sorting tasks: sort](#39-coming-soon-sorting-tasks-sort)
+<br>   3.9. [Sorting tasks: sort](#39-sorting-tasks-sort)
 <br>   3.10. [Viewing help: help](#310-viewing-help-help)
 <br>   3.11. [Clearing all data: clear](#311-clearing-all-data-clear)
 <br>   3.12. [Exiting the program](#312-exiting-the-program-exit)
@@ -159,7 +159,7 @@ Format: `list`
 
 [Return to Top](#table-of-contents-toc)
 
-### 3.3 [Coming soon] Listing all tags: `list t/`
+### 3.3 Listing all tags: `list t/`
 
 Lists all existing tags used in the task list.
 
@@ -267,7 +267,7 @@ e.g. `edit 1 t/CS2103T t/Tutorial`, edits the tags of the task at the first inde
 
 [Return to Top](#table-of-contents-toc)
 
-### 3.9 [Coming soon] Sorting tasks: `sort`
+### 3.9 Sorting tasks: `sort`
 
 Sorts the tasks by the specified sort key and sort order and list them out.
 
@@ -283,6 +283,10 @@ Format: `sort by/SORT_KEY in/SORT_ORDER`
 Example:
 - `sort by/deadline in/asc`: lists the tasks with the earliest deadline first
 - `sort by/priority in/desc`: lists the tasks with the highest priority first
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+The tasks will preserve the specified sorting until a different `sort` command is give.
+</div>
 
 [Return to Top](#table-of-contents-toc)
 
