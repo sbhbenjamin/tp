@@ -16,12 +16,12 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 <br>   1.4. [Special Symbols](#14-special-symbols)
 <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.4.1. [Note](#141-note)
 <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.4.2. [Warning](#142-warning)
-<br>   1.5. [Graphical User Interface (GUI)](#15-graphical-user-interface-gui)
+<br>   1.5. [Graphical User Interface (GUI)](#15-graphical-user-interface-gui54-gui)
 2. [Getting Started](#2-getting-started)
 3. [Features](#3-features)
 <br>   3.1. [Adding a task: add](#31-adding-a-task-add)
 <br>   3.2. [Listing all tasks: list](#32-listing-all-tasks-list)
-<br>   3.3. [Listing all tags: list t/](#33-listing-all-tags-list-t)
+<br>   3.3. [Listing all tags: list t/](#33-listing-all-tags53-tag-list-t)
 <br>   3.4. [Deleting a task: delete](#34-deleting-a-task-delete)
 <br>   3.5. [Locating a task: find](#35-locating-a-task-find)
 <br>   3.6. [Marking as complete: mark](#36-marking-as-complete-mark)
@@ -165,7 +165,7 @@ Format: `list`
 
 [Return to Top](#table-of-contents-toc)
 
-### 3.3 Listing all tags [tags](#53-tag): `list t/`
+### 3.3 Listing all [tags](#53-tag): `list t/`
 
 Lists all existing tags used in the task list.
 
@@ -295,7 +295,7 @@ Example:
 - `sort by/priority in/desc`: lists the tasks with the highest priority first
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-The tasks will preserve the specified sorting until a different `sort` command is give.
+The tasks will preserve the specified sorting until a different `sort` command is given.
 </div>
 
 [Return to Top](#table-of-contents-toc)
