@@ -16,18 +16,18 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 <br>   1.4. [Special Symbols](#14-special-symbols)
 <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.4.1. [Note](#141-note)
 <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.4.2. [Warning](#142-warning)
-<br>   1.5. [Graphical User Interface (GUI)](#15-graphical-user-interface-gui)
+<br>   1.5. [Graphical User Interface (GUI)](#15-graphical-user-interface-gui54-gui)
 2. [Getting Started](#2-getting-started)
 3. [Features](#3-features)
 <br>   3.1. [Adding a task: add](#31-adding-a-task-add)
 <br>   3.2. [Listing all tasks: list](#32-listing-all-tasks-list)
-<br>   3.3. [[Coming Soon] Listing all tags: list t/](#33-coming-soon-listing-all-tags-list-t)
+<br>   3.3. [Listing all tags: list t/](#33-listing-all-tags53-tag-list-t)
 <br>   3.4. [Deleting a task: delete](#34-deleting-a-task-delete)
 <br>   3.5. [Locating a task: find](#35-locating-a-task-find)
 <br>   3.6. [Marking as complete: mark](#36-marking-as-complete-mark)
 <br>   3.7. [Marking as incomplete: unmark](#37-marking-as-incomplete-unmark)
 <br>   3.8. [Editing a task: edit](#38-editing-a-task-edit)
-<br>   3.9. [[Coming soon] Sorting tasks: sort](#39-coming-soon-sorting-tasks-sort)
+<br>   3.9. [Sorting tasks: sort](#39-sorting-tasks-sort)
 <br>   3.10. [Viewing help: help](#310-viewing-help-help)
 <br>   3.11. [Clearing all data: clear](#311-clearing-all-data-clear)
 <br>   3.12. [Exiting the program](#312-exiting-the-program-exit)
@@ -165,7 +165,7 @@ Format: `list`
 
 [Return to Top](#table-of-contents-toc)
 
-### 3.3 [Coming soon] Listing all [tags](#53-tag): `list t/`
+### 3.3 Listing all [tags](#53-tag): `list t/`
 
 Lists all existing tags used in the task list.
 
@@ -277,7 +277,7 @@ e.g. `edit 1 t/CS2103T t/Tutorial`, edits the tags of the task at the first inde
 
 [Return to Top](#table-of-contents-toc)
 
-### 3.9 [Coming soon] Sorting tasks: `sort`
+### 3.9 Sorting tasks: `sort`
 
 Sorts the tasks by the specified sort key and sort order and list them out.
 
@@ -287,17 +287,15 @@ Format: `sort by/SORT_KEY in/SORT_ORDER`
   - `priority` - sort by the priority of the task
   - `name` - sort by the name of the task
 - `SORT_ORDER` is the order in which the tasks are listed out.
-  - `ascending`
-  - `descending`
+  - `asc` - sort in ascending order
+  - `desc` - sort in descending order
 
 Example:
-- `sort by/deadline in/ascending`: lists the tasks with the earliest deadline first
-- `sort by/priority in/descending`: lists the tasks with the highest priority first
+- `sort by/deadline in/asc`: lists the tasks with the earliest deadline first
+- `sort by/priority in/desc`: lists the tasks with the highest priority first
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-You can use the following abbreviations to sort tasks faster.
-- `asc` in place of `ascending`
-- `desc` in place of `descending`
+The tasks will preserve the specified sorting until a different `sort` command is given.
 </div>
 
 [Return to Top](#table-of-contents-toc)
@@ -357,7 +355,7 @@ Action | Format, Examples
 **Mark**| `mark INDEX [INDEX]...` <br> e.g., `mark 3` <br> e.g., `mark 1 2 3`
 **Unmark**| `unmark INDEX [INDEX]...` <br> e.g., `unmark 3` <br> e.g., `unmark 1 2 3`
 **List**| `list` <br> `list t/`
-**Sort**| `sort by/SORT_KEY in/SORT_ORDER` <br> e.g., `sort by/deadline in/descending` <br> e.g., `sort by/priority in/asc`
+**Sort**| `sort by/SORT_KEY in/SORT_ORDER` <br> e.g., `sort by/deadline in/desc` <br> e.g., `sort by/priority in/asc`
 **Find** | `find [n/NAME_KEYWORD]... [t/TAG_KEYWORD]... [start/START_DATE] [end/END_DATE]` <br> e.g., `find n/book n/read` <br> e.g., `find t/test t/CS2103T` <br> e.g., `find start/2022-03-14 end/2022-03-18` <br> e.g., `find t/CS2103T` <br> e.g., `find n/book t/test start/2022-03-15`
 **Help** | `help`
 **Clear** | `clear`
