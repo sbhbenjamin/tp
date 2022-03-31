@@ -22,7 +22,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Task> {
             return true;
         }
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnorePunctuationAndCase(task.getName().fullName, keyword));
     }
 
     @Override
