@@ -8,6 +8,8 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.sort.SortKey;
+import seedu.address.logic.commands.sort.SortOrder;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
@@ -141,5 +143,35 @@ public class ParserUtil {
             keywordSet.add(keyword);
         }
         return keywordSet;
+    }
+
+    /**
+     * Parses a {@code String sortKey} into a {@code SortKey}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sortKey} is invalid.
+     */
+    public static SortKey parseSortKey(String sortKey) throws ParseException {
+        requireNonNull(sortKey);
+        String trimmedSortKey = sortKey.trim();
+        if (!SortKey.isValidSortKey(trimmedSortKey)) {
+            throw new ParseException(SortKey.MESSAGE_CONSTRAINTS);
+        }
+        return SortKey.valueOfLabel(trimmedSortKey);
+    }
+
+    /**
+     * Parses a {@code String sortOrder} into a {@code SortOrder}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sortOrder} is invalid.
+     */
+    public static SortOrder parseSortOrder(String sortOrder) throws ParseException {
+        requireNonNull(sortOrder);
+        String trimmedSortOrder = sortOrder.trim();
+        if (!SortOrder.isValidSortOrder(trimmedSortOrder)) {
+            throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
+        }
+        return SortOrder.valueOfLabel(trimmedSortOrder);
     }
 }

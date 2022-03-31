@@ -7,6 +7,9 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable;
  */
 public enum Priority {
+
+    // Natural ordering of the enum is in the order which constants are declared.
+    // Order is necessary for sort by Priority.
     LOW("low"),
     MEDIUM("medium"),
     HIGH("high");
