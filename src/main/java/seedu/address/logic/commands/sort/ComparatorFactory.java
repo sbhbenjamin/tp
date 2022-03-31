@@ -11,6 +11,7 @@ import seedu.address.model.task.Task;
  */
 public class ComparatorFactory {
 
+    public static final Comparator<Task> DEFAULT_COMPARATOR = createComparator(SortKey.DEADLINE, SortOrder.ASCENDING);
 
     /**
      * Returns a {@code Comparator<Task>} using the specified {@SortKey}  and its natural order.

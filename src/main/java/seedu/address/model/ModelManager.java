@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.commands.sort.ComparatorFactory.DEFAULT_COMPARATOR;
 
 import java.nio.file.Path;
 import java.util.Collections;
@@ -42,7 +43,7 @@ public class ModelManager implements Model {
         this.taskList = new TaskList(taskList);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
-        sortedTasks = new SortedList<>(filteredTasks);
+        sortedTasks = new SortedList<>(filteredTasks, DEFAULT_COMPARATOR);
         tagList = new TagList(this.taskList);
     }
 
