@@ -199,11 +199,11 @@ Format: `find [n/NAME_KEYWORD]... [d/DESCRIPTION_KEYWORD]... [start/START_DATE] 
 
 * If both `START_DATE` and `END_DATE` are supplied by you, Harmonia finds the tasks whose deadline is between the `START_DATE` and `END_DATE` inclusive.
 
-* If only one of the `START_DATE` or `END_DATE` is supplied by you, Harmonia ignores the unspecified field. For example, if only `START_DATE` is supplied by you, Harmonia finds all the tasks with a deadline that is after and including `START_DATE`.
+* If only one of either `START_DATE` or `END_DATE` is supplied by you, Harmonia ignores the unspecified field. For example, if only `START_DATE` is supplied by you, Harmonia finds all the tasks with a deadline that is after and including `START_DATE`.
 
 * If a `PRIORITY` is supplied by you, Harmonia finds the tasks whose priority matches the `PRIORITY` supplied by you. If multiple values of `PRIORITY` are supplied by you, Harmonia finds the tasks whose priority matches any of the values of `PRIORITY` supplied.
 
-* If a `TAG` is supplied by you, Harmonia finds tasks whose [tag(s)](#53-tag) contain the `TAG` specified. If multiple `TAG`s are supplied by you, Harmonia finds the tasks whose tag(s) contains any of the `TAG`s supplied.
+* If a `TAG` is supplied by you, Harmonia finds tasks whose [tag(s)](#53-tag) match the `TAG` specified. If multiple `TAG`s are supplied by you, Harmonia finds the tasks whose tag(s) match any of the `TAG`s supplied.
 
 Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27`
 
@@ -232,7 +232,7 @@ Figure 3.6: Example of Harmonia after marking a task
 
 ### 3.7 Marking as incomplete: `unmark`
 
-Harmonia allows you to mark the tasks at the given [ndexes](#52-index) of the existing task list as incomplete. You have to provide one or more indexes to be unmarked.
+Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the existing task list as incomplete. You have to provide one or more indexes to be unmarked.
 
 Format: `unmark INDEX [INDEX]...`
 Example:
