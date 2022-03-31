@@ -1,8 +1,9 @@
-#copyButton, #openButton, #helpMessage {
-    -fx-text-fill: white;
+#helpMessage {
+    -fx-text-fill: black;
 }
 
 #copyButton, #openButton {
+    -fx-text-fill: white;
     -fx-background-color: dimgray;
 }
 
@@ -16,4 +17,5 @@
 
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: white;
 }

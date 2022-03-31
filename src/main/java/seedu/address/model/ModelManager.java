@@ -4,7 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+
 import java.util.Comparator;
+import java.util.Collections;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,6 +16,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 
 /**
@@ -25,6 +29,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Task> filteredTasks;
     private final SortedList<Task> sortedTasks;
+    private final TagList tagList;
+
 
     /**
      * Initializes a ModelManager with the given taskList and userPrefs.
@@ -38,6 +44,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
         sortedTasks = new SortedList<>(filteredTasks);
+        tagList = new TagList(this.taskList);
     }
 
     public ModelManager() {
@@ -100,11 +107,13 @@ public class ModelManager implements Model {
     @Override
     public void deleteTask(Task target) {
         taskList.removeTask(target);
+        tagList.removeTagsOfTask(target);
     }
 
     @Override
     public void addTask(Task task) {
         taskList.addTask(task);
+        tagList.addTagsOfTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
@@ -113,6 +122,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedTask);
 
         taskList.setTask(target, editedTask);
+        tagList.setTag(target, editedTask);
     }
 
     /**
@@ -179,4 +189,12 @@ public class ModelManager implements Model {
                 && filteredTasks.equals(other.filteredTasks)
                 && sortedTasks.equals(other.sortedTasks);
     }
+
+    //=========== Tag List ==================================================================================
+
+    @Override
+    public Set<Tag> getTagList() {
+        return Collections.unmodifiableSet(tagList.getTagList());
+    }
+
 }

@@ -18,7 +18,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -51,12 +50,12 @@ public class HarmoniaParserTest {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
-    @Test
-    public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_TASK), command);
-    }
+    //    @Test
+    //    public void parseCommand_delete() throws Exception {
+    //        DeleteCommand command = (DeleteCommand) parser.parseCommand(
+    //                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased());
+    //        assertEquals(new DeleteCommand(INDEX_FIRST_TASK), command);
+    //    }
 
     @Test
     public void parseCommand_edit() throws Exception {
@@ -97,8 +96,11 @@ public class HarmoniaParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        ListCommand listTasksCommand = (ListCommand) parser.parseCommand(ListCommand.COMMAND_WORD);
+        ListCommand listTagsCommand = (ListCommand) parser.parseCommand(ListCommand.COMMAND_WORD
+                + " " + PREFIX_TAG);
+        assertEquals(new ListCommand(false), listTasksCommand);
+        assertEquals(new ListCommand(true), listTagsCommand);
     }
 
     //    @Test

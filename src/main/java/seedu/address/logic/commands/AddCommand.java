@@ -23,14 +23,15 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_DEADLINE + "DEADLINE "
+            + PREFIX_PRIORITY + "PRIORITY "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " " + "Review individual projects" + " "
-            + PREFIX_DESCRIPTION + " " + "To review two ips that are sent to my email, for 4 participation points" + " "
-            + PREFIX_DEADLINE + " 2022-03-12" + " "
-            + PREFIX_PRIORITY + " low" + " "
-            + PREFIX_TAG + " " + "CS2103T" + " "
-            + PREFIX_TAG + " " + "participation";
+            + PREFIX_NAME + "Review individual projects "
+            + PREFIX_DESCRIPTION + "To review two ips that are sent to my email, for 4 participation points "
+            + PREFIX_DEADLINE + "2022-03-12 "
+            + PREFIX_PRIORITY + "low "
+            + PREFIX_TAG + "CS2103T "
+            + PREFIX_TAG + "participation";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in Harmonia";

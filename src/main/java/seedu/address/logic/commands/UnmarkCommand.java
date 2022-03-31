@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.MassOpsParser;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.CompletionStatus;
@@ -37,15 +38,17 @@ public class UnmarkCommand extends Command {
 
     /**
      * Constructor for unmarking multiple indexes.
+     *
      * @param targetIndexes an {@code ArrayList<Index>} which stores each index to be unmarked
      */
     public UnmarkCommand(List<Index> targetIndexes) {
         assert(targetIndexes != null && targetIndexes.size() != 0);
-        this.targetIndexes = targetIndexes;
+        this.targetIndexes = MassOpsParser.sortInAsc(targetIndexes);
     }
 
     /**
      * Creates an unmarked iteration of the Task provided.
+     *
      * @param task task to be copied.
      * @return unmarked task.
      */
@@ -94,9 +97,10 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Converts the list of successfully unmarked tasks into a string to be returned to the user
+     * Converts the list of successfully unmarked tasks into a string to be returned to the user.
+     *
      * @param unmarkedTasks
-     * @return
+     * @return a {@code String} listings all the successfully unmarked tasks.
      */
     private String unmarkedTasksToString(List<Task> unmarkedTasks, List<Index> unmarkedTasksIndexes) {
         String str = "Successfully Unmarked Tasks: \n";
@@ -108,8 +112,9 @@ public class UnmarkCommand extends Command {
 
     /**
      * Converts a list of indexes to a string to be returned to the user.
+     *
      * @param indexes
-     * @return
+     * @return a {@code String} of the list of indexes that are passed into the function.
      */
     private String indexesToString(List<Index> indexes) {
         String str = "" + indexes.get(0).getOneBased();
@@ -152,10 +157,11 @@ public class UnmarkCommand extends Command {
 
     /**
      * Processes the lists containing the results of the unmarking of indexes and returns the result to the user.
+     *
      * @param unmarkedTasks
      * @param alreadyUnmarkedIndexes
      * @param outOfBoundsIndexes
-     * @return CommandResult
+     * @return CommandResult of unmarking the inputted indexes.
      * @throws CommandException
      */
     private CommandResult result(List<Task> unmarkedTasks, List<Index> unmarkedTasksIndexes,

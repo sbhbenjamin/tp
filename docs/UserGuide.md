@@ -29,9 +29,10 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 <br>   3.8. [Editing a task: edit](#38-editing-a-task-edit)
 <br>   3.9. [[Coming soon] Sorting tasks: sort](#39-coming-soon-sorting-tasks-sort)
 <br>   3.10. [Viewing help: help](#310-viewing-help-help)
-<br>   3.11. [Exiting the program](#311-exiting-the-program-exit)
-<br>   3.12. [Saving the data](#312-saving-the-data)
-<br>   3.13. [Editing the data file](#313-editing-the-data-file)
+<br>   3.11. [Clearing all data: clear](#311-clearing-all-data-clear)
+<br>   3.12. [Exiting the program](#312-exiting-the-program-exit)
+<br>   3.13. [Saving the data](#313-saving-the-data)
+<br>   3.14. [Editing the data file](#314-editing-the-data-file)
 4. [Command Summary](#4-command-summary)
 
 ## 1. About
@@ -66,13 +67,17 @@ Instructions that occur in a warning box you are advised to heed, or else uninte
 
 ### 1.5 Graphical User Interface (GUI)
 Figure 1.5 depicts the user interface of Harmonia. The following descriptions explain the interface from top to bottom.
-1. At the top of Harmonia is the toolbar, where you can access the `File` and `Help` options.
-2. Below the toolbar is the **command box** where you can input your commands into. This will be the main way in which you will interact with Harmonia.
-3. The result of the command will be output into the **command result box** beneath it. This will be especially useful in helping you understand whether your command has been successfully processed by Harmonia, or if there are any errors.
-4. The mainframe of Harmonia is the **task list**, where you will be able to see all of your tasks. This frame will update accordingly to your commands, and acts as a visual representation of your data.
-5. Beneath the mainframe is the status bar, which includes the location where the data file is stored.
 
-  ![Harmonia UI](images/Harmonia.png)
+Component | Purpose
+--------|------------------
+**Toolbar** | The toolbar allows you to access `File` and `Help` options. 
+**Task List** | The mainframe of Harmonia, where you will be able to view all of your tasks. This list will update accordingly to your commands, especially when you `find` a task, or `sort` all of your tasks.
+**Result Display**| The result display is where you will find the output of your commands. This will be especially useful in helping you understand whether your command has been successfully processed by Harmonia, or if there are any errors.
+**Command Box** | The Command Box will be where you can input your commands. This will be the main way in which you will interact with Harmonia.
+**Status Bar**| The status bar includes the location where the data file is stored.
+
+
+  ![Harmonia UI](images/AnnotatedUi.png)
   *Figure 1.5: Harmonia's GUI*
 
 [Return to Top](#table-of-contents-toc)
@@ -85,10 +90,7 @@ Figure 1.5 depicts the user interface of Harmonia. The following descriptions ex
 
 3. Copy the file to the folder you want to use as the home folder for Harmonia.
 
-4. Double-click the file to start the app. The GUI similar to *Figure 2.1* should appear in a few seconds.
-
-   ![Ui](images/Ui.png)
-   *Figure 2.1: Harmonia's GUI*
+4. Double-click the file to start the app. The GUI similar to *Figure 1.5* should appear in a few seconds.
 
 5. Type the command in the command box and press <kbd>↵Enter</kbd> to execute it.<br>
 Here are a few example commands you can try:
@@ -108,19 +110,19 @@ Here are a few example commands you can try:
 
 **:bulb: Notes about the command format:**
 
-- Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+- Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. `add n/NAME`, `NAME` is a parameter which can be used as `add n/Complete Tutorial`.
-
-- Items in square brackets are optional.<br>
-  e.g. `find [n/NAME] [t/TAG]` can be used as `find n/Complete Tutorial` or `find t/CS203T`.
-
-- Items followed by `...` can be used multiple times (including zero times).<br>
-  e.g. `[t/TAG]...` can be used as `t/CS2103T t/Tutorial`.
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME d/DESCRIPTION`, `d/DESCRIPTION n/NAME` is also acceptable.
 
-- `INDEX` refers to the numbering of an item in a list, as shown in the displayed task list.<br>
+- Items in square brackets are optional.<br>
+  e.g. `find [n/NAME] [t/TAG]` can be used as `find n/Complete Tutorial` or `find t/CS203T`.
+
+- Items followed by `...` can be used multiple times.<br>
+  e.g. `[t/TAG]...` can be used as `t/CS2103T t/Tutorial`.
+
+- `INDEX` refers to the numbering of an item as shown in the displayed task list.<br>
   e.g. in a list of tasks:<br>
        1. Do homework<br>
        2. Clean room<br>
@@ -128,18 +130,18 @@ Here are a few example commands you can try:
        Index 2 here refers to the second item in the list, "Clean room".
 
 - Extraneous parameters for commands that do not take in any parameters (such as `help` and `exit`) will be ignored.<br>
-  e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
+  e.g. if you input `exit 123`, Harmonia will interpret it as `exit`.
 
 </div>
 
 [Return to Top](#table-of-contents-toc)
 
 ### 3.1 Adding a task: `add`
-Adds a task into Harmonia, with a name, description, deadline, priority, and optionally some tags.
+Harmonia allows you to add a task with a name, description, deadline, priority, and optionally some tags.
 
 Format:  `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
 - `DEADLINE` should be in the format `‘YYYY-MM-DD’`.
-- `PRIORITY` should be one of `low`, `medium`,`high`.
+- `PRIORITY` should be `low`, `medium` or `high`.
 - `TAG` should not contain any space.
 
 Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`
@@ -151,7 +153,7 @@ Figure 3.1: Example of Harmonia after adding a task
 
 ### 3.2 Listing all tasks: `list`
 
-Shows a list of all the existing tasks in the task list.
+Harmonia allows you to see a list of all the existing tasks in the task list.
 
 Format: `list`
 
@@ -174,7 +176,11 @@ Format: `delete INDEX`
 Example: `delete 3` deletes the 3rd task in Harmonia.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to delete.
+You can key `list` to check the index of the task you wish to delete.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
+This action is irreversible and all deleted tasks cannot be retrieved.
 </div>
 
 [Return to Top](#table-of-contents-toc)
@@ -203,22 +209,24 @@ You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to
 
 ### 3.6 Marking as complete: `mark`
 
-Marks the task at the given index of the existing task list as complete. At least 1 index has to be provided, but multiple indexes can be provided as well to mark multiple tasks as complete at a time.
-
+Harmonia allows you to mark the tasks at the given indexes of the existing task list as complete. You have to provide one or more indexes to be marked.
 Format: `mark INDEX [INDEX]...`
 Example:
 - `mark 3` marks the task at the third index of the task list as complete.
 - `mark 1 2 3` marks the tasks at the first, second and third index of the list as complete.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to mark.
+You can key `list` to check the index of the task you wish to mark.
 </div>
+
+![UserGuide-mark](images/UserGuide-mark.png)
+Figure 3.6: Example of Harmonia after marking a task
 
 [Return to Top](#table-of-contents-toc)
 
 ### 3.7 Marking as incomplete: `unmark`
 
-Marks the task at the given index of the existing task list as incomplete. At least 1 index has to be provided, but multiple indexes can be provided as well to mark multiple tasks as incomplete at a time.
+Harmonia allows you to mark the tasks at the given indexes of the existing task list as incomplete. You have to provide one or more indexes to be unmarked.
 
 Format: `unmark INDEX [INDEX]...`
 Example:
@@ -226,18 +234,21 @@ Example:
 - `unmark 1 2 3` marks the tasks at the first, second and third index of the list as incomplete.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to unmark.
+You can key `list` to check the index of the task you wish to unmark.
 </div>
+
+![UserGuide-unmark](images/UserGuide-unmark.png)
+Figure 3.7: Example of Harmonia after unmarking a task
 
 [Return to Top](#table-of-contents-toc)
 
 ### 3.8 Editing a task: `edit`
 
-Edits an existing task in the task list.
+Harmonia allows you to edit an existing task in the task list.
 
 Format: `edit INDEX [n/NAME] [d/DESCRIPTION] [dl/DEADLINE] [p/PRIORITY] [t/TAG]...`
 - `DEADLINE` should be in the format `YYYY-MM-DD`.
-- `PRIORITY` should be one of `low`, `medium`, `high`.
+- `PRIORITY` should be `low`, `medium` or `high`.
 - `TAG` should not contain any space.
 
 Example:
@@ -245,8 +256,14 @@ Example:
 - `edit 2 n/CS2103T meeting t/CS2103T`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-You can key `list` to see the sequence of tasks in the list to check the index of the task you wish to edit.
+You can key `list` to check the index of the task you wish to edit.
 </div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
+You should include the existing tag(s) in the command when adding a new tag. Otherwise, existing tags will be overwritten.<br>
+e.g. `edit 1 t/CS2103T t/Tutorial`, edits the tags of the task at the first index where `CS2103T` is an existing tag and `Tutorial` is a new tag to be added.
+</div>
+
 
 [Return to Top](#table-of-contents-toc)
 
@@ -283,7 +300,19 @@ Format: `help`
 
 [Return to Top](#table-of-contents-toc)
 
-### 3.11 Exiting the program: `exit`
+### 3.11 Clearing all data: `clear`
+
+Harmonia allows you to clear all tasks in the task list.
+
+Format: `clear`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
+Do not use the clear command unless you are certain that you wish to erase all data. This action is irreversible and all erased data cannot be retrieved.
+</div>
+
+[Return to Top](#table-of-contents-toc)
+
+### 3.12 Exiting the program: `exit`
 
 Exits the program.
 
@@ -291,13 +320,13 @@ Format: `exit`
 
 [Return to Top](#table-of-contents-toc)
 
-### 3.12 Saving the data
+### 3.13 Saving the data
 
 Harmonia's data is saved in the hard disk automatically after any command changes the data. There is no need to save manually.
 
 [Return to Top](#table-of-contents-toc)
 
-### 3.13 Editing the data file
+### 3.14 Editing the data file
 
 Harmonia's data is saved as JSON file ([Location of Harmonia.jar]/data/harmonia.json). Advanced users are encouraged to update the data by editing JSON file.
 
@@ -321,6 +350,7 @@ Action | Format, Examples
 **Sort**| `sort by/SORT_KEY in/SORT_ORDER` <br> e.g., `sort by/deadline in/descending` <br> e.g., `sort by/priority in/asc`
 **Find** | `find [n/NAME_KEYWORD]... [t/TAG_KEYWORD]... [start/START_DATE] [end/END_DATE]` <br> e.g., `find n/book n/read` <br> e.g., `find t/test t/CS2103T` <br> e.g., `find start/2022-03-14 end/2022-03-18` <br> e.g., `find t/CS2103T` <br> e.g., `find n/book t/test start/2022-03-15`
 **Help** | `help`
+**Clear** | `clear`
 **Exit** | `exit`
 
 [Return to Top](#table-of-contents-toc)
