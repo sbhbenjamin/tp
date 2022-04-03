@@ -91,7 +91,6 @@ public class MarkCommand extends Command {
                 model.strictSetTask(taskToMark, markedTask);
             }
         }
-        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         return result(markedTasks, markedTasksIndexes, alreadyMarkedIndexes, outOfBoundsIndexes);
     }
 

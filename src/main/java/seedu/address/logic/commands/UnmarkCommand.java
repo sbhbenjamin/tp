@@ -89,7 +89,6 @@ public class UnmarkCommand extends Command {
                 unmarkedTasksIndexes.add(index);
 
                 model.strictSetTask(taskToUnmark, unmarkedTask);
-                model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
             }
         }
         return result(unmarkedTasks, unmarkedTasksIndexes, alreadyUnmarkedIndexes, outOfBoundsIndexes);
