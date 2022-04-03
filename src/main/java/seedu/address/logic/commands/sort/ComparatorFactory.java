@@ -19,7 +19,7 @@ public class ComparatorFactory {
     private static Comparator<Task> createComparatorOnSortKey(SortKey sortKey) {
         switch (sortKey) {
         case NAME:
-            return Comparator.comparing(Task::getName);
+            return Comparator.comparing(Task::getName).thenComparing(Task::getDeadline);
 
         case DEADLINE:
             return Comparator.comparing(Task::getDeadline).thenComparing(Task::getName);
