@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Description implements Comparable<Description> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Description should not be blank or start with white spaces,"
-                    + " and the length should be less than 256 characters.";
+            "Description should only contain alphanumeric characters and punctuations,"
+                    + " and it should contain 1-255 characters.";
 
     /*
      * The first character of the description must not be a whitespace.
