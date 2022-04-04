@@ -34,7 +34,7 @@ public class SortCommandParser {
         SortKey sortKey = ParserUtil.parseSortKey(argMultimap.getValue(PREFIX_SORT_KEY).get());
         SortOrder sortOrder = ParserUtil.parseSortOrder(argMultimap.getValue(PREFIX_SORT_ORDER).get());
 
-        return new SortCommand(ComparatorFactory.createComparator(sortKey, sortOrder));
+        return new SortCommand(sortKey, sortOrder);
     }
 
     /**
