@@ -95,7 +95,7 @@ Component | Purpose
 
 3. Copy the file to the folder you want to use as the home folder for Harmonia.
 
-4. Double-click the file to start the app. The [GUI](#54-gui) similar to *Figure 1.5* should appear in a few seconds.
+4. For **Windows** user: double-click the file to start the app. For **Mac/Linux** user: open the terminal, navigate to the directory where harmonia.jar is located, then run `java -jar harmonia.jar` in the terminal. The [GUI](#54-gui) similar to *Figure 1.5* should appear in a few seconds.
 
 5. Type the command in the command box and press <kbd>↵Enter</kbd> to execute it.<br>
 Here are a few example commands you can try:
@@ -108,7 +108,6 @@ Here are a few example commands you can try:
 
 [Return to Top](#table-of-contents-toc)
 
---------------------------------------------------------------------------------------------------------------------
 ## 3. Features
 
 <div markdown="block" class="alert alert-primary">
@@ -146,11 +145,20 @@ Here are a few example commands you can try:
 Harmonia allows you to add a task with a name, description, deadline, priority, and optionally some [tags](#53-tag).
 
 Format:  `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
-- `DEADLINE` should be in the format `‘YYYY-MM-DD’`.
-- `PRIORITY` should be `low`, `medium` or `high`.
-- `TAG` should not contain any space.
 
 Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`
+
+Restrictions:
+
+* `NAME` can only contain alphanumeric characters, i.e. letters and numbers, and should not contain any space.
+
+* `DESCRIPTION` can only contain alphanumeric characters and punctuations, and should not contain slash (`/`).
+
+* `DEADLINE` should be a valid date, in the format of `‘YYYY-MM-DD’`.   
+
+* `PRIORITY` should be `low`, `medium` or `high`. This field is case-insensitive, for example, you may input `LOW` instead of `low`.             
+
+* `TAG` should not contain any space. This field is case-insensitive, and does not allow duplicates. If duplicated tags are supplied, Harmonia removes the duplicate tags for you automatically.
 
 ![UserGuide-add](images/UserGuide-add.png)
 Figure 3.1: Example of Harmonia after adding a task
@@ -213,13 +221,25 @@ Format: `find [n/NAME_KEYWORD]... [d/DESCRIPTION_KEYWORD]... [start/START_DATE] 
 
 Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27 p/low p/medium c/true`
 
+Restrictions:
+
+* `NAME_KEYWORD`s and `DESCRIPTION_KEYWORD`s should only contain alphanumeric characters (letters and numbers), and should not contain any space in the middle.
+
+* `START_DATE` amd `END_DATE` should be valid dates, in the format of `YYYY-MM-DD`. The `START_DATE` should not be later than `END_DATE`, if both of them are specified.
+
+* `PRIORITY` should be `low`, `medium` or `high`. This field is case-insensitive, for example, you may input `LOW` instead of `low`.                                                            
+
+* `TAG` should not contain any space. The search on `TAG` is case-insensitive.
+
+* `COMPLETION_STATUS` should be either `true` or `false`. This field is case-insensitive.
+
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to narrow down your search.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 * Keywords are case-insensitive
-* Harmonia does not include partial keyword match, i.e. `NAME_KEYWORD`s and `DESCRIPTION_KEYWORD`s need to be complete words.
+* Harmonia does not include partial keyword matches, i.e. `NAME_KEYWORD`s and `DESCRIPTION_KEYWORD`s need to be complete words.
 </div>
 
 [Return to Top](#table-of-contents-toc)
@@ -384,7 +404,7 @@ In Harmonia, a JSON file is used to store the list of tasks. For each task, the 
 
 Harmonia uses indexes to help you address a task easily. An `Index` refers to the numbering of an item in a list, as shown in the displayed task list.<br>
 
-For example,  in a list of tasks:<br>
+For example, in a list of tasks:<br>
 1. Do homework<br>
 2. Clean room<br>
 3. Walk dog<br>
@@ -405,3 +425,4 @@ The graphical user interface (GUI) is a form of user interface that allows users
 Harmonia uses a simple GUI to help you interact with the application, while preserving the benefits of command line interface (CLI).
 
 [Return to Top](#table-of-contents-toc)
+
