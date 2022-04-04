@@ -42,8 +42,8 @@ public class NameTest {
         assertTrue(Name.isValidName("complete cs3240 milestones")); // alphanumeric characters
         assertTrue(Name.isValidName("Complete Tutorials")); // with capital letters
         // contains non-alphanumeric characters
-        assertTrue(Name.isValidName("Complete CS3240 Milestones, Tutorials and Lectures"));
-        assertTrue(Name.isValidName("Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
+        assertFalse(Name.isValidName("Complete CS3240 Milestones, Tutorials and Lectures"));
+        assertFalse(Name.isValidName("Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
                 + "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis "
                 + "nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure "
                 + "dolor e")); // 255 characters
