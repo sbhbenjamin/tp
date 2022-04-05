@@ -58,7 +58,7 @@ This is an example of text denoted as user input: `add n/NAME d/DESCRIPTION dl/D
 This is an example of text denoted as keyboard input: <kbd>↵Enter</kbd>
 
 ### 1.4 Special Symbols
-This user guide denotes information that does not flow as part of the text using special symbols enclosed in a box.
+This user guide uses various callouts for information that either do not flow as part of the text, or are more important.
 
 #### 1.4.1 Note
 Instructions or pieces of information that occur in an information box are additional information that can be useful to you.
@@ -84,6 +84,9 @@ Component | Purpose
 
   ![Harmonia UI](images/AnnotatedUi.png)
   *Figure 1.5: Harmonia's GUI*
+
+  ![Harmonia UI](images/TaskCard.png)
+  *Figure 1.6: Task Card*
 
 [Return to Top](#table-of-contents-toc)
 
