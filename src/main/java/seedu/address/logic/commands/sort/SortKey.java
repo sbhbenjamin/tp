@@ -12,7 +12,7 @@ public enum SortKey {
     PRIORITY("priority");
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Sort key should be in the format name, deadline, or priority";
+            "Sort key should be either one of name, deadline, or priority";
 
     private final String label;
 
@@ -47,5 +47,10 @@ public enum SortKey {
             }
         }
         throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+    }
+
+    @Override
+    public String toString() {
+        return this.label;
     }
 }
