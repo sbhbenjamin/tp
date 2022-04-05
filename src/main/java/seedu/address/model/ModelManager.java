@@ -91,6 +91,7 @@ public class ModelManager implements Model {
     @Override
     public void setTaskList(ReadOnlyTaskList taskList) {
         this.taskList.resetData(taskList);
+        this.tagList.resetTags(taskList);
     }
 
     @Override
