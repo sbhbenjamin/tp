@@ -31,10 +31,10 @@ public class UnmarkCommand extends Command {
             + "Parameters: INDEX[ES] (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_TASK_ALREADY_UNCOMPLETED = "The completion status of this task is already set" +
-            " to incomplete.";
-    public static final String MESSAGE_MULTIPLE_TASKS_ALREADY_UNCOMPLETED = "The completion status of these tasks are" +
-            " already set to incomplete.";
+    public static final String MESSAGE_TASK_ALREADY_UNCOMPLETED = "The completion status of this task is already set"
+            + " to incomplete.";
+    public static final String MESSAGE_MULTIPLE_TASKS_ALREADY_UNCOMPLETED = "The completion status of these tasks are"
+            + " already set to incomplete.";
 
     private final List<Index> targetIndexes;
 

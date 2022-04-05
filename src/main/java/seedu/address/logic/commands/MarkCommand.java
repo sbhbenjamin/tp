@@ -31,10 +31,10 @@ public class MarkCommand extends Command {
             + "Parameters: INDEX[ES] (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_TASK_ALREADY_COMPLETED = "The completion status of this task is already set" +
-            " to complete.";
-    public static final String MESSAGE_MULTIPLE_TASKS_ALREADY_COMPLETED = "The completion status of these tasks are" +
-            " already set to complete.";
+    public static final String MESSAGE_TASK_ALREADY_COMPLETED = "The completion status of this task is already set"
+            + " to complete.";
+    public static final String MESSAGE_MULTIPLE_TASKS_ALREADY_COMPLETED = "The completion status of these tasks are"
+            + " already set to complete.";
 
     private final List<Index> targetIndexes;
 
