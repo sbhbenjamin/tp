@@ -11,7 +11,7 @@ public enum SortOrder {
     DESCENDING("desc");
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Sort order should be one of either asc or desc";
+            "Sort order should be either one of asc or desc.";
 
     private final String label;
 
