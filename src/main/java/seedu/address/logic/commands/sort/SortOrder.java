@@ -11,7 +11,7 @@ public enum SortOrder {
     DESCENDING("desc");
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Sort order should be in the format asc or desc";
+            "Sort order should be either one of asc or desc.";
 
     private final String label;
 
@@ -46,5 +46,10 @@ public enum SortOrder {
             }
         }
         throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+    }
+
+    @Override
+    public String toString() {
+        return this.label + "ending";
     }
 }
