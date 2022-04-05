@@ -75,7 +75,7 @@ Figure 1.5 depicts the user interface of Harmonia. The following descriptions ex
 
 Component | Purpose
 --------|------------------
-**Toolbar** | The toolbar allows you to access `File` and `Help` options. 
+**Toolbar** | The toolbar allows you to access `File` and `Help` options.
 **Task List** | The mainframe of Harmonia, where you will be able to view all of your tasks. This list will update accordingly to your commands, especially when you `find` a task, or `sort` all of your tasks.
 **Result Display**| The result display is where you will find the output of your commands. This will be especially useful in helping you understand whether your command has been successfully processed by Harmonia, or if there are any errors.
 **Command Box** | The Command Box will be where you can input your commands. This will be the main way in which you will interact with Harmonia.
