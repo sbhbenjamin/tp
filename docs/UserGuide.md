@@ -85,6 +85,9 @@ Component | Purpose
   ![Harmonia UI](images/AnnotatedUi.png)
   *Figure 1.5: Harmonia's GUI*
 
+  ![Harmonia UI](images/TaskCard.png)
+  *Figure 1.6: Task Card*
+
 [Return to Top](#table-of-contents-toc)
 
 ## 2. Getting Started
