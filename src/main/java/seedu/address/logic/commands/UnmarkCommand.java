@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +88,6 @@ public class UnmarkCommand extends Command {
                 unmarkedTasksIndexes.add(index);
 
                 model.strictSetTask(taskToUnmark, unmarkedTask);
-                model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
             }
         }
         return result(unmarkedTasks, unmarkedTasksIndexes, alreadyUnmarkedIndexes, outOfBoundsIndexes);

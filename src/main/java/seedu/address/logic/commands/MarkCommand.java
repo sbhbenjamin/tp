@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +90,6 @@ public class MarkCommand extends Command {
                 model.strictSetTask(taskToMark, markedTask);
             }
         }
-        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         return result(markedTasks, markedTasksIndexes, alreadyMarkedIndexes, outOfBoundsIndexes);
     }
 

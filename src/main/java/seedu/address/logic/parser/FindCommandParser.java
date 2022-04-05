@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPLETION_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -14,6 +15,8 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
+import seedu.address.model.task.CompletionStatus;
+import seedu.address.model.task.CompletionStatusPredicate;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.DeadlineInRangePredicate;
 import seedu.address.model.task.DescriptionContainsKeywordsPredicate;
@@ -27,13 +30,14 @@ import seedu.address.model.task.PriorityMatchedPredicate;
 public class FindCommandParser implements Parser<FindCommand> {
 
     private static final Prefix[] POSSIBLE_PREFIXES = new Prefix[] {
-        PREFIX_NAME, PREFIX_TAG, PREFIX_START,
+        PREFIX_NAME, PREFIX_TAG, PREFIX_START, PREFIX_COMPLETION_STATUS,
         PREFIX_END, PREFIX_DESCRIPTION, PREFIX_PRIORITY
     };
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
@@ -53,6 +57,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         Deadline startDate = null;
         Deadline endDate = null;
 
+        CompletionStatus completionStatus = null;
+
         if (argMultimap.getValue(PREFIX_START).isPresent()) {
             startDate = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_START).get());
         }
@@ -61,11 +67,16 @@ public class FindCommandParser implements Parser<FindCommand> {
             endDate = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_END).get());
         }
 
+        if (argMultimap.getValue(PREFIX_COMPLETION_STATUS).isPresent()) {
+            completionStatus = ParserUtil.parseCompletionStatus(argMultimap.getValue(PREFIX_COMPLETION_STATUS).get());
+        }
+
         return new FindCommand(new NameContainsKeywordsPredicate(nameKeywords),
                 new TagContainsKeywordsPredicate(tagKeywords),
                 new DeadlineInRangePredicate(startDate, endDate),
                 new DescriptionContainsKeywordsPredicate(descriptionKeywords),
-                new PriorityMatchedPredicate(prioritySet));
+                new PriorityMatchedPredicate(prioritySet),
+                new CompletionStatusPredicate(completionStatus));
     }
 
     /**

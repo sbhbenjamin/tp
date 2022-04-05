@@ -59,6 +59,7 @@ public class Name implements Comparable<Name> {
 
     @Override
     public int compareTo(Name n) {
-        return this.fullName.compareTo(n.fullName);
+        return this.fullName.toLowerCase()
+                .compareTo(n.fullName.toLowerCase());
     }
 }
