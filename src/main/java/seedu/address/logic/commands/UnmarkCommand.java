@@ -31,7 +31,10 @@ public class UnmarkCommand extends Command {
             + "Parameters: INDEX[ES] (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_TASK_ALREADY_UNCOMPLETED = "This task is already marked as incomplete.";
+    public static final String MESSAGE_TASK_ALREADY_UNCOMPLETED = "The completion status of this task is already set" +
+            " to incomplete.";
+    public static final String MESSAGE_MULTIPLE_TASKS_ALREADY_UNCOMPLETED = "The completion status of these tasks are" +
+            " already set to incomplete.";
 
     private final List<Index> targetIndexes;
 
@@ -67,8 +70,7 @@ public class UnmarkCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Task> lastShownList = model.getSortedTaskList();
-        List<Task> unmarkedTasks = new ArrayList<>();
-        List<Index> unmarkedTasksIndexes = new ArrayList<>();
+        List<Index> unmarkTasksIndexes = new ArrayList<>();
         List<Index> alreadyUnmarkedIndexes = new ArrayList<>();
         List<Index> outOfBoundsIndexes = new ArrayList<>();
 
@@ -82,15 +84,10 @@ public class UnmarkCommand extends Command {
             } else if (isValidIndex(index, lastShownList) == -1) {
                 outOfBoundsIndexes.add(index);
             } else {
-                Task taskToUnmark = lastShownList.get(index.getZeroBased());
-                Task unmarkedTask = createUnmarkedTask(taskToUnmark);
-                unmarkedTasks.add(unmarkedTask);
-                unmarkedTasksIndexes.add(index);
-
-                model.strictSetTask(taskToUnmark, unmarkedTask);
+                unmarkTasksIndexes.add(index);
             }
         }
-        return result(unmarkedTasks, unmarkedTasksIndexes, alreadyUnmarkedIndexes, outOfBoundsIndexes);
+        return result(model, lastShownList, unmarkTasksIndexes, alreadyUnmarkedIndexes, outOfBoundsIndexes);
 
     }
 
@@ -101,7 +98,7 @@ public class UnmarkCommand extends Command {
      * @return a {@code String} listings all the successfully unmarked tasks.
      */
     private String unmarkedTasksToString(List<Task> unmarkedTasks, List<Index> unmarkedTasksIndexes) {
-        String str = "Successfully Unmarked Tasks: \n";
+        String str = "Successfully Unmarked Task(s): \n";
         for (int i = 0; i < unmarkedTasks.size(); i++) {
             str += unmarkedTasksIndexes.get(i).getOneBased() + ". " + unmarkedTasks.get(i) + "\n";
         }
@@ -156,34 +153,54 @@ public class UnmarkCommand extends Command {
     /**
      * Processes the lists containing the results of the unmarking of indexes and returns the result to the user.
      *
-     * @param unmarkedTasks
+     * @param model
+     * @param lastShownList
+     * @param unmarkTaskIndexes
      * @param alreadyUnmarkedIndexes
      * @param outOfBoundsIndexes
      * @return CommandResult of unmarking the inputted indexes.
      * @throws CommandException
      */
-    private CommandResult result(List<Task> unmarkedTasks, List<Index> unmarkedTasksIndexes,
+    private CommandResult result(Model model, List<Task> lastShownList, List<Index> unmarkTaskIndexes,
                                  List<Index> alreadyUnmarkedIndexes,
                                  List<Index> outOfBoundsIndexes) throws CommandException {
         StringBuilder errorString = new StringBuilder();
+        List<Task> unmarkedTasks = new ArrayList<>();
 
         if (!alreadyUnmarkedIndexes.isEmpty()) {
-            errorString.append("Index " + indexesToString(alreadyUnmarkedIndexes) + ": "
-                    + MESSAGE_TASK_ALREADY_UNCOMPLETED + "\n");
+            if (alreadyUnmarkedIndexes.size() == 1) {
+                errorString.append("Index " + indexesToString(alreadyUnmarkedIndexes) + ": "
+                        + MESSAGE_TASK_ALREADY_UNCOMPLETED + "\n");
+            } else {
+                errorString.append("Indexes " + indexesToString(alreadyUnmarkedIndexes) + ": "
+                        + MESSAGE_MULTIPLE_TASKS_ALREADY_UNCOMPLETED + "\n");
+            }
         }
 
         if (!outOfBoundsIndexes.isEmpty()) {
-            errorString.append("Index " + indexesToString(outOfBoundsIndexes) + ": "
-                    + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX + "\n");
+            if (outOfBoundsIndexes.size() == 1) {
+                errorString.append("Index " + indexesToString(outOfBoundsIndexes) + ": "
+                        + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX + "\n");
+            } else {
+                errorString.append("Indexes " + indexesToString(outOfBoundsIndexes) + ": "
+                        + Messages.MESSAGE_INVALID_MULTIPLE_TASK_DISPLAYED_INDEX + "\n");
+            }
         }
 
         if (errorString.length() != 0) { //throw error if any
-            if (!unmarkedTasks.isEmpty()) {
-                errorString.append(unmarkedTasksToString(unmarkedTasks, unmarkedTasksIndexes));
-            }
             throw new CommandException(errorString.toString());
         }
 
-        return new CommandResult(unmarkedTasksToString(unmarkedTasks, unmarkedTasksIndexes));
+        if (!unmarkTaskIndexes.isEmpty()) {
+            for (int i = 0; i < unmarkTaskIndexes.size(); i++) {
+                Index index = unmarkTaskIndexes.get(i);
+                Task taskToUnmark = lastShownList.get(index.getZeroBased());
+                Task unmarkedTask = createUnmarkedTask(taskToUnmark);
+                unmarkedTasks.add(unmarkedTask);
+                model.strictSetTask(taskToUnmark, unmarkedTask);
+            }
+        }
+
+        return new CommandResult(unmarkedTasksToString(unmarkedTasks, unmarkTaskIndexes));
     }
 }
