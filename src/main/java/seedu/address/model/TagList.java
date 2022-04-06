@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.HashMap;
 import java.util.Set;
+import java.util.StringJoiner;
 import java.util.TreeSet;
 
 import seedu.address.model.tag.Tag;
@@ -117,5 +118,26 @@ public class TagList {
         for (Task task : newTaskList.getTaskList()) {
             addTagsOfTask(task);
         }
+    }
+
+    @Override
+    public String toString() {
+        final StringJoiner joiner = new StringJoiner(" ");
+        for (Tag tag : getTagList()) {
+            joiner.add(tag.toString());
+        }
+        return joiner.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TagList // instanceof handles nulls
+                && tags.equals(((TagList) other).tags));
+    }
+
+    @Override
+    public int hashCode() {
+        return tags.hashCode();
     }
 }

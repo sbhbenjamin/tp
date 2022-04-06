@@ -25,7 +25,8 @@ public class ParserUtilTest {
     private static final String INVALID_DESCRIPTION = " "; // empty string not allowed for description
     private static final String INVALID_DEADLINE = "2022/01/01"; // wrong date format
     private static final String INVALID_PRIORITY = "highest";
-    private static final String INVALID_TAG = "#test"; // '#' not allowed in tags
+    private static final String INVALID_TAG =
+            "qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbn"; // tag should not be more than 50 characters
     private static final String VALID_NAME = "Complete Assignment";
     private static final String VALID_DESCRIPTION = "Upload submission file to LumiNUS folder";
     private static final String VALID_DEADLINE = "2022-04-02";
