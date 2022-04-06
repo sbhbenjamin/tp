@@ -422,4 +422,4 @@ Harmonia uses a simple GUI to help you interact with the application, while pres
 | `SORT_KEY`                               | 1. This field should be in the format `deadline`, `priority`, or `name`.<br/>2. This field is case-insensitive.                                                                                                         | NA           | [`sort`](#39-sorting-tasks-sort)                                                                                                                             |
 | `SORT_ORDER`                             | 1. This field should be in the format `asc` or `desc`.<br/>2. This field is case-insensitive.                                                                                                                           | NA           | [`sort`](#39-sorting-tasks-sort)                                                                                                                             |
 
-
+[Return to Top](#table-of-contents-toc)
