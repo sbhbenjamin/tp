@@ -71,6 +71,10 @@ public class FindCommandParser implements Parser<FindCommand> {
             completionStatus = ParserUtil.parseCompletionStatus(argMultimap.getValue(PREFIX_COMPLETION_STATUS).get());
         }
 
+        if (!DeadlineInRangePredicate.isValidRange(startDate, endDate)) {
+            throw new ParseException(DeadlineInRangePredicate.INVALID_RANGE_MESSAGE);
+        }
+
         return new FindCommand(new NameContainsKeywordsPredicate(nameKeywords),
                 new TagContainsKeywordsPredicate(tagKeywords),
                 new DeadlineInRangePredicate(startDate, endDate),
