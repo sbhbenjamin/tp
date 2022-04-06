@@ -10,7 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name implements Comparable<Name> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should contain 1-255 characters.";
+            "Name should only contain alphanumeric characters and spaces, "
+                    + "and it has a character limit of 1-255 characters.";
 
     /*
      * The first character of the name must not be a whitespace,

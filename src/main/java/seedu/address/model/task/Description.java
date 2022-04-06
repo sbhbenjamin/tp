@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Description implements Comparable<Description> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Description should only contain alphanumeric characters and punctuations,"
-                    + " and it should contain 1-255 characters.";
+            "Description should only contain alphanumeric characters and punctuations, "
+                    + "and it has a character limit of 1-255 characters.";
 
     /*
      * The first character of the description must not be a whitespace.
