@@ -221,8 +221,7 @@ You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-* Keywords are case-insensitive
-* Harmonia does not include partial keyword matches, i.e. `NAME_KEYWORD`s and `DESCRIPTION_KEYWORD`s need to be complete words.
+* Harmonia does not include partial keyword matches, i.e. only tasks containing keywords that match `NAME_KEYWORD`s and `DESCRIPTION_KEYWORD`s exactly will be retrieved.
 </div>
 
 [Return to Top](#table-of-contents-toc)
