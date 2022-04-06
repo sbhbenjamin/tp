@@ -10,15 +10,16 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name implements Comparable<Name> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Name should only contain alphanumeric characters and spaces, "
-                    + "and it has a character limit of 1-255 characters.";
+            "Name should only contain alphanumeric characters, punctuations and spaces, "
+                    + "and should not start with punctuations.\n"
+                    + "Name has a character limit of 1-255 characters.";
 
     /*
-     * The first character of the name must not be a whitespace,
-     * and only alphanumeric characters are allowed.
+     * The first character of the name must not be a whitespace or punctuation.
+     * For other characters, they must be alphanumeric or spaces.
      * The maximum number of characters allowed is 255.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\s]{0,254}";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\p{Punct}\\s]{0,254}";
 
     public final String fullName;
 
