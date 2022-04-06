@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.TagList;
 import seedu.address.model.TaskList;
 import seedu.address.model.task.Task;
 
@@ -75,7 +76,7 @@ public class TypicalTasks {
     private TypicalTasks() {} // prevents instantiation
 
     /**
-     * Returns an {@code TaskList} with all the typical Tasks.
+     * Returns a {@code TaskList} with all the typical Tasks.
      */
     public static TaskList getTypicalTaskList() {
         TaskList tl = new TaskList();
@@ -89,4 +90,16 @@ public class TypicalTasks {
         return new ArrayList<>(Arrays.asList(CS2103T_PROJECT, CS2105_FINALS, CS2105_MIDTERM,
                 CS2105_TUTORIAL, MEET_ALICE));
     }
+
+    /**
+     * Returns a {@code TagList} with all the tags of typical Tasks.
+     */
+    public static TagList getTypicalTagList() {
+        TagList tagList = new TagList(new TaskList());
+        for (Task task : getTypicalTasks()) {
+            tagList.addTagsOfTask(task);
+        }
+        return tagList;
+    }
+
 }
