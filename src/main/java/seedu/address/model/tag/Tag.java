@@ -9,9 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag implements Comparable<Tag> {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Tag names should be alphanumeric and should not contain whitespaces.";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Tags should not be blank or start with white spaces, "
+            + "and the length should be less than 51 characters.";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}\\p{Punct}][\\p{Alnum}\\p{Punct}\\s]{0,49}";
 
     public final String tagName;
 
