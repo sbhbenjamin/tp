@@ -31,7 +31,10 @@ public class MarkCommand extends Command {
             + "Parameters: INDEX[ES] (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_TASK_ALREADY_COMPLETED = "This task is already marked as complete.";
+    public static final String MESSAGE_TASK_ALREADY_COMPLETED = "The completion status of this task is already set"
+            + " to complete.";
+    public static final String MESSAGE_MULTIPLE_TASKS_ALREADY_COMPLETED = "The completion status of these tasks are"
+            + " already set to complete.";
 
     private final List<Index> targetIndexes;
 
@@ -67,8 +70,7 @@ public class MarkCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Task> lastShownList = model.getSortedTaskList();
-        List<Task> markedTasks = new ArrayList<>();
-        List<Index> markedTasksIndexes = new ArrayList<>();
+        List<Index> markTaskIndexes = new ArrayList<>();
         List<Index> alreadyMarkedIndexes = new ArrayList<>();
         List<Index> outOfBoundsIndexes = new ArrayList<>();
 
@@ -82,15 +84,10 @@ public class MarkCommand extends Command {
             } else if (isValidIndex(index, lastShownList) == -1) {
                 outOfBoundsIndexes.add(index);
             } else {
-                Task taskToMark = lastShownList.get(index.getZeroBased());
-                Task markedTask = createMarkedTask(taskToMark);
-                markedTasks.add(markedTask);
-                markedTasksIndexes.add(index);
-
-                model.strictSetTask(taskToMark, markedTask);
+                markTaskIndexes.add(index);
             }
         }
-        return result(markedTasks, markedTasksIndexes, alreadyMarkedIndexes, outOfBoundsIndexes);
+        return result(model, lastShownList, markTaskIndexes, alreadyMarkedIndexes, outOfBoundsIndexes);
     }
 
     /**
@@ -100,7 +97,7 @@ public class MarkCommand extends Command {
      * @return a {@code String} listings all the successfully marked tasks.
      */
     private String markedTasksToString(List<Task> markedTasks, List<Index> markedTasksIndexes) {
-        String str = "Successfully Marked Tasks: \n";
+        String str = "Successfully Marked Task(s): \n";
         for (int i = 0; i < markedTasks.size(); i++) {
             str += markedTasksIndexes.get(i).getOneBased() + ". " + markedTasks.get(i) + "\n";
         }
@@ -156,36 +153,52 @@ public class MarkCommand extends Command {
     /**
      * Processes the lists containing the results of the marking of indexes and returns the result to the user.
      *
-     * @param markedTasks
-     * @param markedTasksIndexes
+     * @param markTaskIndexes
      * @param alreadyMarkedIndexes
      * @param outOfBoundsIndexes
      * @return CommandResult of the marking of the inputted indexes.
      * @throws CommandException
      */
-    private CommandResult result(List<Task> markedTasks, List<Index> markedTasksIndexes,
+    private CommandResult result(Model model, List<Task> lastShownList, List<Index> markTaskIndexes,
                                  List<Index> alreadyMarkedIndexes,
                                  List<Index> outOfBoundsIndexes) throws CommandException {
         StringBuilder errorString = new StringBuilder();
+        List<Task> markedTasks = new ArrayList<>();
 
         if (!alreadyMarkedIndexes.isEmpty()) {
-            errorString.append("Index " + indexesToString(alreadyMarkedIndexes) + ": "
+            if (alreadyMarkedIndexes.size() == 1) {
+                errorString.append("Index " + indexesToString(alreadyMarkedIndexes) + ": "
                     + MESSAGE_TASK_ALREADY_COMPLETED + "\n");
+            } else {
+                errorString.append("Indexes " + indexesToString(alreadyMarkedIndexes) + ": "
+                        + MESSAGE_MULTIPLE_TASKS_ALREADY_COMPLETED + "\n");
+            }
         }
 
         if (!outOfBoundsIndexes.isEmpty()) {
-            errorString.append("Index " + indexesToString(outOfBoundsIndexes) + ": "
-                    + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX + "\n");
+            if (outOfBoundsIndexes.size() == 1) {
+                errorString.append("Index " + indexesToString(outOfBoundsIndexes) + ": "
+                        + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX + "\n");
+            } else {
+                errorString.append("Indexes " + indexesToString(outOfBoundsIndexes) + ": "
+                        + Messages.MESSAGE_INVALID_MULTIPLE_TASK_DISPLAYED_INDEX + "\n");
+            }
         }
 
         if (errorString.length() != 0) { //throw error if any
-            if (!markedTasks.isEmpty()) {
-                errorString.append(markedTasksToString(markedTasks, markedTasksIndexes));
-            }
             throw new CommandException(errorString.toString());
         }
 
-        return new CommandResult(markedTasksToString(markedTasks, markedTasksIndexes));
+        if (!markTaskIndexes.isEmpty()) {
+            for (int i = 0; i < markTaskIndexes.size(); i++) {
+                Index index = markTaskIndexes.get(i);
+                Task taskToMark = lastShownList.get(index.getZeroBased());
+                Task markedTask = createMarkedTask(taskToMark);
+                markedTasks.add(markedTask);
+                model.strictSetTask(taskToMark, markedTask);
+            }
+        }
 
+        return new CommandResult(markedTasksToString(markedTasks, markTaskIndexes));
     }
 }
