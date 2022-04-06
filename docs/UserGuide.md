@@ -156,13 +156,13 @@ Format:  `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
 Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`
 
 ![UserGuide-add](images/UserGuide-add.png)
-Figure 3.1: Example of Harmonia after adding a task
+*Figure 3.1: Example of Harmonia after adding a task*
 
 [Return to Top](#table-of-contents-toc)
 
 ### 3.2 Listing all tasks: `list`
 
-Harmonia allows you to see a list of all the existing tasks in the task list.
+Harmonia allows you to see a list of all existing tasks in the task list.
 
 Format: `list`
 
@@ -170,9 +170,11 @@ Format: `list`
 
 ### 3.3 Listing all [tags](#53-tag): `list t/`
 
-Lists all existing tags used in the task list.
+Harmonia allows you to see a list of all existing tags used in the task list.
 
 Format: `list t/`
+- The tags are listed in the Result Display.
+- Listed tags are case-insensitive (i.e. if there are two tags, cs2103t and CS2103T, only one of the tags will be shown).
 
 [Return to Top](#table-of-contents-toc)
 
@@ -182,7 +184,7 @@ Deletes the task at the given [index](#52-index) of the existing task list from 
 
 Format: `delete INDEX`
 
-Example: `delete 3` deletes the 3rd task in Harmonia.
+Example: `delete 3` deletes the task at the third index of the task list.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the index of the task you wish to delete.
@@ -225,7 +227,9 @@ You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to
 ### 3.6 Marking as complete: `mark`
 
 Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the existing task list as complete. You have to provide one or more indexes to be marked.
+
 Format: `mark INDEX [INDEX]...`
+
 Example:
 - `mark 3` marks the task at the third index of the task list as complete.
 - `mark 1 2 3` marks the tasks at the first, second and third index of the list as complete.
@@ -235,7 +239,7 @@ You can key `list` to check the index of the task you wish to mark.
 </div>
 
 ![UserGuide-mark](images/UserGuide-massmark-after.png)
-Figure 3.6: Example of Harmonia after marking a task
+*Figure 3.6: Example of Harmonia after marking a task*
 
 [Return to Top](#table-of-contents-toc)
 
@@ -244,6 +248,7 @@ Figure 3.6: Example of Harmonia after marking a task
 Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the existing task list as incomplete. You have to provide one or more indexes to be unmarked.
 
 Format: `unmark INDEX [INDEX]...`
+
 Example:
 - `unmark 3` marks the task at the third index of the task list as incomplete.
 - `unmark 1 2 3` marks the tasks at the first, second and third index of the list as incomplete.
@@ -253,7 +258,7 @@ You can key `list` to check the index of the task you wish to unmark.
 </div>
 
 ![UserGuide-unmark](images/UserGuide-massunmark-after.png)
-Figure 3.7: Example of Harmonia after unmarking some tasks
+*Figure 3.7: Example of Harmonia after unmarking some tasks*
 
 [Return to Top](#table-of-contents-toc)
 
