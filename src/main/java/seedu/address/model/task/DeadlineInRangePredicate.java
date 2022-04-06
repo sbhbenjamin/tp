@@ -11,6 +11,8 @@ import java.util.function.Predicate;
  */
 public class DeadlineInRangePredicate implements Predicate<Task> {
 
+    public static final String INVALID_RANGE_MESSAGE = "The start date cannot be later than the end date!";
+
     private final Optional<Deadline> startDate;
     private final Optional<Deadline> endDate;
 
@@ -25,6 +27,21 @@ public class DeadlineInRangePredicate implements Predicate<Task> {
     public DeadlineInRangePredicate(Deadline startDate, Deadline endDate) {
         this.startDate = Optional.ofNullable(startDate);
         this.endDate = Optional.ofNullable(endDate);
+    }
+
+    /**
+     * Checks whether a range of deadline is valid.
+     *
+     * @param startDate the lower bound of deadline
+     * @param endDate the upper bound of deadline
+     * @return true if {@code startDate} is not later than {@code endDate}
+     */
+    public static boolean isValidRange(Deadline startDate, Deadline endDate) {
+        if (startDate == null || endDate == null) {
+            // If one of the deadline is missing, then it is always valid.
+            return true;
+        }
+        return startDate.compareTo(endDate) <= 0;
     }
 
     @Override

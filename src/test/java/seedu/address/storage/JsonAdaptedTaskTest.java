@@ -25,7 +25,7 @@ public class JsonAdaptedTaskTest {
     private static final String INVALID_COMPLETION_STATUS = "unknown";
     private static final String INVALID_DEADLINE = "example.com";
     private static final String INVALID_PRIORITY = "highest";
-    private static final String INVALID_TAG = "#CS2103T";
+    private static final String INVALID_TAG = " #CS2103T";
 
     private static final String VALID_NAME = CS2105_MIDTERM.getName().toString();
     private static final String VALID_DESCRIPTION = CS2105_MIDTERM.getDescription().toString();

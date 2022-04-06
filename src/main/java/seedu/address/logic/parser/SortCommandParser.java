@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.sort.ComparatorFactory;
 import seedu.address.logic.commands.sort.SortCommand;
 import seedu.address.logic.commands.sort.SortKey;
 import seedu.address.logic.commands.sort.SortOrder;
@@ -34,7 +33,7 @@ public class SortCommandParser {
         SortKey sortKey = ParserUtil.parseSortKey(argMultimap.getValue(PREFIX_SORT_KEY).get());
         SortOrder sortOrder = ParserUtil.parseSortOrder(argMultimap.getValue(PREFIX_SORT_ORDER).get());
 
-        return new SortCommand(ComparatorFactory.createComparator(sortKey, sortOrder));
+        return new SortCommand(sortKey, sortOrder);
     }
 
     /**
