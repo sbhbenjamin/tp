@@ -43,7 +43,8 @@ public class ModelManager implements Model {
         this.taskList = new TaskList(taskList);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
-        sortedTasks = new SortedList<>(filteredTasks, DEFAULT_COMPARATOR);
+        sortedTasks = new SortedList<>(filteredTasks);
+        updateToDefaultSortedTaskList(); // Updates the sorted list to use the default ordering.
         tagList = new TagList(this.taskList);
     }
 
@@ -169,6 +170,17 @@ public class ModelManager implements Model {
     public void updateSortedTaskList(Comparator<Task> comparator) {
         requireNonNull(comparator);
         sortedTasks.setComparator(comparator);
+        resetSortedTaskList();
+    }
+
+    @Override
+    public void resetSortedTaskList() {
+        sortedTasks.setComparator(null);
+    }
+
+    @Override
+    public void updateToDefaultSortedTaskList() {
+        updateSortedTaskList(DEFAULT_COMPARATOR);
     }
 
     @Override

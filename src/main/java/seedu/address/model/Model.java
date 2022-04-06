@@ -105,6 +105,17 @@ public interface Model {
      */
     void updateSortedTaskList(Comparator<Task> comparator);
 
+    /**
+     * Resets the sortedList to be unordered. The sorted list may preserve the order according to the previous
+     * comparator but would not dynamically change when edits are made to it.
+     */
+    void resetSortedTaskList();
+
+    /**
+     * Updates the sortedList to be ordered by the {@code DEFAULT_COMPARATOR}.
+     */
+    void updateToDefaultSortedTaskList();
+
     /** Returns an unmodifiable view of the tag list */
     Set<Tag> getTagList();
 
