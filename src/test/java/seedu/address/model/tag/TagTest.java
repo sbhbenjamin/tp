@@ -14,9 +14,9 @@ public class TagTest {
     }
 
     @Test
-    public void constructor_invalidTagTag_throwsIllegalArgumentException() {
-        String invalidTagTag = "";
-        assertThrows(IllegalArgumentException.class, () -> new Tag(invalidTagTag));
+    public void constructor_invalidTagName_throwsIllegalArgumentException() {
+        String invalidTagName = "";
+        assertThrows(IllegalArgumentException.class, () -> new Tag(invalidTagName));
     }
 
     @Test
@@ -30,16 +30,16 @@ public class TagTest {
         assertFalse(Tag.isValidTagName("ㅁㅂㅇㅈㅊㅋㅌㅍㅎ")); // non-english characters
         assertFalse(Tag.isValidTagName("╲ʕ·ᴥ· ╲ʔ")); // symbols
         assertFalse(Tag.isValidTagName("☝")); // emojis
-        assertFalse(Tag.isValidTagName("Lorem ipsum dolor sit amet, consectetur adipiscinga")); // 51 characters
+        assertFalse(Tag.isValidTagName("AI/ML")); // contains punctuations
+        assertFalse(Tag.isValidTagName("AI Machine Learning")); // contains spaces
+        assertFalse(Tag.isValidTagName("ExtraordinaryMachineLearningAndArtificialIntelligen")); // 51 characters
 
-        // valid name
+        // valid tag name
         assertTrue(Tag.isValidTagName("tutorials")); // alphabets only
         assertTrue(Tag.isValidTagName("12345")); // numbers only
         assertTrue(Tag.isValidTagName("cs3240")); // alphanumeric characters
         assertTrue(Tag.isValidTagName("Cs3240")); // with capital letters
-        // contains non-alphanumeric characters
-        assertTrue(Tag.isValidTagName("AI / Machine Learning"));
-        assertTrue(Tag.isValidTagName("Lorem ipsum dolor sit amet, consectetur adipiscing")); // 50 characters
+        assertTrue(Tag.isValidTagName("ExtraordinaryMachineLearningAndArtificialIntellige")); // 50 characters
     }
 
 }
