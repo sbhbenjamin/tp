@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline implements Comparable<Deadline> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Deadlines should be in the format YYYY-MM-DD";
+            "Deadlines should be a valid date, and in the format YYYY-MM-DD";
     static final Deadline MIN_DEADLINE = new Deadline(LocalDate.MIN);
     static final Deadline MAX_DEADLINE = new Deadline(LocalDate.MAX);
 

@@ -21,14 +21,19 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all tasks by the specified sort key and order "
-            + "and displays them as a list with index numbers. "
+            + "and displays them as a list with index numbers. Possible sort keys are deadline, name, and priority. "
             + "Parameters: "
-            + PREFIX_SORT_KEY + "SORT_BY "
+            + PREFIX_SORT_KEY + "SORT_KEY "
             + PREFIX_SORT_ORDER + "SORT_ORDER\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SORT_KEY + "deadline "
             + PREFIX_SORT_ORDER + "desc";
 
+    /** {@code SortOrder} used to denote the order of sorting. */
+    private final SortOrder sortOrder;
+
+    /** {@code SortKey} used to denote the key used for sorting. */
+    private final SortKey sortKey;
 
     /** {@code Comparator<Task>} used to sort tasks. */
     private final Comparator<Task> comparator;
@@ -36,9 +41,12 @@ public class SortCommand extends Command {
     /**
      * Creates a {@code SortCommand} object.
      */
-    public SortCommand(Comparator<Task> comparator) {
-        requireNonNull(comparator);
-        this.comparator = comparator;
+    public SortCommand(SortKey sortKey, SortOrder sortOrder) {
+        requireNonNull(sortKey);
+        requireNonNull(sortOrder);
+        this.sortKey = sortKey;
+        this.sortOrder = sortOrder;
+        this.comparator = ComparatorFactory.createComparator(sortKey, sortOrder);
     }
 
     @Override
@@ -46,7 +54,8 @@ public class SortCommand extends Command {
         requireNonNull(model);
         model.updateSortedTaskList(comparator);
         return new CommandResult(
-                String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getSortedTaskList().size()));
+                String.format(Messages.MESSAGE_TASKS_SORTED,
+                        model.getSortedTaskList().size(), sortKey.toString(), sortOrder.toString()));
     }
 
     @Override

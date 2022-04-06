@@ -34,6 +34,7 @@ public class TagList {
      * @param taskList TaskList to retrieve tags from.
      */
     public void initialiseTagList(TaskList taskList) {
+        requireNonNull(taskList);
         for (Task task : taskList.getTaskList()) {
             Set<Tag> tagsInTask = task.getTags();
             tagsInTask.forEach(this::addTag);
@@ -99,9 +100,22 @@ public class TagList {
         tagsInEditedTask.forEach(this::addTag);
     }
 
-    /** Returns an ordered tag list */
+    /**
+     * Returns an ordered tag list
+     */
     public Set<Tag> getTagList() {
         return new TreeSet<>(tags.keySet());
     }
 
+    /**
+     * Resets the existing tags of this {@code TagList} with tags from {@code newTaskList}.
+     */
+    public void resetTags(ReadOnlyTaskList newTaskList) {
+        requireNonNull(newTaskList);
+
+        tags = new HashMap<>();
+        for (Task task : newTaskList.getTaskList()) {
+            addTagsOfTask(task);
+        }
+    }
 }
