@@ -9,6 +9,9 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.text.Text?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -18,18 +21,20 @@
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
-      <HBox spacing="5" alignment="CENTER_LEFT">
+      <HBox alignment="TOP_LEFT">
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-        <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
+          <TextFlow>
+            <Text fx:id="name" text="\$first" styleClass="cell_big_label" />
+            <Label fx:id="priority" styleClass="cell_small_label" text="\$priority"/>
+          </TextFlow>
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+      <Label fx:id="description" styleClass="cell_small_label" text="\$description" wrapText="true"/>
       <Label fx:id="completionStatus" styleClass="cell_small_label" text="\$completionStatus" />
       <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
 
