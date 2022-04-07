@@ -94,7 +94,9 @@ public class UnmarkCommand extends Command {
     /**
      * Converts the list of successfully unmarked tasks into a string to be returned to the user.
      *
-     * @param unmarkedTasks
+     * @param unmarkedTasks a {a @code List<Task>} containing an array of all the successfully unmarked tasks.
+     * @param unmarkedTasksIndexes a {@code List<Index>} containing the array of indexes that were successfully
+     * unmarked.
      * @return a {@code String} listings all the successfully unmarked tasks.
      */
     private String unmarkedTasksToString(List<Task> unmarkedTasks, List<Index> unmarkedTasksIndexes) {
@@ -108,7 +110,8 @@ public class UnmarkCommand extends Command {
     /**
      * Converts a list of indexes to a string to be returned to the user.
      *
-     * @param indexes
+     * @param indexes a {@code List<Index>} containing the list of indexes that are to be processed and returned to the
+     * user.
      * @return a {@code String} of the list of indexes that are passed into the function.
      */
     private String indexesToString(List<Index> indexes) {
@@ -137,6 +140,8 @@ public class UnmarkCommand extends Command {
      * If index is already unmarked, return 1.
      * If index is a valid index, return 0.
      *
+     * @param index the inde which validity is to be checked.
+     * @param taskList the task list which size is to be checked against.
      * @return an int representing validity of the index
      */
     private int isValidIndex(Index index, List<Task> taskList) {
@@ -153,11 +158,11 @@ public class UnmarkCommand extends Command {
     /**
      * Processes the lists containing the results of the unmarking of indexes and returns the result to the user.
      *
-     * @param model
-     * @param lastShownList
-     * @param unmarkTaskIndexes
-     * @param alreadyUnmarkedIndexes
-     * @param outOfBoundsIndexes
+     * @param model the current model
+     * @param lastShownList the last shown list which contains the tasks to be unmarked.
+     * @param unmarkTaskIndexes the array of indexes inputted by the user that are to be unmarked.
+     * @param alreadyUnmarkedIndexes the array of indexes inputted by the user that are already unmarked.
+     * @param outOfBoundsIndexes the array of indexes inputted by the user that are outOfBounds.
      * @return CommandResult of unmarking the inputted indexes.
      * @throws CommandException
      */

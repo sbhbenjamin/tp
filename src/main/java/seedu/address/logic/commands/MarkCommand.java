@@ -93,7 +93,8 @@ public class MarkCommand extends Command {
     /**
      * Converts the list of successfully marked tasks into a string to be returned to the user
      *
-     * @param markedTasks
+     * @param markedTasks a {a @code List<Task>} containing an array of all the successfully marked tasks.
+     * @param markedTasksIndexes a {@code List<Index>} containing the array of indexes that were successfully marked.
      * @return a {@code String} listings all the successfully marked tasks.
      */
     private String markedTasksToString(List<Task> markedTasks, List<Index> markedTasksIndexes) {
@@ -107,7 +108,8 @@ public class MarkCommand extends Command {
     /**
      * Converts a list of indexes to a string to be returned to the user.
      *
-     * @param indexes
+     * @param indexes a {@code List<Index>} containing the list of indexes that are to be processed and returned to the
+     * user.
      * @return a {@code String} of the list of indexes that are passed into the function.
      */
     private String indexesToString(List<Index> indexes) {
@@ -137,6 +139,8 @@ public class MarkCommand extends Command {
      * If index is already marked, return 1.
      * If index is a valid index, return 0.
      *
+     * @param index the inde which validity is to be checked.
+     * @param taskList the task list which size is to be checked against.
      * @return an int representing validity of the index
      */
     private int isValidIndex(Index index, List<Task> taskList) {
@@ -153,9 +157,11 @@ public class MarkCommand extends Command {
     /**
      * Processes the lists containing the results of the marking of indexes and returns the result to the user.
      *
-     * @param markTaskIndexes
-     * @param alreadyMarkedIndexes
-     * @param outOfBoundsIndexes
+     * @param model the current model
+     * @param lastShownList the last shown list which contains the tasks to be marked.
+     * @param markTaskIndexes the array of indexes inputted by the user that are to be marked.
+     * @param alreadyMarkedIndexes the array of indexes inputted by the user that are already marked.
+     * @param outOfBoundsIndexes the array of indexes inputted by the user that are outOfBounds.
      * @return CommandResult of the marking of the inputted indexes.
      * @throws CommandException
      */
