@@ -111,16 +111,14 @@ public class DeleteCommand extends Command {
     /**
      * Processes the lists containing the results of the deleting of indexes and returns the result to the user.
      *
-     * @param deletedTasks
-     * @param deletedTasksIndexes
      * @param outOfBoundsIndexes
      * @return CommandResult of deleting the inputted indexes.
      * @throws CommandException
      */
-    private CommandResult result(List<Task> deletedTasks, List<Index> deletedTasksIndexes,
+    private CommandResult result(Model model, List<Task> lastShownListl, List<Index> deleteTasksIndexes,
                                  List<Index> outOfBoundsIndexes) throws CommandException {
         StringBuilder errorString = new StringBuilder();
-
+        List<Task> deletedTasks = new ArrayList<>();
 
         if (!outOfBoundsIndexes.isEmpty()) {
             errorString.append("Index " + indexesToString(outOfBoundsIndexes) + ": "
@@ -128,13 +126,13 @@ public class DeleteCommand extends Command {
         }
 
         if (errorString.length() != 0) { //throw error if any
-            if (!deletedTasks.isEmpty()) {
-                errorString.append(deletedTasksToString(deletedTasks, deletedTasksIndexes));
+            if (!deleteTasks.isEmpty()) {
+                errorString.append(deletedTasksToString(deletedTasks, deleteTasksIndexes));
             }
             throw new CommandException(errorString.toString());
         }
 
-        return new CommandResult(deletedTasksToString(deletedTasks, deletedTasksIndexes));
+        return new CommandResult(deletedTasksToString(deletedTasks, deleteTasksIndexes));
 
     }
 }
