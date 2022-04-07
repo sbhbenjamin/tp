@@ -155,7 +155,7 @@ Format:  `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
 
 Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`
 
-![UserGuide-add](images/UserGuide-add.png)
+![Add a task](images/Ui-AddTask.png)
 Figure 3.1: Example of Harmonia after adding a task
 
 [Return to Top](#table-of-contents-toc)
@@ -220,6 +220,9 @@ Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27 p/low p/
 You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to narrow down your search.
 </div>
 
+![Find tasks after and including a specified start date](images/Ui-FindStartDate.png)
+Figure 3.5: Example of finding tasks after and including the date `2022-04-01`
+
 [Return to Top](#table-of-contents-toc)
 
 ### 3.6 Marking as complete: `mark`
@@ -234,7 +237,7 @@ Example:
 You can key `list` to check the index of the task you wish to mark.
 </div>
 
-![UserGuide-mark](images/UserGuide-massmark-after.png)
+![Mark a task](images/Ui-MarkTask.png)
 Figure 3.6: Example of Harmonia after marking a task
 
 [Return to Top](#table-of-contents-toc)
@@ -252,8 +255,8 @@ Example:
 You can key `list` to check the index of the task you wish to unmark.
 </div>
 
-![UserGuide-unmark](images/UserGuide-massunmark-after.png)
-Figure 3.7: Example of Harmonia after unmarking some tasks
+![Unmark multiple tasks](images/Ui-MassUnmarkTasks.png)
+Figure 3.7: Example of Harmonia after unmarking multiple tasks
 
 [Return to Top](#table-of-contents-toc)
 
@@ -302,6 +305,9 @@ Example:
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 The tasks will preserve the specified sorting until a different `sort` command is given.
 </div>
+
+![Sort by priority in descending order](images/Ui-SortPriority.png)
+Figure 3.9: Example of Harmonia after sorting tasks in descending order
 
 [Return to Top](#table-of-contents-toc)
 
