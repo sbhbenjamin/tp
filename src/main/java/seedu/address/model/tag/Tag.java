@@ -4,13 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag in the address book.
+ * Represents a Tag in the task list.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
-public class Tag {
+public class Tag implements Comparable<Tag> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Tags should not be blank or start with white spaces, "
+            + "and the length should be less than 51 characters.";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}\\p{Punct}][\\p{Alnum}\\p{Punct}\\s]{0,49}";
 
     public final String tagName;
 
@@ -51,4 +52,8 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
+    @Override
+    public int compareTo(Tag other) {
+        return tagName.compareToIgnoreCase(other.tagName);
+    }
 }
