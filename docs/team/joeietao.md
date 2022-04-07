@@ -15,7 +15,6 @@ Given below are my contributions to the project.
 - Update `MainWindow`
 - Refactor `Ui`
 - Update the `FXML` files
-- Refactor `testutil`
 - Removed unused files from `AddressBook` that were irrelevant to `Harmonia`
 
 **Added Mass Operations:** ([#139](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/139#issue-1169282871), [#191](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/191#issue-1183178506))
@@ -47,9 +46,11 @@ Given below are my contributions to the project.
     - Added documentation for mass marking
     - Added documentation for mass unmarking
 
+**Testing**
+- Updated testutil [#128](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/128#issue-1166192852)
 
 **Team**
-- identifying and fixing bugs: [#160](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/160#issue-1179281197), [#191](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/191#issue-1183178506), [#272](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/272#issue-1193391761), [#281](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/281#issue-1195887094)
+- Fixed bugs: [#160](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/160#issue-1179281197), [#191](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/191#issue-1183178506), [#272](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/272#issue-1193391761), [#281](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/281#issue-1195887094)
 - PRs reviewed (with non-trivial review comments): [#200](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/200#issue-1185955092), [#207](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/207#issue-1186631238), [#196](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/196#issue-1184502012)
 
 **Community**
