@@ -291,7 +291,7 @@ e.g. `edit 1 t/CS2103T t/Tutorial`, edits the tags of the task at the first inde
 
 ### 3.9 Sorting tasks: `sort`
 
-Harmonia allows you to sorts the tasks by the specified sort key and sort order and list them out.
+Harmonia allows you to sort the tasks by the specified sort key and sort order and list them out.
 
 Format: `sort by/SORT_KEY in/SORT_ORDER`
 - `SORT_KEY` is the property of the task used for sorting. Currently, supported sort keys are:
