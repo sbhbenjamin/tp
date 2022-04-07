@@ -3,7 +3,7 @@ layout: page
 title: Benjamin's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: Harmonia
 
 **Overview**
 
@@ -11,12 +11,12 @@ Harmonia is a command-line-based personal task manager, which helps university s
 
 Given below are my contributions to the project.
 
-**Improve GUI:** [#203](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/203)
+**Improved GUI:** [#203](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/203)
 - Created initial high-fidelity wireframes on Figma
-- Tweak padding, fonts, colours and alignments according to initial wireframes to make the GUI more pleasing to look at
-- Enhance responsiveness of the application, to ensure that the application displays content as intended at all screen sizes
+- Tweaked padding, fonts, colours and alignments according to initial wireframes to make the GUI more pleasing to look at
+- Enhanced responsiveness of the application, to ensure that the application displays content as intended at all screen sizes
 
-**Evolve Addressbook into Harmonia:** [#100](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/100)
+**Evolved Addressbook into Harmonia:** [#100](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/100)
 - Add new `Task` class and its corresponding property classes (`Name`, `Description`, `Tags`, `isCompleted`)
 - Add `Deadline` property
 - Add `Task` exceptions
@@ -24,16 +24,16 @@ Given below are my contributions to the project.
 - Update User Preferences
 - Update`Model`
 
-**Priority feature:** [#153](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/153)
+**Added the Priority feature:** [#153](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/153)
 - What it does: a feature that allows the user to attach priorities to tasks
 - Justification: This feature enhances the product as it allows a user to tag attach an importance to their task, to ensure that they can quickly prioritise what they want to do
 - Highlights: This enhancement affects existing commands such as `Add`, `Edit`, `Find` and `Sort` commands.
 
-**Conduct testing:**
+**Conducted testing:**
 - Tests for the model [#147](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/147)
 - Tests for the `Task` and its properties (`Completion Status`, `Deadline`, `Description`, `Name`, `Task`, `NameContainsKeywordsPredicateTest`, `UniqueTaskListTest`)
-- Test for `TaskList` and `ModelManager`
-- Test for Tags [#271](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/271)
+- Tests for `TaskList` and `ModelManager`
+- Tests for `Tag` [#271](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/271)
 
 
 **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=sbhbenjamin&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
@@ -57,19 +57,19 @@ Given below are my contributions to the project.
 
 
 **Team**
-- Setting up the GitHub team org/repo
-- Setting up GitHub and Gradle
-- Update codecov and CI status badge [#89](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/89)
-- Integrate the product, to ensure that it is functional when combining different parts of the system [#127](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/127), [#141](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/141)
-- Identifying inconsistencies or bugs, and performing hotfixes [#201](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/201), [#159](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/159), [#277](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/277), [#271](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/271), [#266](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/266), [#267](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/267)
-- Fix site-wide settings for documentation [#195](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/195)
-- Update home page of the documentation [#88](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/88)
-- Update AboutUs page to include team information [#53](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/53)
+- Set up the GitHub team org/repo
+- Set up GitHub and Gradle
+- Updated codecov and CI status badge [#89](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/89)
+- Integrated the product, to ensure that it is functional when combining different parts of the system [#127](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/127), [#141](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/141)
+- Identified inconsistencies or bugs, and performed hotfixes [#201](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/201), [#159](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/159), [#277](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/277), [#271](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/271), [#266](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/266), [#267](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/267)
+- Fixed site-wide settings for documentation [#195](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/195)
+- Updated home page of the documentation [#88](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/88)
+- Updated AboutUs page to include team information [#53](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/53)
 - PRs reviewed (with non-trivial review comments): [#108](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/108), [#116](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/116), [#115](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/115), [#129](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/129), [#133](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/133), [#160](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/160), [#163](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/163), [#177](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/177), [#263](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/263), [#264](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/264)
-- Take part in informal code reviews and provided suggestions on implementations
+- Took part in informal code reviews and provided suggestions on implementations
 
 
 **Community**
 - Contributed to forum discussions: [#10](https://github.com/nus-cs2103-AY2122S2/forum/issues/10#issuecomment-1017075628)
 - Shared useful information in the forum, and provided support for members in other teams: ([#114](https://github.com/nus-cs2103-AY2122S2/forum/issues/114), [#232](https://github.com/nus-cs2103-AY2122S2/forum/issues/232), [#175](https://github.com/nus-cs2103-AY2122S2/forum/issues/175#issuecomment-1046781542))
-- Reported bugs for other teams in the class ([16 bugs identified in the PE-D](https://github.com/sbhbenjamin/ped/issues))
+- Reported bugs for other teams in class ([16 bugs identified in the PE-D](https://github.com/sbhbenjamin/ped/issues))
