@@ -93,7 +93,7 @@ public class MarkCommand extends Command {
     /**
      * Converts the list of successfully marked tasks into a string to be returned to the user
      *
-     * @param markedTasks a {a @code List<Task>} containing an array of all the successfully marked tasks.
+     * @param markedTasks a {@code List<Task>} containing an array of all the successfully marked tasks.
      * @param markedTasksIndexes a {@code List<Index>} containing the array of indexes that were successfully marked.
      * @return a {@code String} listings all the successfully marked tasks.
      */

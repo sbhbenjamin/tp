@@ -94,7 +94,7 @@ public class UnmarkCommand extends Command {
     /**
      * Converts the list of successfully unmarked tasks into a string to be returned to the user.
      *
-     * @param unmarkedTasks a {a @code List<Task>} containing an array of all the successfully unmarked tasks.
+     * @param unmarkedTasks a {@code List<Task>} containing an array of all the successfully unmarked tasks.
      * @param unmarkedTasksIndexes a {@code List<Index>} containing the array of indexes that were successfully
      * unmarked.
      * @return a {@code String} listings all the successfully unmarked tasks.
