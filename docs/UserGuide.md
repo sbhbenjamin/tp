@@ -237,8 +237,8 @@ Example:
 You can key `list` to check the index of the task you wish to mark.
 </div>
 
-![Mark a task](images/Ui-MarkTask.png)
-Figure 3.6: Example of Harmonia after marking a task
+![UserGuide-mark](images/UserGuide-massmark-after.png)
+Figure 3.6: Example of Harmonia after marking task 2
 
 [Return to Top](#table-of-contents-toc)
 
@@ -255,8 +255,8 @@ Example:
 You can key `list` to check the index of the task you wish to unmark.
 </div>
 
-![Unmark multiple tasks](images/Ui-MassUnmarkTasks.png)
-Figure 3.7: Example of Harmonia after unmarking multiple tasks
+![UserGuide-unmark](images/UserGuide-massunmark-after.png)
+Figure 3.7: Example of Harmonia after unmarking tasks 1 and 2
 
 [Return to Top](#table-of-contents-toc)
 
