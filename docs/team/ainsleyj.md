@@ -72,5 +72,6 @@ Given below are my contributions to the project.
       * [#167](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/167)
       * [#169](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/169)
       * [#212](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/212)
+      * [#278](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/278)
 
   2. Actively provide suggestions on various functionalities implemented by others.
