@@ -29,7 +29,7 @@ Given below are my contributions to the project.
 
   * Enhancement to the `help` feature (PR: [#188](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/188))
     * Added the option of opening the user guide using the user's default browser.
-    * Justification: This enhancement provides convenience for the user as they can choose to view the user guide by clicking the button instead of having to copy and paste the url into another browser window.
+    * Justification: This enhancement provides convenience for the user as they can choose to view the user guide by clicking the button instead of copying and pasting the url into another browser window.
     * Credits: Code to open url using default browser adapted from [here](https://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java) 
     
   * Enhancement to the `list` feature (PR: [#196](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/196))
