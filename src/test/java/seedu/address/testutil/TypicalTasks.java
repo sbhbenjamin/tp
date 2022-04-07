@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.TagList;
 import seedu.address.model.TaskList;
 import seedu.address.model.task.Task;
 
@@ -52,6 +53,7 @@ public class TypicalTasks {
     public static final Task BUY_ART_SUPPLIES = new TaskBuilder().withName("Buy Art Supplies")
             .withDescription("Buy Art supplies for art project").withDeadline("2022-03-21")
             .withPriority("low").withCompletionStatus("false").build();
+
     public static final Task APPLY_INTERNSHIP = new TaskBuilder().withName("Apply Internship")
             .withDescription("Apply for opening at Shopee").withDeadline("2022-03-24")
             .withPriority("low").withCompletionStatus("false").build();
@@ -75,7 +77,7 @@ public class TypicalTasks {
     private TypicalTasks() {} // prevents instantiation
 
     /**
-     * Returns an {@code TaskList} with all the typical Tasks.
+     * Returns a {@code TaskList} with all the typical Tasks.
      */
     public static TaskList getTypicalTaskList() {
         TaskList tl = new TaskList();
@@ -89,4 +91,31 @@ public class TypicalTasks {
         return new ArrayList<>(Arrays.asList(CS2103T_PROJECT, CS2105_FINALS, CS2105_MIDTERM,
                 CS2105_TUTORIAL, MEET_ALICE));
     }
+
+    /**
+     * Returns a {@code TaskList} with all the typical Tasks which have no tags.
+     */
+    public static TaskList getTypicalTaskListWithNoTags() {
+        TaskList tl = new TaskList();
+        for (Task task : getTypicalTasksWithNoTags()) {
+            tl.addTask(task);
+        }
+        return tl;
+    }
+
+    public static List<Task> getTypicalTasksWithNoTags() {
+        return new ArrayList<>(Arrays.asList(MEET_ALICE, BUY_ART_SUPPLIES, APPLY_INTERNSHIP, CS2107_ASSIGNMENT));
+    }
+
+    /**
+     * Returns a {@code TagList} with all the tags of typical Tasks.
+     */
+    public static TagList getTypicalTagList() {
+        TagList tagList = new TagList(new TaskList());
+        for (Task task : getTypicalTasks()) {
+            tagList.addTagsOfTask(task);
+        }
+        return tagList;
+    }
+
 }

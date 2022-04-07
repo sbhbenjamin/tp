@@ -59,7 +59,8 @@ public class CommandTestUtil {
             + "magna dictum quis. Proin erat curae."; // description should not be more than 255 characters
     public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DEADLINE + "2022/01/01"; // wrong date format
     public static final String INVALID_PRIORITY = " " + PREFIX_PRIORITY + "highest"; // invalid priority enum
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "test*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG
+            + "qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbn"; // tag should not be more than 50 characters
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -70,10 +71,10 @@ public class CommandTestUtil {
     static {
         DESC_TUTORIAL = new EditTaskDescriptorBuilder().withName(VALID_NAME_TUTORIAL)
                 .withDescription(VALID_DESCRIPTION_TUTORIAL).withDeadline(VALID_DEADLINE_TUTORIAL)
-                .withTags(VALID_TAG_CS2103T).build();
+                .withPriority(VALID_PRIORITY_LOW).withTags(VALID_TAG_CS2103T).build();
         DESC_MIDTERM = new EditTaskDescriptorBuilder().withName(VALID_NAME_MIDTERM)
                 .withDescription(VALID_DESCRIPTION_MIDTERM).withDeadline(VALID_DEADLINE_MIDTERM)
-                .withTags(VALID_TAG_CS2102, VALID_TAG_TEST).build();
+                .withPriority(VALID_PRIORITY_MEDIUM).withTags(VALID_TAG_CS2102, VALID_TAG_TEST).build();
     }
 
     /**

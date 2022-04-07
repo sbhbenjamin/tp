@@ -39,6 +39,7 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 <br>   5.2 [Index](#52-index)
 <br>   5.3 [Tag](#53-tag)
 <br>   5.4 [GUI](#54-gui)
+6. [Appendix: Constraints on inputs](#6-appendix-constraints-on-inputs)
 
 ## 1. About
 
@@ -73,16 +74,15 @@ Instructions that occur in a warning box you are advised to heed, or else uninte
 ### 1.5 [Graphical User Interface (GUI)](#54-gui)
 Figure 1.5 depicts the user interface of Harmonia. The following descriptions explain the interface from top to bottom.
 
-Component | Purpose
---------|------------------
-**Toolbar** | The toolbar allows you to access `File` and `Help` options.
-**Task List** | The mainframe of Harmonia, where you will be able to view all of your tasks. This list will update accordingly to your commands, especially when you `find` a task, or `sort` all of your tasks.
-**Result Display**| The result display is where you will find the output of your commands. This will be especially useful in helping you understand whether your command has been successfully processed by Harmonia, or if there are any errors.
-**Command Box** | The Command Box will be where you can input your commands. This will be the main way in which you will interact with Harmonia.
-**Status Bar**| The status bar includes the location where the data file is stored.
+| Component          | Purpose                                                                                                                                                                                                                       |
+|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Toolbar**        | The toolbar allows you to access `File` and `Help` options.                                                                                                                                                                   |
+| **Task List**      | The mainframe of Harmonia, where you will be able to view all of your tasks. This list will update accordingly to your commands, especially when you `find` a task, or `sort` all of your tasks.                              |
+| **Result Display** | The result display is where you will find the output of your commands. This will be especially useful in helping you understand whether your command has been successfully processed by Harmonia, or if there are any errors. |
+| **Command Box**    | The Command Box will be where you can input your commands. This will be the main way in which you will interact with Harmonia.                                                                                                |
+| **Status Bar**     | The status bar includes the location where the data file is stored.                                                                                                                                                           |
 
-
-  ![Harmonia UI](images/AnnotatedUi.png)
+![Harmonia UI](images/AnnotatedUi.png)
   *Figure 1.5: Harmonia's GUI*
 
   ![Harmonia UI](images/TaskCard.png)
@@ -98,7 +98,9 @@ Component | Purpose
 
 3. Copy the file to the folder you want to use as the home folder for Harmonia.
 
-4. Double-click the file to start the app. The [GUI](#54-gui) similar to *Figure 1.5* should appear in a few seconds.
+4. * For **Windows** user: double-click the file to start the app.
+   * For **Mac/Linux** user: open the terminal, navigate to the directory where harmonia.jar is located, then run `java -jar harmonia.jar` in the terminal.
+   * The [GUI](#54-gui) similar to *Figure 1.5* should appear in a few seconds.
 
 5. Type the command in the command box and press <kbd>↵Enter</kbd> to execute it.<br>
 Here are a few example commands you can try:
@@ -111,7 +113,6 @@ Here are a few example commands you can try:
 
 [Return to Top](#table-of-contents-toc)
 
---------------------------------------------------------------------------------------------------------------------
 ## 3. Features
 
 <div markdown="block" class="alert alert-primary">
@@ -141,6 +142,8 @@ Here are a few example commands you can try:
 - Extraneous parameters for commands that do not take in any parameters (such as `help` and `exit`) will be ignored.<br>
   e.g. if you input `exit 123`, Harmonia will interpret it as `exit`.
 
+- The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
+
 </div>
 
 [Return to Top](#table-of-contents-toc)
@@ -149,20 +152,19 @@ Here are a few example commands you can try:
 Harmonia allows you to add a task with a name, description, deadline, priority, and optionally some [tags](#53-tag).
 
 Format:  `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
-- `DEADLINE` should be in the format `‘YYYY-MM-DD’`.
-- `PRIORITY` should be `low`, `medium` or `high`.
-- `TAG` should not contain any space.
 
 Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`
 
 ![Add a task](images/Ui-AddTask.png)
 Figure 3.1: Example of Harmonia after adding a task
 
+The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
+
 [Return to Top](#table-of-contents-toc)
 
 ### 3.2 Listing all tasks: `list`
 
-Harmonia allows you to see a list of all the existing tasks in the task list.
+Harmonia allows you to see a list of all existing tasks in the task list.
 
 Format: `list`
 
@@ -170,19 +172,25 @@ Format: `list`
 
 ### 3.3 Listing all [tags](#53-tag): `list t/`
 
-Lists all existing tags used in the task list.
+Harmonia allows you to see a list of all existing tags used in the task list.
 
 Format: `list t/`
+- The tags are listed in the Result Display.
+- Listed tags are case-insensitive (i.e. if there are two tags, cs2103t and CS2103T, only one of the tags will be shown).
 
 [Return to Top](#table-of-contents-toc)
 
 ### 3.4 Deleting a task: `delete`
 
-Deletes the task at the given [index](#52-index) of the existing task list from Harmonia.
+Harmonia allows you to delete the tasks at the given [indexes](#52-index) of the displayed task list. You have to provide one or more indexes to be deleted.
 
-Format: `delete INDEX`
+Format: `delete INDEX [INDEX]...`
 
-Example: `delete 3` deletes the 3rd task in Harmonia.
+Example: 
+- `delete 3` deletes the task at the third [index](#52-index) of the task list.
+- `delete 1 2 3` deletes the tasks at the first, second and third [index](#52-index) of the task list.
+
+The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the index of the task you wish to delete.
@@ -216,47 +224,62 @@ Format: `find [n/NAME_KEYWORD]... [d/DESCRIPTION_KEYWORD]... [start/START_DATE] 
 
 Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27 p/low p/medium c/true`
 
+![Find tasks after and including a specified start date](images/Ui-FindStartDate.png)
+Figure 3.5: Example of finding tasks after and including the date `2022-04-01`
+
+The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
+
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to narrow down your search.
 </div>
 
-![Find tasks after and including a specified start date](images/Ui-FindStartDate.png)
-Figure 3.5: Example of finding tasks after and including the date `2022-04-01`
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+* Harmonia does not include partial keyword matches, i.e. only tasks containing keywords that match `NAME_KEYWORD`s and `DESCRIPTION_KEYWORD`s exactly will be retrieved.
+</div>
+
 
 [Return to Top](#table-of-contents-toc)
 
 ### 3.6 Marking as complete: `mark`
 
-Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the existing task list as complete. You have to provide one or more indexes to be marked.
+Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the displayed task list as complete. You have to provide one or more indexes to be marked.
+
 Format: `mark INDEX [INDEX]...`
+
 Example:
-- `mark 3` marks the task at the third index of the task list as complete.
-- `mark 1 2 3` marks the tasks at the first, second and third index of the list as complete.
+- `mark 3` marks the task at the third [index](#52-index) of the task list as complete.
+- `mark 1 2 3` marks the tasks at the first, second and third [index](#52-index) of the list as complete.
+
+![UserGuide-mark](images/Ui-MarkTask.png)
+Figure 3.6: Example of Harmonia after marking task 2
+
+The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the index of the task you wish to mark.
 </div>
 
-![UserGuide-mark](images/UserGuide-massmark-after.png)
-Figure 3.6: Example of Harmonia after marking task 2
 
 [Return to Top](#table-of-contents-toc)
 
 ### 3.7 Marking as incomplete: `unmark`
 
-Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the existing task list as incomplete. You have to provide one or more indexes to be unmarked.
+Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the displayed task list as incomplete. You have to provide one or more indexes to be unmarked.
 
 Format: `unmark INDEX [INDEX]...`
+
 Example:
-- `unmark 3` marks the task at the third index of the task list as incomplete.
-- `unmark 1 2 3` marks the tasks at the first, second and third index of the list as incomplete.
+- `unmark 3` marks the task at the third [index](#52-index) of the task list as incomplete.
+- `unmark 1 2 3` marks the tasks at the first, second and third [index](#52-index) of the list as incomplete.
+
+![UserGuide-unmark](images/Ui-MassUnmarkTasks.png)
+Figure 3.7: Example of Harmonia after unmarking tasks 1 and 2
+
+The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the index of the task you wish to unmark.
 </div>
-
-![UserGuide-unmark](images/UserGuide-massunmark-after.png)
-Figure 3.7: Example of Harmonia after unmarking tasks 1 and 2
 
 [Return to Top](#table-of-contents-toc)
 
@@ -265,13 +288,12 @@ Figure 3.7: Example of Harmonia after unmarking tasks 1 and 2
 Harmonia allows you to edit an existing task in the task list.
 
 Format: `edit INDEX [n/NAME] [d/DESCRIPTION] [dl/DEADLINE] [p/PRIORITY] [t/TAG]...`
-- `DEADLINE` should be in the format `YYYY-MM-DD`.
-- `PRIORITY` should be `low`, `medium` or `high`.
-- `TAG` should not contain any space.
 
 Example:
 - `edit 1 d/Prepare for CS2103T tutorial`
 - `edit 2 n/CS2103T meeting t/CS2103T`
+
+The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the [index](#52-index) of the task you wish to edit.
@@ -282,12 +304,11 @@ You should include the existing tag(s) in the command when adding a new tag. Oth
 e.g. `edit 1 t/CS2103T t/Tutorial`, edits the tags of the task at the first index where `CS2103T` is an existing tag and `Tutorial` is a new tag to be added.
 </div>
 
-
 [Return to Top](#table-of-contents-toc)
 
 ### 3.9 Sorting tasks: `sort`
 
-Sorts the tasks by the specified sort key and sort order and list them out.
+Harmonia allows you to sort the tasks by the specified sort key and sort order and list them out.
 
 Format: `sort by/SORT_KEY in/SORT_ORDER`
 - `SORT_KEY` is the property of the task used for sorting. Currently, supported sort keys are:
@@ -302,18 +323,22 @@ Example:
 - `sort by/deadline in/asc`: lists the tasks with the earliest deadline first
 - `sort by/priority in/desc`: lists the tasks with the highest priority first
 
+![Sort by priority in descending order](images/Ui-SortPriority.png)
+Figure 3.9: Example of Harmonia after sorting tasks in descending order
+
+The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
+
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 The tasks will preserve the specified sorting until a different `sort` command is given.
 </div>
 
-![Sort by priority in descending order](images/Ui-SortPriority.png)
-Figure 3.9: Example of Harmonia after sorting tasks in descending order
+
 
 [Return to Top](#table-of-contents-toc)
 
 ### 3.10 Viewing help: `help`
 
-Shows the link to the user guide.
+Harmonia allows you to view help by showing you the link to the user guide.
 
 Format: `help`
 
@@ -333,7 +358,7 @@ Do not use the clear command unless you are certain that you wish to erase all d
 
 ### 3.12 Exiting the program: `exit`
 
-Exits the program.
+Harmonia allows you to exit the program.
 
 Format: `exit`
 
@@ -358,19 +383,19 @@ If your changes to the data file makes its format invalid, Harmonia will discard
 --------------------------------------------------------------------------------------------------------------------
 ## 4. Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…` <br> e.g., `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [d/DESCRIPTION] [dl/DEADLINE] [p/PRIORITY] [t/TAG]...`<br> e.g.,`edit 2 n/CS2101 meeting t/CS2101`
-**Mark**| `mark INDEX [INDEX]...` <br> e.g., `mark 3` <br> e.g., `mark 1 2 3`
-**Unmark**| `unmark INDEX [INDEX]...` <br> e.g., `unmark 3` <br> e.g., `unmark 1 2 3`
-**List**| `list` <br> `list t/`
-**Sort**| `sort by/SORT_KEY in/SORT_ORDER` <br> e.g., `sort by/deadline in/desc` <br> e.g., `sort by/priority in/asc`
-**Find** | `find [n/NAME_KEYWORD]... [t/TAG_KEYWORD]... [start/START_DATE] [end/END_DATE]` <br> e.g., `find n/book n/read` <br> e.g., `find t/test t/CS2103T` <br> e.g., `find start/2022-03-14 end/2022-03-18` <br> e.g., `find t/CS2103T` <br> e.g., `find n/book t/test start/2022-03-15`
-**Help** | `help`
-**Clear** | `clear`
-**Exit** | `exit`
+| Action     | Format, Examples                                                                                                                                                                                                                                                                  |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…` <br> e.g., `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`                                                                                            |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                               |
+| **Edit**   | `edit INDEX [n/NAME] [d/DESCRIPTION] [dl/DEADLINE] [p/PRIORITY] [t/TAG]...`<br> e.g.,`edit 2 n/CS2101 meeting t/CS2101`                                                                                                                                                           |
+| **Mark**   | `mark INDEX [INDEX]...` <br> e.g., `mark 3` <br> e.g., `mark 1 2 3`                                                                                                                                                                                                               |
+| **Unmark** | `unmark INDEX [INDEX]...` <br> e.g., `unmark 3` <br> e.g., `unmark 1 2 3`                                                                                                                                                                                                         |
+| **List**   | `list` <br> `list t/`                                                                                                                                                                                                                                                             |
+| **Sort**   | `sort by/SORT_KEY in/SORT_ORDER` <br> e.g., `sort by/deadline in/desc` <br> e.g., `sort by/priority in/asc`                                                                                                                                                                       |
+| **Find**   | `find [n/NAME_KEYWORD]... [t/TAG_KEYWORD]... [start/START_DATE] [end/END_DATE]` <br> e.g., `find n/book n/read` <br> e.g., `find t/test t/CS2103T` <br> e.g., `find start/2022-03-14 end/2022-03-18` <br> e.g., `find t/CS2103T` <br> e.g., `find n/book t/test start/2022-03-15` |
+| **Help**   | `help`                                                                                                                                                                                                                                                                            |
+| **Clear**  | `clear`                                                                                                                                                                                                                                                                           |
+| **Exit**   | `exit`                                                                                                                                                                                                                                                                            |
 
 [Return to Top](#table-of-contents-toc)
 
@@ -388,7 +413,7 @@ In Harmonia, a JSON file is used to store the list of tasks. For each task, the 
 
 Harmonia uses indexes to help you address a task easily. An `Index` refers to the numbering of an item in a list, as shown in the displayed task list.<br>
 
-For example,  in a list of tasks:<br>
+For example, in a list of tasks:<br>
 1. Do homework<br>
 2. Clean room<br>
 3. Walk dog<br>
@@ -407,5 +432,24 @@ Harmonia uses tags to help you categorize your tasks. You may optionally assign 
 The graphical user interface (GUI) is a form of user interface that allows users to interact with electronic devices through graphical icons and audio indicator such as primary notation, instead of text-based user interfaces, typed command labels or text navigation. [(Source: Wikipedia)](https://en.wikipedia.org/wiki/Graphical_user_interface)
 
 Harmonia uses a simple GUI to help you interact with the application, while preserving the benefits of command line interface (CLI).
+
+[Return to Top](#table-of-contents-toc)
+
+## 6. Appendix: Constraints on inputs
+
+| Field                                    | Constraint                                                                                                                                                                                                              | Length Limit | Related Command(s)                                                                                                                                           |
+|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`                                   | 1. This field can only contain alphanumeric characters, or punctuations (other than `/`).<br/>2. The first character must be a letter or digit.<br/>3. This field is case-insensitive.                                  | 1 - 255      | [`add`](#31-adding-a-task-add) [`find`](#35-locating-a-task-find) [`edit`](#38-editing-a-task-edit) [`sort`](#39-sorting-tasks-sort)                         |
+| `DESCRIPTION`                            | 1. This field can only contain alphanumeric characters, or punctuations (other than `/`), or spaces.<br/>2. The first character must be a letter or digit.<br/>3. This field is case-insensitive.                       | 1 - 255      | [`add`](#31-adding-a-task-add) [`find`](#35-locating-a-task-find) [`edit`](#38-editing-a-task-edit)                                                          |
+| `DEADLINE`                               | 1. This field should contain a valid date.<br/>2. This field should be in the format of `YYYY-MM-DD`.                                                                                                                   | NA           | [`add`](#31-adding-a-task-add) [`edit`](#38-editing-a-task-edit) [`sort`](#39-sorting-tasks-sort)                                                            |
+| `PRIORITY`                               | 1. This field should be either `low`, `medium`, or `high`.<br/>2. This field is case-insensitive.                                                                                                                       | NA           | [`add`](#31-adding-a-task-add) [`find`](#35-locating-a-task-find) [`edit`](#38-editing-a-task-edit) [`sort`](#39-sorting-tasks-sort)                         |
+| `TAG`                                    | 1. This field can only contain alphanumeric characters.<br/>2. This field is case-insensitive.                                                                                                                          | 1 - 50       | [`add`](#31-adding-a-task-add) [`find`](#35-locating-a-task-find) [`edit`](#38-editing-a-task-edit)                                                          |
+| `INDEX`                                  | 1. This field should be a positive integer.<br/>2. The value of this field should not be more than the number of tasks displayed.                                                                                       | NA           | [`delete`](#34-deleting-a-task-delete) [`mark`](#36-marking-as-complete-mark) [`unmark`](#37-marking-as-incomplete-unmark) [`edit`](#38-editing-a-task-edit) |
+| `NAME_KEYWORD`<br/>`DESCRIPTION_KEYWORD` | 1. These fields should only contain alphanumeric characters.<br/>2. These fields are case-insensitive.                                                                                                                  | 1 - 63       | [`find`](#35-locating-a-task-find)                                                                                                                           |
+| `START_DATE`                             | 1. This field should contain a valid date.<br/>2. This field should be in the format of `YYYY-MM-DD`.<br/>3. If `END_DATE` is specified at the same time, the `START_DATE` should not be later than the `END_DATE`.     | NA           | [`find`](#35-locating-a-task-find)                                                                                                                           |
+| `END_DATE`                               | 1. This field should contain a valid date.<br/>2. This field should be in the format of `YYYY-MM-DD`.<br/>3. If `START_DATE` is specified at the same time, the `END_DATE` should not be earlier than the `START_DATE`. | NA           | [`find`](#35-locating-a-task-find)                                                                                                                           |
+| `COMPLETION_STATUS`                      | 1. This field should be either `true` or `false`.<br/>2. This field is case-insensitive.                                                                                                                                | NA           | [`find`](#35-locating-a-task-find)                                                                                                                           |
+| `SORT_KEY`                               | 1. This field should be either `deadline`, `priority`, or `name`.<br/>2. This field is case-insensitive.                                                                                                                | NA           | [`sort`](#39-sorting-tasks-sort)                                                                                                                             |
+| `SORT_ORDER`                             | 1. This field should be either `asc` or `desc`.<br/>2. This field is case-insensitive.                                                                                                                                  | NA           | [`sort`](#39-sorting-tasks-sort)                                                                                                                             |
 
 [Return to Top](#table-of-contents-toc)
