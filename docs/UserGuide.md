@@ -180,11 +180,13 @@ Format: `list t/`
 
 ### 3.4 Deleting a task: `delete`
 
-Deletes the task at the given [index](#52-index) of the existing task list from Harmonia.
+Harmonia allows you to delete the tasks at the given [indexes](#52-index) of the displayed task list. You have to provide one or more indexes to be deleted.
 
-Format: `delete INDEX`
+Format: `delete INDEX [INDEX]...`
 
-Example: `delete 3` deletes the task at the third index of the task list.
+Example: 
+- `delete 3` deletes the task at the third [index](#52-index) of the task list.
+- `delete 1 2 3` deletes the tasks at the first, second and third [index](#52-index) of the task list.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the index of the task you wish to delete.
@@ -226,13 +228,13 @@ You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to
 
 ### 3.6 Marking as complete: `mark`
 
-Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the existing task list as complete. You have to provide one or more indexes to be marked.
+Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the displayed task list as complete. You have to provide one or more indexes to be marked.
 
 Format: `mark INDEX [INDEX]...`
 
 Example:
-- `mark 3` marks the task at the third index of the task list as complete.
-- `mark 1 2 3` marks the tasks at the first, second and third index of the list as complete.
+- `mark 3` marks the task at the third [index](#52-index) of the task list as complete.
+- `mark 1 2 3` marks the tasks at the first, second and third [index](#52-index) of the list as complete.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the index of the task you wish to mark.
@@ -245,13 +247,13 @@ You can key `list` to check the index of the task you wish to mark.
 
 ### 3.7 Marking as incomplete: `unmark`
 
-Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the existing task list as incomplete. You have to provide one or more indexes to be unmarked.
+Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the displayed task list as incomplete. You have to provide one or more indexes to be unmarked.
 
 Format: `unmark INDEX [INDEX]...`
 
 Example:
-- `unmark 3` marks the task at the third index of the task list as incomplete.
-- `unmark 1 2 3` marks the tasks at the first, second and third index of the list as incomplete.
+- `unmark 3` marks the task at the third [index](#52-index) of the task list as incomplete.
+- `unmark 1 2 3` marks the tasks at the first, second and third [index](#52-index) of the list as incomplete.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the index of the task you wish to unmark.
@@ -289,7 +291,7 @@ e.g. `edit 1 t/CS2103T t/Tutorial`, edits the tags of the task at the first inde
 
 ### 3.9 Sorting tasks: `sort`
 
-Sorts the tasks by the specified sort key and sort order and list them out.
+Harmonia allows you to sorts the tasks by the specified sort key and sort order and list them out.
 
 Format: `sort by/SORT_KEY in/SORT_ORDER`
 - `SORT_KEY` is the property of the task used for sorting. Currently, supported sort keys are:
@@ -312,7 +314,7 @@ The tasks will preserve the specified sorting until a different `sort` command i
 
 ### 3.10 Viewing help: `help`
 
-Shows the link to the user guide.
+Harmonia allows you to view help by showing you the link to the user guide.
 
 Format: `help`
 
@@ -332,7 +334,7 @@ Do not use the clear command unless you are certain that you wish to erase all d
 
 ### 3.12 Exiting the program: `exit`
 
-Exits the program.
+Harmonia allows you to exit the program.
 
 Format: `exit`
 
