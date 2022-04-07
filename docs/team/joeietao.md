@@ -11,10 +11,14 @@ Harmonia is a command-line-based personal task manager, which helps university s
 Given below are my contributions to the project.
 
 **Refactoring the code from AddressBook to Harmonia:** ([#116](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/116#issue-1163459822), [#128](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/128#issue-1166192852), [#139](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/139#issue-1169282871))
-- Update `Logic` and `LogicManager`
-- Update `MainWindow`
-- Refactor `Ui`
-- Update the `FXML` files
+- Modified `Logic`
+- Modified `LogicManager`
+- Modified `MainWindow`
+- Refactored `PersonListPanel` to `TaskListPanel`
+- Refactored `PersonCard` to `TaskCard`
+- Modified `MainWindow.fxml`
+- Refactored `PersonListCard.fxml` to `TaskListCard.fxml`
+- Refactored `PersonListPanel.fxml` to `TaskListPanel.fxml`
 - Removed unused files from `AddressBook` that were irrelevant to `Harmonia`
 
 **Added Mass Operations:** ([#139](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/139#issue-1169282871), [#191](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/191#issue-1183178506))
