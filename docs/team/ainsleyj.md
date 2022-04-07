@@ -49,7 +49,7 @@ Given below are my contributions to the project.
 
 * **Contributions to team-based tasks**:
 
-  1. Add trail release [v1.3.trail](https://github.com/AY2122S2-CS2103T-T09-1/tp/releases/tag/v1.3.trial). Related PR: [#170](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/170).
+  1. Add trial release [v1.3.trail](https://github.com/AY2122S2-CS2103T-T09-1/tp/releases/tag/v1.3.trial). Related PR: [#170](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/170).
 
   2. Submission of files:
 
