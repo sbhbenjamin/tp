@@ -9,6 +9,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.Task;
 
 
@@ -35,6 +36,7 @@ public class EditTaskDescriptorBuilder {
         descriptor.setName(task.getName());
         descriptor.setDescription(task.getDescription());
         descriptor.setDeadline(task.getDeadline());
+        descriptor.setPriority(task.getPriority());
         descriptor.setTags(task.getTags());
     }
 
@@ -59,6 +61,14 @@ public class EditTaskDescriptorBuilder {
      */
     public EditTaskDescriptorBuilder withDeadline(String deadline) {
         descriptor.setDeadline(new Deadline(deadline));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Priority} of the {@code EditTaskDescriptor} that we are building.
+     */
+    public EditTaskDescriptorBuilder withPriority(String priority) {
+        descriptor.setPriority(Priority.valueOfLabel(priority));
         return this;
     }
 
