@@ -13,14 +13,64 @@ Given below are my contributions to the project.
 
 * **Code Contributed**: [link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=ainsleyj&breakdown=true)
 
-* **Enhancements implemented**: To be added.
+* **Enhancements implemented**:
 
-* **Contributions to the UG**: To be added.
+  1. Modify the `AddCommand` and `AddCommandParser` in Address Book Level 3 (AB3), such that they suit the requirements of Harmonia. Related PR: [#115](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/115), [#138](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/138) and [#264](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/264).
 
-* **Contributions to the DG**: To be added.
+      * Convert the fields from AB3 to the fields in Harmonia. For example, the field `Deadline` and `Description` are added.
+      * Change the parsers and prefixes, to support the `AddCommand`.
+      * Rename some files and methods, to support the functionalities in Harmonia.
+      * Refactor the tests related to `AddCommand`.
 
-* **Contributions to team-based tasks**: To be added.
+  2. Modify the `DeleteCommand` and `ListCommand` in AB3, such that they work correctly for the task list. Related PRs: [#122](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/122) and [#123](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/123).
 
-* **Review/mentoring contributions**: To be added.
+  3. Refactor the messages in Harmonia. Related PRs: [#124](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/124), [#261](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/261), and [#262](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/262).
 
-* **Contributions beyond the project team**: To be added.
+  4. Enhance the `find` command, such that it supports:
+
+      * Search by a range of deadline. Related PR: [#177](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/177)
+      * Search by description, by keyword matching. Related PRs: [#198](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/198) and [#214](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/214).
+      * Search by priority. Related PR: [#198](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/198).
+      * Search by completion status. Related PR: [#218](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/218).
+
+* **Contributions to the UG**:
+
+  1. Update part 3.3 - 3.5 (list all tags, delete and find). Related PR: [#192](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/192) and [#210](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/210).
+
+  2. Add glossary to the UG. Related PR: [#210](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/210).
+
+  3. Add a summary of constraints on user inputs to the UG, and refactor some instructions on commands. Related PR: [#263](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/263).
+
+* **Contributions to the DG**:
+
+  1. Add and format the use cases 5 - 9. Related PR: [#65](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/65).
+
+  2. Update the part related to search by date. Related PR: [#166](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/166).
+
+* **Contributions to team-based tasks**:
+
+  1. Add trail release [v1.3.trail](https://github.com/AY2122S2-CS2103T-T09-1/tp/releases/tag/v1.3.trial). Related PR: [#170](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/170).
+
+  2. Submission of files:
+
+     * Week 6: tP UG draft
+
+* **Review/mentoring contributions**:
+
+  1. Actively participate in reviewing PRs:
+
+      * [#61](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/61)
+      * [#100](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/100)
+      * [#107](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/107)
+      * [#149](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/149)
+      * [#150](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/150)
+      * [#153](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/153)
+      * [#156](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/156)
+      * [#158](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/158)
+      * [#160](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/160)
+      * [#163](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/163)
+      * [#167](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/167)
+      * [#169](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/169)
+      * [#212](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/212)
+
+  2. Actively provide suggestions on various functionalities implemented by others.
