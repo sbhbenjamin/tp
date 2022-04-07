@@ -158,13 +158,13 @@ Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 ![UserGuide-add](images/UserGuide-add.png)
-Figure 3.1: Example of Harmonia after adding a task
+*Figure 3.1: Example of Harmonia after adding a task*
 
 [Return to Top](#table-of-contents-toc)
 
 ### 3.2 Listing all tasks: `list`
 
-Harmonia allows you to see a list of all the existing tasks in the task list.
+Harmonia allows you to see a list of all existing tasks in the task list.
 
 Format: `list`
 
@@ -172,19 +172,23 @@ Format: `list`
 
 ### 3.3 Listing all [tags](#53-tag): `list t/`
 
-Lists all existing tags used in the task list.
+Harmonia allows you to see a list of all existing tags used in the task list.
 
 Format: `list t/`
+- The tags are listed in the Result Display.
+- Listed tags are case-insensitive (i.e. if there are two tags, cs2103t and CS2103T, only one of the tags will be shown).
 
 [Return to Top](#table-of-contents-toc)
 
 ### 3.4 Deleting a task: `delete`
 
-Deletes the task at the given [index](#52-index) of the existing task list from Harmonia.
+Harmonia allows you to delete the tasks at the given [indexes](#52-index) of the displayed task list. You have to provide one or more indexes to be deleted.
 
-Format: `delete INDEX`
+Format: `delete INDEX [INDEX]...`
 
-Example: `delete 3` deletes the 3rd task in Harmonia.
+Example: 
+- `delete 3` deletes the task at the third [index](#52-index) of the task list.
+- `delete 1 2 3` deletes the tasks at the first, second and third [index](#52-index) of the task list.
 
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
@@ -234,14 +238,14 @@ You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to
 
 ### 3.6 Marking as complete: `mark`
 
-Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the existing task list as complete. You have to provide one or more indexes to be marked.
+Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the displayed task list as complete. You have to provide one or more indexes to be marked.
 
 Format: `mark INDEX [INDEX]...`
 
 Example:
+- `mark 3` marks the task at the third [index](#52-index) of the task list as complete.
+- `mark 1 2 3` marks the tasks at the first, second and third [index](#52-index) of the list as complete.
 
-- `mark 3` marks the task at the third index of the task list as complete.
-- `mark 1 2 3` marks the tasks at the first, second and third index of the list as complete.
 
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
@@ -250,19 +254,19 @@ You can key `list` to check the index of the task you wish to mark.
 </div>
 
 ![UserGuide-mark](images/UserGuide-massmark-after.png)
-Figure 3.6: Example of Harmonia after marking a task
+*Figure 3.6: Example of Harmonia after marking a task*
 
 [Return to Top](#table-of-contents-toc)
 
 ### 3.7 Marking as incomplete: `unmark`
 
-Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the existing task list as incomplete. You have to provide one or more indexes to be unmarked.
+Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the displayed task list as incomplete. You have to provide one or more indexes to be unmarked.
 
 Format: `unmark INDEX [INDEX]...`
 
 Example:
-- `unmark 3` marks the task at the third index of the task list as incomplete.
-- `unmark 1 2 3` marks the tasks at the first, second and third index of the list as incomplete.
+- `unmark 3` marks the task at the third [index](#52-index) of the task list as incomplete.
+- `unmark 1 2 3` marks the tasks at the first, second and third [index](#52-index) of the list as incomplete.
 
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
@@ -271,7 +275,7 @@ You can key `list` to check the index of the task you wish to unmark.
 </div>
 
 ![UserGuide-unmark](images/UserGuide-massunmark-after.png)
-Figure 3.7: Example of Harmonia after unmarking some tasks
+*Figure 3.7: Example of Harmonia after unmarking some tasks*
 
 [Return to Top](#table-of-contents-toc)
 
@@ -300,7 +304,7 @@ e.g. `edit 1 t/CS2103T t/Tutorial`, edits the tags of the task at the first inde
 
 ### 3.9 Sorting tasks: `sort`
 
-Sorts the tasks by the specified sort key and sort order and list them out.
+Harmonia allows you to sort the tasks by the specified sort key and sort order and list them out.
 
 Format: `sort by/SORT_KEY in/SORT_ORDER`
 - `SORT_KEY` is the property of the task used for sorting. Currently, supported sort keys are:
@@ -325,7 +329,7 @@ The tasks will preserve the specified sorting until a different `sort` command i
 
 ### 3.10 Viewing help: `help`
 
-Shows the link to the user guide.
+Harmonia allows you to view help by showing you the link to the user guide.
 
 Format: `help`
 
@@ -345,7 +349,7 @@ Do not use the clear command unless you are certain that you wish to erase all d
 
 ### 3.12 Exiting the program: `exit`
 
-Exits the program.
+Harmonia allows you to exit the program.
 
 Format: `exit`
 
