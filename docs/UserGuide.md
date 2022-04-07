@@ -155,6 +155,8 @@ Format:  `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
 
 Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`
 
+The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
+
 ![UserGuide-add](images/UserGuide-add.png)
 Figure 3.1: Example of Harmonia after adding a task
 
@@ -183,6 +185,8 @@ Deletes the task at the given [index](#52-index) of the existing task list from 
 Format: `delete INDEX`
 
 Example: `delete 3` deletes the 3rd task in Harmonia.
+
+The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the index of the task you wish to delete.
@@ -216,6 +220,8 @@ Format: `find [n/NAME_KEYWORD]... [d/DESCRIPTION_KEYWORD]... [start/START_DATE] 
 
 Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27 p/low p/medium c/true`
 
+The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
+
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to narrow down your search.
 </div>
@@ -229,10 +235,15 @@ You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to
 ### 3.6 Marking as complete: `mark`
 
 Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the existing task list as complete. You have to provide one or more indexes to be marked.
+
 Format: `mark INDEX [INDEX]...`
+
 Example:
+
 - `mark 3` marks the task at the third index of the task list as complete.
 - `mark 1 2 3` marks the tasks at the first, second and third index of the list as complete.
+
+The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the index of the task you wish to mark.
@@ -248,9 +259,12 @@ Figure 3.6: Example of Harmonia after marking a task
 Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the existing task list as incomplete. You have to provide one or more indexes to be unmarked.
 
 Format: `unmark INDEX [INDEX]...`
+
 Example:
 - `unmark 3` marks the task at the third index of the task list as incomplete.
 - `unmark 1 2 3` marks the tasks at the first, second and third index of the list as incomplete.
+
+The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the index of the task you wish to unmark.
@@ -270,6 +284,8 @@ Format: `edit INDEX [n/NAME] [d/DESCRIPTION] [dl/DEADLINE] [p/PRIORITY] [t/TAG].
 Example:
 - `edit 1 d/Prepare for CS2103T tutorial`
 - `edit 2 n/CS2103T meeting t/CS2103T`
+
+The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the [index](#52-index) of the task you wish to edit.
@@ -298,6 +314,8 @@ Format: `sort by/SORT_KEY in/SORT_ORDER`
 Example:
 - `sort by/deadline in/asc`: lists the tasks with the earliest deadline first
 - `sort by/priority in/desc`: lists the tasks with the highest priority first
+
+The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 The tasks will preserve the specified sorting until a different `sort` command is given.
