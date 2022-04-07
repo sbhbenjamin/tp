@@ -52,8 +52,8 @@ public class ListCommand extends Command {
             return new CommandResult(String.format(LIST_TAGS_MESSAGE_SUCCESS, allTags));
 
         } else {
-            model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
             model.updateToDefaultSortedTaskList();
+            model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
             return new CommandResult(LIST_TASKS_MESSAGE_SUCCESS);
         }
     }

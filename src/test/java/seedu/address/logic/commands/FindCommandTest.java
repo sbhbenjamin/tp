@@ -107,7 +107,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(namePredicate, tagPredicate, deadlinePredicate);
         expectedModel.updateFilteredTaskList(namePredicate.and(tagPredicate).and(deadlinePredicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CS2103T_PROJECT, CS2105_FINALS, CS2105_MIDTERM), model.getFilteredTaskList());
+        assertEquals(Arrays.asList(CS2105_MIDTERM, CS2103T_PROJECT, CS2105_FINALS), model.getFilteredTaskList());
     }
 
     @Test
