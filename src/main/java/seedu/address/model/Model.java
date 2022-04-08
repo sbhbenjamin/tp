@@ -95,7 +95,14 @@ public interface Model {
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
 
+    /**
+     * Updates the filtered list to be filtered by the {@code PREDICATE_SHOW_ALL_TASKS}.
+     */
+    void updateToDefaultFilteredTaskList();
 
+    /**
+     * Restores the previous predicate used by the filtered list.
+     */
     void restorePreviousPredicate();
 
     /** Returns an unmodifiable view of the sorted task list */
@@ -114,7 +121,7 @@ public interface Model {
     void resetSortedTaskList();
 
     /**
-     * Updates the sortedList to be ordered by the {@code DEFAULT_COMPARATOR}.
+     * Updates the sortedList to be ordered by the {@code COMPARATOR_SORT_DEADLINE_ASCENDING}.
      */
     void updateToDefaultSortedTaskList();
 
@@ -125,5 +132,4 @@ public interface Model {
 
     /** Returns an unmodifiable view of the tag list */
     Set<Tag> getTagList();
-
 }

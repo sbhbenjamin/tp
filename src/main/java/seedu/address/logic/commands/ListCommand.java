@@ -53,6 +53,7 @@ public class ListCommand extends Command {
 
         } else {
             model.updateToDefaultSortedTaskList();
+            model.updateToDefaultFilteredTaskList();
             model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
             return new CommandResult(LIST_TASKS_MESSAGE_SUCCESS);
         }

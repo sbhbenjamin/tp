@@ -2,7 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.commands.sort.ComparatorFactory.DEFAULT_COMPARATOR;
+import static seedu.address.logic.commands.sort.ComparatorFactory.COMPARATOR_SORT_DEADLINE_ASCENDING;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -48,8 +48,8 @@ public class ModelManager implements Model {
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
         sortedTasks = new SortedList<>(filteredTasks);
         updateToDefaultSortedTaskList(); // Updates the sorted list to use the default ordering.
+        updateToDefaultFilteredTaskList(); // Updates the filtered list to use the default filter.
         tagList = new TagList(this.taskList);
-        predicate = PREDICATE_SHOW_ALL_TASKS;
         updateTaskList();
     }
 
@@ -178,6 +178,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateToDefaultFilteredTaskList() {
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    @Override
     public void restorePreviousPredicate() {
         updateFilteredTaskList(predicate);
     }
@@ -206,7 +211,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateToDefaultSortedTaskList() {
-        updateSortedTaskList(DEFAULT_COMPARATOR);
+        updateSortedTaskList(COMPARATOR_SORT_DEADLINE_ASCENDING);
     }
 
     @Override
