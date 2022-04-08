@@ -155,10 +155,10 @@ Format:  `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
 
 Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`
 
-The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
-
-![UserGuide-add](images/UserGuide-add.png)
+![Add a task](images/Ui-AddTask.png)
 *Figure 3.1: Example of Harmonia after adding a task*
+
+The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 [Return to Top](#table-of-contents-toc)
 
@@ -224,6 +224,9 @@ Format: `find [n/NAME_KEYWORD]... [d/DESCRIPTION_KEYWORD]... [start/START_DATE] 
 
 Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27 p/low p/medium c/true`
 
+![Find tasks after and including a specified start date](images/Ui-FindStartDate.png)
+*Figure 3.5: Example of finding tasks after and including the date `2022-04-01`*
+
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
@@ -233,6 +236,7 @@ You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 * Harmonia does not include partial keyword matches, i.e. only tasks containing keywords that match `NAME_KEYWORD`s and `DESCRIPTION_KEYWORD`s exactly will be retrieved.
 </div>
+
 
 [Return to Top](#table-of-contents-toc)
 
@@ -246,6 +250,8 @@ Example:
 - `mark 3` marks the task at the third [index](#52-index) of the task list as complete.
 - `mark 1 2 3` marks the tasks at the first, second and third [index](#52-index) of the list as complete.
 
+![UserGuide-mark](images/Ui-MarkTask.png)
+*Figure 3.6: Example of Harmonia after marking task 2*
 
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
@@ -253,8 +259,6 @@ The constraints on the inputs can be found [here](#6-appendix-constraints-on-inp
 You can key `list` to check the index of the task you wish to mark.
 </div>
 
-![UserGuide-mark](images/UserGuide-massmark-after.png)
-*Figure 3.6: Example of Harmonia after marking a task*
 
 [Return to Top](#table-of-contents-toc)
 
@@ -268,14 +272,14 @@ Example:
 - `unmark 3` marks the task at the third [index](#52-index) of the task list as incomplete.
 - `unmark 1 2 3` marks the tasks at the first, second and third [index](#52-index) of the list as incomplete.
 
+![UserGuide-unmark](images/Ui-MassUnmarkTasks.png)
+*Figure 3.7: Example of Harmonia after unmarking tasks 1 and 2*
+
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the index of the task you wish to unmark.
 </div>
-
-![UserGuide-unmark](images/UserGuide-massunmark-after.png)
-*Figure 3.7: Example of Harmonia after unmarking some tasks*
 
 [Return to Top](#table-of-contents-toc)
 
@@ -319,11 +323,16 @@ Example:
 - `sort by/deadline in/asc`: lists the tasks with the earliest deadline first
 - `sort by/priority in/desc`: lists the tasks with the highest priority first
 
+![Sort by priority in descending order](images/Ui-SortPriority.png)
+*Figure 3.9: Example of Harmonia after sorting tasks in descending order*
+
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 The tasks will preserve the specified sorting until a different `sort` command is given.
 </div>
+
+
 
 [Return to Top](#table-of-contents-toc)
 
