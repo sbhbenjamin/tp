@@ -15,18 +15,18 @@ Given below are my contributions to the project.
 
 * **Enhancements implemented**:
 
-  1. Modify the `AddCommand` and `AddCommandParser` in Address Book Level 3 (AB3), such that they suit the requirements of Harmonia. Related PR: [#115](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/115), [#138](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/138) and [#264](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/264).
+  1. Modified the `AddCommand` and `AddCommandParser` in Address Book Level 3 (AB3), such that they suit the requirements of Harmonia. Related PR: [#115](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/115), [#138](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/138) and [#264](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/264).
 
-      * Convert the fields from AB3 to the fields in Harmonia. For example, the field `Deadline` and `Description` are added.
-      * Change the parsers and prefixes, to support the `AddCommand`.
-      * Rename some files and methods, to support the functionalities in Harmonia.
-      * Refactor the tests related to `AddCommand`.
+      * Converted the fields from AB3 to the fields in Harmonia. For example, the field `Deadline` and `Description` were added.
+      * Changed the parsers and prefixes, to support the `AddCommand`.
+      * Renamed some files and methods, to support the functionalities in Harmonia.
+      * Refactored the tests related to `AddCommand`.
 
-  2. Modify the `DeleteCommand` and `ListCommand` in AB3, such that they work correctly for the task list. Related PRs: [#122](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/122) and [#123](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/123).
+  2. Modified the `DeleteCommand` and `ListCommand` in AB3, such that they work correctly for the task list. Related PRs: [#122](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/122) and [#123](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/123).
 
-  3. Refactor the messages in Harmonia. Related PRs: [#124](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/124), [#261](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/261), and [#262](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/262).
+  3. Refactored the messages in Harmonia. Related PRs: [#124](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/124), [#261](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/261), and [#262](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/262).
 
-  4. Enhance the `find` command, such that it supports:
+  4. Enhanced the `find` command, such that it supports:
 
       * Search by a range of deadline. Related PR: [#177](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/177)
       * Search by description, by keyword matching. Related PRs: [#198](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/198) and [#214](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/214).
@@ -35,21 +35,21 @@ Given below are my contributions to the project.
 
 * **Contributions to the UG**:
 
-  1. Update part 3.3 - 3.5 (list all tags, delete and find). Related PR: [#192](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/192) and [#210](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/210).
+  1. Updated part 3.3 - 3.5 (list all tags, delete and find). Related PR: [#192](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/192) and [#210](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/210).
 
-  2. Add glossary to the UG. Related PR: [#210](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/210).
+  2. Added glossary to the UG. Related PR: [#210](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/210).
 
-  3. Add a summary of constraints on user inputs to the UG, and refactor some instructions on commands. Related PR: [#263](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/263).
+  3. Added a summary of constraints on user inputs to the UG, and refactor some instructions on commands. Related PR: [#263](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/263).
 
 * **Contributions to the DG**:
 
-  1. Add and format the use cases 5 - 9. Related PR: [#65](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/65).
+  1. Added and formatted the use cases 5 - 9. Related PR: [#65](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/65).
 
-  2. Update the part related to search by date. Related PR: [#166](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/166).
+  2. Updated the part related to search by date. Related PR: [#166](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/166).
 
 * **Contributions to team-based tasks**:
 
-  1. Add trial release [v1.3.trail](https://github.com/AY2122S2-CS2103T-T09-1/tp/releases/tag/v1.3.trial). Related PR: [#170](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/170).
+  1. Added trial release [v1.3.trail](https://github.com/AY2122S2-CS2103T-T09-1/tp/releases/tag/v1.3.trial). Related PR: [#170](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/170).
 
   2. Submission of files:
 
@@ -57,7 +57,7 @@ Given below are my contributions to the project.
 
 * **Review/mentoring contributions**:
 
-  1. Actively participate in reviewing PRs:
+  1. Actively participated in reviewing PRs:
 
       * [#61](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/61)
       * [#100](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/100)
@@ -74,4 +74,8 @@ Given below are my contributions to the project.
       * [#212](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/212)
       * [#278](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/278)
 
-  2. Actively provide suggestions on various functionalities implemented by others.
+  2. Actively provided suggestions on various functionalities implemented by others.
+
+* **Contributions to community**:
+
+  1. Reported bugs for other teams in class ([9 bugs identified in the PE-D](https://github.com/ainsleyj/ped/issues))
