@@ -135,18 +135,18 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both task list data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `TaskListStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -306,7 +306,7 @@ Step 7. Each command result is stored in an `ArrayList` which is returned and di
         * Ensures that there is no confusion in which tasks are successfully marked or unmarked and which tasks are unsuccessfully marked or unmarked when multiple indexes are provided in the command
     * Cons:
         * May be very time-consuming for the user and becomes less user-friendly as the user has to manually mark or
-        * Unmark multiple tasks one at a time if they want to do it in batches
+        * unmark multiple tasks one at a time if they want to do it in batches
 
 
 ### Priority
@@ -347,7 +347,7 @@ In this case, the `enum` type also increases the extensibility of the feature. I
       * Possibly increases memory use. If we use `String` or `int` types, we might have to instantiate new `Priority` classes every time we create a new `Task` object.
 
 
-### Mark/unmark feature
+### Mark/unmark
 
 #### What is the feature about
 Provides a way to mark `Task` objects as either completed or uncompleted.
@@ -379,6 +379,59 @@ It is designed to preserve the Command Design Pattern. Through the implementatio
         * Easier to extend if both mark and unmark are required to change synchronously
     * Cons:
         * No exact knowledge whether the execution of command mark task as complete or incomplete
+
+### Sorting
+
+#### What is the feature about
+Sorts the tasks presented by specified attribute and order.
+
+#### How the feature is implemented
+The sort feature uses the `sort` command, prefix `by/` before the specified `SORT_KEY` and prefix `in/` before the specified `SORT_ORDER`.
+
+Given below is an example usage scenario of how the sort mechanism behaves at each step to sort the task:
+
+Step 1. User inputs `sort by/deadline in/asc` to sort the task list by the `Deadline` in the ascending order.
+    
+Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
+
+Step 3. The first word of the user input is `sort`, which matches the command for `SortCommand`. This initialises `SortCommandParser`.
+
+Step 4. `SortCommandParser#parse()` is called. `SORT_KEY` with prefix `by/` and `SORT_ORDER` with prefix `in/` are extracted out as a `SortKey` and `SortOrder` objects.
+
+Step 5. A `SortCommand` is initialised using the `SortKey` and `SortOrder`. The `SortCommand` constructor creates a `Comparator` used for sorting the list. `SortCommand` is returned to `LogicManager` for execution.
+
+Step 6. After `SortCommand#execute()` is called, `model#updateSortedTaskList(Comparator)` is invoked to sort the task list using the created `Comparator`. The command result is returned and displayed to the user.
+
+#### Why it is implemented that way
+The underlying `UniqueTaskList` uses an `ObservableList` and therefore it allows the application listen to changes and render according specified requirements. One such abstraction used in the initial implementation is the `FilteredList`. With the `FilteredList` the application grants the ability to filter the list using a `Predicate`. Sorting was designed to be an extension of this concept using `SortedList` abstraction where the application can sort the list by a given `Comparator` and render its output instantaneously.
+
+#### Design considerations:
+**Aspect: How the `Comparator` is created:**
+* **Alternative 1 (current choice):** Use Factory design pattern.
+    * Pros:
+        * Easier to extend
+        * Abstracts out the complexity of creating a Comparator
+        * Cons:
+            * Makes the code verbose
+* **Alternative 2:** Create `Comparator` at the point of parsing.
+    * Pros:
+        * Less code needed to implement
+    * Cons:
+        * Leads to poor code quality `Comparator` creation becomes more complex
+
+**Aspect: How the sorted list is stored/rendered:**
+* **Alternative 1 (current choice):** Use `javafx.collections.transformation.SortedList`.
+    * Pros:
+        * Abstracts out the details of rendering
+        * Abstracts out the details behind sorting (i.e. only need to pass in the `Comparator`)
+        * Cons:
+            * Difficult to preserve the ordering if tasks are added or edited
+* **Alternative 2:** Sorts the tasks using a stream and repopulate the `TaskList`.
+    * Pros:
+        * Straightforward implementation
+    * Cons:
+        * Mutability may lead to errors
+        * Redundant computation to delete and reinsert the same tasks after each operation
 
 
 ### \[Proposed\] Search by date
