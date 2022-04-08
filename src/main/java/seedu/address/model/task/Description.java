@@ -10,16 +10,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Description implements Comparable<Description> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Description should only contain alphanumeric characters, punctuations and spaces, "
+            "Description should only contain alphanumeric characters, punctuations (except '/') and spaces, "
                     + "and should not start with punctuations.\n "
                     + "Description has a character limit of 1-255 characters.";
 
     /*
-     * The first character of the description must not be a whitespace or punctuation.
+     * The first character of the name must not be a whitespace or punctuation.
      * For other characters, they must be alphanumeric or spaces.
+     * For all characters, slashes are not allowed.
      * The maximum number of characters allowed is 255.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\p{Punct}\\s]{0,254}";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\p{Punct}\\s&&[^/]]{0,254}";
     public final String value;
 
     /**
