@@ -156,7 +156,7 @@ Format:  `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…`
 Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`
 
 ![Add a task](images/Ui-AddTask.png)
-Figure 3.1: Example of Harmonia after adding a task
+*Figure 3.1: Example of Harmonia after adding a task*
 
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
@@ -225,7 +225,7 @@ Format: `find [n/NAME_KEYWORD]... [d/DESCRIPTION_KEYWORD]... [start/START_DATE] 
 Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27 p/low p/medium c/true`
 
 ![Find tasks after and including a specified start date](images/Ui-FindStartDate.png)
-Figure 3.5: Example of finding tasks after and including the date `2022-04-01`
+*Figure 3.5: Example of finding tasks after and including the date `2022-04-01`*
 
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
@@ -251,7 +251,7 @@ Example:
 - `mark 1 2 3` marks the tasks at the first, second and third [index](#52-index) of the list as complete.
 
 ![UserGuide-mark](images/Ui-MarkTask.png)
-Figure 3.6: Example of Harmonia after marking task 2
+*Figure 3.6: Example of Harmonia after marking task 2*
 
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
@@ -273,7 +273,7 @@ Example:
 - `unmark 1 2 3` marks the tasks at the first, second and third [index](#52-index) of the list as incomplete.
 
 ![UserGuide-unmark](images/Ui-MassUnmarkTasks.png)
-Figure 3.7: Example of Harmonia after unmarking tasks 1 and 2
+*Figure 3.7: Example of Harmonia after unmarking tasks 1 and 2*
 
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
@@ -324,7 +324,7 @@ Example:
 - `sort by/priority in/desc`: lists the tasks with the highest priority first
 
 ![Sort by priority in descending order](images/Ui-SortPriority.png)
-Figure 3.9: Example of Harmonia after sorting tasks in descending order
+*Figure 3.9: Example of Harmonia after sorting tasks in descending order*
 
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
