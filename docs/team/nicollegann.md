@@ -17,7 +17,7 @@ Given below are my contributions to the project.
 * **Enhancements implemented**:
 
   * Evolved AddressBook into Harmonia 
-    * Modified `EditCommand` and `EditCommandParser` by replacing the fields in AB3 (phone, email, address) with fields used in Harmonia (description, deadline) (PR: [#125](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/125)).
+    * Modified `EditCommand` and `EditCommandParser` by replacing the fields in AB3 (`phone`, `email`, `address`) with fields used in Harmonia (`description`, `deadline`) (PR: [#125](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/125)).
     * Modified `FindCommand` and `ClearCommand` to suit Harmonia (PR: [#121](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/121)).
     * Replaced sample data for AB3 with sample data for Harmonia.
     * Modified test utilities (PR: [#130](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/130)).
@@ -42,13 +42,13 @@ Given below are my contributions to the project.
 
 
 * **Project management**:
-  * Managed release [v1.2](https://github.com/AY2122S2-CS2103T-T09-1/tp/releases/tag/v1.2) 
-  * Helped to wrap up and close milestone v1.3
+  * Managed release [`v1.2`](https://github.com/AY2122S2-CS2103T-T09-1/tp/releases/tag/v1.2) 
+  * Helped to wrap up and close milestone `v1.3`
 
 
 * **Documentation**:
   * User Guide (PRs: [#186](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/186), [#200](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/200), [#276](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/276))
-    * Added documentation for the Getting Started and Notes about command format sections.
+    * Added documentation for sections Getting Started and Command format.
     * Added documentation for the `clear` feature.
     * Updated documentation to add a warning note for the `edit` feature.
     * Updated documentation for the `list t/` feature.
