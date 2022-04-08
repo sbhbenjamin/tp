@@ -8,6 +8,7 @@ import seedu.address.model.task.CompletionStatus;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.Task;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,11 +21,13 @@ public class TaskBuilder {
     public static final String DEFAULT_DESCRIPTION = "Tutorial for Week 9";
     public static final String DEFAULT_DEADLINE = "2022-03-16";
     public static final String DEFAULT_COMPLETION_STATUS = "false";
+    public static final String DEFAULT_PRIORITY = "low";
 
     private Name name;
     private Description description;
     private Deadline deadline;
     private CompletionStatus completionStatus;
+    private Priority priority;
     private Set<Tag> tags;
 
     /**
@@ -35,6 +38,7 @@ public class TaskBuilder {
         description = new Description(DEFAULT_DESCRIPTION);
         deadline = new Deadline(DEFAULT_DEADLINE);
         completionStatus = new CompletionStatus(DEFAULT_COMPLETION_STATUS);
+        priority = Priority.valueOfLabel(DEFAULT_PRIORITY);
         tags = new HashSet<>();
     }
 
@@ -46,6 +50,7 @@ public class TaskBuilder {
         description = taskToCopy.getDescription();
         deadline = taskToCopy.getDeadline();
         completionStatus = taskToCopy.getCompletionStatus();
+        priority = taskToCopy.getPriority();
         tags = new HashSet<>(taskToCopy.getTags());
     }
 
@@ -89,8 +94,16 @@ public class TaskBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Priority} of the {@code Task} that we are building.
+     */
+    public TaskBuilder withPriority(String priority) {
+        this.priority = Priority.valueOfLabel(priority);
+        return this;
+    }
+
     public Task build() {
-        return new Task(name, description, completionStatus, deadline, tags);
+        return new Task(name, description, completionStatus, deadline, priority, tags);
     }
 
 }

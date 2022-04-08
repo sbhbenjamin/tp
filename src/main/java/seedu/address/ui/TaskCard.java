@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 import seedu.address.model.task.Task;
 
 /**
@@ -29,7 +30,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Text name;
     @FXML
     private Label id;
     @FXML
@@ -38,6 +39,8 @@ public class TaskCard extends UiPart<Region> {
     private Label completionStatus;
     @FXML
     private Label deadline;
+    @FXML
+    private Label priority;
     @FXML
     private FlowPane tags;
 
@@ -50,8 +53,10 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(task.getName().fullName);
         description.setText(task.getDescription().value);
-        completionStatus.setText((task.getCompletionStatus().value == "true") ? "Completed" : "Incomplete");
+        completionStatus.setText((task.getCompletionStatus().toString().equals("true")) ? "Completed" : "Incomplete");
         deadline.setText(task.getDeadline().value);
+        priority.setText(task.getPriority().value);
+
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

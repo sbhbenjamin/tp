@@ -1,6 +1,6 @@
 package seedu.address.model.task;
 
-import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
@@ -9,16 +9,20 @@ import seedu.address.commons.util.StringUtil;
  * Tests that a {@code Task}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Task> {
-    private final List<String> keywords;
+    private final Set<String> keywords;
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    public NameContainsKeywordsPredicate(Set<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Task task) {
+        if (keywords.size() == 0) {
+            // If the list passed in is empty, returns true.
+            return true;
+        }
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnorePunctuationAndCase(task.getName().fullName, keyword));
     }
 
     @Override

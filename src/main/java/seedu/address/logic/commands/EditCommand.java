@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
@@ -23,6 +24,7 @@ import seedu.address.model.task.CompletionStatus;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.Task;
 
 /**
@@ -39,11 +41,13 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_DEADLINE + "DEADLINE] "
+            + "[" + PREFIX_PRIORITY + " PRIORITY]" + " "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Midterm Test Revision"
             + PREFIX_DESCRIPTION + "Chapters 1-4 "
-            + PREFIX_DEADLINE + "2022-03-20"
+            + PREFIX_DEADLINE + "2022-03-20 "
+            + PREFIX_PRIORITY + "low "
             + PREFIX_TAG + "CS2102";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -68,7 +72,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredTaskList();
+        List<Task> lastShownList = model.getSortedTaskList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -97,9 +101,10 @@ public class EditCommand extends Command {
         Description updatedDescription = editTaskDescriptor.getDescription().orElse(taskToEdit.getDescription());
         CompletionStatus isComplete = taskToEdit.getCompletionStatus();
         Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElse(taskToEdit.getDeadline());
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElse(taskToEdit.getPriority());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
 
-        return new Task(updatedName, updatedDescription, isComplete, updatedDeadline, updatedTags);
+        return new Task(updatedName, updatedDescription, isComplete, updatedDeadline, updatedPriority, updatedTags);
     }
 
     @Override
@@ -128,6 +133,7 @@ public class EditCommand extends Command {
         private Name name;
         private Description description;
         private Deadline deadline;
+        private Priority priority;
         private Set<Tag> tags;
 
         public EditTaskDescriptor() {}
@@ -140,6 +146,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setDescription(toCopy.description);
             setDeadline(toCopy.deadline);
+            setPriority(toCopy.priority);
             setTags(toCopy.tags);
         }
 
@@ -147,7 +154,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, description, deadline, tags);
+            return CollectionUtil.isAnyNonNull(name, description, deadline, priority, tags);
         }
 
         public void setName(Name name) {
@@ -172,6 +179,14 @@ public class EditCommand extends Command {
 
         public Optional<Deadline> getDeadline() {
             return Optional.ofNullable(deadline);
+        }
+
+        public void setPriority(Priority priority) {
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return Optional.ofNullable(priority);
         }
 
         /**
@@ -209,6 +224,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getDescription().equals(e.getDescription())
                     && getDeadline().equals(e.getDeadline())
+                    && getPriority().equals(e.getPriority())
                     && getTags().equals(e.getTags());
         }
     }

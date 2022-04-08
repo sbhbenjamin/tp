@@ -5,11 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -33,6 +34,8 @@ public class CommandTestUtil {
     public static final String VALID_DEADLINE_MIDTERM = "2022-03-21";
     public static final String VALID_COMPLETION_STATUS_TRUE = "true";
     public static final String VALID_COMPLETION_STATUS_FALSE = "false";
+    public static final String VALID_PRIORITY_LOW = "low";
+    public static final String VALID_PRIORITY_MEDIUM = "medium";
     public static final String VALID_TAG_CS2103T = "CS2103T";
     public static final String VALID_TAG_CS2102 = "CS2102";
     public static final String VALID_TAG_TEST = "Test";
@@ -43,6 +46,8 @@ public class CommandTestUtil {
     public static final String DESCRIPTION_DESC_MIDTERM = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_MIDTERM;
     public static final String DEADLINE_DESC_TUTORIAL = " " + PREFIX_DEADLINE + VALID_DEADLINE_TUTORIAL;
     public static final String DEADLINE_DESC_MIDTERM = " " + PREFIX_DEADLINE + VALID_DEADLINE_MIDTERM;
+    public static final String PRIORITY_LOW = " " + PREFIX_PRIORITY + VALID_PRIORITY_LOW;
+    public static final String PRIORITY_MEDIUM = " " + PREFIX_PRIORITY + VALID_PRIORITY_MEDIUM;
     public static final String TAG_DESC_CS2103T = " " + PREFIX_TAG + VALID_TAG_CS2103T;
     public static final String TAG_DESC_CS2102 = " " + PREFIX_TAG + VALID_TAG_CS2102;
     public static final String TAG_DESC_TEST = " " + PREFIX_TAG + VALID_TAG_TEST;
@@ -53,7 +58,9 @@ public class CommandTestUtil {
             + "Donec pellentesque massa vel dolor blandit imperdiet. In bibendum justo urna, vitae venenatis "
             + "magna dictum quis. Proin erat curae."; // description should not be more than 255 characters
     public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DEADLINE + "2022/01/01"; // wrong date format
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "test*"; // '*' not allowed in tags
+    public static final String INVALID_PRIORITY = " " + PREFIX_PRIORITY + "highest"; // invalid priority enum
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG
+            + "qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbn"; // tag should not be more than 50 characters
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -64,10 +71,10 @@ public class CommandTestUtil {
     static {
         DESC_TUTORIAL = new EditTaskDescriptorBuilder().withName(VALID_NAME_TUTORIAL)
                 .withDescription(VALID_DESCRIPTION_TUTORIAL).withDeadline(VALID_DEADLINE_TUTORIAL)
-                .withTags(VALID_TAG_CS2103T).build();
+                .withPriority(VALID_PRIORITY_LOW).withTags(VALID_TAG_CS2103T).build();
         DESC_MIDTERM = new EditTaskDescriptorBuilder().withName(VALID_NAME_MIDTERM)
                 .withDescription(VALID_DESCRIPTION_MIDTERM).withDeadline(VALID_DEADLINE_MIDTERM)
-                .withTags(VALID_TAG_CS2102, VALID_TAG_TEST).build();
+                .withPriority(VALID_PRIORITY_MEDIUM).withTags(VALID_TAG_CS2102, VALID_TAG_TEST).build();
     }
 
     /**
@@ -122,7 +129,7 @@ public class CommandTestUtil {
 
         Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
         final String[] splitName = task.getName().fullName.split("\\s+");
-        model.updateFilteredTaskList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredTaskList(new NameContainsKeywordsPredicate(Collections.singleton(splitName[0])));
 
         assertEquals(1, model.getFilteredTaskList().size());
     }

@@ -1,20 +1,22 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.MassOpsParser;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.CompletionStatus;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.Task;
 
 /**
@@ -26,58 +28,179 @@ public class UnmarkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the task identified by the index number used in the displayed task list as uncompleted.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX[ES] (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_UNMARK_TASK_SUCCESS = "Uncompleted Task: %1$s";
-    public static final String MESSAGE_TASK_ALREADY_UNCOMPLETED = "This task is already marked as incomplete.";
+    public static final String MESSAGE_TASK_ALREADY_UNCOMPLETED = "The completion status of this task is already set"
+            + " to incomplete.";
+    public static final String MESSAGE_MULTIPLE_TASKS_ALREADY_UNCOMPLETED = "The completion status of these tasks are"
+            + " already set to incomplete.";
 
-    private final Index targetIndex;
+    private final List<Index> targetIndexes;
 
-    public UnmarkCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    /**
+     * Constructor for unmarking multiple indexes.
+     *
+     * @param targetIndexes an {@code ArrayList<Index>} which stores each index to be unmarked
+     */
+    public UnmarkCommand(List<Index> targetIndexes) {
+        assert(targetIndexes != null && targetIndexes.size() != 0);
+        this.targetIndexes = MassOpsParser.sortInAsc(targetIndexes);
     }
 
     /**
-     * Creates a unmarked iteration of the Task provided.
+     * Creates an unmarked iteration of the Task provided.
+     *
      * @param task task to be copied.
-     * @return marked task.
+     * @return unmarked task.
      */
     private static Task createUnmarkedTask(Task task) {
         Name name = task.getName();
         Description description = task.getDescription();
         CompletionStatus completionStatus = new CompletionStatus("false");
         Deadline deadline = task.getDeadline();
+        Priority priority = task.getPriority();
         Set<Tag> tags = task.getTags();
 
-        Task unmarkedTask = new Task(name, description, completionStatus, deadline, tags);
+        Task unmarkedTask = new Task(name, description, completionStatus, deadline, priority, tags);
         return unmarkedTask;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredTaskList();
+        List<Task> lastShownList = model.getSortedTaskList();
+        List<Index> unmarkTasksIndexes = new ArrayList<>();
+        List<Index> alreadyUnmarkedIndexes = new ArrayList<>();
+        List<Index> outOfBoundsIndexes = new ArrayList<>();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        // to unmark each index in the task list individually.
+        for (int i = 0; i < targetIndexes.size(); i++) {
+            Index index = targetIndexes.get(i);
+
+            if (isValidIndex(index, lastShownList) == 1) {
+                alreadyUnmarkedIndexes.add(index);
+            } else if (isValidIndex(index, lastShownList) == -1) {
+                outOfBoundsIndexes.add(index);
+            } else {
+                unmarkTasksIndexes.add(index);
+            }
         }
-        Task taskToUnmark = lastShownList.get(targetIndex.getZeroBased());
-        Task unmarkedTask = createUnmarkedTask(taskToUnmark);
+        return result(model, lastShownList, unmarkTasksIndexes, alreadyUnmarkedIndexes, outOfBoundsIndexes);
 
-        if (taskToUnmark.equals(unmarkedTask)) {
-            throw new CommandException(MESSAGE_TASK_ALREADY_UNCOMPLETED);
+    }
+
+    /**
+     * Converts the list of successfully unmarked tasks into a string to be returned to the user.
+     *
+     * @param unmarkedTasks
+     * @return a {@code String} listings all the successfully unmarked tasks.
+     */
+    private String unmarkedTasksToString(List<Task> unmarkedTasks, List<Index> unmarkedTasksIndexes) {
+        String str = "Successfully Unmarked Task(s): \n";
+        for (int i = 0; i < unmarkedTasks.size(); i++) {
+            str += unmarkedTasksIndexes.get(i).getOneBased() + ". " + unmarkedTasks.get(i) + "\n";
         }
+        return str;
+    }
 
-        model.strictSetTask(taskToUnmark, unmarkedTask);
-        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        return new CommandResult(String.format(MESSAGE_UNMARK_TASK_SUCCESS, unmarkedTask));
+    /**
+     * Converts a list of indexes to a string to be returned to the user.
+     *
+     * @param indexes
+     * @return a {@code String} of the list of indexes that are passed into the function.
+     */
+    private String indexesToString(List<Index> indexes) {
+        String str = "" + indexes.get(0).getOneBased();
+        for (int i = 1; i < indexes.size(); i++) {
+            int index = indexes.get(i).getOneBased();
+            if (indexes.size() > 1 && i == indexes.size() - 1) {
+                str += " and " + index;
+            } else {
+                str += ", " + index;
+            }
+        }
+        return str;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UnmarkCommand // instanceof handles nulls
-                && targetIndex.equals(((UnmarkCommand) other).targetIndex)); // state check
+                && targetIndexes.equals(((UnmarkCommand) other).targetIndexes)); // state check
+    }
+
+    /**
+     * Checks if index is a valid index to unmark.
+     * If index > size of targetIndexes, return -1.
+     * If index is already unmarked, return 1.
+     * If index is a valid index, return 0.
+     *
+     * @return an int representing validity of the index
+     */
+    private int isValidIndex(Index index, List<Task> taskList) {
+        if (index.getZeroBased() > taskList.size() - 1 || index.getZeroBased() < 0) { //index out of bounds
+            return -1;
+        } else if (taskList.get(index.getZeroBased()).getCompletionStatus().toString().equals("false")) {
+            //already unmarked index
+            return 1;
+        } else { //valid index
+            return 0;
+        }
+    }
+
+    /**
+     * Processes the lists containing the results of the unmarking of indexes and returns the result to the user.
+     *
+     * @param model
+     * @param lastShownList
+     * @param unmarkTaskIndexes
+     * @param alreadyUnmarkedIndexes
+     * @param outOfBoundsIndexes
+     * @return CommandResult of unmarking the inputted indexes.
+     * @throws CommandException
+     */
+    private CommandResult result(Model model, List<Task> lastShownList, List<Index> unmarkTaskIndexes,
+                                 List<Index> alreadyUnmarkedIndexes,
+                                 List<Index> outOfBoundsIndexes) throws CommandException {
+        StringBuilder errorString = new StringBuilder();
+        List<Task> unmarkedTasks = new ArrayList<>();
+
+        if (!alreadyUnmarkedIndexes.isEmpty()) {
+            if (alreadyUnmarkedIndexes.size() == 1) {
+                errorString.append("Index " + indexesToString(alreadyUnmarkedIndexes) + ": "
+                        + MESSAGE_TASK_ALREADY_UNCOMPLETED + "\n");
+            } else {
+                errorString.append("Indexes " + indexesToString(alreadyUnmarkedIndexes) + ": "
+                        + MESSAGE_MULTIPLE_TASKS_ALREADY_UNCOMPLETED + "\n");
+            }
+        }
+
+        if (!outOfBoundsIndexes.isEmpty()) {
+            if (outOfBoundsIndexes.size() == 1) {
+                errorString.append("Index " + indexesToString(outOfBoundsIndexes) + ": "
+                        + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX + "\n");
+            } else {
+                errorString.append("Indexes " + indexesToString(outOfBoundsIndexes) + ": "
+                        + Messages.MESSAGE_INVALID_MULTIPLE_TASK_DISPLAYED_INDEX + "\n");
+            }
+        }
+
+        if (errorString.length() != 0) { //throw error if any
+            throw new CommandException(errorString.toString());
+        }
+
+        if (!unmarkTaskIndexes.isEmpty()) {
+            for (int i = 0; i < unmarkTaskIndexes.size(); i++) {
+                Index index = unmarkTaskIndexes.get(i);
+                Task taskToUnmark = lastShownList.get(index.getZeroBased());
+                Task unmarkedTask = createUnmarkedTask(taskToUnmark);
+                unmarkedTasks.add(unmarkedTask);
+                model.strictSetTask(taskToUnmark, unmarkedTask);
+            }
+        }
+
+        return new CommandResult(unmarkedTasksToString(unmarkedTasks, unmarkTaskIndexes));
     }
 }

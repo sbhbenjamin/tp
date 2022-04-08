@@ -7,18 +7,20 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Task's description in the task list.
  * Guarantees: immutable;
  */
-public class Description {
+public class Description implements Comparable<Description> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Description should not be blank or start with white spaces,"
-                    + " and the length should be less than 256 characters.";
+            "Description should only contain alphanumeric characters, punctuations (except '/') and spaces, "
+                    + "and should not start with punctuations.\n "
+                    + "Description has a character limit of 1-255 characters.";
 
     /*
-     * The first character of the description must not be a whitespace.
-     * For other characters, they must be printable or whitespaces.
+     * The first character of the name must not be a whitespace or punctuation.
+     * For other characters, they must be alphanumeric or spaces.
+     * For all characters, slashes are not allowed.
      * The maximum number of characters allowed is 255.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}\\p{Punct}][\\p{Alnum}\\p{Punct}\\s]{0,254}";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\p{Punct}\\s&&[^/]]{0,254}";
     public final String value;
 
     /**
@@ -54,5 +56,10 @@ public class Description {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Description d) {
+        return this.value.compareTo(d.value);
     }
 }
