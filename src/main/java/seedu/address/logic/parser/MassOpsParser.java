@@ -17,7 +17,7 @@ public class MassOpsParser {
     /**
      * Parses through the second part of user input to process what indexes are called.
      *
-     * @param args string of indexes to perform mass ops on
+     * @param args string of indexes to perform mass ops on.
      * @return a {@code ArrayList<Index>} with the indexes to be performing mass ops on
      * @throws ParseException
      */
@@ -37,7 +37,7 @@ public class MassOpsParser {
     /**
      * Sorts the indexes in ascending order.
      *
-     * @param indexes
+     * @param indexes the list of indexes to be sorted.
      * @return a {@code List<Indexes>} sorted in ascending order.
      */
     public static List<Index> sortInAsc(List<Index> indexes) {
@@ -49,7 +49,7 @@ public class MassOpsParser {
     /**
      * Sorts the indexes in descending order.
      *
-     * @param indexes
+     * @param indexes the list of indexes to be sorted.
      * @return a {@code List<Indexes>} sorted in descending order.
      */
     public static List<Index> sortInDesc(List<Index> indexes) {
