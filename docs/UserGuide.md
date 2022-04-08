@@ -138,6 +138,9 @@ Here are a few example commands you can try:
        2. Clean room<br>
        3. Walk dog<br>
        Index 2 here refers to the second item in the list, "Clean room".
+  
+- If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.
+  e.g. if you specify `d/desciption one d/description two`, only `d/description two` will be taken.
 
 - Extraneous parameters for commands that do not take in any parameters (such as `help` and `exit`) will be ignored.<br>
   e.g. if you input `exit 123`, Harmonia will interpret it as `exit`.
@@ -167,6 +170,10 @@ The constraints on the inputs can be found [here](#6-appendix-constraints-on-inp
 Harmonia allows you to see a list of all existing tasks in the task list.
 
 Format: `list`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+`list` will order tasks by deadline in the ascending order.
+</div>
 
 [Return to Top](#table-of-contents-toc)
 
@@ -329,7 +336,8 @@ Example:
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-The tasks will preserve the specified sorting until a different `sort` command is given.
+Sort order is lost after `add` and `edit` commands.
+`list` will sort the tasks by deadline in the ascending order. 
 </div>
 
 
