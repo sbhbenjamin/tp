@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TEST;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showTaskAtIndex;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskList;
@@ -94,7 +95,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new TaskList(model.getTaskList()), new UserPrefs());
         expectedModel.setTask(model.getSortedTaskList().get(0), editedTask);
-
+        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 

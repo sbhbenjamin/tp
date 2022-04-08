@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TEST;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTasks.CS2105_MIDTERM;
-import static seedu.address.testutil.TypicalTasks.CS2105_TUTORIAL;
+import static seedu.address.testutil.TypicalTasks.CS2107_TUTORIAL;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,15 +45,15 @@ public class TaskTest {
         assertFalse(CS2105_MIDTERM.isSameTask(editedMidtermTask));
 
         // name differs in case, all other attributes same -> returns false
-        Task editedTutorialTask = new TaskBuilder(CS2105_TUTORIAL)
+        Task editedTutorialTask = new TaskBuilder(CS2107_TUTORIAL)
                 .withName(VALID_NAME_TUTORIAL.toLowerCase())
                 .build();
-        assertFalse(CS2105_TUTORIAL.isSameTask(editedTutorialTask));
+        assertFalse(CS2107_TUTORIAL.isSameTask(editedTutorialTask));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_TUTORIAL + " ";
-        editedTutorialTask = new TaskBuilder(CS2105_TUTORIAL).withName(nameWithTrailingSpaces).build();
-        assertFalse(CS2105_TUTORIAL.isSameTask(editedTutorialTask));
+        editedTutorialTask = new TaskBuilder(CS2107_TUTORIAL).withName(nameWithTrailingSpaces).build();
+        assertFalse(CS2107_TUTORIAL.isSameTask(editedTutorialTask));
     }
 
     @Test
@@ -72,7 +72,7 @@ public class TaskTest {
         assertFalse(CS2105_MIDTERM.equals(5));
 
         // different task -> returns false
-        assertFalse(CS2105_MIDTERM.equals(CS2105_TUTORIAL));
+        assertFalse(CS2105_MIDTERM.equals(CS2107_TUTORIAL));
 
         // different name -> returns false
         Task editedMidtermTask = new TaskBuilder(CS2105_MIDTERM).withName(VALID_NAME_TUTORIAL).build();
