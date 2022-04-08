@@ -43,15 +43,15 @@ Given below are my contributions to the project.
 - User Guide
   - Added documentation for the Quick Start section [#74](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/74#issue-1153043764)
   - Added table of contents in the beginning [#91](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/91#issue-1153876080)
-  - Updated documentation for the Features section (Add, List, Mark, Unmark) ([#183](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/183#issue-1182479119), [#199](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/199#issue-1185714418))
+  - Updated documentation for the Features section (`Add`, `List`, `Mark`, `Unmark`) ([#183](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/183#issue-1182479119), [#199](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/199#issue-1185714418))
   - Replaced images of mass marking and mass unmarking to better explain the features [#216](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/216#issue-1188232576)
 - Developer Guide
-  - Added documentation for `Mass Operations` [#171](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/171#issue-1179857765)
+  - Added documentation for `MassOperations` [#171](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/171#issue-1179857765)
     - Added documentation for mass marking
     - Added documentation for mass unmarking
 
 **Testing**
-- Updated testutil [#128](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/128#issue-1166192852)
+- Updated `TestUtil` [#128](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/128#issue-1166192852)
 
 **Team**
 - Fixed bugs: [#160](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/160#issue-1179281197), [#191](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/191#issue-1183178506), [#272](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/272#issue-1193391761), [#281](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/281#issue-1195887094)
