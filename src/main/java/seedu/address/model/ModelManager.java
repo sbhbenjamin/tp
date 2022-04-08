@@ -231,7 +231,8 @@ public class ModelManager implements Model {
         return taskList.equals(other.taskList)
                 && userPrefs.equals(other.userPrefs)
                 && filteredTasks.equals(other.filteredTasks)
-                && sortedTasks.equals(other.sortedTasks);
+                && sortedTasks.equals(other.sortedTasks)
+                && tagList.equals(other.tagList);
     }
 
     //=========== Tag List ==================================================================================
