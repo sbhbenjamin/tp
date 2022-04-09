@@ -62,6 +62,11 @@ public class TypicalTasks {
             .withDescription("Assignment 2").withDeadline("2022-03-20")
             .withPriority("low").withCompletionStatus("false").build();
 
+    public static final Task CS2102_MEETING = new TaskBuilder().withName("CS2102 MEETING")
+            .withDescription("Meeting").withDeadline("2022-04-06")
+            .withPriority("medium").withCompletionStatus("true").build();
+
+
     // Manually added - Task's details found in {@code CommandTestUtil}
     public static final Task CS2103T_TUTORIAL = new TaskBuilder().withName(VALID_NAME_TUTORIAL)
             .withDescription(VALID_DESCRIPTION_TUTORIAL).withDeadline(VALID_DEADLINE_TUTORIAL)
@@ -89,7 +94,7 @@ public class TypicalTasks {
 
     public static List<Task> getTypicalTasks() {
         return new ArrayList<>(Arrays.asList(CS2103T_PROJECT, CS2106_FINALS, CS2105_MIDTERM,
-                CS2107_TUTORIAL, MEET_ALICE));
+                CS2107_TUTORIAL, MEET_ALICE, CS2102_MEETING));
     }
 
     /**
