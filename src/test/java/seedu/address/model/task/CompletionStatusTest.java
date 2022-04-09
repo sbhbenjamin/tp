@@ -3,6 +3,7 @@ package seedu.address.model.task;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.assertAllFalse;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,9 +22,11 @@ public class CompletionStatusTest {
 
     @Test
     public void isValidCompletionStatus() {
+        // test all common restrictions
+        assertAllFalse(CompletionStatus::isValidCompletionStatus);
+
         // invalid completion status
         assertFalse(CompletionStatus.isValidCompletionStatus(null));
-        assertFalse(CompletionStatus.isValidCompletionStatus(""));
         assertFalse(CompletionStatus.isValidCompletionStatus("F"));
         assertFalse(CompletionStatus.isValidCompletionStatus("T"));
 

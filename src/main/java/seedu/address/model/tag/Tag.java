@@ -18,7 +18,6 @@ public class Tag implements Comparable<Tag> {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}]{1,50}";
 
-
     public final String tagName;
 
     /**

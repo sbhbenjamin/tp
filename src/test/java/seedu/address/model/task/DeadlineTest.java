@@ -3,6 +3,7 @@ package seedu.address.model.task;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.assertAllFalse;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,9 +25,8 @@ public class DeadlineTest {
         // null date
         assertThrows(NullPointerException.class, () -> Deadline.isValidDeadline(null));
 
-        // blank date
-        assertFalse(Deadline.isValidDeadline("")); // empty string
-        assertFalse(Deadline.isValidDeadline(" ")); // spaces only
+        // test all common string restrictions
+        assertAllFalse(Deadline::isValidDeadline);
 
         // missing parts
         assertFalse(Deadline.isValidDeadline("10-22")); // missing year
