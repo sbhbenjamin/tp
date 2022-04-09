@@ -130,6 +130,8 @@ public class HelpWindow extends UiPart<Stage> {
     private void openUrl() {
         try {
             logger.info("Opening URL to user guide using default browser");
+            // Code below adapted from
+            // https://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java
             Desktop desktop = java.awt.Desktop.getDesktop();
             desktop.browse(new URI(USERGUIDE_URL));
         } catch (URISyntaxException | IOException e) {
