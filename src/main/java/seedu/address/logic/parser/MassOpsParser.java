@@ -41,6 +41,9 @@ public class MassOpsParser {
      * @return a {@code List<Indexes>} sorted in ascending order.
      */
     public static List<Index> sortInAsc(List<Index> indexes) {
+        assert indexes.size() != 0;
+        assert indexes != null;
+
         TreeSet<Index> sorted = new TreeSet<>(indexes);
         List<Index> ascIndexes = new ArrayList<>(sorted);
         return ascIndexes;
@@ -53,6 +56,9 @@ public class MassOpsParser {
      * @return a {@code List<Indexes>} sorted in descending order.
      */
     public static List<Index> sortInDesc(List<Index> indexes) {
+        assert indexes.size() != 0;
+        assert indexes != null;
+
         List<Index> descIndexes = sortInAsc(indexes);
         Collections.reverse(descIndexes);
         return descIndexes;
