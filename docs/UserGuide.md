@@ -120,30 +120,30 @@ Here are a few example commands you can try:
 **:bulb: Notes about the command format:**
 
 - Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
-  e.g. `add n/NAME`, `NAME` is a parameter which can be used as `add n/Complete Tutorial`.
+  For example `add n/NAME`, `NAME` is a parameter which can be used as `add n/Complete Tutorial`.
 
 - Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME d/DESCRIPTION`, `d/DESCRIPTION n/NAME` is also acceptable.
+  For example if the command specifies `n/NAME d/DESCRIPTION`, `d/DESCRIPTION n/NAME` is also acceptable.
 
 - Items in square brackets are optional.<br>
-  e.g. `find [n/NAME] [t/TAG]` can be used as `find n/Complete Tutorial` or `find t/CS203T`.
+  For example `find [n/NAME] [t/TAG]` can be used as `find n/Complete Tutorial` or `find t/CS203T`.
 
 - Items followed by `...` can be used multiple times.<br>
-  e.g. `[t/TAG]...` can be used as `t/CS2103T t/Tutorial`.
+  For example `[t/TAG]...` can be used as `t/CS2103T t/Tutorial`.
 
 - [`Index`](#52-index) refers to the numbering of an item as shown in the displayed task list.<br>
 
-  e.g. in a list of tasks:<br>
+  For example in a list of tasks:<br>
        1. Do homework<br>
        2. Clean room<br>
        3. Walk dog<br>
        Index 2 here refers to the second item in the list, "Clean room".
   
 - If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.
-  e.g. if you specify `d/desciption one d/description two`, only `d/description two` will be taken.
+  For example if you specify `d/desciption one d/description two`, only `d/description two` will be taken.
 
 - Extraneous parameters for commands that do not take in any parameters (such as `help` and `exit`) will be ignored.<br>
-  e.g. if you input `exit 123`, Harmonia will interpret it as `exit`.
+  For example if you input `exit 123`, Harmonia will interpret it as `exit`.
 
 - The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
@@ -237,7 +237,7 @@ Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27 p/low p/
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to narrow down your search.
+You can also search using multiple descriptors (example: `find n/book t/CS2103T`) to narrow down your search.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
@@ -308,7 +308,7 @@ You can key `list` to check the [index](#52-index) of the task you wish to edit.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 You should include the existing tag(s) in the command when adding a new tag. Otherwise, existing tags will be overwritten.<br>
-e.g. `edit 1 t/CS2103T t/Tutorial`, edits the tags of the task at the first index where `CS2103T` is an existing tag and `Tutorial` is a new tag to be added.
+For example `edit 1 t/CS2103T t/Tutorial`, edits the tags of the task at the first index where `CS2103T` is an existing tag and `Tutorial` is a new tag to be added.
 </div>
 
 [Return to Top](#table-of-contents-toc)
@@ -336,7 +336,7 @@ Example:
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Sort order is lost after `add` and `edit` commands.
+Sort order will be lost after using the `add` or `edit` commands.
 `list` will sort the tasks by deadline in the ascending order. 
 </div>
 
@@ -413,7 +413,7 @@ If your changes to the data file makes its format invalid, Harmonia will discard
 
 [JSON (JavaScript Object Notation](https://www.json.org/json-en.html), is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values). [(Source: Wikipedia)](https://en.wikipedia.org/wiki/JSON)
 
-In Harmonia, a JSON file is used to store the list of tasks. For each task, the JSON file stores the mapping between attributes (e.g. task name, description, etc.) and their values. If you are an advanced user, you may choose to update the data by editing the JSON file.
+In Harmonia, a JSON file is used to store the list of tasks. For each task, the JSON file stores the mapping between attributes (examples: task name, description, etc.) and their values. If you are an advanced user, you may choose to update the data by editing the JSON file.
 
 [Return to Top](#table-of-contents-toc)
 
