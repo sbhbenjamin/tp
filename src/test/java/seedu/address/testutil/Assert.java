@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.function.Executable;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.function.Predicate;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.function.Executable;
 
 /**
  * A set of assertion methods useful for writing tests.
@@ -44,6 +44,7 @@ public class Assert {
      * @param testItems the items to be supplied as input to {@code predicate}
      * @param <T> the type of the items
      */
+    @SafeVarargs
     public static <T> void assertAllFalse(Predicate<? super T> predicate, T... testItems) {
         for (T item : testItems) {
             assertFalse(predicate.test(item));
