@@ -3,13 +3,6 @@ package seedu.address.model.task;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TestUtil.EMOJI_STRING;
-import static seedu.address.testutil.TestUtil.EMPTY_STRING;
-import static seedu.address.testutil.TestUtil.LEADING_WHITESPACE_STRING;
-import static seedu.address.testutil.TestUtil.NON_ENGLISH_STRING;
-import static seedu.address.testutil.TestUtil.PUNCTUATION_STRING;
-import static seedu.address.testutil.TestUtil.SYMBOLS_STRING;
-import static seedu.address.testutil.TestUtil.WHITESPACES_ONLY_STRING;
 import static seedu.address.testutil.TestUtil.assertAllFalse;
 
 import org.junit.jupiter.api.Test;
