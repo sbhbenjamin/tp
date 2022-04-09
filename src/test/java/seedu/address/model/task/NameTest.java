@@ -3,6 +3,14 @@ package seedu.address.model.task;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.EMOJI_STRING;
+import static seedu.address.testutil.TestUtil.EMPTY_STRING;
+import static seedu.address.testutil.TestUtil.LEADING_WHITESPACE_STRING;
+import static seedu.address.testutil.TestUtil.NON_ENGLISH_STRING;
+import static seedu.address.testutil.TestUtil.PUNCTUATION_STRING;
+import static seedu.address.testutil.TestUtil.SYMBOLS_STRING;
+import static seedu.address.testutil.TestUtil.WHITESPACES_ONLY_STRING;
+import static seedu.address.testutil.TestUtil.assertAllFalse;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,23 +32,22 @@ public class NameTest {
         // null name
         assertThrows(NullPointerException.class, () -> Name.isValidName(null));
 
+        // test all common string restrictions
+        assertAllFalse(Name::isValidName);
+
         // invalid name
-        assertFalse(Name.isValidName("")); // empty string
-        assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName(" Complete CS3240 Milestones")); // first character whitespace
-        assertFalse(Name.isValidName("ㅁㅂㅇㅈㅊㅋㅌㅍㅎ")); // non-english characters
-        assertFalse(Name.isValidName("╲ʕ·ᴥ· ╲ʔ")); // symbols
-        assertFalse(Name.isValidName("☝")); // emojis
         assertFalse(Name.isValidName("Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
                 + "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis "
                 + "nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure "
                 + "dolor em")); // 256 characters
 
         // valid name
+        assertTrue(Description.isValidDescription("H")); // one character
         assertTrue(Name.isValidName("complete tutorials")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only
         assertTrue(Name.isValidName("complete cs3240 milestones")); // alphanumeric characters
         assertTrue(Name.isValidName("Complete Tutorials")); // with capital letters
+        assertTrue(Description.isValidDescription("T[G2] Complete Milestone")); // Punctation not at first character
         // contains non-alphanumeric characters
         assertTrue(Name.isValidName("Complete CS3240 Milestones, Tutorials and Lectures"));
         assertTrue(Name.isValidName("Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
