@@ -2,7 +2,15 @@ package seedu.address.model.task;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertAllFalse;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.EMOJI_STRING;
+import static seedu.address.testutil.TestUtil.EMPTY_STRING;
+import static seedu.address.testutil.TestUtil.LEADING_WHITESPACE_STRING;
+import static seedu.address.testutil.TestUtil.NON_ENGLISH_STRING;
+import static seedu.address.testutil.TestUtil.PUNCTUATION_STRING;
+import static seedu.address.testutil.TestUtil.SYMBOLS_STRING;
+import static seedu.address.testutil.TestUtil.WHITESPACES_ONLY_STRING;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,16 +33,12 @@ public class NameTest {
         assertThrows(NullPointerException.class, () -> Name.isValidName(null));
 
         // invalid name
-        assertFalse(Name.isValidName("")); // empty string
-        assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName(" Complete CS3240 Milestones")); // first character whitespace
-        assertFalse(Name.isValidName("ㅁㅂㅇㅈㅊㅋㅌㅍㅎ")); // non-english characters
-        assertFalse(Name.isValidName("╲ʕ·ᴥ· ╲ʔ")); // symbols
-        assertFalse(Name.isValidName("☝")); // emojis
-        assertFalse(Name.isValidName("Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
+        String veryLongName = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
                 + "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis "
                 + "nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure "
-                + "dolor em")); // 256 characters
+                + "dolor em";
+        assertAllFalse(Name::isValidName, veryLongName, EMPTY_STRING, WHITESPACES_ONLY_STRING, EMOJI_STRING,
+                SYMBOLS_STRING, PUNCTUATION_STRING, NON_ENGLISH_STRING, LEADING_WHITESPACE_STRING);
 
         // valid name
         assertTrue(Name.isValidName("complete tutorials")); // alphabets only
