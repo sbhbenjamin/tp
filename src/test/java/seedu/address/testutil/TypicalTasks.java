@@ -33,14 +33,14 @@ public class TypicalTasks {
             .withTags("CS2105", "exam").build();
 
     /** Task with Completion Status set to true **/
-    public static final Task CS2105_FINALS = new TaskBuilder().withName("CS2105 Finals")
+    public static final Task CS2106_FINALS = new TaskBuilder().withName("CS2106 Finals")
             .withCompletionStatus("true")
             .withDeadline("2022-11-11").withDescription("All lectures and tutorials")
-            .withPriority("low").withTags("CS2105", "exam").build();
+            .withPriority("low").withTags("CS2106", "exam").build();
 
-    public static final Task CS2105_TUTORIAL = new TaskBuilder().withName("CS2105 Tutorial")
+    public static final Task CS2107_TUTORIAL = new TaskBuilder().withName("CS2107 Tutorial")
             .withDescription("Week 9 Tutorial").withDeadline("2022-03-16").withCompletionStatus("false")
-            .withPriority("low").withTags("CS2105").build();
+            .withPriority("low").withTags("CS2107").build();
 
     public static final Task CS2103T_PROJECT = new TaskBuilder().withName("CS2103T Project")
             .withDescription("V1.2b completion").withDeadline("2022-03-13").withCompletionStatus("false")
@@ -88,8 +88,8 @@ public class TypicalTasks {
     }
 
     public static List<Task> getTypicalTasks() {
-        return new ArrayList<>(Arrays.asList(CS2103T_PROJECT, CS2105_FINALS, CS2105_MIDTERM,
-                CS2105_TUTORIAL, MEET_ALICE));
+        return new ArrayList<>(Arrays.asList(CS2103T_PROJECT, CS2106_FINALS, CS2105_MIDTERM,
+                CS2107_TUTORIAL, MEET_ALICE));
     }
 
     /**

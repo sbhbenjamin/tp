@@ -2,11 +2,13 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.commands.sort.ComparatorFactory.DEFAULT_COMPARATOR;
+import static seedu.address.logic.commands.sort.ComparatorFactory.COMPARATOR_SORT_DEADLINE_ASCENDING;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -30,6 +32,7 @@ public class ModelManager implements Model {
     private final FilteredList<Task> filteredTasks;
     private final SortedList<Task> sortedTasks;
     private final TagList tagList;
+    private Predicate<Task> predicate;
 
 
     /**
@@ -43,8 +46,11 @@ public class ModelManager implements Model {
         this.taskList = new TaskList(taskList);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
-        sortedTasks = new SortedList<>(filteredTasks, DEFAULT_COMPARATOR);
+        sortedTasks = new SortedList<>(filteredTasks);
+        updateToDefaultSortedTaskList(); // Updates the sorted list to use the default ordering.
+        updateToDefaultFilteredTaskList(); // Updates the filtered list to use the default filter.
         tagList = new TagList(this.taskList);
+        updateTaskList();
     }
 
     public ModelManager() {
@@ -126,6 +132,11 @@ public class ModelManager implements Model {
         tagList.setTag(target, editedTask);
     }
 
+    public void setTasks(List<Task> tasks) {
+        requireNonNull(tasks);
+        taskList.setTasks(tasks);
+    }
+
     /**
      * Replaces the task {@code target} in the list with {@code editedTask} under stricter conditions.
      * {@code target} must exist in the list.
@@ -135,6 +146,17 @@ public class ModelManager implements Model {
     public void strictSetTask(Task target, Task markedTask) {
         requireAllNonNull(target, markedTask);
         taskList.strictSetTask(target, markedTask);
+    }
+
+    @Override
+    public void updateTaskList() {
+        List<Task> list = new ArrayList<>();
+        filteredTasks.setPredicate(PREDICATE_SHOW_ALL_TASKS);
+        for (int i = 0; i < sortedTasks.size(); i++) {
+            list.add(sortedTasks.get(i));
+        }
+        restorePreviousPredicate();
+        setTasks(list);
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -151,7 +173,18 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
+        this.predicate = predicate;
         filteredTasks.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateToDefaultFilteredTaskList() {
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    @Override
+    public void restorePreviousPredicate() {
+        updateFilteredTaskList(predicate);
     }
 
     //=========== Sorted Task List Accessors =============================================================
@@ -169,6 +202,16 @@ public class ModelManager implements Model {
     public void updateSortedTaskList(Comparator<Task> comparator) {
         requireNonNull(comparator);
         sortedTasks.setComparator(comparator);
+    }
+
+    @Override
+    public void resetSortedTaskList() {
+        sortedTasks.setComparator(null);
+    }
+
+    @Override
+    public void updateToDefaultSortedTaskList() {
+        updateSortedTaskList(COMPARATOR_SORT_DEADLINE_ASCENDING);
     }
 
     @Override
