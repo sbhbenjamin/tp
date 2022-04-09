@@ -196,7 +196,7 @@ Format: `list t/`
 
 Harmonia allows you to delete the tasks at the given [indexes](#52-index) of the displayed task list. You have to provide one or more indexes to be deleted.
 
-Format: `delete INDEX [INDEX]...`
+Format: `delete INDEX...`
 
 Example: 
 - `delete 3` deletes the task at the third [index](#52-index) of the task list.
@@ -256,7 +256,7 @@ Harmonia does not include partial keyword matches, i.e. only tasks containing ke
 
 Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the displayed task list as complete. You have to provide one or more indexes to be marked.
 
-Format: `mark INDEX [INDEX]...`
+Format: `mark INDEX...`
 
 Example:
 - `mark 3` marks the task at the third [index](#52-index) of the task list as complete.
@@ -278,7 +278,7 @@ You can key `list` to check the index of the task you wish to mark.
 
 Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the displayed task list as incomplete. You have to provide one or more indexes to be unmarked.
 
-Format: `unmark INDEX [INDEX]...`
+Format: `unmark INDEX...`
 
 Example:
 - `unmark 3` marks the task at the third [index](#52-index) of the task list as incomplete.
