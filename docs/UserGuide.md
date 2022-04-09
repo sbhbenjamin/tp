@@ -161,8 +161,8 @@ Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-If duplicate tags are specified, only one of the tags will be added to the task.<br>
-e.g. `add n/midterm d/revise notes dl/2022-04-04 p/high t/test t/test` will only add a single `test` tag to the task.
+- Harmonia does not allow multiple tasks with the same name, and [task names are case-insensitive](#6-appendix-constraints-on-inputs).
+- If duplicate tags are specified, only one of the tags will be added to the task. For example, `add n/midterm d/revise notes dl/2022-04-04 p/high t/test t/test` will only add a single `test` tag to the task.
 </div>
 
 [Return to Top](#table-of-contents-toc)
