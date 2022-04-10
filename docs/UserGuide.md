@@ -312,7 +312,7 @@ You can key `list` to check the [index](#52-index) of the task you wish to edit.
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-You should include the existing tag(s) in the command when adding a new tag. Otherwise, existing tags will be overwritten.<br>
+You should include tags you want to preserve in the command when adding a new tag. Otherwise, all existing tags will be overwritten.<br>
 For example `edit 1 t/CS2103T t/Tutorial`, edits the tags of the task at the first index where `CS2103T` is an existing tag and `Tutorial` is a new tag to be added.
 </div>
 
