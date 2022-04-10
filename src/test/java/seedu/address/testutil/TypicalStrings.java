@@ -54,16 +54,16 @@ public class TypicalStrings {
      */
     public static String[] getInvalidStringsForName() {
         return new String[] {
-                EMPTY_STRING,
-                WHITESPACES_ONLY_STRING,
-                EMOJI_STRING,
-                SYMBOLS_STRING,
-                PUNCTUATION_STRING,
-                NON_ENGLISH_STRING,
-                LEADING_WHITESPACE_STRING,
-                LONG_STRING_256_CHAR,
-                CONTAIN_SLASH_STRING,
-                START_WITH_PUNCTUATION_STRING
+            EMPTY_STRING,
+            WHITESPACES_ONLY_STRING,
+            EMOJI_STRING,
+            SYMBOLS_STRING,
+            PUNCTUATION_STRING,
+            NON_ENGLISH_STRING,
+            LEADING_WHITESPACE_STRING,
+            LONG_STRING_256_CHAR,
+            CONTAIN_SLASH_STRING,
+            START_WITH_PUNCTUATION_STRING
         };
     }
 
@@ -74,13 +74,13 @@ public class TypicalStrings {
      */
     public static String[] getValidStringsForName() {
         return new String[] {
-                ONE_LETTER_1,
-                ONE_LETTER_2,
-                LONG_STRING_255_CHAR,
-                START_WITH_DIGIT_STRING,
-                ALNUM_STRING,
-                MANY_SPACES_STRING,
-                CONTAINS_PUNCTUATION_STRING
+            ONE_LETTER_1,
+            ONE_LETTER_2,
+            LONG_STRING_255_CHAR,
+            START_WITH_DIGIT_STRING,
+            ALNUM_STRING,
+            MANY_SPACES_STRING,
+            CONTAINS_PUNCTUATION_STRING
         };
     }
 
@@ -91,16 +91,16 @@ public class TypicalStrings {
      */
     public static String[] getInvalidStringsForDescription() {
         return new String[] {
-                EMPTY_STRING,
-                WHITESPACES_ONLY_STRING,
-                EMOJI_STRING,
-                SYMBOLS_STRING,
-                PUNCTUATION_STRING,
-                NON_ENGLISH_STRING,
-                LEADING_WHITESPACE_STRING,
-                LONG_STRING_256_CHAR,
-                CONTAIN_SLASH_STRING,
-                START_WITH_PUNCTUATION_STRING
+            EMPTY_STRING,
+            WHITESPACES_ONLY_STRING,
+            EMOJI_STRING,
+            SYMBOLS_STRING,
+            PUNCTUATION_STRING,
+            NON_ENGLISH_STRING,
+            LEADING_WHITESPACE_STRING,
+            LONG_STRING_256_CHAR,
+            CONTAIN_SLASH_STRING,
+            START_WITH_PUNCTUATION_STRING
         };
     }
 
@@ -111,13 +111,13 @@ public class TypicalStrings {
      */
     public static String[] getValidStringsForDescription() {
         return new String[] {
-                ONE_LETTER_1,
-                ONE_LETTER_2,
-                LONG_STRING_255_CHAR,
-                START_WITH_DIGIT_STRING,
-                ALNUM_STRING,
-                MANY_SPACES_STRING,
-                CONTAINS_PUNCTUATION_STRING
+            ONE_LETTER_1,
+            ONE_LETTER_2,
+            LONG_STRING_255_CHAR,
+            START_WITH_DIGIT_STRING,
+            ALNUM_STRING,
+            MANY_SPACES_STRING,
+            CONTAINS_PUNCTUATION_STRING
         };
     }
 }
