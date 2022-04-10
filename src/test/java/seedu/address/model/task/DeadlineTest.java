@@ -24,10 +24,6 @@ public class DeadlineTest {
         // null date
         assertThrows(NullPointerException.class, () -> Deadline.isValidDeadline(null));
 
-        // blank date
-        assertFalse(Deadline.isValidDeadline("")); // empty string
-        assertFalse(Deadline.isValidDeadline(" ")); // spaces only
-
         // missing parts
         assertFalse(Deadline.isValidDeadline("10-22")); // missing year
         assertFalse(Deadline.isValidDeadline("2022-10")); // missing month

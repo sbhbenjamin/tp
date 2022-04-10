@@ -21,9 +21,9 @@ public class CompletionStatusTest {
 
     @Test
     public void isValidCompletionStatus() {
+
         // invalid completion status
         assertFalse(CompletionStatus.isValidCompletionStatus(null));
-        assertFalse(CompletionStatus.isValidCompletionStatus(""));
         assertFalse(CompletionStatus.isValidCompletionStatus("F"));
         assertFalse(CompletionStatus.isValidCompletionStatus("T"));
 

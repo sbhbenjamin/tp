@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.function.Predicate;
 
@@ -48,6 +49,21 @@ public class Assert {
     public static <T> void assertAllFalse(Predicate<? super T> predicate, T... testItems) {
         for (T item : testItems) {
             assertFalse(predicate.test(item));
+        }
+    }
+
+    /**
+     * Asserts that for each of the items in {@code testItems}, if it is passed as the parameter of the
+     * {@code predicate}, then the {@code predicate} will evaluate to true.
+     *
+     * @param predicate the predicate to be used
+     * @param testItems the items to be supplied as input to {@code predicate}
+     * @param <T> the type of the items
+     */
+    @SafeVarargs
+    public static <T> void assertAllTrue(Predicate<? super T> predicate, T... testItems) {
+        for (T item : testItems) {
+            assertTrue(predicate.test(item));
         }
     }
 }

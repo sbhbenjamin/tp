@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,14 +14,6 @@ import seedu.address.model.task.Task;
  * A utility class for test cases.
  */
 public class TestUtil {
-
-    public static final String EMPTY_STRING = "";
-    public static final String WHITESPACES_ONLY_STRING = "";
-    public static final String EMOJI_STRING = "☝️";
-    public static final String SYMBOLS_STRING = "ʕ·ᴥ·ʔ";
-    public static final String PUNCTUATION_STRING = ",";
-    public static final String NON_ENGLISH_STRING = "ㅁㅂㅇㅈㅊㅋㅌㅍㅎ";
-    public static final String LEADING_WHITESPACE_STRING = " task";
 
     /**
      * Folder used for temp files created during testing. Ignored by Git.
