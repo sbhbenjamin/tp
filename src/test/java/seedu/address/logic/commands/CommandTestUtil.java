@@ -159,7 +159,7 @@ public class CommandTestUtil {
         assertTrue(0 < model.getFilteredTaskList().size());
     }
 
-   /**
+    /**
      * Updates {@code model}'s filtered list to show the tasks at the 2 given {@code targetIndexes} in the
      * {@code model}'s task list.
      */
