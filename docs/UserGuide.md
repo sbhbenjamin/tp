@@ -416,7 +416,7 @@ If your changes to the data file makes its format invalid, Harmonia will discard
 
 ### 5.1 JSON file
 
-[JSON (JavaScript Object Notation](https://www.json.org/json-en.html), is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values). [(Source: Wikipedia)](https://en.wikipedia.org/wiki/JSON)
+[JSON (JavaScript Object Notation)](https://www.json.org/json-en.html), is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values). [(Source: Wikipedia)](https://en.wikipedia.org/wiki/JSON)
 
 In Harmonia, a JSON file is used to store the list of tasks. For each task, the JSON file stores the mapping between attributes (examples: task name, description, etc.) and their values. If you are an advanced user, you may choose to update the data by editing the JSON file.
 
@@ -436,7 +436,7 @@ Index 2 here refers to the second item in the list, "Clean room".
 
 ### 5.3 Tag
 
-Harmonia uses tags to help you categorize your tasks. You may optionally assign one or more tags to a task through [Adding a task: add](#31-adding-a-task-add), and find your tasks with specified tag(s) through [Locating a task: find](#35-locating-a-task-find).
+Harmonia uses tags to help you categorize your tasks. You may optionally assign one or more tags when [adding a task](#31-adding-a-task-add). You can also [find your tasks](#35-locating-a-task-find) using tags.
 
 [Return to Top](#table-of-contents-toc)
 
