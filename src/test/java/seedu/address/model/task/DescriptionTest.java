@@ -14,7 +14,7 @@ public class DescriptionTest {
     @Test
     public void constructor_invalidDescription_throwsIllegalArgumentException() {
 
-        // null name: throw NullPointerException
+        // null description: throw NullPointerException
         assertThrows(NullPointerException.class, () -> new Description(NULL_STRING));
 
         // other cases: throw IllegalArgumentException
