@@ -34,5 +34,12 @@
     "deadline" : "2022-04-01",
     "priority": "low",
     "tagged" : [ ]
+  }, {
+    "name" : "CS2102 Meeting",
+    "description" : "Meeting",
+    "isCompleted" : "true",
+    "deadline" : "2022-04-06",
+    "priority" : "medium",
+    "tagged" : [ ]
   } ]
 }

@@ -5,11 +5,13 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkCommand;
 
-import java.util.List;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -24,7 +26,7 @@ public class MarkCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsMarkCommand() {
-        List indexList = List.of(INDEX_FIRST_TASK);
+        List<Index> indexList = List.of(INDEX_FIRST_TASK);
         assertParseSuccess(parser, "1", new MarkCommand(indexList));
     }
 

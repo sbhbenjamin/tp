@@ -7,8 +7,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPLETION_STAT
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showTaskAtIndex;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_TASK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SIXTH_TASK;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskList;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +25,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TaskBuilder;
 
-import java.util.List;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for

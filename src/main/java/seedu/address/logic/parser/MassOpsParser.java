@@ -22,9 +22,10 @@ public class MassOpsParser {
      * @throws ParseException
      */
     public static List<Index> massOpProcessor(String args) throws ParseException {
+        assert args.length() != 0;
+
         List<String> stringIndexes = new ArrayList<>(Arrays.asList(args.trim().split(" ")));
         List<Index> indexes = new ArrayList<>();
-
 
         for (int i = 0; i < stringIndexes.size(); i++) {
             Index index = ParserUtil.parseIndex(stringIndexes.get(i));
@@ -42,7 +43,6 @@ public class MassOpsParser {
      */
     public static List<Index> sortInAsc(List<Index> indexes) {
         assert indexes.size() != 0;
-        assert indexes != null;
 
         TreeSet<Index> sorted = new TreeSet<>(indexes);
         List<Index> ascIndexes = new ArrayList<>(sorted);
@@ -57,7 +57,6 @@ public class MassOpsParser {
      */
     public static List<Index> sortInDesc(List<Index> indexes) {
         assert indexes.size() != 0;
-        assert indexes != null;
 
         List<Index> descIndexes = sortInAsc(indexes);
         Collections.reverse(descIndexes);

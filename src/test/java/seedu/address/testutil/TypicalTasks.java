@@ -62,7 +62,7 @@ public class TypicalTasks {
             .withDescription("Assignment 2").withDeadline("2022-03-20")
             .withPriority("low").withCompletionStatus("false").build();
 
-    public static final Task CS2102_MEETING = new TaskBuilder().withName("CS2102 MEETING")
+    public static final Task CS2102_MEETING = new TaskBuilder().withName("CS2102 Meeting")
             .withDescription("Meeting").withDeadline("2022-04-06")
             .withPriority("medium").withCompletionStatus("true").build();
 
