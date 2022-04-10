@@ -1,7 +1,11 @@
 package seedu.address.model.task;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.task.TypicalDeadlines.NULL_DATE;
+import static seedu.address.model.task.TypicalDeadlines.getInvalidDeadlines;
+import static seedu.address.model.task.TypicalDeadlines.getValidDeadlines;
+import static seedu.address.testutil.Assert.assertAllFalse;
+import static seedu.address.testutil.Assert.assertAllThrows;
+import static seedu.address.testutil.Assert.assertAllTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -9,42 +13,25 @@ import org.junit.jupiter.api.Test;
 public class DeadlineTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Deadline(null));
-    }
-
-    @Test
     public void constructor_invalidDeadline_throwsIllegalArgumentException() {
-        String invalidDeadline = "";
-        assertThrows(IllegalArgumentException.class, () -> new Deadline(invalidDeadline));
+
+        // null case
+        assertThrows(NullPointerException.class, () -> new Deadline(NULL_DATE));
+        // other invalid cases
+        String[] invalidDeadlines = getInvalidDeadlines();
+        assertAllThrows(IllegalArgumentException.class, Deadline::new, invalidDeadlines);
     }
 
     @Test
     public void isValidDeadline() {
-        // null date
-        assertThrows(NullPointerException.class, () -> Deadline.isValidDeadline(null));
 
-        // missing parts
-        assertFalse(Deadline.isValidDeadline("10-22")); // missing year
-        assertFalse(Deadline.isValidDeadline("2022-10")); // missing month
-        assertFalse(Deadline.isValidDeadline("2022-22")); // missing day
+        // null case
+        assertAllFalse(Deadline::isValidDeadline, NULL_DATE);
 
-        // invalid parts
-        assertFalse(Deadline.isValidDeadline("2022-10-32")); // day exceeds limit
-        assertFalse(Deadline.isValidDeadline("2022-13-26")); // month exceeds limit
-        assertFalse(Deadline.isValidDeadline("999-13-26")); // year under limit
-        assertFalse(Deadline.isValidDeadline("10000-13-26")); // year over limit
+        // invalid deadlines
+        assertAllFalse(Deadline::isValidDeadline, getInvalidDeadlines());
 
-        // invalid format
-        assertFalse(Deadline.isValidDeadline("26-10-2022")); // DD-MM-YYYY
-        assertFalse(Deadline.isValidDeadline("10-26-2022")); // MM-DD-YYYY
-        assertFalse(Deadline.isValidDeadline("2022/10/22")); // DD/MM/YYYY
-        assertFalse(Deadline.isValidDeadline("--03-20")); // ISO_8601 format without year
-        assertFalse(Deadline.isValidDeadline("20090106")); // Basic ISO_8601 format
-        assertFalse(Deadline.isValidDeadline("2nd October 2007"));
-        assertFalse(Deadline.isValidDeadline("2 October 2007"));
-
-        // valid date
-        assertTrue(Deadline.isValidDeadline("2022-10-22")); // YYYY-MM-DD
+        // valid deadlines
+        assertAllTrue(Deadline::isValidDeadline, getValidDeadlines());
     }
 }
