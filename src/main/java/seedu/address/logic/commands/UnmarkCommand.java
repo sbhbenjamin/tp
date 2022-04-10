@@ -115,16 +115,15 @@ public class UnmarkCommand extends Command {
      * @return a {@code String} of the list of indexes that are passed into the function.
      */
     private String indexesToString(List<Index> indexes) {
-        String str = "" + indexes.get(0).getOneBased();
-        for (int i = 1; i < indexes.size(); i++) {
-            int index = indexes.get(i).getOneBased();
-            if (indexes.size() > 1 && i == indexes.size() - 1) {
-                str += " and " + index;
-            } else {
-                str += ", " + index;
+        StringBuilder str = new StringBuilder();
+        if (indexes.size() > 1) {
+            for (int i = indexes.size() - 1; i >= 1; i--) {
+                str.append(indexes.get(i).getOneBased());
+                str.append(i == 1 ? " and " : ", ");
             }
         }
-        return str;
+        str.append(indexes.get(0).getOneBased());
+        return str.toString();
     }
 
     @Override
