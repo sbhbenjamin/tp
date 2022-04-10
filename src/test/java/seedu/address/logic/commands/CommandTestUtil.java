@@ -158,4 +158,24 @@ public class CommandTestUtil {
         model.updateFilteredTaskList(new NameContainsKeywordsPredicate(set));
         assertTrue(0 < model.getFilteredTaskList().size());
     }
+
+   /**
+     * Updates {@code model}'s filtered list to show the tasks at the 2 given {@code targetIndexes} in the
+     * {@code model}'s task list.
+     */
+    public static void showTasksAtIndexes(Model model, Index targetIndex1, Index targetIndex2) {
+        assertTrue(targetIndex1.getZeroBased() < model.getFilteredTaskList().size());
+        assertTrue(targetIndex2.getZeroBased() < model.getFilteredTaskList().size());
+
+        Task task1 = model.getFilteredTaskList().get(targetIndex1.getZeroBased());
+        String[] splitName1 = task1.getName().fullName.split("\\s+");
+        NameContainsKeywordsPredicate p1 = new NameContainsKeywordsPredicate(Collections.singleton(splitName1[0]));
+
+        Task task2 = model.getFilteredTaskList().get(targetIndex2.getZeroBased());
+        String[] splitName2 = task2.getName().fullName.split("\\s+");
+        NameContainsKeywordsPredicate p2 = new NameContainsKeywordsPredicate(Collections.singleton(splitName2[0]));
+
+        model.updateFilteredTaskList(p1.or(p2));
+        assertEquals(2, model.getFilteredTaskList().size());
+    }
 }

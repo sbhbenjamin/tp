@@ -3,6 +3,7 @@ package seedu.address.model.tag;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.assertAllFalse;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,15 +25,12 @@ public class TagTest {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
 
-        assertFalse(Tag.isValidTagName("")); // empty string
-        assertFalse(Tag.isValidTagName(" ")); // spaces only
-        assertFalse(Tag.isValidTagName(" CS3240")); // first character whitespace
-        assertFalse(Tag.isValidTagName("ㅁㅂㅇㅈㅊㅋㅌㅍㅎ")); // non-english characters
-        assertFalse(Tag.isValidTagName("╲ʕ·ᴥ· ╲ʔ")); // symbols
-        assertFalse(Tag.isValidTagName("☝")); // emojis
-        assertFalse(Tag.isValidTagName("AI/ML")); // contains punctuations
-        assertFalse(Tag.isValidTagName("AI Machine Learning")); // contains spaces
-        assertFalse(Tag.isValidTagName("ExtraordinaryMachineLearningAndArtificialIntelligen")); // 51 characters
+        // test all common restrictions
+        assertAllFalse(Tag::isValidTagName);
+
+        // invalid tag name
+        assertFalse(Tag.isValidTagName("ai machine learning")); // contains spaces
+        assertFalse(Tag.isValidTagName("extraordinarymachinelearningandartificialintelligen")); // 51 characters
 
         // valid tag name
         assertTrue(Tag.isValidTagName("tutorials")); // alphabets only

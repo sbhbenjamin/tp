@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
-//import seedu.address.model.TaskList;
-//import seedu.address.testutil.TypicalTasks;
+import seedu.address.model.TaskList;
+import seedu.address.testutil.TypicalTasks;
 
 public class JsonSerializableTaskListTest {
 
@@ -20,14 +20,14 @@ public class JsonSerializableTaskListTest {
     private static final Path INVALID_TASK_FILE = TEST_DATA_FOLDER.resolve("invalidTaskTaskList.json");
     private static final Path DUPLICATE_TASK_FILE = TEST_DATA_FOLDER.resolve("duplicateTaskTaskList.json");
 
-    //    @Test
-    //    public void toModelType_typicalTasksFile_success() throws Exception {
-    //        JsonSerializableTaskList dataFromFile = JsonUtil.readJsonFile(TYPICAL_TASKS_FILE,
-    //                JsonSerializableTaskList.class).get();
-    //        TaskList taskListFromFile = dataFromFile.toModelType();
-    //        TaskList typicalTaskList = TypicalTasks.getTypicalTaskList();
-    //        assertEquals(taskListFromFile, typicalTaskList);
-    //    }
+    @Test
+    public void toModelType_typicalTasksFile_success() throws Exception {
+        JsonSerializableTaskList dataFromFile = JsonUtil.readJsonFile(TYPICAL_TASKS_FILE,
+                JsonSerializableTaskList.class).get();
+        TaskList taskListFromFile = dataFromFile.toModelType();
+        TaskList typicalTaskList = TypicalTasks.getTypicalTaskList();
+        assertEquals(taskListFromFile, typicalTaskList);
+    }
 
     @Test
     public void toModelType_invalidTasksFile_throwsIllegalValueException() throws Exception {
