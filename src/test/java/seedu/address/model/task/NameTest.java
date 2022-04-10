@@ -2,6 +2,7 @@ package seedu.address.model.task;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertAllFalse;
+import static seedu.address.testutil.Assert.assertAllThrows;
 import static seedu.address.testutil.Assert.assertAllTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStrings.NULL_STRING;
@@ -20,9 +21,7 @@ public class NameTest {
 
         // other cases: throw IllegalArgumentException
         String[] invalidStrings = getInvalidStringsForName();
-        for (String s : invalidStrings) {
-            assertThrows(IllegalArgumentException.class, () -> new Name(s));
-        }
+        assertAllThrows(IllegalArgumentException.class, Name::new, invalidStrings);
     }
 
     @Test

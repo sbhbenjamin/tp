@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Assertions;
@@ -35,6 +36,45 @@ public class Assert {
             Executable executable) {
         Throwable thrownException = Assertions.assertThrows(expectedType, executable);
         Assertions.assertEquals(expectedMessage, thrownException.getMessage());
+    }
+
+    /**
+     * Asserts that when the {@code function} is applied with any of the inputs, it throws the
+     * {@code expectedType} of exception.
+     *
+     * @param expectedType the type of exception that is expected to be thrown
+     * @param function the function to be executed
+     * @param inputs the inputs to the function, applied one by one
+     * @param <T> the type of input
+     * @param <R> the type that the function returns
+     */
+    @SafeVarargs
+    public static <T, R> void assertAllThrows(Class<? extends Throwable> expectedType,
+                                              Function<? super T, R> function, T... inputs) {
+
+        for (T input : inputs) {
+            assertThrows(expectedType, () -> function.apply(input));
+        }
+    }
+
+    /**
+     * Asserts that when the {@code function} is applied with any of the inputs, it throws the
+     * {@code expectedType} of exception.
+     *
+     * @param expectedType the type of exception that is expected to be thrown
+     * @param expectedMessage the error message expected for every run of the function
+     * @param function the function to be executed
+     * @param inputs the inputs to the function, applied one by one
+     * @param <T> the type of input
+     * @param <R> the type that the function returns
+     */
+    @SafeVarargs
+    public static <T, R> void assertAllThrows(Class<? extends Throwable> expectedType, String expectedMessage,
+                                              Function<? super T, R> function, T... inputs) {
+
+        for (T input : inputs) {
+            assertThrows(expectedType, expectedMessage, () -> function.apply(input));
+        }
     }
 
     /**
