@@ -72,6 +72,21 @@ public class TypicalTasks {
             .withCompletionStatus(VALID_COMPLETION_STATUS_FALSE).withPriority(VALID_PRIORITY_LOW)
             .withTags(VALID_TAG_CS2102, VALID_TAG_TEST).build();
 
+    // Used in {@code ComparatorFactoryTest} and {@code SortCommandTest}
+    public static final Task SAMPLE_TASK_ONE = new TaskBuilder().withName("AAA KEYWORD")
+            .withDescription("TEST DESCRIPTION ONE").withDeadline("2022-02-21")
+            .withPriority("high").withCompletionStatus("false").build();
+    public static final Task SAMPLE_TASK_TWO = new TaskBuilder().withName("BBB KEYWORD")
+            .withDescription("TEST DESCRIPTION TWO").withDeadline("2022-03-24")
+            .withPriority("low").withCompletionStatus("false").build();
+    public static final Task SAMPLE_TASK_THREE = new TaskBuilder().withName("CCC")
+            .withDescription("TEST DESCRIPTION THREE").withDeadline("2022-01-20")
+            .withPriority("medium").withCompletionStatus("false").build();
+    public static final Task SAMPLE_TASK_FOUR = new TaskBuilder().withName("DDD KEYWORD")
+            .withDescription("TEST DESCRIPTION THREE").withDeadline("2022-02-15")
+            .withPriority("medium").withCompletionStatus("true").build();
+
+
     public static final String KEYWORD_MATCHING_NUS = "NUS"; // A keyword that matches NUS
 
     private TypicalTasks() {} // prevents instantiation
@@ -90,6 +105,22 @@ public class TypicalTasks {
     public static List<Task> getTypicalTasks() {
         return new ArrayList<>(Arrays.asList(CS2103T_PROJECT, CS2106_FINALS, CS2105_MIDTERM,
                 CS2107_TUTORIAL, MEET_ALICE));
+    }
+
+    /**
+     * Returns a {@code TaskList} with all the typical Tasks optimized for Sort tests.
+     */
+    public static TaskList getTypicalTaskListForSort() {
+        TaskList tl = new TaskList();
+        for (Task task : getTypicalTasksForSort()) {
+            tl.addTask(task);
+        }
+        return tl;
+    }
+
+    public static List<Task> getTypicalTasksForSort() {
+        return new ArrayList<>(Arrays.asList(SAMPLE_TASK_ONE, SAMPLE_TASK_TWO,
+                SAMPLE_TASK_THREE, SAMPLE_TASK_FOUR));
     }
 
     /**
