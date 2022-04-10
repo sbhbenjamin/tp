@@ -13,11 +13,14 @@ import org.junit.jupiter.api.Test;
 public class DeadlineTest {
 
     @Test
-    public void constructor_invalidDeadline_throwsIllegalArgumentException() {
-
+    public void constructor_nullDescription_throwsNullPointerException() {
         // null case
         assertThrows(NullPointerException.class, () -> new Deadline(NULL_DATE));
-        // other invalid cases
+    }
+
+    @Test
+    public void constructor_invalidDeadline_throwsIllegalArgumentException() {
+
         String[] invalidDeadlines = getInvalidDeadlines();
         assertAllThrows(IllegalArgumentException.class, Deadline::new, invalidDeadlines);
     }

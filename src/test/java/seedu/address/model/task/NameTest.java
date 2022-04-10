@@ -14,12 +14,14 @@ import org.junit.jupiter.api.Test;
 public class NameTest {
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
+    public void constructor_nullDescription_throwsNullPointerException() {
 
         // null name: throw NullPointerException
         assertThrows(NullPointerException.class, () -> new Name(NULL_STRING));
+    }
+    @Test
+    public void constructor_invalidName_throwsIllegalArgumentException() {
 
-        // other cases: throw IllegalArgumentException
         String[] invalidStrings = getInvalidStringsForName();
         assertAllThrows(IllegalArgumentException.class, Name::new, invalidStrings);
     }

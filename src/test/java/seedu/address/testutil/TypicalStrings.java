@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 /**
- * Represents the typical strings that could be supplied as user inputs.
+ * Contains the typical strings that could be supplied as user inputs.
  */
 public class TypicalStrings {
 

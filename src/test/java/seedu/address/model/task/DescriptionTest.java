@@ -12,13 +12,15 @@ import static seedu.address.testutil.TypicalStrings.getValidStringsForDescriptio
 import org.junit.jupiter.api.Test;
 
 public class DescriptionTest {
+
+    @Test
+    public void constructor_nullDescription_throwsNullPointerException() {
+        // null description: throw NullPointerException
+        assertThrows(NullPointerException.class, () -> new Description(NULL_STRING));
+    }
     @Test
     public void constructor_invalidDescription_throwsIllegalArgumentException() {
 
-        // null description: throw NullPointerException
-        assertThrows(NullPointerException.class, () -> new Description(NULL_STRING));
-
-        // other cases: throw IllegalArgumentException
         String[] invalidStrings = getInvalidStringsForDescription();
         assertAllThrows(IllegalArgumentException.class, Description::new, invalidStrings);
     }

@@ -1,7 +1,7 @@
 package seedu.address.model.task;
 
 /**
- * Represents the typical inputs to the {@code Deadline} field.
+ * Contains the typical inputs to the {@code Deadline} field.
  */
 public class TypicalDeadlines {
 
@@ -54,7 +54,7 @@ public class TypicalDeadlines {
     }
 
     /**
-     * Retrieves all the invalid strings that represent a {@code Deadline}.
+     * Retrieves all the invalid strings that represent a {@code Deadline}, excluding null.
      *
      * @return the list of strings
      */
