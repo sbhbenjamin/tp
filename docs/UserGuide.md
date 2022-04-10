@@ -188,7 +188,7 @@ Harmonia allows you to see a list of all existing tags used in the task list.
 
 Format: `list t/`
 - The tags are listed in the Result Display.
-- Listed tags are case-insensitive (i.e. if there are two tags, cs2103t and CS2103T, only one of the tags will be shown).
+- Listed tags are case-insensitive (i.e. if there are two tags, `cs2103t` and `CS2103T`, only one of the tags will be shown).
 
 [Return to Top](#table-of-contents-toc)
 
