@@ -385,7 +385,7 @@ Harmonia's data is saved in the hard disk automatically after any command change
 
 ### 3.14 Editing the data file
 
-Harmonia's data is saved as [JSON](#51-json-file) file ([Location of Harmonia.jar]/data/harmonia.json). Advanced users are encouraged to update the data by editing JSON file.
+Harmonia's data is saved as [JSON](#51-json-file) file (`[Location of Harmonia.jar]/data/harmonia.json`). Advanced users are encouraged to update the data by editing JSON file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, Harmonia will discard all data and start with an empty data file at the next run.
