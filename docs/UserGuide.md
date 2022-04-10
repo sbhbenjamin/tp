@@ -228,7 +228,7 @@ Format: `find [n/NAME_KEYWORD]... [d/DESCRIPTION_KEYWORD]... [start/START_DATE] 
 
 * If only one of either `START_DATE` or `END_DATE` is supplied by you, Harmonia ignores the unspecified field. For example, if only `START_DATE` is supplied by you, Harmonia finds all the tasks with a deadline that is after and including `START_DATE`.
 
-* If a `PRIORITY` is supplied by you, Harmonia finds the tasks whose priority matches the `PRIORITY` supplied by you. If multiple values of `PRIORITY` are supplied by you, Harmonia finds the tasks whose priority matches any of the values of `PRIORITY` supplied.
+* If a `PRIORITY` is supplied by you, Harmonia finds the tasks whose priority matches the `PRIORITY` specified. If multiple values of `PRIORITY` are supplied by you, Harmonia finds the tasks whose priority matches any of the values of `PRIORITY` supplied.
 
 * If a `TAG` is supplied by you, Harmonia finds tasks whose [tag(s)](#53-tag) match the `TAG` specified. If multiple `TAG`s are supplied by you, Harmonia finds the tasks whose tag(s) match any of the `TAG`s supplied.
 
