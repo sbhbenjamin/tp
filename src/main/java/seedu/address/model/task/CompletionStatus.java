@@ -1,9 +1,9 @@
 package seedu.address.model.task;
 
-import java.util.Locale;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Locale;
 
 /**
  * Represents a Task's completion status in the task list.
