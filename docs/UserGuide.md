@@ -47,7 +47,7 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 This user guide aims to teach you how to use Harmonia to systematically organize your student life. It walks you through all the commands Harmonia has and examples on how to use them. By the end of the guide, you should have a better understanding on how to use Harmonia to help you organise your life.
 
 ### 1.2 How to use this guide
-This guide is designed to be read from top to bottom. At the same time, this guide provides ease of navigation, where you can quickly access the segment you are looking for. To this end, the table of contents summarizes all the different sections of our user guide, and it links you to the section of the guide which you wish to look at in detail. After each section, there is a [Return to Top](#table-of-contents-toc) link enables you to quickly navigate back to the Table of Contents.
+This guide is designed to be read from top to bottom. At the same time, this guide provides ease of navigation, where you can quickly access the segment you are looking for. To this end, the table of contents summarizes all the different sections of our user guide, and it links you to the section of the guide which you wish to look at in detail. After each section, there is a [Return to Top](#table-of-contents-toc) link which enables you to quickly navigate back to the Table of Contents.
 
 ### 1.3 Typography
 This user guide uses different typography to denote different types of information so that you can easily know if the instruction is actionable.
