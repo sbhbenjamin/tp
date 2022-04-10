@@ -105,11 +105,11 @@ Figure 1.5 depicts the user interface of Harmonia. The following descriptions ex
 5. Type the command in the command box and press <kbd>↵Enter</kbd> to execute it.<br>
 Here are a few example commands you can try:
 - `list`
-  - Lists out all tasks.
+  - Harmonia lists out all tasks.
 - `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T`
-  - Adds a task named `CS2103T tp meeting`, with a description of `read the weekly tasks before the meeting`. It has a deadline of `2022-03-27`, with a priority of `medium` and a [tag](#53-tag) of `CS2103T`.
+  - Harmonia adds a task named `CS2103T tp meeting`, with a description of `read the weekly tasks before the meeting`. It has a deadline of `2022-03-27`, with a priority of `medium` and a [tag](#53-tag) of `CS2103T`.
 - `find n/tp`
-  - Finds a task with the name `tp`.
+  - Harmonia finds tasks that match the keyword `tp`.
 
 [Return to Top](#table-of-contents-toc)
 
