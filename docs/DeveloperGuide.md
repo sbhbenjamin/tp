@@ -243,7 +243,7 @@ _{Explain here how the data archiving feature will be implemented}_
 #### What is the feature about
 This feature provides a way for users to `mark`, `unmark` and `delete` multiple `Tasks` at a time. For the previous implementation of `mark`, `unmark` and `delete`, users had to type in a command for each task that they wished to `mark`, `unmark` or `delete` one at a time.   
 
-`Mark` and `unmark` allows users to mark a `Task` objects as either completed or uncompleted while `delete` allows users to remove a task from the task list.
+`Mark` and `unmark` allows users to mark a `Task` as either complete or incomplete while `delete` allows users to remove a `Task` from the task list.
 
 #### How the feature is implemented
 
@@ -251,17 +251,15 @@ These features are implemented with the addition of a `MassOpsParser` class whic
 
 It is designed to preserve the Command Design Pattern. Through the implementation of the `MarkCommmandParser` and `UnmarkCommandParser`, we can enforce the input format of mark command. Furthermore, isolating `MarkCommand` and `UnmarkCommand` into separate classes, we narrow down functionality of each class. This gives the application more control by limiting the outcome in successful execution. For example, successful execution of MarkCommand will only lead to the task being marked as complete.Whereas an alternative design combining mark and unmark functionality together will lead vague outcome (application unaware whether the task is marked as complete or incomplete after execution).
 
-##### Mass `Marking`, `Unmarking` and `Deleting` Tasks
-Given below is an example usage scenario of how the MassOps mechanism behaves at each step to `mark` tasks in
-the task list.
+Given below is an example usage scenario of how the MassOps mechanism behaves at each step to `mark` tasks in the task list.
 
-Step 1. User inputs `mark 1 2 3` to mark tasks 1, 2 and 3 of the task list.
+Step 1. User inputs `mark 1 2 3` to mark the tasks at the first, second and third index of the task list as complete.
 
 Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
 
 Step 3. The first word of the user input is `mark`, which matches the command for `MarkCommand`.
 
-Step 4. `MarkCommandParser#parse()` is called and `MassOpsParser#massOpsProcessor` is invoked to initialise `indexes` with the user input.
+Step 4. `MarkCommandParser#parse()` is called and `MassOpsParser#massOpsProcessor` is invoked to process the user input into a list of `Indexes`.
 
 Step 5. A `MarkCommand` is initialised using the list of `indexes` and is returned to `LogicManager` for execution.
 
@@ -317,6 +315,21 @@ The `delete` feature follows a similar implementation as well, involving `Delete
         * Easier to extend if both mark and unmark are required to change synchronously
     * Cons:
         * No exact knowledge whether the execution of command mark task as complete or incomplete
+
+**Aspect: How the user input is parsed:**
+
+* **Alternative 1 (current choice):** Create a separate `MassOpsParser` class to parse the user input
+    * Pros:
+      * Reduces similar looking code
+      * Easier to introduce mass operations into other features in future
+      * Abstracts the processing of user input from the respective commands, reducing chances of introducing errors into the different commands.
+    * Cons: -
+* **Alternative 2:** Process the user input in command's parser function itself
+    * Pros:
+      * More control over the way the indexes are processed (can order the indexes in a specific format for execution according to the command)
+    * Cons:
+      * Repetitive code
+      * Makes it more difficult and time-consuming to apply mass operations to other features in future
 
 ### Priority
 
