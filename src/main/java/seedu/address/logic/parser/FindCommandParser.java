@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.keyword.Keyword;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
@@ -49,9 +50,9 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        Set<String> nameKeywords = ParserUtil.parseKeywords(argMultimap.getAllValues(PREFIX_NAME));
-        Set<String> tagKeywords = ParserUtil.parseKeywords(argMultimap.getAllValues(PREFIX_TAG));
-        Set<String> descriptionKeywords = ParserUtil.parseKeywords(argMultimap.getAllValues(PREFIX_DESCRIPTION));
+        Set<Keyword> nameKeywords = ParserUtil.parseKeywords(argMultimap.getAllValues(PREFIX_NAME));
+        Set<Keyword> tagKeywords = ParserUtil.parseKeywords(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Keyword> descriptionKeywords = ParserUtil.parseKeywords(argMultimap.getAllValues(PREFIX_DESCRIPTION));
         Set<Priority> prioritySet = ParserUtil.parsePriorities(argMultimap.getAllValues(PREFIX_PRIORITY));
 
         Deadline startDate = null;

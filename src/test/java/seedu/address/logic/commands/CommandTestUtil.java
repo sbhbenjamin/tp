@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.keyword.Keyword;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TaskList;
@@ -129,7 +130,8 @@ public class CommandTestUtil {
 
         Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
         final String[] splitName = task.getName().fullName.split("\\s+");
-        model.updateFilteredTaskList(new NameContainsKeywordsPredicate(Collections.singleton(splitName[0])));
+        model.updateFilteredTaskList(new NameContainsKeywordsPredicate(Collections.singleton(
+                new Keyword(splitName[0]))));
 
         assertEquals(1, model.getFilteredTaskList().size());
     }
@@ -144,11 +146,13 @@ public class CommandTestUtil {
 
         Task task1 = model.getFilteredTaskList().get(targetIndex1.getZeroBased());
         String[] splitName1 = task1.getName().fullName.split("\\s+");
-        NameContainsKeywordsPredicate p1 = new NameContainsKeywordsPredicate(Collections.singleton(splitName1[0]));
+        NameContainsKeywordsPredicate p1 = new NameContainsKeywordsPredicate(Collections.singleton(
+                new Keyword(splitName1[0])));
 
         Task task2 = model.getFilteredTaskList().get(targetIndex2.getZeroBased());
         String[] splitName2 = task2.getName().fullName.split("\\s+");
-        NameContainsKeywordsPredicate p2 = new NameContainsKeywordsPredicate(Collections.singleton(splitName2[0]));
+        NameContainsKeywordsPredicate p2 = new NameContainsKeywordsPredicate(Collections.singleton(
+                new Keyword(splitName2[0])));
 
         model.updateFilteredTaskList(p1.or(p2));
         assertEquals(2, model.getFilteredTaskList().size());
