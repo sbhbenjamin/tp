@@ -47,6 +47,8 @@ Given below are my contributions to the project.
 - Developer Guide
   - Added documentation for `MassOperations` ([#171](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/171#issue-1179857765), [#323](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/323#issue-1199047041))
     - Added documentation for mass marking, unmarking and deleting
+  - Added documentation for `Appendix: Instructions for manual testing`
+    - Added documentation for `add`, `edit`, `list`, `list t/`, `mark`, `unmark`, `help`
 
 **Testing**
 - Updated `TestUtil` ([#128](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/128#issue-1166192852))

@@ -3,15 +3,15 @@ package seedu.address.model.task;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.core.keyword.Keyword;
 
 /**
  * Tests that a {@code Task}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Task> {
-    private final Set<String> keywords;
+    private final Set<Keyword> keywords;
 
-    public NameContainsKeywordsPredicate(Set<String> keywords) {
+    public NameContainsKeywordsPredicate(Set<Keyword> keywords) {
         this.keywords = keywords;
     }
 
@@ -22,7 +22,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Task> {
             return true;
         }
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnorePunctuationAndCase(task.getName().fullName, keyword));
+                .anyMatch(keyword -> Keyword.containsKeywordIgnorePunctuationAndCase(task.getName().fullName, keyword));
     }
 
     @Override

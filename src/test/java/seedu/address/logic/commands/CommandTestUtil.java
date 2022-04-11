@@ -6,14 +6,20 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_KEY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.keyword.Keyword;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TaskList;
@@ -39,6 +45,10 @@ public class CommandTestUtil {
     public static final String VALID_TAG_CS2103T = "CS2103T";
     public static final String VALID_TAG_CS2102 = "CS2102";
     public static final String VALID_TAG_TEST = "Test";
+    public static final String VALID_SORT_ORDER_ASCENDING = "asc";
+    public static final String VALID_SORT_ORDER_DESCENDING = "desc";
+    public static final String VALID_SORT_KEY_DEADLINE = "deadline";
+    public static final String VALID_SORT_KEY_PRIORITY = "priority";
 
     public static final String NAME_DESC_TUTORIAL = " " + PREFIX_NAME + VALID_NAME_TUTORIAL;
     public static final String NAME_DESC_MIDTERM = " " + PREFIX_NAME + VALID_NAME_MIDTERM;
@@ -51,6 +61,10 @@ public class CommandTestUtil {
     public static final String TAG_DESC_CS2103T = " " + PREFIX_TAG + VALID_TAG_CS2103T;
     public static final String TAG_DESC_CS2102 = " " + PREFIX_TAG + VALID_TAG_CS2102;
     public static final String TAG_DESC_TEST = " " + PREFIX_TAG + VALID_TAG_TEST;
+    public static final String SORT_ORDER_DESC_ASCENDING = " " + PREFIX_SORT_ORDER + VALID_SORT_ORDER_ASCENDING;
+    public static final String SORT_ORDER_DESC_DESCENDING = " " + PREFIX_SORT_ORDER + VALID_SORT_ORDER_DESCENDING;
+    public static final String SORT_KEY_DESC_DEADLINE = " " + PREFIX_SORT_KEY + VALID_SORT_KEY_DEADLINE;
+    public static final String SORT_KEY_DESC_PRIORITY = " " + PREFIX_SORT_KEY + VALID_SORT_KEY_PRIORITY;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME; // empty string not allowed for names
     public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "Lorem ipsum dolor sit amet, "
@@ -61,6 +75,8 @@ public class CommandTestUtil {
     public static final String INVALID_PRIORITY = " " + PREFIX_PRIORITY + "highest"; // invalid priority enum
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG
             + "qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbn"; // tag should not be more than 50 characters
+    public static final String INVALID_SORT_ORDER_DESC = " " + PREFIX_SORT_ORDER + "lowest"; // invalid sort order enum
+    public static final String INVALID_SORT_KEY_DESC = " " + PREFIX_SORT_KEY + "description"; // invalid sort key enum
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -129,9 +145,20 @@ public class CommandTestUtil {
 
         Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
         final String[] splitName = task.getName().fullName.split("\\s+");
-        model.updateFilteredTaskList(new NameContainsKeywordsPredicate(Collections.singleton(splitName[0])));
+        model.updateFilteredTaskList(new NameContainsKeywordsPredicate(Collections.singleton(
+                new Keyword(splitName[0]))));
 
         assertEquals(1, model.getFilteredTaskList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the task with the matching {@code keywords} with task name
+     * in the {@code model}'s task list.
+     */
+    public static void showTaskWithKeywords(Model model, String... keywords) {
+        Set<String> set = new HashSet<>(Arrays.asList(keywords));
+        model.updateFilteredTaskList(new NameContainsKeywordsPredicate(set));
+        assertTrue(0 < model.getFilteredTaskList().size());
     }
 
     /**
@@ -144,14 +171,15 @@ public class CommandTestUtil {
 
         Task task1 = model.getFilteredTaskList().get(targetIndex1.getZeroBased());
         String[] splitName1 = task1.getName().fullName.split("\\s+");
-        NameContainsKeywordsPredicate p1 = new NameContainsKeywordsPredicate(Collections.singleton(splitName1[0]));
+        NameContainsKeywordsPredicate p1 = new NameContainsKeywordsPredicate(Collections.singleton(
+                new Keyword(splitName1[0])));
 
         Task task2 = model.getFilteredTaskList().get(targetIndex2.getZeroBased());
         String[] splitName2 = task2.getName().fullName.split("\\s+");
-        NameContainsKeywordsPredicate p2 = new NameContainsKeywordsPredicate(Collections.singleton(splitName2[0]));
+        NameContainsKeywordsPredicate p2 = new NameContainsKeywordsPredicate(Collections.singleton(
+                new Keyword(splitName2[0])));
 
         model.updateFilteredTaskList(p1.or(p2));
         assertEquals(2, model.getFilteredTaskList().size());
     }
-
 }

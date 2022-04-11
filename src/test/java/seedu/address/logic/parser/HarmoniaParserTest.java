@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SORT_KEY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.SORT_KEY_DESC_DEADLINE;
+import static seedu.address.logic.commands.CommandTestUtil.SORT_ORDER_DESC_DESCENDING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -20,6 +23,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.keyword.Keyword;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -31,6 +35,9 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.UnmarkCommand;
+import seedu.address.logic.commands.sort.SortCommand;
+import seedu.address.logic.commands.sort.SortKey;
+import seedu.address.logic.commands.sort.SortOrder;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
 import seedu.address.model.task.DeadlineInRangePredicate;
@@ -82,10 +89,12 @@ public class HarmoniaParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> nameKeywords = Arrays.asList("foo", "bar", "baz");
-        List<String> tagKeywords = Arrays.asList("tag1", "tag2");
-        List<String> tagKeywordsWithPrefix = tagKeywords.stream().map(k -> PREFIX_TAG + k).collect(Collectors.toList());
-        List<String> nameKeywordsWithPrefix = nameKeywords.stream().map(k -> PREFIX_NAME + k)
+        List<Keyword> nameKeywords = Arrays.asList(new Keyword("foo"), new Keyword("bar"),
+                new Keyword("baz"));
+        List<Keyword> tagKeywords = Arrays.asList(new Keyword("tag1"), new Keyword("tag2"));
+        List<String> tagKeywordsWithPrefix = tagKeywords.stream().map(k -> PREFIX_TAG + k.getValue()).collect(
+                Collectors.toList());
+        List<String> nameKeywordsWithPrefix = nameKeywords.stream().map(k -> PREFIX_NAME + k.getValue())
                 .collect(Collectors.toList());
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " "
@@ -127,6 +136,21 @@ public class HarmoniaParserTest {
                         + INDEX_SIXTH_TASK.getOneBased());
         List<Index> indexes = List.of(INDEX_FIFTH_TASK, INDEX_SIXTH_TASK);
         assertEquals(new UnmarkCommand(indexes), command);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+
+        // Valid sort input: Sort Key - deadline and Sort Order - descending
+        String validSortInput = SortCommand.COMMAND_WORD + " " + SORT_KEY_DESC_DEADLINE + SORT_ORDER_DESC_DESCENDING;
+        SortCommand validSortCommand = (SortCommand) parser.parseCommand(validSortInput);
+        assertEquals(new SortCommand(SortKey.DEADLINE, SortOrder.DESCENDING), validSortCommand);
+
+        // Invalid sort input
+        String invalidSortInput = SortCommand.COMMAND_WORD + " " + INVALID_SORT_KEY_DESC + SORT_ORDER_DESC_DESCENDING;
+        assertThrows(ParseException.class, () -> {
+            parser.parseCommand(invalidSortInput);
+        });
     }
 
     @Test

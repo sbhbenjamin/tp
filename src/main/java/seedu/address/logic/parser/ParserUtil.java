@@ -1,14 +1,14 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.StringUtil.EMPTY_KEYWORD_MESSAGE;
-import static seedu.address.commons.util.StringUtil.INVALID_KEYWORD_MESSAGE;
+import static seedu.address.commons.core.keyword.Keyword.isValidKeyword;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.keyword.Keyword;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.sort.SortKey;
 import seedu.address.logic.commands.sort.SortOrder;
@@ -146,25 +146,35 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> keywords} into a {@code Set<String>}.
+     * Parses a {@code String keyword} into a {@code Keyword}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
      */
-    public static Set<String> parseKeywords(Collection<String> keywords) throws ParseException {
-        requireNonNull(keywords);
-        final Set<String> keywordSet = new HashSet<>();
-        for (String keyword : keywords) {
-            if (keyword.isEmpty()) {
-                throw new ParseException(EMPTY_KEYWORD_MESSAGE);
-            }
-            if (!isValidKeyword(keyword)) {
-                throw new ParseException(INVALID_KEYWORD_MESSAGE);
-            }
-            keywordSet.add(keyword);
+    public static Keyword parseKeyword(String keyword) throws ParseException {
+        requireNonNull(keyword);
+        String trimmedKeyword = keyword.trim();
+        if (!isValidKeyword(trimmedKeyword)) {
+            throw new ParseException(Keyword.MESSAGE_CONSTRAINTS);
         }
-        return keywordSet;
+        return new Keyword(trimmedKeyword);
     }
 
-    private static boolean isValidKeyword(String keyword) {
-        return keyword.matches("\\p{Alnum}{1,63}");
+    /**
+     * Parses {@code Collection<String> keywords} into a {@code Set<Keyword>}.
+     */
+    public static Set<Keyword> parseKeywords(Collection<String> keywords) throws ParseException {
+        requireNonNull(keywords);
+        final Set<Keyword> keywordSet = new HashSet<>();
+        for (String keyword : keywords) {
+            requireNonNull(keyword);
+            String trimmedKeyword = keyword.trim();
+            if (!isValidKeyword(trimmedKeyword)) {
+                throw new ParseException(Keyword.MESSAGE_CONSTRAINTS);
+            }
+            keywordSet.add(new Keyword(trimmedKeyword));
+        }
+        return keywordSet;
     }
 
     /**

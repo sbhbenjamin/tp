@@ -28,10 +28,10 @@ Given below are my contributions to the project.
 - Highlights: This enhancement affects existing commands such as `Add`, `Edit`, `Find` and `Sort` commands.
 
 **Conducted testing:**
-- Tests for the model [#147](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/147)
-- Tests for the `Task` and its properties (`Completion Status`, `Deadline`, `Description`, `Name`, `Task`, `NameContainsKeywordsPredicateTest`, `UniqueTaskListTest`)
-- Tests for `TaskList` and `ModelManager`
-- Tests for `Tag` [#271](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/271)
+- Tested the model [#147](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/147), [#317](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/317)
+- Tested `Task` and its properties (`Completion Status`, `Deadline`, `Description`, `Name`, `Task`, `NameContainsKeywordsPredicateTest`, `UniqueTaskListTest`)
+- Tested `TaskList` and `ModelManager`
+- Tested `Tag` [#271](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/271)
 
 
 **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=sbhbenjamin&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
@@ -50,16 +50,18 @@ Given below are my contributions to the project.
     - Added documentation for the Model in the design component [#283](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/283)
     - Added documentation for Harmonia's target user profile, value proposition, user stories, NFR and glossary [#57](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/57)
     - Added documentation for use cases [#107](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/107)
-- Conducted cosmetic tweaks to improve consistency of documentation in terms of formatting and language used [#107](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/107), [#194](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/194)
+- Conducted cosmetic tweaks to improve consistency of documentation in terms of formatting and language used [#107](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/107), [#194](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/194), [#325](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/325)
 
 
 **Team**
 - Set up the GitHub team org/repo, initial project, and Gradle
+- Managed issue tracker
+- Changed the icon of Harmonia [#314](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/314)
 - Updated codecov and CI status badge [#89](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/89)
 - Integrated different parts of the system to ensure that the product is functional [#127](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/127), [#141](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/141)
-- Identified inconsistencies or bugs, and performed hotfixes [#201](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/201), [#159](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/159), [#277](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/277), [#271](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/271), [#266](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/266), [#267](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/267)
+- Identified inconsistencies or bugs, and performed hotfixes [#201](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/201), [#159](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/159), [#277](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/277), [#271](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/271), [#266](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/266), [#267](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/267), [#325](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/325)
 - Updated Home page, the AboutUs page, and site-wide settings of the documentation [#88](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/88), [#53](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/53), [#195](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/195)
-- PRs reviewed (with non-trivial review comments): [#160](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/160), [#129](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/129), [#263](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/263), [#264](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/264), [#280](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/280)
+- PRs reviewed (with non-trivial review comments): [#160](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/160), [#129](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/129), [#263](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/263), [#264](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/264), [#280](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/280), [#296](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/296), [#316](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/316), [#327](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/327)
 - Took part in informal code reviews and provided suggestions on implementations
 
 

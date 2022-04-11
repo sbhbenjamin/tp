@@ -48,7 +48,8 @@ public class Tag implements Comparable<Tag> {
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        requireNonNull(this.tagName);
+        return tagName.toLowerCase().hashCode();
     }
 
     /**
