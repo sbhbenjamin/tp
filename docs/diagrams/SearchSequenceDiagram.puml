@@ -102,7 +102,7 @@ deactivate HarmoniaParser
 LogicManager -> FindCommand : execute(model)
 activate FindCommand
 
-FindCommand -> FindCommand : interceptPredicates(namePredicate, descriptionPredicate, tagPredicate, deadlinePredicate, priorityPredicate, deadlinePredicate)
+FindCommand -> FindCommand : interceptPredicates(namePredicate, descriptionPredicate, tagPredicate, deadlinePredicate, priorityPredicate, completionStatusPredicate)
 
 FindCommand -> Model : updateFilteredTaskList(interceptedPredicate)
 activate Model
