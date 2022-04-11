@@ -925,8 +925,121 @@ testers are expected to do more *exploratory* testing.
     2. `add n/CS2103T d/This coming sat PE dl/2022-04-16 p/low t/#CS2103T` (`t/` only takes alphanumeric characters)
     3. `add n/CS2103T d/This coming sat PE dl/2022-04-16 p/none t/CS2103T` (invalid priority, which only accepts `low`, `medium` or `high`)
     4. `add n/CS2103T d/This coming sat PE dl/2022 p/high t/CS2103T` (invalid date format for the `dl` field)
-       Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
- 
+       Expected: No task is added. Error details are shown in the status message.
+
+### Editing an existing task in Harmonia
+1. Editing a task while all tasks are being shown
+   1. Prerequisites: List all tasks using the `list` command. Multiple tasks are shown in the list.
+
+   2. Test case: `edit 2 d/Practice with group dl/2022-04-01`<br>
+      Expected: The description of the second task in the task list is edited. Details of the newly edited task is also shown in the status message.
+
+   3. Test case: `edit 2 d/Practi/ce` (including `/` in `n/` or `d/`) <br>
+      Expected: No task is edited. Error details shown in the status message.
+
+   4. Test case: `edit 2 dl/2022-13-13` (invalid date) <br>
+      Expected: No task is edited. Error details shown in the status message.
+
+   5. Test case: `edit 0 n/Testing` (invalid index)<br>
+      Expected: No task is edited. Error details shown in the status message.
+
+   6. Other incorrect add commands to try:
+       1. `edit`
+       2. `edit x t/tag` (where x is larger than the list size)<br>
+       3. `edit 2 t/#CS2103T` (`t/` only takes alphanumeric characters)
+       4. `edit 2 p/none` (invalid priority, which only accepts `low`, `medium` or `high`)
+          Expected: No task is edited. Error details are shown in the status message.
+
+1. Editing a task while filtered tasks are being shown
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks are shown in the list.
+
+    2. Test case: `edit 2 d/Practice with group`<br>
+       Expected: The description of the second task in the filtered task list is edited. Details of the newly edited task is also shown in the status message.
+
+    3. Test case: `edit 2 d/Practi/ce` (including `/` in `n/` or `d/`) <br>
+       Expected: No task is edited. Error details shown in the status message.
+
+    4. Test case: `edit 2 dl/2022-13-13` (invalid date) <br>
+       Expected: No task is edited. Error details shown in the status message.
+
+    5. Test case: `edit 0 n/Testing` (invalid index)<br>
+       Expected: No task is edited. Error details shown in the status message.
+
+    6. Other incorrect add commands to try:
+        1. `edit`
+        2. `edit x t/tag` (where x is larger than the filtered list size)<br>
+        3. `edit 2 t/#CS2103T` (`t/` only takes alphanumeric characters)
+        4. `edit 2 p/none` (invalid priority, which only accepts `low`, `medium` or `high`)
+           Expected: No task is edited. Error details are shown in the status message.
+
+
+### Listing all tasks in Harmonia
+
+1. Test case: `list`
+   Expected: All tasks in Harmonia are listed. Multiple tasks are shown in the list. Success message displayed.
+
+### Listing all tags in Harmonia
+
+1. Test case: `list t/`
+   Expected: All tags are listed in the results display.
+2. Test case: `list t/test`
+   Expected: No tags are listed. Error details are shown in the status message.
+
+### Marking/Unmarking a task
+
+1. Marking a task while all tasks are being shown
+
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks are shown in the list.
+
+    2. Test case: `mark 1`<br>
+       Expected: Completion status of the first task in the list is changed to `Completed`. Details of the completed task are shown in the status message.
+
+    3. Test case: `mark 0`<br>
+       Expected: No task is marked. Error details are shown in the status message.
+
+    4. Other incorrect mark commands to try: `mark`, `mark x` (where x is larger than the list size)<br>
+       Expected: No task is marked. Error details are shown in the status message.
+
+2. Marking a task while filtered tasks are shown
+
+    1. Prerequisites: Filter the incomplete tasks using the `find c/false` command. Multiple tasks are shown in the list.
+
+    2. Test case: `mark 1`<br>
+       Expected: Completion status of the first task in the filtered list is changed to `Completed`. Details of the marked task are shown in the status message.
+
+    3. Test case: `mark 0`<br>
+       Expected: No task is marked. Error details are shown in the status message.
+
+    4. Other incorrect mark commands to try: `mark`, `mark x` (where x is larger than the filtered list size)<br>
+       Expected: No task is marked. Error details are shown in the status message.
+
+3. Mark multiple tasks while all tasks are being shown
+
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks are shown in the list.
+
+    2. Test case: `mark 2 1 3`<br>
+       Expected: Completion status of the first, second and third tasks in the list are changed to `Completed`. Details of the marked tasks are shown in the status message.
+
+    3. Test case: `mark 0 2 3`<br>
+       Expected: No task is marked. Error details are shown in the status message.
+
+    4. Other incorrect mark commands to try: `mark`, `mark x y z` (where x, y, and/or z is larger than the list size)<br>
+       Expected: No task is marked. Error details are shown in the status message.
+
+4. Marking multiple tasks while filtered tasks are shown
+
+    1. Prerequisites: Filter the incomplete tasks using the `find c/false` command. Multiple tasks are shown in the list.
+
+    2. Test case: `mark 1 2`<br>
+       Expected: Completion status of the first and second tasks in the list are changed to `Completed`. Details of the marked tasks are shown in the status message.
+
+    3. Test case: `mark 0 1`<br>
+       Expected: No task is marked. Error details are shown in the status message.
+
+    4. Other incorrect mark commands to try: `mark`, `mark x y z`, `...` (where x, y, and/or z is larger than the filtered list size)<br>
+       Expected: No task is marked. Error details are shown in the status message.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The `unmark` command is similar to the `mark` command, you can refer to the steps here to test for the `unmarking` of tasks by just changing `mark` to `unmark`. When filtering the tasks, remember to use `find c/true` instead to see a list of all the completed tasks that you can unmark.</div>
 
 ### Deleting a task
 
@@ -953,7 +1066,7 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `delete 0`<br>
       Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the filtered list size)<br>
       Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
 
 3. Delete multiple tasks while all tasks are being shown
@@ -979,8 +1092,14 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `delete 0 1`<br>
        Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
 
-    4. Other incorrect delete commands to try: `delete`, `delete x y z`, `...` (where x, y, and/or z is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `delete`, `delete x y z`, `...` (where x, y, and/or z is larger than the filtered list size)<br>
        Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
+
+### Help
+
+1. Opening the help window for Harmonia's user guide.
+   1. Test case: `help`<br>
+      Expected: The help window pops up with the URL to Harmonia's User Guide. Status message explains that command was a success.
 
 ### Saving data
 
