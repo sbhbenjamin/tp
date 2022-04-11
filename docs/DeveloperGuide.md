@@ -158,8 +158,6 @@ This feature provides a way for users to `mark`, `unmark` and `delete` multiple 
 
 These features are implemented with the addition of a `MassOpsParser` class which parses through user inputs, consisting of multiple indexes. `MassOpsParser` processes the indexes to return an `ArrayList` of `Indexes` for `MarkCommand`, `UnmarkCommand` or `DeleteCommand` to execute.
 
-It is designed to preserve the Command Design Pattern. Through the implementation of the `MarkCommmandParser` and `UnmarkCommandParser`, we can enforce the input format of mark command. Furthermore, by isolating `MarkCommand` and `UnmarkCommand` into separate classes, we narrow down functionality of each class. This gives the application more control by limiting the outcome in successful execution. For example, successful execution of MarkCommand will only lead to the task being marked as completed. Whereas an alternative design combining mark and unmark functionality together will lead vague outcome (application unaware whether the task is marked as complete or incomplete after execution).
-
 Given below is an example usage scenario of how the MassOps mechanism behaves at each step to `mark` tasks in the task list.
 
 Step 1. User inputs `mark 1 2 3` to mark the tasks at the first, second and third index of the task list as completed.
