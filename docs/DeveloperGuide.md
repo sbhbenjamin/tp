@@ -589,7 +589,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
     Steps 2a1-2a2 are repeated until valid request is inputted.
     Use case resumes from step 3.
 
@@ -608,7 +608,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -627,7 +627,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -646,7 +646,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -665,7 +665,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -684,7 +684,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -702,33 +702,32 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
 <br/>
 
-**Use case: UC08 - Search for a task by keyword/tag**
+**Use case: UC08 - Search for tasks by keyword**
 
 **MSS**
-1. User enters the request to search for task(s) by keyword/tag.
-2. Harmonia shows a list of tasks that match the specified keyword/tag.
-3. Harmonia informs the user that the search result has been displayed successfully.
+1. User chooses to search for tasks which contain a specific keyword.
+2. User enters the request to search for tasks by the specified keyword.
+3. Harmonia shows a list of tasks that match the specified keyword.
+4. Harmonia informs the user that the search result has been displayed successfully.
 
     Use case ends.
 
 **Extensions**
-* 2a. Harmonia detects that the keyword is missing.
+* 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new command.
-  Steps 2a1-2a2 are repeated until valid data is inputted.
+    * 2a2. User enters a new request.<br>
+  Steps 2a1-2a2 are repeated until valid request is inputted. 
   Use case resumes from step 3.
 
-* 2b. Harmonia detects that the tag does not exist.
-    * 2b1. Harmonia outputs an error message.
-    * 2b2. User enters a new command.
-  Steps 2a1-2a2 are repeated until valid data is inputted.
-  Use case resumes from step 3.
+* 2b. Harmonia detects that there are no tasks which contain the specified keyword.
+    * 2b1. Harmonia shows an empty list.<br>
+  Use case resumes from step 4.
 
 <br/>
 
@@ -746,7 +745,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia is unable to recognize the request entered by the user.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -765,7 +764,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request. <br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -784,7 +783,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -803,9 +802,9 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
-      Steps 2a1-2a2 are repeated until valid request is inputted.
-      Use case resumes from step 3.
+    * 2a2. User enters a new request.<br>
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
 
 <br/>
 
@@ -822,9 +821,9 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
-      Steps 2a1-2a2 are repeated until valid request is inputted.
-      Use case resumes from step 3.
+    * 2a2. User enters a new request.<br>
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
 
 <br/>
 
@@ -841,9 +840,9 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
-      Steps 2a1-2a2 are repeated until valid request is inputted.
-      Use case resumes from step 3.
+    * 2a2. User enters a new request.<br>
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
 
 <br/>
 
@@ -860,9 +859,9 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
-      Steps 2a1-2a2 are repeated until valid request is inputted.
-      Use case resumes from step 3.
+    * 2a2. User enters a new request.<br>
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
