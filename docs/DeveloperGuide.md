@@ -154,76 +154,179 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Mass Operations
+
+### \[Proposed\] Undo/redo feature
+
+#### Proposed Implementation
+
+The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+
+![UndoRedoState0](images/UndoRedoState0.png)
+
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+
+![UndoRedoState1](images/UndoRedoState1.png)
+
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+
+![UndoRedoState2](images/UndoRedoState2.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+
+</div>
+
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+
+![UndoRedoState3](images/UndoRedoState3.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the undo.
+
+</div>
+
+The following sequence diagram shows how the undo operation works:
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</div>
+
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+
+![UndoRedoState4](images/UndoRedoState4.png)
+
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+
+![UndoRedoState5](images/UndoRedoState5.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<img src="images/CommitActivityDiagram.png" width="250" />
+
+#### Design considerations:
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire address book.
+  * Pros: Easy to implement.
+  * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Cons: We must ensure that the implementation of each individual command are correct.
+
+
+### Mass Operations
+
 
 #### What is the feature about
-This feature provides a way for users to mark and unmark multiple `Tasks` at a time. For the current implementation of
-mark and unmark, users have to type in a command for each task that they wish to mark or unmark, one at a time.
+This feature provides a way for users to `mark`, `unmark` and `delete` multiple `Tasks` at a time. For the previous implementation of `mark`, `unmark` and `delete`, users had to type in a command for each task that they wished to `mark`, `unmark` or `delete` one at a time.   
+
+`Mark` and `unmark` allows users to mark a `Task` as either complete or incomplete while `delete` allows users to remove a `Task` from the task list.
 
 #### How the feature is implemented
 
-The feature is to be implemented with the addition of a `MassOpsParser` class which parses through user inputs
-consisting of multiple indexes and processes the indexes to return an `ArrayList` of `Indexes` for `MarkCommand` and
-`UnmarkCommand` to execute on.
+These features are implemented with the addition of a `MassOpsParser` class which parses through user inputs, consisting of multiple indexes. `MassOpsParser` processes the indexes to return an `ArrayList` of `Indexes` for `MarkCommand`, `UnmarkCommand` or `DeleteCommand` to execute.
 
-##### MassOperations: Marking tasks
-Given below is an example usage scenario of how the MassOps mechanism behaves at each step to mark tasks in
-the task list.
+It is designed to preserve the Command Design Pattern. Through the implementation of the `MarkCommmandParser` and `UnmarkCommandParser`, we can enforce the input format of mark command. Furthermore, isolating `MarkCommand` and `UnmarkCommand` into separate classes, we narrow down functionality of each class. This gives the application more control by limiting the outcome in successful execution. For example, successful execution of MarkCommand will only lead to the task being marked as complete.Whereas an alternative design combining mark and unmark functionality together will lead vague outcome (application unaware whether the task is marked as complete or incomplete after execution).
 
-Step 1. User inputs `mark 1 2 3` to unmark tasks 1, 2 and 3 of the task list.
+Given below is an example usage scenario of how the MassOps mechanism behaves at each step to `mark` tasks in the task list.
+
+Step 1. User inputs `mark 1 2 3` to mark the tasks at the first, second and third index of the task list as complete.
 
 Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
 
 Step 3. The first word of the user input is `mark`, which matches the command for `MarkCommand`.
 
-Step 4. `MarkCommandParser#parse()` is called and `MassOpsParser#massOpsProcessor` is invoked to process the user input
-into `indexes`, an `ArrayList<Index>` containing the indexes to be marked.
+Step 4. `MarkCommandParser#parse()` is called and `MassOpsParser#massOpsProcessor` is invoked to process the user input into a list of `Indexes`.
 
-Step 5. `MarkCommand` is invoked upon `indexes` and returned to LogicManager.
+Step 5. A `MarkCommand` is initialised using the list of `indexes` and is returned to `LogicManager` for execution.
 
-Step 6. After `MarkCommand#execute()` is executed, Harmonia retrieves each task to be marked from `lastShowList` and
-`createMarkedTask` is called to mark each task respectively.
+Step 6. After `MarkCommand#execute()` is executed, Harmonia looks through `lastShownList` to check the validity of marking the tasks at each inputted index.
 
-Step 7. Each command result is stored in `markedTasks` which is returned and displayed to the user at the
-end of the execution.
+Step 7. The valid indexes are stored in the `ArrayList`, `markTaskIndexes`, which is passed into `result()`.
+
+Step 8. In `result()`, `createMarkedTask` is called to mark the tasks at each index stored in `markTaskIndexes` respectively.
+
+Step 9. The result is converted into a string `markedTasksToString` which is used to initialise a `CommandResult` returned and displayed to the user.  
 
 ![MassOpsMark](images/MassOpsMark.png)
 
-##### MassOperations: Unmarking tasks
-Given below is an example usage scenario of how the MassOps mechanism behaves at each step to unmark tasks in
-the task list.
-
-Step 1. User inputs `unmark 1 2 3` to mark tasks 1, 2 and 3 of the task list.
-
-Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
-
-Step 3. The first word of the user input is `unmark`, which matches the command for `UnmarkCommand`.
-
-Step 4. `UnmarkCommandParser#parse()` is called and `MassOpsParser#massOpsProcessor` is invoked to process the user
-input to be stored temporarily in `indexes`, an `ArrayList<Index>` containing the indexes to be unmarked.
-
-Step 5. `UnmarkCommand` is invoked upon `indexes` and returned to LogicManager.
-
-Step 6. After `UnmarkCommand#execute()` is executed, `model#updateFilteredTaskList()` is invoked to get the updated task
-list, from which Harmonia will retrieve the respective tasks to be unmarked.
-
-Step 7. Each command result is stored in an `ArrayList` which is returned and displayed to the user.
+The `unmark` feature follows a similar implementation involving `UnmarkCommandParser` and `UnmarkCommand` instead.  
 
 ![MassOpsUnmark](images/MassOpsUnmark.png)
 
+The `delete` feature follows a similar implementation as well, involving `DeleteCommandParser` and `DeleteCommand` instead.  
+
+![MassOpsDelete](images/MassOpsDelete.png)
+
+
 #### Design considerations:
 
-**Aspect: The number of indexes to be marked/unmarked at a time**
+**Aspect: The number of indexes to be marked/unmarked/deleted at a time**
 
-* **Alternative 1 (current choice):** Ignore case and only allow users to mark or unmark tasks one at a time.
+* **Alternative 1 (current choice):** Implement MassOps and allow users to mark, unmark or delete multiple tasks at a time.
     * Pros:
-        * Easy to implement.
-        * Consistent with how delete and find are working now, just deleting one task and finding one keyword at a time.
-        * Ensures that there is no confusion in which tasks are successfully marked or unmarked and which tasks are unsuccessfully marked or unmarked when multiple indexes are provided in the command
+        * User-friendly, user can conduct mass operations and not have to do similar operations repetitively.
+        * Conducive for fast-typers who value efficiency
     * Cons:
-        * May be very time-consuming for the user and becomes less user-friendly as the user has to manually mark or
-        * unmark multiple tasks one at a time if they want to do it in batches
+        * May be confusing for new users as they may not understand the concept of conducting mass operations in a single command.
 
+* **Alternative 2:** Only allow users to mark, unmark or delete tasks one task at a time.
+    * Pros:
+        * Easier to implement.
+        * Reduces chance of users becoming confused with how to use the command as the command is straightforward and direct, only targeting one index at a time.
+    * Cons:
+        * May be very time-consuming for the user and becomes less user-friendly, especially if they are using the same operation, as the user has to manually key in commands one at a time.
+
+**Aspect: How the functionality of mark/unmark is broken down:**
+
+* **Alternative 1 (current choice):** Use two separate Command classes: `MarkCommand` and `UnmarkCommand`.
+    * Pros:
+        * More control over the final outcome of the Command execution (Knowledge whether task is completed or uncompleted after execution)
+        * Ability to check whether a task is either `MarkCommand` or `UnmarkCommand` during runtime
+        * Ability to extend either mark or unmark functionality isolated from each other
+        * Cons:
+            * Makes the code more bloated with similar looking code (for each class)
+* **Alternative 2:** Use a single `Command` to toggle `Task` as either complete or incomplete.
+    * Pros:
+        * Less redundant code
+        * Easier to extend if both mark and unmark are required to change synchronously
+    * Cons:
+        * No exact knowledge whether the execution of command mark task as complete or incomplete
+
+**Aspect: How the user input is parsed:**
+
+* **Alternative 1 (current choice):** Create a separate `MassOpsParser` class to parse the user input
+    * Pros:
+      * Reduces similar looking code
+      * Easier to introduce mass operations into other features in future
+      * Abstracts the processing of user input from the respective commands, reducing chances of introducing errors into the different commands.
+    * Cons: -
+* **Alternative 2:** Process the user input in command's parser function itself
+    * Pros:
+      * More control over the way the indexes are processed (can order the indexes in a specific format for execution according to the command)
+    * Cons:
+      * Repetitive code
+      * Makes it more difficult and time-consuming to apply mass operations to other features in future
 
 ### Priority
 
@@ -262,7 +365,6 @@ In this case, the `enum` type also increases the extensibility of the feature. I
       * More tedious to extend. To implement this, we might have to use conditionals to check if the `String` or `int` input corresponds with the accepted values in our `Priority` design. This can pose a problem when we try to extend the number of properties a `Priority` field can take. In this case, we might have to increase the number of conditionals, which could reduce readability and make the code more prone to errors.
       * Possibly increases memory use. If we use `String` or `int` types, we might have to instantiate new `Priority` classes every time we create a new `Task` object.
 
-
 ### Mark/unmark feature
 
 #### What is the feature about
@@ -296,7 +398,6 @@ It is designed to preserve the Command Design Pattern. Through the implementatio
     * Cons:
         * No exact knowledge whether the execution of command mark task as complete or incomplete
         
-
 ### Search by various attributes
 
 #### What is the feature about
@@ -605,7 +706,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
     Steps 2a1-2a2 are repeated until valid request is inputted.
     Use case resumes from step 3.
 
@@ -624,7 +725,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -643,7 +744,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -662,7 +763,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -681,7 +782,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -700,7 +801,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -718,33 +819,32 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
 <br/>
 
-**Use case: UC08 - Search for a task by keyword/tag**
+**Use case: UC08 - Search for tasks by keyword**
 
 **MSS**
-1. User enters the request to search for task(s) by keyword/tag.
-2. Harmonia shows a list of tasks that match the specified keyword/tag.
-3. Harmonia informs the user that the search result has been displayed successfully.
+1. User chooses to search for tasks which contain a specific keyword.
+2. User enters the request to search for tasks by the specified keyword.
+3. Harmonia shows a list of tasks that match the specified keyword.
+4. Harmonia informs the user that the search result has been displayed successfully.
 
     Use case ends.
 
 **Extensions**
-* 2a. Harmonia detects that the keyword is missing.
+* 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new command.
-  Steps 2a1-2a2 are repeated until valid data is inputted.
+    * 2a2. User enters a new request.<br>
+  Steps 2a1-2a2 are repeated until valid request is inputted. 
   Use case resumes from step 3.
 
-* 2b. Harmonia detects that the tag does not exist.
-    * 2b1. Harmonia outputs an error message.
-    * 2b2. User enters a new command.
-  Steps 2a1-2a2 are repeated until valid data is inputted.
-  Use case resumes from step 3.
+* 2b. Harmonia detects that there are no tasks which contain the specified keyword.
+    * 2b1. Harmonia shows an empty list.<br>
+  Use case resumes from step 4.
 
 <br/>
 
@@ -762,7 +862,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia is unable to recognize the request entered by the user.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -781,7 +881,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request. <br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -800,7 +900,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -819,9 +919,9 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
-      Steps 2a1-2a2 are repeated until valid request is inputted.
-      Use case resumes from step 3.
+    * 2a2. User enters a new request.<br>
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
 
 <br/>
 
@@ -838,9 +938,9 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
-      Steps 2a1-2a2 are repeated until valid request is inputted.
-      Use case resumes from step 3.
+    * 2a2. User enters a new request.<br>
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
 
 <br/>
 
@@ -857,9 +957,9 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
-      Steps 2a1-2a2 are repeated until valid request is inputted.
-      Use case resumes from step 3.
+    * 2a2. User enters a new request.<br>
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
 
 <br/>
 
@@ -876,9 +976,9 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
-      Steps 2a1-2a2 are repeated until valid request is inputted.
-      Use case resumes from step 3.
+    * 2a2. User enters a new request.<br>
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
 
 ### Non-Functional Requirements
 

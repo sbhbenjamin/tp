@@ -25,7 +25,10 @@ public enum SortKey {
      * Returns true if {@code String sortKey} is a valid {@code SortKey}, false otherwise.
      */
     public static boolean isValidSortKey(String sortKey) {
-        requireNonNull(sortKey);
+        if (sortKey == null) {
+            return false;
+        }
+
         for (SortKey s : SortKey.values()) {
             if (s.label.equals(sortKey)) {
                 return true;

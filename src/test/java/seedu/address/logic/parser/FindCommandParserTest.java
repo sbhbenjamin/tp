@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.keyword.Keyword;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
 import seedu.address.model.task.DeadlineInRangePredicate;
@@ -32,8 +33,9 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // both name and tag keywords specified
         FindCommand expectedFindCommand = new FindCommand(
-                new NameContainsKeywordsPredicate(Set.of("Tutorial", "Midterm")),
-                new TagContainsKeywordsPredicate(new HashSet<>(Arrays.asList("CS2103T", "Test"))),
+                new NameContainsKeywordsPredicate(Set.of(new Keyword("Tutorial"), new Keyword("Midterm"))),
+                new TagContainsKeywordsPredicate(new HashSet<>(Arrays.asList(new Keyword("CS2103T"),
+                        new Keyword("Test")))),
                 new DeadlineInRangePredicate(null, null));
 
         // name and tag keywords specified, no leading and trailing whitespaces
@@ -47,7 +49,7 @@ public class FindCommandParserTest {
 
         // only name keywords
         expectedFindCommand = new FindCommand(
-                new NameContainsKeywordsPredicate(Set.of("Tutorial", "Midterm")),
+                new NameContainsKeywordsPredicate(Set.of(new Keyword("Tutorial"), new Keyword("Midterm"))),
                 new TagContainsKeywordsPredicate(new HashSet<>()),
                 new DeadlineInRangePredicate(null, null));
 
@@ -57,7 +59,8 @@ public class FindCommandParserTest {
         // only tag keywords
         expectedFindCommand = new FindCommand(
                 new NameContainsKeywordsPredicate(new HashSet<>()),
-                new TagContainsKeywordsPredicate(new HashSet<>(Arrays.asList("CS2103T", "Test"))),
+                new TagContainsKeywordsPredicate(new HashSet<>(Arrays.asList(new Keyword("CS2103T"),
+                        new Keyword("Test")))),
                 new DeadlineInRangePredicate(null, null));
 
         assertParseSuccess(parser, TAG_DESC_CS2103T + TAG_DESC_TEST, expectedFindCommand);
@@ -65,7 +68,7 @@ public class FindCommandParserTest {
 
         // name keywords and empty tag
         expectedFindCommand = new FindCommand(
-                new NameContainsKeywordsPredicate(Set.of("Tutorial", "Midterm")),
+                new NameContainsKeywordsPredicate(Set.of(new Keyword("Tutorial"), new Keyword("Midterm"))),
                 new TagContainsKeywordsPredicate(new HashSet<>()),
                 new DeadlineInRangePredicate(null, null));
 
