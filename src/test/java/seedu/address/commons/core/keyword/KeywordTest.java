@@ -6,6 +6,9 @@ import static seedu.address.testutil.Assert.assertAllFalse;
 import static seedu.address.testutil.Assert.assertAllThrows;
 import static seedu.address.testutil.Assert.assertAllTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalStrings.DIGITS;
+import static seedu.address.testutil.TypicalStrings.EMPTY_STRING;
+import static seedu.address.testutil.TypicalStrings.LEADING_WHITESPACE_STRING;
 import static seedu.address.testutil.TypicalStrings.LONG_STRING_50_CHAR;
 import static seedu.address.testutil.TypicalStrings.LONG_STRING_63_CHAR;
 import static seedu.address.testutil.TypicalStrings.NULL_STRING;
@@ -42,6 +45,24 @@ public class KeywordTest {
         // valid keywords
         assertAllTrue(Keyword::isValidKeyword, getValidStringsForKeyword());
     }
+
+    @Test
+    public void validateDeadline() {
+
+        // null case
+        assertThrows(NullPointerException.class, () -> new Keyword(NULL_STRING));
+
+        // invalid keywords
+        assertFalse(Keyword.isValidKeyword(EMPTY_STRING));
+        assertFalse(Keyword.isValidKeyword("HELLO HI"));
+
+        // valid keywords
+        assertTrue(Keyword.isValidKeyword(LONG_STRING_50_CHAR));
+        assertTrue(Keyword.isValidKeyword(DIGITS));
+
+    }
+
+    
 
     @Test
     public void equals() {
