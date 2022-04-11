@@ -618,7 +618,7 @@ Harmonia is the easiest way for students to manage the complexity associated wit
 
 ### User stories
 
-Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Medium-low (nice to have but difficult) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Medium-low (nice to have but difficult) - `**`, Low (unlikely to have) - `*`
 
 |Priority                    | As a …​        | I want to …​                                                | So that I can…​                                                                |
 |----------------------------|-------------------|----------------------------------------------------------------|--------------------------------------------------------------------------------|
