@@ -343,7 +343,7 @@ The underlying `UniqueTaskList` uses an `ObservableList` and therefore it allows
         * Abstracts out the details of rendering
         * Abstracts out the details behind sorting (i.e. only need to pass in the `Comparator`)
     * Cons:
-        * Difficult to preserve the ordering if tasks are added or edited. Since `TaskList` is implemented using `ObservableList`, any changes to it would cause them to be propagated to the `SortedList` (which wraps the `ObservableList`). Therefore, adding/editing a `Task` would cause the contents to be automatically sorted. Hence, this might lead to the reordering of the tasks.
+        * Difficult to preserve the ordering if tasks are added or edited. Since `TaskList` is implemented using `ObservableList`, any changes to it would cause them to be propagated to the `SortedList` (which wraps the `ObservableList`). Therefore, adding/editing a `Task` would cause the contents to be automatically sorted. Hence, this might lead to tasks being reordered.
     
 * **Alternative 2:** Sorts the tasks using a stream and repopulate the `TaskList`.
     * Pros:
