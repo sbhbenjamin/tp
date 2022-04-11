@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.Set;
 import java.util.StringJoiner;
@@ -52,7 +51,8 @@ public class ListCommand extends Command {
             return new CommandResult(String.format(LIST_TAGS_MESSAGE_SUCCESS, allTags));
 
         } else {
-            model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+            model.updateToDefaultSortedTaskList();
+            model.updateToDefaultFilteredTaskList();
             return new CommandResult(LIST_TASKS_MESSAGE_SUCCESS);
         }
     }

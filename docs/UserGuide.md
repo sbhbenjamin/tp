@@ -12,16 +12,16 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 <br>   1.2. [How to use this guide](#12-how-to-use-this-guide)
 <br>   1.3. [Typography](#13-typography)
 <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.3.1. [User Input](#131-user-input)
-<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.3.2. [User Input](#132-keyboard-input)
+<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.3.2. [Keyboard Input](#132-keyboard-input)
 <br>   1.4. [Special Symbols](#14-special-symbols)
 <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.4.1. [Note](#141-note)
 <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.4.2. [Warning](#142-warning)
-<br>   1.5. [Graphical User Interface (GUI)](#15-graphical-user-interface-gui54-gui)
+<br>   1.5. [Graphical User Interface (GUI)](#15-graphical-user-interface-gui)
 2. [Getting Started](#2-getting-started)
 3. [Features](#3-features)
 <br>   3.1. [Adding a task: add](#31-adding-a-task-add)
 <br>   3.2. [Listing all tasks: list](#32-listing-all-tasks-list)
-<br>   3.3. [Listing all tags: list t/](#33-listing-all-tags53-tag-list-t)
+<br>   3.3. [Listing all tags: list t/](#33-listing-all-tags-list-t)
 <br>   3.4. [Deleting a task: delete](#34-deleting-a-task-delete)
 <br>   3.5. [Locating a task: find](#35-locating-a-task-find)
 <br>   3.6. [Marking as complete: mark](#36-marking-as-complete-mark)
@@ -47,7 +47,7 @@ Harmonia is a **desktop app for managing tasks related to your academic life, op
 This user guide aims to teach you how to use Harmonia to systematically organize your student life. It walks you through all the commands Harmonia has and examples on how to use them. By the end of the guide, you should have a better understanding on how to use Harmonia to help you organise your life.
 
 ### 1.2 How to use this guide
-This guide is designed to be read from top to bottom. At the same time, this guide provides ease of navigation, where you can quickly access the segment you are looking for. To this end, the table of contents summarizes all the different sections of our user guide, and it links you to the section of the guide which you wish to look at in detail. After each section, there is a [Return to Top](#table-of-contents-toc) link enables you to quickly navigate back to the Table of Contents.
+This guide is designed to be read from top to bottom. At the same time, this guide provides ease of navigation, where you can quickly access the segment you are looking for. To this end, the table of contents summarizes all the different sections of our user guide, and it links you to the section of the guide which you wish to look at in detail. After each section, there is a [Return to Top](#table-of-contents-toc) link which enables you to quickly navigate back to the Table of Contents.
 
 ### 1.3 Typography
 This user guide uses different typography to denote different types of information so that you can easily know if the instruction is actionable.
@@ -105,11 +105,11 @@ Figure 1.5 depicts the user interface of Harmonia. The following descriptions ex
 5. Type the command in the command box and press <kbd>↵Enter</kbd> to execute it.<br>
 Here are a few example commands you can try:
 - `list`
-  - Lists out all tasks.
+  - Harmonia lists out all tasks.
 - `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T`
-  - Adds a task named `CS2103T tp meeting`, with a description of `read the weekly tasks before the meeting`. It has a deadline of `2022-03-27`, with a priority of `medium` and a [tag](#53-tag) of `CS2103T`.
+  - Harmonia adds a task named `CS2103T tp meeting`, with a description of `read the weekly tasks before the meeting`. It has a deadline of `2022-03-27`, with a priority of `medium` and a [tag](#53-tag) of `CS2103T`.
 - `find n/tp`
-  - Finds a task with the name `tp`.
+  - Harmonia finds tasks that match the keyword `tp`.
 
 [Return to Top](#table-of-contents-toc)
 
@@ -120,27 +120,30 @@ Here are a few example commands you can try:
 **:bulb: Notes about the command format:**
 
 - Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
-  e.g. `add n/NAME`, `NAME` is a parameter which can be used as `add n/Complete Tutorial`.
+  For example `add n/NAME`, `NAME` is a parameter which can be used as `add n/Complete Tutorial`.
 
 - Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME d/DESCRIPTION`, `d/DESCRIPTION n/NAME` is also acceptable.
+  For example if the command specifies `n/NAME d/DESCRIPTION`, `d/DESCRIPTION n/NAME` is also acceptable.
 
 - Items in square brackets are optional.<br>
-  e.g. `find [n/NAME] [t/TAG]` can be used as `find n/Complete Tutorial` or `find t/CS203T`.
+  For example `find [n/NAME] [t/TAG]` can be used as `find n/Complete Tutorial` or `find t/CS203T`.
 
 - Items followed by `...` can be used multiple times.<br>
-  e.g. `[t/TAG]...` can be used as `t/CS2103T t/Tutorial`.
+  For example `[t/TAG]...` can be used as `t/CS2103T t/Tutorial`.
 
 - [`Index`](#52-index) refers to the numbering of an item as shown in the displayed task list.<br>
 
-  e.g. in a list of tasks:<br>
+  For example in a list of tasks:<br>
        1. Do homework<br>
        2. Clean room<br>
        3. Walk dog<br>
        Index 2 here refers to the second item in the list, "Clean room".
+  
+- If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.
+  For example if you specify `d/desciption one d/description two`, only `d/description two` will be taken.
 
 - Extraneous parameters for commands that do not take in any parameters (such as `help` and `exit`) will be ignored.<br>
-  e.g. if you input `exit 123`, Harmonia will interpret it as `exit`.
+  For example if you input `exit 123`, Harmonia will interpret it as `exit`.
 
 - The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
@@ -160,6 +163,11 @@ Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl
 
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+- Harmonia does not allow multiple tasks with the same name, and [task names are case-insensitive](#6-appendix-constraints-on-inputs).
+- If duplicate tags are specified, only one of the tags will be added to the task. For example, `add n/midterm d/revise notes dl/2022-04-04 p/high t/test t/test` will only add a single `test` tag to the task.
+</div>
+
 [Return to Top](#table-of-contents-toc)
 
 ### 3.2 Listing all tasks: `list`
@@ -167,6 +175,10 @@ The constraints on the inputs can be found [here](#6-appendix-constraints-on-inp
 Harmonia allows you to see a list of all existing tasks in the task list.
 
 Format: `list`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+`list` will order tasks by deadline in the ascending order.
+</div>
 
 [Return to Top](#table-of-contents-toc)
 
@@ -176,7 +188,7 @@ Harmonia allows you to see a list of all existing tags used in the task list.
 
 Format: `list t/`
 - The tags are listed in the Result Display.
-- Listed tags are case-insensitive (i.e. if there are two tags, cs2103t and CS2103T, only one of the tags will be shown).
+- Listed tags are case-insensitive (i.e. if there are two tags, `cs2103t` and `CS2103T`, only one of the tags will be shown).
 
 [Return to Top](#table-of-contents-toc)
 
@@ -184,7 +196,7 @@ Format: `list t/`
 
 Harmonia allows you to delete the tasks at the given [indexes](#52-index) of the displayed task list. You have to provide one or more indexes to be deleted.
 
-Format: `delete INDEX [INDEX]...`
+Format: `delete INDEX...`
 
 Example: 
 - `delete 3` deletes the task at the third [index](#52-index) of the task list.
@@ -216,7 +228,7 @@ Format: `find [n/NAME_KEYWORD]... [d/DESCRIPTION_KEYWORD]... [start/START_DATE] 
 
 * If only one of either `START_DATE` or `END_DATE` is supplied by you, Harmonia ignores the unspecified field. For example, if only `START_DATE` is supplied by you, Harmonia finds all the tasks with a deadline that is after and including `START_DATE`.
 
-* If a `PRIORITY` is supplied by you, Harmonia finds the tasks whose priority matches the `PRIORITY` supplied by you. If multiple values of `PRIORITY` are supplied by you, Harmonia finds the tasks whose priority matches any of the values of `PRIORITY` supplied.
+* If a `PRIORITY` is supplied by you, Harmonia finds the tasks whose priority matches the `PRIORITY` specified. If multiple values of `PRIORITY` are supplied by you, Harmonia finds the tasks whose priority matches any of the values of `PRIORITY` supplied.
 
 * If a `TAG` is supplied by you, Harmonia finds tasks whose [tag(s)](#53-tag) match the `TAG` specified. If multiple `TAG`s are supplied by you, Harmonia finds the tasks whose tag(s) match any of the `TAG`s supplied.
 
@@ -230,11 +242,11 @@ Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27 p/low p/
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to narrow down your search.
+You can also search using multiple descriptors (example: `find n/book t/CS2103T`) to narrow down your search.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-* Harmonia does not include partial keyword matches, i.e. only tasks containing keywords that match `NAME_KEYWORD`s and `DESCRIPTION_KEYWORD`s exactly will be retrieved.
+Harmonia does not include partial keyword matches, i.e. only tasks containing keywords that match `NAME_KEYWORD`s and `DESCRIPTION_KEYWORD`s exactly will be retrieved.
 </div>
 
 
@@ -244,7 +256,7 @@ You can also search using multiple descriptors (e.g. `find n/book t/CS2103T`) to
 
 Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the displayed task list as complete. You have to provide one or more indexes to be marked.
 
-Format: `mark INDEX [INDEX]...`
+Format: `mark INDEX...`
 
 Example:
 - `mark 3` marks the task at the third [index](#52-index) of the task list as complete.
@@ -266,7 +278,7 @@ You can key `list` to check the index of the task you wish to mark.
 
 Harmonia allows you to mark the tasks at the given [indexes](#52-index) of the displayed task list as incomplete. You have to provide one or more indexes to be unmarked.
 
-Format: `unmark INDEX [INDEX]...`
+Format: `unmark INDEX...`
 
 Example:
 - `unmark 3` marks the task at the third [index](#52-index) of the task list as incomplete.
@@ -300,8 +312,8 @@ You can key `list` to check the [index](#52-index) of the task you wish to edit.
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-You should include the existing tag(s) in the command when adding a new tag. Otherwise, existing tags will be overwritten.<br>
-e.g. `edit 1 t/CS2103T t/Tutorial`, edits the tags of the task at the first index where `CS2103T` is an existing tag and `Tutorial` is a new tag to be added.
+You should include tags you want to preserve in the command when adding a new tag. Otherwise, all existing tags will be overwritten.<br>
+For example `edit 1 t/CS2103T t/Tutorial`, edits the tags of the task at the first index where `CS2103T` is an existing tag and `Tutorial` is a new tag to be added.
 </div>
 
 [Return to Top](#table-of-contents-toc)
@@ -329,7 +341,8 @@ Example:
 The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-The tasks will preserve the specified sorting until a different `sort` command is given.
+Sort order will be lost after using the `add` or `edit` commands.
+`list` will sort the tasks by deadline in the ascending order. 
 </div>
 
 
@@ -372,7 +385,7 @@ Harmonia's data is saved in the hard disk automatically after any command change
 
 ### 3.14 Editing the data file
 
-Harmonia's data is saved as [JSON](#51-json-file) file ([Location of Harmonia.jar]/data/harmonia.json). Advanced users are encouraged to update the data by editing JSON file.
+Harmonia's data is saved as [JSON](#51-json-file) file (`[Location of Harmonia.jar]/data/harmonia.json`). Advanced users are encouraged to update the data by editing JSON file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, Harmonia will discard all data and start with an empty data file at the next run.
@@ -386,10 +399,10 @@ If your changes to the data file makes its format invalid, Harmonia will discard
 | Action     | Format, Examples                                                                                                                                                                                                                                                                  |
 |------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME d/DESCRIPTION dl/DEADLINE p/PRIORITY [t/TAG]…` <br> e.g., `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl/2022-03-27 p/medium t/CS2103T t/meeting`                                                                                            |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                               |
+| **Delete** | `delete INDEX...`<br> e.g., `delete 3` <br> e.g., `delete 1 2 3`                                                                                                                                                                                                                  |
 | **Edit**   | `edit INDEX [n/NAME] [d/DESCRIPTION] [dl/DEADLINE] [p/PRIORITY] [t/TAG]...`<br> e.g.,`edit 2 n/CS2101 meeting t/CS2101`                                                                                                                                                           |
-| **Mark**   | `mark INDEX [INDEX]...` <br> e.g., `mark 3` <br> e.g., `mark 1 2 3`                                                                                                                                                                                                               |
-| **Unmark** | `unmark INDEX [INDEX]...` <br> e.g., `unmark 3` <br> e.g., `unmark 1 2 3`                                                                                                                                                                                                         |
+| **Mark**   | `mark INDEX...` <br> e.g., `mark 3` <br> e.g., `mark 1 2 3`                                                                                                                                                                                                                       |
+| **Unmark** | `unmark INDEX...` <br> e.g., `unmark 3` <br> e.g., `unmark 1 2 3`                                                                                                                                                                                                                 |
 | **List**   | `list` <br> `list t/`                                                                                                                                                                                                                                                             |
 | **Sort**   | `sort by/SORT_KEY in/SORT_ORDER` <br> e.g., `sort by/deadline in/desc` <br> e.g., `sort by/priority in/asc`                                                                                                                                                                       |
 | **Find**   | `find [n/NAME_KEYWORD]... [t/TAG_KEYWORD]... [start/START_DATE] [end/END_DATE]` <br> e.g., `find n/book n/read` <br> e.g., `find t/test t/CS2103T` <br> e.g., `find start/2022-03-14 end/2022-03-18` <br> e.g., `find t/CS2103T` <br> e.g., `find n/book t/test start/2022-03-15` |
@@ -403,9 +416,9 @@ If your changes to the data file makes its format invalid, Harmonia will discard
 
 ### 5.1 JSON file
 
-[JSON (JavaScript Object Notation](https://www.json.org/json-en.html), is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values). [(Source: Wikipedia)](https://en.wikipedia.org/wiki/JSON)
+[JSON (JavaScript Object Notation)](https://www.json.org/json-en.html), is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values). [(Source: Wikipedia)](https://en.wikipedia.org/wiki/JSON)
 
-In Harmonia, a JSON file is used to store the list of tasks. For each task, the JSON file stores the mapping between attributes (e.g. task name, description, etc.) and their values. If you are an advanced user, you may choose to update the data by editing the JSON file.
+In Harmonia, a JSON file is used to store the list of tasks. For each task, the JSON file stores the mapping between attributes (examples: task name, description, etc.) and their values. If you are an advanced user, you may choose to update the data by editing the JSON file.
 
 [Return to Top](#table-of-contents-toc)
 
@@ -423,7 +436,7 @@ Index 2 here refers to the second item in the list, "Clean room".
 
 ### 5.3 Tag
 
-Harmonia uses tags to help you categorize your tasks. You may optionally assign one or more tags to a task through [Adding a task: add](#31-adding-a-task-add), and find your tasks with specified tag(s) through [Locating a task: find](#35-locating-a-task-find).
+Harmonia uses tags to help you categorize your tasks. You may optionally assign one or more tags when [adding a task](#31-adding-a-task-add). You can also [find your tasks](#35-locating-a-task-find) using tags.
 
 [Return to Top](#table-of-contents-toc)
 

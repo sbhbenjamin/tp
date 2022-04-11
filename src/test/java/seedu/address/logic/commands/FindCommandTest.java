@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalTasks.CS2103T_PROJECT;
-import static seedu.address.testutil.TypicalTasks.CS2105_FINALS;
 import static seedu.address.testutil.TypicalTasks.CS2105_MIDTERM;
+import static seedu.address.testutil.TypicalTasks.CS2106_FINALS;
 import static seedu.address.testutil.TypicalTasks.MEET_ALICE;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskList;
 
@@ -73,7 +73,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywordsAndVeryLargeDateRange_noTaskFound() {
-        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 5);
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 6);
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(" ");
         TagContainsKeywordsPredicate tagPredicate = prepareTagPredicate(" ");
         DeadlineInRangePredicate deadlinePredicate =
@@ -107,7 +107,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(namePredicate, tagPredicate, deadlinePredicate);
         expectedModel.updateFilteredTaskList(namePredicate.and(tagPredicate).and(deadlinePredicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CS2103T_PROJECT, CS2105_FINALS, CS2105_MIDTERM), model.getFilteredTaskList());
+        assertEquals(Arrays.asList(CS2105_MIDTERM, CS2103T_PROJECT, CS2106_FINALS), model.getFilteredTaskList());
     }
 
     @Test

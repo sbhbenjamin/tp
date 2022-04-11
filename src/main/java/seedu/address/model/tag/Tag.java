@@ -2,6 +2,7 @@ package seedu.address.model.tag;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.StringUtil.isSameStringIgnoreCases;
 
 /**
  * Represents a Tag in the task list.
@@ -17,7 +18,6 @@ public class Tag implements Comparable<Tag> {
             * The maximum number of characters allowed is 50.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}]{1,50}";
-
 
     public final String tagName;
 
@@ -43,7 +43,7 @@ public class Tag implements Comparable<Tag> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Tag // instanceof handles nulls
-                && tagName.equals(((Tag) other).tagName)); // state check
+                && isSameStringIgnoreCases(tagName, ((Tag) other).tagName)); // state check
     }
 
     @Override

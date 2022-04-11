@@ -1,47 +1,41 @@
 package seedu.address.model.task;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertAllFalse;
+import static seedu.address.testutil.Assert.assertAllThrows;
+import static seedu.address.testutil.Assert.assertAllTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalStrings.NULL_STRING;
+import static seedu.address.testutil.TypicalStrings.getInvalidStringsForDescription;
+import static seedu.address.testutil.TypicalStrings.getValidStringsForDescription;
 
 import org.junit.jupiter.api.Test;
 
 public class DescriptionTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Description(null));
+    public void constructor_nullDescription_throwsNullPointerException() {
+        // null description: throw NullPointerException
+        assertThrows(NullPointerException.class, () -> new Description(NULL_STRING));
     }
-
     @Test
     public void constructor_invalidDescription_throwsIllegalArgumentException() {
-        String invalidDescription = "";
-        assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription));
+
+        String[] invalidStrings = getInvalidStringsForDescription();
+        assertAllThrows(IllegalArgumentException.class, Description::new, invalidStrings);
     }
 
     @Test
     public void isValidDescription() {
-        // null description
-        assertThrows(NullPointerException.class, () -> Description.isValidDescription(null));
+
+        // null
+        assertFalse(Description.isValidDescription(NULL_STRING));
 
         // invalid descriptions
-        assertFalse(Description.isValidDescription("")); // empty string
-        assertFalse(Description.isValidDescription(" ")); // spaces only
-        assertFalse(Description.isValidDescription("ㅁㅂㅇㅈㅊㅋㅌㅍㅎ")); // non-english characters
-        assertFalse(Description.isValidDescription("╲ʕ·ᴥ· ╲ʔ")); // symbols
-        assertFalse(Description.isValidDescription("☝")); // emojis
-        assertFalse(Description.isValidDescription(" Complete CS2103T Week 8 Readings")); // first char whitespace
-        assertFalse(Description.isValidDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
-                + "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis "
-                + "nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure "
-                + "dolor em")); // 256 characters
 
-        // valid description
-        assertTrue(Description.isValidDescription("Complete CS2103T Week 8 Readings"));
-        assertTrue(Description.isValidDescription("H")); // one character
-        assertTrue(Description.isValidDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
-                + "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis "
-                + "nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure "
-                + "dolor e")); // 255 characters
+        assertAllFalse(Description::isValidDescription, getInvalidStringsForDescription());
+
+        // valid descriptions
+        assertAllTrue(Description::isValidDescription, getValidStringsForDescription());
     }
 }

@@ -2,6 +2,7 @@ package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.StringUtil.isSameStringIgnoreCases;
 
 /**
  * Represents a Task's name in the task list.
@@ -39,6 +40,9 @@ public class Name implements Comparable<Name> {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
+        if (test == null) {
+            return false;
+        }
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -48,11 +52,19 @@ public class Name implements Comparable<Name> {
         return fullName;
     }
 
+    /**
+     * Checks whether two {@code Name}s are equal.
+     * If two {@code Name}s contain the same {@code String}, ignoring the cases,
+     * they are considered as the same.
+     *
+     * @param other the other {@code Object} to be compared with
+     * @return true if {@code other} is a {@code Name} and has the same {@code String} internally, ignoring the cases
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Name // instanceof handles nulls
-                && fullName.equals(((Name) other).fullName)); // state check
+                && isSameStringIgnoreCases(this.fullName, ((Name) other).fullName)); // state check
     }
 
     @Override

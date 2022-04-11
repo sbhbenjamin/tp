@@ -27,9 +27,9 @@ public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the task identified by the index number used in the displayed task list as completed.\n"
-            + "Parameters: INDEX[ES] (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " 1 2 3";
+            + ": Marks the tasks at the given indexes of the displayed task list as complete.\n"
+            + "Parameters: INDEX... (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1 2 3";
 
     public static final String MESSAGE_TASK_ALREADY_COMPLETED = "The completion status of this task is already set"
             + " to complete.";
@@ -93,7 +93,8 @@ public class MarkCommand extends Command {
     /**
      * Converts the list of successfully marked tasks into a string to be returned to the user
      *
-     * @param markedTasks
+     * @param markedTasks a {@code List<Task>} containing an array of all the successfully marked tasks.
+     * @param markedTasksIndexes a {@code List<Index>} containing the array of indexes that were successfully marked.
      * @return a {@code String} listings all the successfully marked tasks.
      */
     private String markedTasksToString(List<Task> markedTasks, List<Index> markedTasksIndexes) {
@@ -107,22 +108,21 @@ public class MarkCommand extends Command {
     /**
      * Converts a list of indexes to a string to be returned to the user.
      *
-     * @param indexes
+     * @param indexes a {@code List<Index>} containing the list of indexes that are to be processed and returned to the
+     * user.
      * @return a {@code String} of the list of indexes that are passed into the function.
      */
     private String indexesToString(List<Index> indexes) {
-        String str = "" + indexes.get(0).getOneBased();
-        for (int i = 1; i < indexes.size(); i++) {
-            int index = indexes.get(i).getOneBased();
-            if (indexes.size() > 1 && i == indexes.size() - 1) {
-                str += " and " + index;
-            } else {
-                str += ", " + index;
+        StringBuilder str = new StringBuilder();
+        if (indexes.size() > 1) {
+            for (int i = indexes.size() - 1; i >= 1; i--) {
+                str.append(indexes.get(i).getOneBased());
+                str.append(i == 1 ? " and " : ", ");
             }
         }
-        return str;
+        str.append(indexes.get(0).getOneBased());
+        return str.toString();
     }
-
 
     @Override
     public boolean equals(Object other) {
@@ -137,6 +137,8 @@ public class MarkCommand extends Command {
      * If index is already marked, return 1.
      * If index is a valid index, return 0.
      *
+     * @param index the inde which validity is to be checked.
+     * @param taskList the task list which size is to be checked against.
      * @return an int representing validity of the index
      */
     private int isValidIndex(Index index, List<Task> taskList) {
@@ -153,9 +155,11 @@ public class MarkCommand extends Command {
     /**
      * Processes the lists containing the results of the marking of indexes and returns the result to the user.
      *
-     * @param markTaskIndexes
-     * @param alreadyMarkedIndexes
-     * @param outOfBoundsIndexes
+     * @param model the current model
+     * @param lastShownList the last shown list which contains the tasks to be marked.
+     * @param markTaskIndexes the array of indexes inputted by the user that are to be marked.
+     * @param alreadyMarkedIndexes the array of indexes inputted by the user that are already marked.
+     * @param outOfBoundsIndexes the array of indexes inputted by the user that are outOfBounds.
      * @return CommandResult of the marking of the inputted indexes.
      * @throws CommandException
      */

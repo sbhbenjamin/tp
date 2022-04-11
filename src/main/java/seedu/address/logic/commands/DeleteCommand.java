@@ -18,9 +18,9 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the task identified by the index number used in the displayed task list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the tasks at the given indexes of the displayed task list.\n"
+            + "Parameters: INDEX... (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1 2 3";
 
     private final List<Index> targetIndexes;
 
@@ -32,23 +32,18 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
 
         List<Task> lastShownList = model.getSortedTaskList();
-        List<Task> deletedTasks = new ArrayList<>();
-        List<Index> deletedTasksIndexes = new ArrayList<>();
+        List<Index> deletedTaskIndexes = new ArrayList<>();
         List<Index> outOfBoundsIndexes = new ArrayList<>();
-
 
         for (int i = 0; i < targetIndexes.size(); i++) {
             Index index = targetIndexes.get(i);
             if (!isValidIndex(index, lastShownList)) {
                 outOfBoundsIndexes.add(index);
             } else {
-                Task taskToDelete = lastShownList.get(index.getZeroBased());
-                model.deleteTask(taskToDelete);
-                deletedTasks.add(taskToDelete);
-                deletedTasksIndexes.add(index);
+                deletedTaskIndexes.add(index);
             }
         }
-        return result(deletedTasks, deletedTasksIndexes, outOfBoundsIndexes);
+        return result(model, lastShownList, deletedTaskIndexes, outOfBoundsIndexes);
     }
 
     @Override
@@ -61,7 +56,9 @@ public class DeleteCommand extends Command {
     /**
      * Converts the list of successfully deleted tasks into a string to be returned to the user
      *
-     * @param deletedTasks
+     * @param deletedTasks a {@code List<Task>} containing an array of all the successfully deleted tasks.
+     * @param deletedTasksIndexes a {@code List<Index} containing the array of indexes of tasks that were successfully
+     * deleted.
      * @return a {@code String} listings all the successfully deleted tasks.
      */
     private String deletedTasksToString(List<Task> deletedTasks, List<Index> deletedTasksIndexes) {
@@ -75,20 +72,20 @@ public class DeleteCommand extends Command {
     /**
      * Converts a list of indexes to a string to be returned to the user.
      *
-     * @param indexes
+     * @param indexes a {@code List<Index>} containing the list of indexes that are to be processed and returned to the
+     * user.
      * @return a {@code String} of the list of indexes that are passed into the function.
      */
     private String indexesToString(List<Index> indexes) {
-        String str = "" + indexes.get(0).getOneBased();
-        for (int i = 1; i < indexes.size(); i++) {
-            int index = indexes.get(i).getOneBased();
-            if (indexes.size() > 1 && i == indexes.size() - 1) {
-                str += " and " + index;
-            } else {
-                str += ", " + index;
+        StringBuilder str = new StringBuilder();
+        if (indexes.size() > 1) {
+            for (int i = indexes.size() - 1; i >= 1; i--) {
+                str.append(indexes.get(i).getOneBased());
+                str.append(i == 1 ? " and " : ", ");
             }
         }
-        return str;
+        str.append(indexes.get(0).getOneBased());
+        return str.toString();
     }
 
     /**
@@ -96,8 +93,8 @@ public class DeleteCommand extends Command {
      * If index > size of targetIndexes, return false.
      * If index is a valid index, return true.
      *
-     * @param index
-     * @param taskList
+     * @param index the index which validity is to be checked.
+     * @param taskList the task list which size is to be checked against.
      * @return a boolean representing if the index is valid.
      */
     private boolean isValidIndex(Index index, List<Task> taskList) {
@@ -111,16 +108,16 @@ public class DeleteCommand extends Command {
     /**
      * Processes the lists containing the results of the deleting of indexes and returns the result to the user.
      *
-     * @param deletedTasks
-     * @param deletedTasksIndexes
-     * @param outOfBoundsIndexes
+     * @param model the current model
+     * @param lastShownList the last shown list which contains the tasks to be marked.
+     * @param outOfBoundsIndexes the array of indexes inputted by the user that are outOfBounds.
      * @return CommandResult of deleting the inputted indexes.
      * @throws CommandException
      */
-    private CommandResult result(List<Task> deletedTasks, List<Index> deletedTasksIndexes,
+    private CommandResult result(Model model, List<Task> lastShownList, List<Index> deleteTaskIndexes,
                                  List<Index> outOfBoundsIndexes) throws CommandException {
         StringBuilder errorString = new StringBuilder();
-
+        List<Task> deletedTasks = new ArrayList<>();
 
         if (!outOfBoundsIndexes.isEmpty()) {
             errorString.append("Index " + indexesToString(outOfBoundsIndexes) + ": "
@@ -128,13 +125,19 @@ public class DeleteCommand extends Command {
         }
 
         if (errorString.length() != 0) { //throw error if any
-            if (!deletedTasks.isEmpty()) {
-                errorString.append(deletedTasksToString(deletedTasks, deletedTasksIndexes));
-            }
             throw new CommandException(errorString.toString());
         }
 
-        return new CommandResult(deletedTasksToString(deletedTasks, deletedTasksIndexes));
+        if (!deleteTaskIndexes.isEmpty()) {
+            for (int i = 0; i < targetIndexes.size(); i++) {
+                Index index = deleteTaskIndexes.get(i);
+                Task taskToDelete = lastShownList.get(index.getZeroBased());
+                model.deleteTask(taskToDelete);
+                deletedTasks.add(taskToDelete);
+            }
+        }
+
+        return new CommandResult(deletedTasksToString(deletedTasks, deleteTaskIndexes));
 
     }
 }

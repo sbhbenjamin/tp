@@ -78,7 +78,10 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            Tag tag = parseTag(tagName);
+            if (tagSet.stream().noneMatch(tag::equals)) {
+                tagSet.add(tag);
+            }
         }
         return tagSet;
     }

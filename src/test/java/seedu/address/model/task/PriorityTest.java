@@ -25,12 +25,10 @@ public class PriorityTest {
         assertThrows(NullPointerException.class, () -> Priority.isValidPriority(null));
 
         // invalid priority
-        assertFalse(Priority.isValidPriority("")); // empty string
-        assertFalse(Priority.isValidPriority(" ")); // spaces only
         assertFalse(Priority.isValidPriority("highest")); // invalid enum
-        assertFalse(Priority.isValidPriority("ㅁㅂㅇㅈㅊㅋㅌㅍㅎ")); // non-english characters
-        assertFalse(Priority.isValidPriority("╲ʕ·ᴥ· ╲ʔ")); // symbols
-        assertFalse(Priority.isValidPriority("☝")); // emojis
+        assertFalse(Priority.isValidPriority("low ")); // valid enum, trailing whitespace
+        assertFalse(Priority.isValidPriority(" low")); // valid enum, leading whitespace
+
 
         // valid priority
         assertTrue(Priority.isValidPriority("low"));

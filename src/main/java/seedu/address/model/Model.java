@@ -95,6 +95,15 @@ public interface Model {
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
 
+    /**
+     * Updates the filtered list to be filtered by the {@code PREDICATE_SHOW_ALL_TASKS}.
+     */
+    void updateToDefaultFilteredTaskList();
+
+    /**
+     * Restores the previous predicate used by the filtered list.
+     */
+    void restorePreviousPredicate();
 
     /** Returns an unmodifiable view of the sorted task list */
     ObservableList<Task> getSortedTaskList();
@@ -105,7 +114,22 @@ public interface Model {
      */
     void updateSortedTaskList(Comparator<Task> comparator);
 
+    /**
+     * Resets the sortedList to be unordered. The sorted list may preserve the order according to the previous
+     * comparator but would not dynamically change when edits are made to it.
+     */
+    void resetSortedTaskList();
+
+    /**
+     * Updates the sortedList to be ordered by the {@code COMPARATOR_SORT_DEADLINE_ASCENDING}.
+     */
+    void updateToDefaultSortedTaskList();
+
+    /**
+     * Updates the source ordering of the task list with the order of the order preserved in the sortedList.
+     */
+    void updateTaskList();
+
     /** Returns an unmodifiable view of the tag list */
     Set<Tag> getTagList();
-
 }

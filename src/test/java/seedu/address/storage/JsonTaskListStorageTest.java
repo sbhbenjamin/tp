@@ -1,12 +1,12 @@
 package seedu.address.storage;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-//import static seedu.address.testutil.TypicalTasks.APPLY_INTERNSHIP;
-//import static seedu.address.testutil.TypicalTasks.CS2105_MIDTERM;
-//import static seedu.address.testutil.TypicalTasks.MEET_ALICE;
-//import static seedu.address.testutil.TypicalTasks.getTypicalTaskList;
+import static seedu.address.testutil.TypicalTasks.CS2102_MIDTERM;
+import static seedu.address.testutil.TypicalTasks.CS2103T_TUTORIAL;
+import static seedu.address.testutil.TypicalTasks.CS2105_MIDTERM;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskList;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -61,31 +61,31 @@ public class JsonTaskListStorageTest {
         assertThrows(DataConversionException.class, () -> readTaskList("invalidAndValidTaskTaskList.json"));
     }
 
-    //    @Test
-    //    public void readAndSaveTaskList_allInOrder_success() throws Exception {
-    //        Path filePath = testFolder.resolve("TempTaskList.json");
-    //        TaskList original = getTypicalTaskList();
-    //        JsonTaskListStorage jsonTaskListStorage = new JsonTaskListStorage(filePath);
-    //
-    //        // Save in new file and read back
-    //        jsonTaskListStorage.saveTaskList(original, filePath);
-    //        ReadOnlyTaskList readBack = jsonTaskListStorage.readTaskList(filePath).get();
-    //        assertEquals(original, new TaskList(readBack));
-    //
-    //        // Modify data, overwrite exiting file, and read back
-    //        original.addTask(MEET_ALICE);
-    //        original.removeTask(CS2105_MIDTERM);
-    //        jsonTaskListStorage.saveTaskList(original, filePath);
-    //        readBack = jsonTaskListStorage.readTaskList(filePath).get();
-    //        assertEquals(original, new TaskList(readBack));
-    //
-    //        // Save and read without specifying file path
-    //        original.addTask(APPLY_INTERNSHIP);
-    //        jsonTaskListStorage.saveTaskList(original); // file path not specified
-    //        readBack = jsonTaskListStorage.readTaskList().get(); // file path not specified
-    //        assertEquals(original, new TaskList(readBack));
-    //
-    //    }
+    @Test
+    public void readAndSaveTaskList_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempTaskList.json");
+        TaskList original = getTypicalTaskList();
+        JsonTaskListStorage jsonTaskListStorage = new JsonTaskListStorage(filePath);
+
+        // Save in new file and read back
+        jsonTaskListStorage.saveTaskList(original, filePath);
+        ReadOnlyTaskList readBack = jsonTaskListStorage.readTaskList(filePath).get();
+        assertEquals(original, new TaskList(readBack));
+
+        // Modify data, overwrite exiting file, and read back
+        original.addTask(CS2102_MIDTERM);
+        original.removeTask(CS2105_MIDTERM);
+        jsonTaskListStorage.saveTaskList(original, filePath);
+        readBack = jsonTaskListStorage.readTaskList(filePath).get();
+        assertEquals(original, new TaskList(readBack));
+
+        // Save and read without specifying file path
+        original.addTask(CS2103T_TUTORIAL);
+        jsonTaskListStorage.saveTaskList(original); // file path not specified
+        readBack = jsonTaskListStorage.readTaskList().get(); // file path not specified
+        assertEquals(original, new TaskList(readBack));
+
+    }
 
     @Test
     public void saveTaskList_nullTaskList_throwsNullPointerException() {

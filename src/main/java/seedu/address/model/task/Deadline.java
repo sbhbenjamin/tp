@@ -48,6 +48,10 @@ public class Deadline implements Comparable<Deadline> {
      * Returns true if a given string is a valid deadline.
      */
     public static boolean isValidDeadline(String test) {
+
+        if (test == null) {
+            return false;
+        }
         try {
             LocalDate.parse(test);
             return true;

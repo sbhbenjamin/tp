@@ -43,8 +43,9 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = harmoniaParser.parseCommand(commandText);
+        model.resetSortedTaskList(); // Reset the task list to be unordered for future commands.
         commandResult = command.execute(model);
-
+        model.updateTaskList(); // Update the source ordering of the tasks for future commands.
         try {
             storage.saveTaskList(model.getTaskList());
         } catch (IOException ioe) {
