@@ -240,8 +240,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 #### What is the feature about
 This feature provides a way for users to `mark`, `unmark` and `delete` multiple `Tasks` at a time. For the previous implementation of `mark`, `unmark` and `delete`, users had to type in a command for each task that they wished to `mark`, `unmark` or `delete` one at a time.   
 
-`Mark` and `unmark` allows users to mark a `Task` as either complete or incomplete while `delete` allows users to remove a `Task` from the task list.
-
 #### How the feature is implemented
 
 These features are implemented with the addition of a `MassOpsParser` class which parses through user inputs, consisting of multiple indexes. `MassOpsParser` processes the indexes to return an `ArrayList` of `Indexes` for `MarkCommand`, `UnmarkCommand` or `DeleteCommand` to execute.
@@ -277,22 +275,6 @@ The `unmark` feature follows a similar implementation involving `UnmarkCommandPa
 The `delete` feature follows a similar implementation as well, involving `DeleteCommandParser` and `DeleteCommand` instead.  
 
 ![MassOpsDelete](images/MassOpsDelete.png)
-
-**Aspect: How the functionality of mark/unmark is broken down:**
-
-* **Alternative 1 (current choice):** Use two separate Command classes: `MarkCommand` and `UnmarkCommand`.
-    * Pros:
-        * More control over the final outcome of the Command execution (Knowledge whether task is completed or uncompleted after execution)
-        * Ability to check whether a task is either `MarkCommand` or `UnmarkCommand` during runtime
-        * Ability to extend either mark or unmark functionality isolated from each other
-        * Cons:
-            * Makes the code more bloated with similar looking code (for each class)
-* **Alternative 2:** Use a single `Command` to toggle `Task` as either complete or incomplete.
-    * Pros:
-        * Less redundant code
-        * Easier to extend if both mark and unmark are required to change synchronously
-    * Cons:
-        * No exact knowledge whether the execution of command mark task as complete or incomplete
 
 **Aspect: How the user input is processed:**
 
