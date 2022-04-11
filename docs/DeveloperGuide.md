@@ -69,31 +69,31 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T09-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Task` object residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `HarmoniaParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -110,7 +110,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `HarmoniaParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `HarmoniaParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -135,13 +135,13 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both task list data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `TaskListStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -365,6 +365,94 @@ In this case, the `enum` type also increases the extensibility of the feature. I
       * More tedious to extend. To implement this, we might have to use conditionals to check if the `String` or `int` input corresponds with the accepted values in our `Priority` design. This can pose a problem when we try to extend the number of properties a `Priority` field can take. In this case, we might have to increase the number of conditionals, which could reduce readability and make the code more prone to errors.
       * Possibly increases memory use. If we use `String` or `int` types, we might have to instantiate new `Priority` classes every time we create a new `Task` object.
 
+### Mark/unmark
+
+#### What is the feature about
+Provides a way to mark `Task` objects as either completed or uncompleted.
+
+#### How the feature is implemented
+The first stage of the implementation `mark` feature involves parsing the user input. `MarkCommandParser` is used to parse and check whether the user input is valid. After which a `MarkCommand` object is created with the respective task index. The second stage requires `MarkCommand#execute()` to be called. The execution would update `TaskList` by replacing task to be marked by the copy of it with the `CompletionStatus` set to `true`.
+
+The `unmark` feature follows a similar implementation involving `UnmarkCommandParser`, `UnmarkCommand`.
+
+<img src="images/MarkSequenceDiagram.png" width="574" />
+
+#### Why it is implemented that way
+It is designed to preserve the Command Design Pattern. Through the implementation of the `MarkCommmandParser` and `UnmarkCommandParser`, we can enforce the input format of mark command. Furthermore, isolating `MarkCommand` and `UnmarkCommand` into separate classes, we narrow down functionality of each class. This gives the application more control by limiting the outcome in successful execution. For example, successful execution of MarkCommand will only lead to the task being marked as complete.Whereas an alternative design combining mark and unmark functionality together will lead vague outcome (application unaware whether the task is marked as complete or incomplete after execution).
+
+#### Design considerations:
+
+**Aspect: How the functionality of mark/unmark is broken down:**
+
+* **Alternative 1 (current choice):** Use two separate Command classes: `MarkCommand` and `UnmarkCommand`.
+    * Pros:
+        * More control over the final outcome of the Command execution (Knowledge whether task is completed or uncompleted after execution)
+        * Ability to check whether a task is either `MarkCommand` or `UnamrkCommand` during runtime
+        * Ability to extend either mark or unmark functionality isolated from each other
+      * Cons:
+        * Makes the code more bloated with similar looking code (for each class)
+* **Alternative 2:** Use a single `Command` to toggle `Task` as either complete or incomplete.
+    * Pros:
+        * Less redundant code
+        * Easier to extend if both mark and unmark are required to change synchronously
+    * Cons:
+        * The final state of task's `CompletionStatus` after executing toggle command cannot be precisely known. (i.e. We only know the final outcome of the task's `CompletionStatus` during runtime. Whereas, having with two different commands, `MarkCommand` and `UnmarkCommand` we know for certain the final state of the `CompletionStatus` can be predicted.)  
+
+### Sorting
+
+#### What is the feature about
+Sorts the tasks presented by specified attribute and order.
+
+#### How the feature is implemented
+The sort feature uses the `sort` command, prefix `by/` before the specified `SORT_KEY` and prefix `in/` before the specified `SORT_ORDER`.
+
+Given below is an example usage scenario of how the sort mechanism behaves at each step to sort the task:
+
+Step 1. User inputs `sort by/deadline in/asc` to sort the task list by the `Deadline` in the ascending order.
+    
+Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
+
+Step 3. The first word of the user input is `sort`, which matches the command for `SortCommand`. This initialises `SortCommandParser`.
+
+Step 4. `SortCommandParser#parse()` is called. `SORT_KEY` with prefix `by/` and `SORT_ORDER` with prefix `in/` are extracted out as a `SortKey` and `SortOrder` objects.
+
+Step 5. A `SortCommand` is initialised using the `SortKey` and `SortOrder`. The `SortCommand` constructor creates a `Comparator` used for sorting the list. `SortCommand` is returned to `LogicManager` for execution.
+
+Step 6. After `SortCommand#execute()` is called, `model#updateSortedTaskList(Comparator)` is invoked to sort the task list using the created `Comparator`. The command result is returned and displayed to the user.
+
+#### Why it is implemented that way
+The underlying `UniqueTaskList` uses an `ObservableList` and therefore it allows the application listen to changes and render according specified requirements. One such abstraction used in the initial implementation is the `FilteredList`. With the `FilteredList` the application grants the ability to filter the list using a `Predicate`. Sorting was designed to be an extension of this concept using `SortedList` abstraction where the application can sort the list by a given `Comparator` and render its output instantaneously.
+
+#### Design considerations:
+**Aspect: How the `Comparator` is created:**
+* **Alternative 1 (current choice):** Use Factory design pattern.
+    * Pros:
+        * Easier to extend
+        * Abstracts out the complexity of creating a `Comparator`
+        * Promotes reuse of code as there is no need to repeat necessary conditions needed to create a `Comparator`
+        * Easier to conduct Unit-testing as we only need to test the Factory to check whether the `Comparator` returned meets the correct type and the conditions.
+        * Cons:
+            * Makes the code verbose
+* **Alternative 2:** Create `Comparator` at the point of parsing.
+    * Pros:
+        * Less code needed to implement
+    * Cons:
+        * Leads to poor code quality as `Comparator` creation becomes more complex. (For example: Poor quality may arise due to violations of KISS principle) 
+
+**Aspect: How the sorted list is stored/rendered:**
+* **Alternative 1 (current choice):** Use `javafx.collections.transformation.SortedList`.
+    * Pros:
+        * Abstracts out the details of rendering
+        * Abstracts out the details behind sorting (i.e. only need to pass in the `Comparator`)
+    * Cons:
+        * Difficult to preserve the ordering if tasks are added or edited. Since `TaskList` is implemented using `ObservableList`, any changes to it would cause them to be propagated to the `SortedList` (which wraps the `ObservableList`). Therefore, adding/editing a `Task` would cause the contents to be automatically sorted. Hence, this might lead to tasks being reordered.
+    
+* **Alternative 2:** Sorts the tasks using a stream and repopulate the `TaskList`.
+    * Pros:
+        * Straightforward implementation
+    * Cons:
+        * Mutability may introduce latent bugs (For examples: Storage may be updated with `incorrect` tasks that may have been introduced when mutating the `TaskList` since saving to storage is dependent on `TaskList`)
+        * Redundant computation to delete and reinsert the same tasks after each operation
 
 ### \[Proposed\] Search by date
 
@@ -612,35 +700,35 @@ Harmonia is the easiest way for students to manage the complexity associated wit
 
 Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Medium-low (nice to have but difficult) - `* *`, Low (unlikely to have) - `*`
 
-| Priority  | As a …​        | I want to …​                                                | So that I can…​                                                                |
-|-----------|----------------|-------------------------------------------------------------|--------------------------------------------------------------------------------|
-| `* * * *` | user           | add a new task                                              |                                                                                |
-| `* * * *` | user           | delete a task                                               | remove tasks that I no longer need                                             |
-| `* * * *` | user           | mark a task as complete                                     |                                                                                |
-| `* * * *` | user           | mark a task as incomplete                                   |                                                                                |
-| `* * * *` | user           | see all my tasks when I start up the application            | view my tasks more conveniently without having to perform any extra operations |
-| `* * * *` | user           | tag a task                                                  | categorise my tasks according to my preferred system                           |
-| `* * * *` | user           | modify a task                                               | amend a mistake or update a task                                               |
-| `* * * *` | user           | search by tags                                              | find tasks related to a category                                               |
-| `* * * *` | user           | search by keywords                                          | find a specific task more easily                                               |
-| `* * * *` | new user       | have straightforward commands I can use                     | use the application more intuitively                                           |
-| `* * * *` | expert user    | modify the tasks in the data file directly                  | modify the tasks in a way that is not supported by the application             |
-| `* * *`   | user           | tag a task with multiple tags                               | categorise tasks under multiple categories at a time                           |
-| `* * *`   | user           | search for tasks that fall within a specific time range     | find the tasks that lie between a specific period                              |
-| `* * *`   | user           | view upcoming deadlines                                     | prioritise what tasks I need to do first                                       |
-| `* * *`   | user           | view tags I have already added when creating a new task     | know how to tag new tasks and avoid creating similar tags                      |
-| `* * *`   | user           | view all of my upcoming–deadlines and longer-term deadlines | have a more holistic view of all events in the short-term and long-term future |
-| `* * *`   | user           | access the user guide through the interface                 | access the documentation without having to search online for it                |
-| `* * *`   | user           | sort my tasks by certain filters                            | organise my view the way I prefer                                              |
-| `* * *`   | user           | label my tasks with priorities                              | keep track of which tasks are more important                                   |
-| `* * *`   | new user       | view suggestions if I type in the wrong command             | recover from mistakes and use the correct command more easily                  |
-| `* * *`   | potential user | see the app populated with sample data                      | easily see how the application would look like when in use                     |
-| `* *`     | user           | set repeated occurrence of a task                           | avoid having to add a task multiple times                                      |
-| `* *`     | new user       | revert changes made                                         | undo changes that were made by mistake                                         |
-| `* *`     | expert user    | use shortcuts                                               | perform operations more efficiently                                            |
-| `*`       | user           | bulk mark different tasks as complete                       | marking everything I finished a day with just one command                      |
-| `*`       | expert user    | delete multiple tasks at once                               | do not have to delete tasks one by one                                         |
-
+|</br> Priority &nbsp;&nbsp;&nbsp;| As a …​        | I want to …​                                                | So that I can…​                                                                |
+|---------------------------------|-------------------|----------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `* * * *`                       | user              | add a new task                                                 |                                                                                |
+| `* * * *`                       | user              | delete a task                                                  | remove tasks that I no longer need                                             |
+| `* * * *`                       | user              | mark a task as complete                                        |                                                                                |
+| `* * * *`                       | user              | mark a task as incomplete                                      |                                                                                |
+| `* * * *`                       | user              | see all my tasks when I start up the application               | view my tasks more conveniently without having to perform any extra operations |
+| `* * * *`                       | user              | tag a task                                                     | categorise my tasks according to my preferred system                           |
+| `* * * *`                       | user              | modify a task                                                  | amend a mistake or update a task                                               |
+| `* * * *`                       | user              | search by tags                                                 | find tasks related to a category                                               |
+| `* * * *`                       | user              | search by keywords                                             | find a specific task more easily                                               |
+| `* * * *`                       | new user          | have straightforward commands I can use                        | use the application more intuitively                                           |
+| `* * * *`                       | expert user       | modify the tasks in the data file directly                     | modify the tasks in a way that is not supported by the application             |
+| `* * *`                         | user              | tag a task with multiple tags                                  | categorise tasks under multiple categories at a time                           |
+| `* * *`                         | user              | search for tasks that fall within a specific time range        | find the tasks that lie between a specific period                              |
+| `* * *`                         | user              | view upcoming deadlines                                        | prioritise what tasks I need to do first                                       |
+| `* * *`                         | user              | view tags I have already added when creating a new task        | know how to tag new tasks and avoid creating similar tags                      |
+| `* * *`                         | user              | view all of my upcoming–deadlines and longer-term deadlines    | have a more holistic view of all events in the short-term and long-term future |
+| `* * *`                         | user              | access the user guide through the interface                    | access the documentation without having to search online for it                |
+| `* * *`                         | user              | sort my tasks by certain filters                               | organise my view the way I prefer                                              |
+| `* * *`                         | user              | label my tasks with priorities                                 | keep track of which tasks are more important                                   |
+| `* * *`                         | new user          | view suggestions if I type in the wrong command                | recover from mistakes and use the correct command more easily                  |
+| `* * *`                         | potential user    | see the app populated with sample data                         | easily see how the application would look like when in use                     |
+| `* *`                           | user              | set repeated occurrence of a task                              | avoid having to add a task multiple times                                      |
+| `* *`                           | new user          | revert changes made                                            | undo changes that were made by mistake                                         |
+| `* *`                           | expert user       | use shortcuts                                                  | perform operations more efficiently                                            |
+| `*`                             | user              | bulk mark different tasks as complete                          | marking everything I finished a day with just one command                      |
+| `*`                             | expert user       | delete multiple tasks at once                                  | do not have to delete tasks one by one                                         |
+   
 ### Use cases
 
 (For all use cases below, the **System** is `Harmonia` and the **Actor** is the `user`, unless specified otherwise)
