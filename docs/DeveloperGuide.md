@@ -620,34 +620,34 @@ Harmonia is the easiest way for students to manage the complexity associated wit
 
 Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Medium-low (nice to have but difficult) - `* *`, Low (unlikely to have) - `*`
 
-|&nbsp;Priority&nbsp;&nbsp;&nbsp;| As a …​        | I want to …​                                                | So that I can…​                                                                |
-|-------------------------------|-------------------|----------------------------------------------------------------|--------------------------------------------------------------------------------|
-| `* * * *`                     | user              | add a new task                                                 |                                                                                |
-| `* * * *`                     | user              | delete a task                                                  | remove tasks that I no longer need                                             |
-| `* * * *`                     | user              | mark a task as complete                                        |                                                                                |
-| `* * * *`                     | user              | mark a task as incomplete                                      |                                                                                |
-| `* * * *`                     | user              | see all my tasks when I start up the application               | view my tasks more conveniently without having to perform any extra operations |
-| `* * * *`                     | user              | tag a task                                                     | categorise my tasks according to my preferred system                           |
-| `* * * *`                     | user              | modify a task                                                  | amend a mistake or update a task                                               |
-| `* * * *`                     | user              | search by tags                                                 | find tasks related to a category                                               |
-| `* * * *`                     | user              | search by keywords                                             | find a specific task more easily                                               |
-| `* * * *`                     | new user          | have straightforward commands I can use                        | use the application more intuitively                                           |
-| `* * * *`                     | expert user       | modify the tasks in the data file directly                     | modify the tasks in a way that is not supported by the application             |
-| `* * *`                       | user              | tag a task with multiple tags                                  | categorise tasks under multiple categories at a time                           |
-| `* * *`                       | user              | search for tasks that fall within a specific time range        | find the tasks that lie between a specific period                              |
-| `* * *`                       | user              | view upcoming deadlines                                        | prioritise what tasks I need to do first                                       |
-| `* * *`                       | user              | view tags I have already added when creating a new task        | know how to tag new tasks and avoid creating similar tags                      |
-| `* * *`                       | user              | view all of my upcoming–deadlines and longer-term deadlines    | have a more holistic view of all events in the short-term and long-term future |
-| `* * *`                       | user              | access the user guide through the interface                    | access the documentation without having to search online for it                |
-| `* * *`                       | user              | sort my tasks by certain filters                               | organise my view the way I prefer                                              |
-| `* * *`                       | user              | label my tasks with priorities                                 | keep track of which tasks are more important                                   |
-| `* * *`                       | new user          | view suggestions if I type in the wrong command                | recover from mistakes and use the correct command more easily                  |
-| `* * *`                       | potential user    | see the app populated with sample data                         | easily see how the application would look like when in use                     |
-| `* *`                         | user              | set repeated occurrence of a task                              | avoid having to add a task multiple times                                      |
-| `* *`                         | new user          | revert changes made                                            | undo changes that were made by mistake                                         |
-| `* *`                         | expert user       | use shortcuts                                                  | perform operations more efficiently                                            |
-| `*`                           | user              | bulk mark different tasks as complete                          | marking everything I finished a day with just one command                      |
-| `*`                           | expert user       | delete multiple tasks at once                                  | do not have to delete tasks one by one                                         |
+|Priority                    | As a …​        | I want to …​                                                | So that I can…​                                                                |
+|----------------------------|-------------------|----------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `****`                     | user              | add a new task                                                 |                                                                                |
+| `****`                     | user              | delete a task                                                  | remove tasks that I no longer need                                             |
+| `****`                     | user              | mark a task as complete                                        |                                                                                |
+| `****`                     | user              | mark a task as incomplete                                      |                                                                                |
+| `****`                     | user              | see all my tasks when I start up the application               | view my tasks more conveniently without having to perform any extra operations |
+| `****`                     | user              | tag a task                                                     | categorise my tasks according to my preferred system                           |
+| `****`                     | user              | modify a task                                                  | amend a mistake or update a task                                               |
+| `****`                     | user              | search by tags                                                 | find tasks related to a category                                               |
+| `****`                     | user              | search by keywords                                             | find a specific task more easily                                               |
+| `****`                     | new user          | have straightforward commands I can use                        | use the application more intuitively                                           |
+| `****`                     | expert user       | modify the tasks in the data file directly                     | modify the tasks in a way that is not supported by the application             |
+| `***`                      | user              | tag a task with multiple tags                                  | categorise tasks under multiple categories at a time                           |
+| `***`                      | user              | search for tasks that fall within a specific time range        | find the tasks that lie between a specific period                              |
+| `***`                      | user              | view upcoming deadlines                                        | prioritise what tasks I need to do first                                       |
+| `***`                      | user              | view tags I have already added when creating a new task        | know how to tag new tasks and avoid creating similar tags                      |
+| `***`                      | user              | view all of my upcoming–deadlines and longer-term deadlines    | have a more holistic view of all events in the short-term and long-term future |
+| `***`                      | user              | access the user guide through the interface                    | access the documentation without having to search online for it                |
+| `***`                      | user              | sort my tasks by certain filters                               | organise my view the way I prefer                                              |
+| `***`                      | user              | label my tasks with priorities                                 | keep track of which tasks are more important                                   |
+| `***`                      | new user          | view suggestions if I type in the wrong command                | recover from mistakes and use the correct command more easily                  |
+| `***`                      | potential user    | see the app populated with sample data                         | easily see how the application would look like when in use                     |
+| `**`                       | user              | set repeated occurrence of a task                              | avoid having to add a task multiple times                                      |
+| `**`                       | new user          | revert changes made                                            | undo changes that were made by mistake                                         |
+| `**`                       | expert user       | use shortcuts                                                  | perform operations more efficiently                                            |
+| `*`                        | user              | bulk mark different tasks as complete                          | marking everything I finished a day with just one command                      |
+| `*`                        | expert user       | delete multiple tasks at once                                  | do not have to delete tasks one by one                                         |
    
 ### Use cases
 
