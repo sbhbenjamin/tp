@@ -27,9 +27,9 @@ public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the task identified by the index number used in the displayed task list as completed.\n"
-            + "Parameters: INDEX[ES] (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " 1 2 3";
+            + ": Marks the tasks at the given indexes of the displayed task list as complete.\n"
+            + "Parameters: INDEX... (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1 2 3";
 
     public static final String MESSAGE_TASK_ALREADY_COMPLETED = "The completion status of this task is already set"
             + " to complete.";

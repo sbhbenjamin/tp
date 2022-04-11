@@ -27,9 +27,9 @@ public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the task identified by the index number used in the displayed task list as uncompleted.\n"
-            + "Parameters: INDEX[ES] (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " 1 2 3";
+            + ": Marks the tasks at the given indexes of the displayed task list as incomplete.\n"
+            + "Parameters: INDEX... (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1 2 3";
 
     public static final String MESSAGE_TASK_ALREADY_UNCOMPLETED = "The completion status of this task is already set"
             + " to incomplete.";
