@@ -11,13 +11,14 @@ end box
 
 box Model MODEL_COLOR_T1
 participant "p:TagContainsKeywordPredicate" as TagContainsKeywordPredicate MODEL_COLOR
+participant "p:PriorityMatchedPredicate" as PriorityMatchedPredicate MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("find t/CS2103T")
+[-> LogicManager : execute("find t/CS2103T t/CS2105 p/low")
 activate LogicManager
 
-LogicManager -> HarmoniaParser : parseCommand("find t/CS2103T")
+LogicManager -> HarmoniaParser : parseCommand("find t/CS2103T t/CS2105 p/low")
 activate HarmoniaParser
 
 create FindCommandParser
@@ -27,15 +28,22 @@ activate FindCommandParser
 FindCommandParser --> HarmoniaParser
 deactivate FindCommandParser
 
-HarmoniaParser -> FindCommandParser : parse("t/CS2103T")
+HarmoniaParser -> FindCommandParser : parse("find t/CS2103T t/CS2105 p/low")
 activate FindCommandParser
 
 create TagContainsKeywordPredicate
 FindCommandParser -> TagContainsKeywordPredicate
 activate TagContainsKeywordPredicate
 
-TagContainsKeywordPredicate --> FindCommandParser : p
+TagContainsKeywordPredicate --> FindCommandParser : tagPredicate
 deactivate TagContainsKeywordPredicate
+
+create PriorityMatchedPredicate
+FindCommandParser -> PriorityMatchedPredicate
+activate PriorityMatchedPredicate
+
+PriorityMatchedPredicate --> FindCommandParser : priorityPredicate
+deactivate PriorityMatchedPredicate
 
 create FindCommand
 FindCommandParser -> FindCommand
@@ -56,7 +64,9 @@ deactivate HarmoniaParser
 LogicManager -> FindCommand : execute(model)
 activate FindCommand
 
-FindCommand -> Model : updateFilteredTaskList(p)
+FindCommand -> FindCommand : interceptPredicates(tagPredicate, priorityPredicate)
+
+FindCommand -> Model : updateFilteredTaskList(interceptedPredicate)
 activate Model
 
 Model --> FindCommand

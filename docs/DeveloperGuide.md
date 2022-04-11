@@ -295,101 +295,117 @@ It is designed to preserve the Command Design Pattern. Through the implementatio
         * Easier to extend if both mark and unmark are required to change synchronously
     * Cons:
         * No exact knowledge whether the execution of command mark task as complete or incomplete
+        
 
-
-### \[Proposed\] Search by date
-
-#### What is the feature about
-Supports the searching of tasks by a date range. If the deadline of a task falls within the specified time range, it is displayed in the result.
-
-#### How the feature is implemented
-This feature will be incorporated with the current `FindCommand`. By adding additional checks for flags (`/start` and `/end`) in the FindCommandParser, the tasks will be filtered accordingly. A new `TimeRangePredicate` class will be added to abstract out the details on time range. Hence, the predicate will be applied to the filtered task list that is displayed to the user.
-
-Additionally, there will be checks for duplicate start and end date, such that the user can specify one start date and one end date at most.
-
-#### Why it is implemented that way
-Searching based on a time range is a similar operation to `find`, hence it is intuitive to incorporate them. The presence of start/end date is optional, to provide more flexibility. However, we do not allow multiple start/end date, to avoid confusion.
-
-#### Design considerations:
-
-**Aspect: Command to be used for searching by date:**
-
-* **Alternative 1 (current choice):** Incorporate with the original `find` (current choice).
-    * Pros:
-        * Does not increase the size of the command set.
-        * More intuitive, as the user does not have to remember another similar command.
-    * Cons:
-        * The parsing of an `AddCommand` becomes slightly more complicated.
-* **Alternative 2:** Create a new command `search`
-  itself.
-    * Pros:
-        * Less modification on current implementation.
-    * Cons:
-        * Increase the size of command sets.
-        * Could cause confusion with another similar command `find`, which compromises user experience.
-
-### Search by tags
+### Search by various attributes
 
 #### What is the feature about
 
-This feature allows the user to search for tasks with at least one of its tag matching the specified keyword.
+This feature allows the user to search for tasks that meet the different criteria as specified in the input.
+
+Currently, Harmonia allows user to search for tasks by
+
+1. The deadline of a task, by specifying a range of date that deadline should fall into
+
+2. The name of a task, by specifying keywords that should be contained by the name
+
+3. The description of a task, by specifying keywords that should be contained by the description
+
+4. The tag of a task
+
+5. The priority of a task
+
+6. The completion status of a task
+
+Additionally, the fields above could be combined in a single query using `find`, to simplify the process of querying by multiple criteria.
 
 #### How the feature is implemented
+
+Overall, the workflow of finding a task can be generalized into 3 steps:
+
+1. The `FindCommand` class accepts the parsed inputs as various predicates from the `FindCommandParser`.
+
+   * The `FindCommandParser` makes use of various utility methods in `ParserUtil`, to parse the user input into several tokens that correspond to a type of input, e.g. `Keyword`, `CompletionStatus`, etc.
+
+   * After parsing the user input into several tokens, the predicates are constructed to represent the criteria of filtering.
+
+   * User inputs are seperated into several subgroups, since some fields allow multiple inputs. There are 6 subgroups of fields: tag(s), description keyword(s), name keyword(s), priority(s), date range, completion status.
+
+   * Within each subgroup, if a task has a match, e.g. the name of the task contains only one of the name keywords specified, it is considered as a match, and the name predicate evaluates to true for this task.
+
+   * Since all the fields in `find` are optional, all the predicates are able to handle null input. In the case of null input, the predicates always evaluate to true.
+   
+2. Then, the `FindCommand` chains the predicates up using AND, i.e. all the predicates must be evaluated to true, for a task to be displayed in the result.
+
+3. Finally, the chained predicate is used to filter the tasks, and the tasks with the criteria met are displayed on the screen.
 
 The search by tags feature uses the `find` command and prefix `t/` before the keyword.
 
-Given below is an example usage scenario of how the find mechanism behaves at each step to search for tasks by tags:
+Given below is an example usage scenario of how the find mechanism behaves at each step to search for tasks:
 
-Step 1. User inputs `find t/CS2103T` to find tasks that have a 'CS2103T' tag.
+Step 1. User inputs `find t/CS2103T t/CS2105 p/low` to find tasks that have a 'CS2103T' or 'CS2105' tag, and with a low priority.
 
 Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
 
-Step 3. The first word of the user input is `find`, which matches the command for `FindCommand`. This initialises `FindCommandParser`.
+Step 3. The first word of the user input is `find`, which matches the command for `FindCommand`. This initializes `FindCommandParser`.
 
-Step 4. `FindCommandParser#parse()` is called and keywords with prefix `t/` are extracted out as a list of keywords to search for. This list of keywords are used to initialise a `TagContainsKeywordPredicate`.
+Step 4. `FindCommandParser#parse()![img.png](img.png)` is called. 
 
-Step 5. A `FindCommand` is initialised using the `TagContainsKeywordPredicate` and returned to `LogicManager` for execution.
+Step 5. For the fields that could only appear once, `FindCommandParser` checks whether they are present. If they are present, the value is extracted out and stored. Otherwise, null is assigned to them.
 
-Step 6. After `FindCommand#execute()` is called, `model#updateFilteredTaskList()` is invoked to filter the task list using the given `TagContainsKeywordPredicate`. The command result is returned and displayed to the user.
+Step 6. For the fields that accept multiple occurrences, they are stored as a set. In this case, Tags with prefix `t/` are extracted out as a list of keywords, and the priority `low` with prefix `p/` is also extracted out and stored as a list, as multiple priorities are allowed in general.
 
-The following is the sequence diagram summarising the above steps:
+Step 7. For each subgroup, the corresponding predicate is initialized, and used to initialize a `FindCommand`.
 
-![SearchByTagSequenceDiagram](images/SearchByTagSequenceDiagram.png)
+Step 8. `FindCommand` then proceeds to chain the predicates up using AND.
+
+Step 9. After `FindCommand#execute()` is called using the predicate created at step 8, `model#updateFilteredTaskList()` is invoked to filter the task list using the given predicate. The command result is returned and displayed to the user.
+
+The following is the sequence diagram summarizing the above steps:
+
+![SearchSequenceDiagram](images/SearchSequenceDiagram.png)
+
+Note that the creation of some predicates are omitted to simplify the diagram. Only the creation of `TagContainsKeywordPredicate` and `PriorityMatchedPredicate` are shown.
 
 #### Design considerations:
 
-**Aspect: How tags are matched:**
+**Aspect: Command to be used for searching various fields:**
 
-* **Alternative 1 (current choice):** Ignore case and require full match with at least one of the task's tags.
+* **Alternative 1 (current choice):** Use single `find` that supports multiple fields.
+
     * Pros:
-      * Easy to implement.
-      * Consistent with how keywords are matched with task names in the search by keywords feature.
-      * Gives the most specific list of tasks if the user is able to remember the exact tag that one is searching for.
+        * Does not increase the size of the command set.
+        * More intuitive, as the user does not have to remember other similar commands.
+        * Allows combination of search fields, to make it more powerful.
     * Cons:
-      * May not find any match if users only enter a part of the tag (e.g. `cs2103` will not match with `cs2103t`).
+        * The parsing of an `AddCommand` becomes more complicated.
 
-* **Alternative 2:** Ignore case and allow partial match with at least one of the task's tags.
+* **Alternative 2:** Create a new command for each field itself.
+
     * Pros:
-      * Gives a list of possible tasks even if the user is unable to remember the exact full tag.
+        * Simpler implementation, less complex logic.
     * Cons:
-      * More difficult to implement.
-      * May give additional tasks that the user is not searching for (e.g. user searches for tasks with tag `data` but result list shows all tasks with tags `data` and `database`).
+        * Increase the size of command sets.
+        * Could cause confusion with other similar commands, which compromises user experience.
+        * Does not allow searching by multiple fields.
 
-**Aspect: User does not specify tag after `t/` prefix:**
+**Aspect: How keywords are matched:**
 
-* **Alternative 1 (current choice):** Ignores the empty tag. `find t/` gives an empty result list. `find t/cs2103t t/` gives a list of tasks with tag `cs2103t`.
+* **Alternative 1 (current choice):** Ignore case and require a full word match, with words separated by punctuations or spaces.
+
     * Pros:
-      * If user searches for multiple tags, the valid tags will still be matched.
+      * Allows more accurate search.
+      * A word that is preceded by punctuations, or with trailing punctuations, e.g. `emails,`, will not be affected by the punctuation in search.
     * Cons:
-      * No error message to inform user on invalid tag.
+      * May not find any match if users only enter a part of the word (e.g. `cs2103` will not match with `cs2103t`).
 
-* **Alternative 2:** Ignores other valid tags and outputs an error message to inform user on invalid command format.
+* **Alternative 2:** Ignore case and allow partial match.
     * Pros:
-      * Ensures user does not unintentionally leave a tag value empty.
+      * Gives a larger result list, when the user enters a very short keyword like `a`.
     * Cons:
-      * Other valid tags are not matched until user corrects command.
-
-
+      * The result list might not be specific enough, and too large.
+      * May give additional tasks that the user is not searching for (e.g. user searches for tasks with name `ma` but result list shows unexpected tasks like `Read e**ma**ils` and `Read infor**ma**tion`).
+      
 ### List Tags
 
 #### What is the feature about
@@ -878,7 +894,6 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 * **Task**: A piece of work that the user needs to complete
 * **Tag**: A label or category attached to a task to give additional information to it
 * **Keyword**: A word that the user queries to search for a task
-
 
 --------------------------------------------------------------------------------------------------------------------
 
