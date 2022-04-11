@@ -69,31 +69,31 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T09-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Task` object residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `HarmoniaParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -110,7 +110,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `HarmoniaParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `HarmoniaParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -135,13 +135,13 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both task list data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `TaskListStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -365,7 +365,7 @@ In this case, the `enum` type also increases the extensibility of the feature. I
       * More tedious to extend. To implement this, we might have to use conditionals to check if the `String` or `int` input corresponds with the accepted values in our `Priority` design. This can pose a problem when we try to extend the number of properties a `Priority` field can take. In this case, we might have to increase the number of conditionals, which could reduce readability and make the code more prone to errors.
       * Possibly increases memory use. If we use `String` or `int` types, we might have to instantiate new `Priority` classes every time we create a new `Task` object.
 
-### Mark/unmark feature
+### Mark/unmark
 
 #### What is the feature about
 Provides a way to mark `Task` objects as either completed or uncompleted.
@@ -396,7 +396,63 @@ It is designed to preserve the Command Design Pattern. Through the implementatio
         * Less redundant code
         * Easier to extend if both mark and unmark are required to change synchronously
     * Cons:
-        * No exact knowledge whether the execution of command mark task as complete or incomplete
+        * The final state of task's `CompletionStatus` after executing toggle command cannot be precisely known. (i.e. We only know the final outcome of the task's `CompletionStatus` during runtime. Whereas, having with two different commands, `MarkCommand` and `UnmarkCommand` we know for certain the final state of the `CompletionStatus` can be predicted.)  
+
+### Sorting
+
+#### What is the feature about
+Sorts the tasks presented by specified attribute and order.
+
+#### How the feature is implemented
+The sort feature uses the `sort` command, prefix `by/` before the specified `SORT_KEY` and prefix `in/` before the specified `SORT_ORDER`.
+
+Given below is an example usage scenario of how the sort mechanism behaves at each step to sort the task:
+
+Step 1. User inputs `sort by/deadline in/asc` to sort the task list by the `Deadline` in the ascending order.
+    
+Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
+
+Step 3. The first word of the user input is `sort`, which matches the command for `SortCommand`. This initialises `SortCommandParser`.
+
+Step 4. `SortCommandParser#parse()` is called. `SORT_KEY` with prefix `by/` and `SORT_ORDER` with prefix `in/` are extracted out as a `SortKey` and `SortOrder` objects.
+
+Step 5. A `SortCommand` is initialised using the `SortKey` and `SortOrder`. The `SortCommand` constructor creates a `Comparator` used for sorting the list. `SortCommand` is returned to `LogicManager` for execution.
+
+Step 6. After `SortCommand#execute()` is called, `model#updateSortedTaskList(Comparator)` is invoked to sort the task list using the created `Comparator`. The command result is returned and displayed to the user.
+
+#### Why it is implemented that way
+The underlying `UniqueTaskList` uses an `ObservableList` and therefore it allows the application listen to changes and render according specified requirements. One such abstraction used in the initial implementation is the `FilteredList`. With the `FilteredList` the application grants the ability to filter the list using a `Predicate`. Sorting was designed to be an extension of this concept using `SortedList` abstraction where the application can sort the list by a given `Comparator` and render its output instantaneously.
+
+#### Design considerations:
+**Aspect: How the `Comparator` is created:**
+* **Alternative 1 (current choice):** Use Factory design pattern.
+    * Pros:
+        * Easier to extend
+        * Abstracts out the complexity of creating a `Comparator`
+        * Promotes reuse of code as there is no need to repeat necessary conditions needed to create a `Comparator`
+        * Easier to conduct Unit-testing as we only need to test the Factory to check whether the `Comparator` returned meets the correct type and the conditions.
+        * Cons:
+            * Makes the code verbose
+* **Alternative 2:** Create `Comparator` at the point of parsing.
+    * Pros:
+        * Less code needed to implement
+    * Cons:
+        * Leads to poor code quality as `Comparator` creation becomes more complex. (For example: Poor quality may arise due to violations of KISS principle) 
+
+**Aspect: How the sorted list is stored/rendered:**
+* **Alternative 1 (current choice):** Use `javafx.collections.transformation.SortedList`.
+    * Pros:
+        * Abstracts out the details of rendering
+        * Abstracts out the details behind sorting (i.e. only need to pass in the `Comparator`)
+    * Cons:
+        * Difficult to preserve the ordering if tasks are added or edited. Since `TaskList` is implemented using `ObservableList`, any changes to it would cause them to be propagated to the `SortedList` (which wraps the `ObservableList`). Therefore, adding/editing a `Task` would cause the contents to be automatically sorted. Hence, this might lead to tasks being reordered.
+    
+* **Alternative 2:** Sorts the tasks using a stream and repopulate the `TaskList`.
+    * Pros:
+        * Straightforward implementation
+    * Cons:
+        * Mutability may introduce latent bugs (For examples: Storage may be updated with `incorrect` tasks that may have been introduced when mutating the `TaskList` since saving to storage is dependent on `TaskList`)
+        * Redundant computation to delete and reinsert the same tasks after each operation
         
 ### Search by various attributes
 
@@ -660,35 +716,35 @@ Harmonia is the easiest way for students to manage the complexity associated wit
 
 Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Medium-low (nice to have but difficult) - `* *`, Low (unlikely to have) - `*`
 
-| Priority  | As a …​        | I want to …​                                                | So that I can…​                                                                |
-|-----------|----------------|-------------------------------------------------------------|--------------------------------------------------------------------------------|
-| `* * * *` | user           | add a new task                                              |                                                                                |
-| `* * * *` | user           | delete a task                                               | remove tasks that I no longer need                                             |
-| `* * * *` | user           | mark a task as complete                                     |                                                                                |
-| `* * * *` | user           | mark a task as incomplete                                   |                                                                                |
-| `* * * *` | user           | see all my tasks when I start up the application            | view my tasks more conveniently without having to perform any extra operations |
-| `* * * *` | user           | tag a task                                                  | categorise my tasks according to my preferred system                           |
-| `* * * *` | user           | modify a task                                               | amend a mistake or update a task                                               |
-| `* * * *` | user           | search by tags                                              | find tasks related to a category                                               |
-| `* * * *` | user           | search by keywords                                          | find a specific task more easily                                               |
-| `* * * *` | new user       | have straightforward commands I can use                     | use the application more intuitively                                           |
-| `* * * *` | expert user    | modify the tasks in the data file directly                  | modify the tasks in a way that is not supported by the application             |
-| `* * *`   | user           | tag a task with multiple tags                               | categorise tasks under multiple categories at a time                           |
-| `* * *`   | user           | search for tasks that fall within a specific time range     | find the tasks that lie between a specific period                              |
-| `* * *`   | user           | view upcoming deadlines                                     | prioritise what tasks I need to do first                                       |
-| `* * *`   | user           | view tags I have already added when creating a new task     | know how to tag new tasks and avoid creating similar tags                      |
-| `* * *`   | user           | view all of my upcoming–deadlines and longer-term deadlines | have a more holistic view of all events in the short-term and long-term future |
-| `* * *`   | user           | access the user guide through the interface                 | access the documentation without having to search online for it                |
-| `* * *`   | user           | sort my tasks by certain filters                            | organise my view the way I prefer                                              |
-| `* * *`   | user           | label my tasks with priorities                              | keep track of which tasks are more important                                   |
-| `* * *`   | new user       | view suggestions if I type in the wrong command             | recover from mistakes and use the correct command more easily                  |
-| `* * *`   | potential user | see the app populated with sample data                      | easily see how the application would look like when in use                     |
-| `* *`     | user           | set repeated occurrence of a task                           | avoid having to add a task multiple times                                      |
-| `* *`     | new user       | revert changes made                                         | undo changes that were made by mistake                                         |
-| `* *`     | expert user    | use shortcuts                                               | perform operations more efficiently                                            |
-| `*`       | user           | bulk mark different tasks as complete                       | marking everything I finished a day with just one command                      |
-| `*`       | expert user    | delete multiple tasks at once                               | do not have to delete tasks one by one                                         |
-
+|</br> Priority &nbsp;&nbsp;&nbsp;| As a …​        | I want to …​                                                | So that I can…​                                                                |
+|---------------------------------|-------------------|----------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `* * * *`                       | user              | add a new task                                                 |                                                                                |
+| `* * * *`                       | user              | delete a task                                                  | remove tasks that I no longer need                                             |
+| `* * * *`                       | user              | mark a task as complete                                        |                                                                                |
+| `* * * *`                       | user              | mark a task as incomplete                                      |                                                                                |
+| `* * * *`                       | user              | see all my tasks when I start up the application               | view my tasks more conveniently without having to perform any extra operations |
+| `* * * *`                       | user              | tag a task                                                     | categorise my tasks according to my preferred system                           |
+| `* * * *`                       | user              | modify a task                                                  | amend a mistake or update a task                                               |
+| `* * * *`                       | user              | search by tags                                                 | find tasks related to a category                                               |
+| `* * * *`                       | user              | search by keywords                                             | find a specific task more easily                                               |
+| `* * * *`                       | new user          | have straightforward commands I can use                        | use the application more intuitively                                           |
+| `* * * *`                       | expert user       | modify the tasks in the data file directly                     | modify the tasks in a way that is not supported by the application             |
+| `* * *`                         | user              | tag a task with multiple tags                                  | categorise tasks under multiple categories at a time                           |
+| `* * *`                         | user              | search for tasks that fall within a specific time range        | find the tasks that lie between a specific period                              |
+| `* * *`                         | user              | view upcoming deadlines                                        | prioritise what tasks I need to do first                                       |
+| `* * *`                         | user              | view tags I have already added when creating a new task        | know how to tag new tasks and avoid creating similar tags                      |
+| `* * *`                         | user              | view all of my upcoming–deadlines and longer-term deadlines    | have a more holistic view of all events in the short-term and long-term future |
+| `* * *`                         | user              | access the user guide through the interface                    | access the documentation without having to search online for it                |
+| `* * *`                         | user              | sort my tasks by certain filters                               | organise my view the way I prefer                                              |
+| `* * *`                         | user              | label my tasks with priorities                                 | keep track of which tasks are more important                                   |
+| `* * *`                         | new user          | view suggestions if I type in the wrong command                | recover from mistakes and use the correct command more easily                  |
+| `* * *`                         | potential user    | see the app populated with sample data                         | easily see how the application would look like when in use                     |
+| `* *`                           | user              | set repeated occurrence of a task                              | avoid having to add a task multiple times                                      |
+| `* *`                           | new user          | revert changes made                                            | undo changes that were made by mistake                                         |
+| `* *`                           | expert user       | use shortcuts                                                  | perform operations more efficiently                                            |
+| `*`                             | user              | bulk mark different tasks as complete                          | marking everything I finished a day with just one command                      |
+| `*`                             | expert user       | delete multiple tasks at once                                  | do not have to delete tasks one by one                                         |
+   
 ### Use cases
 
 (For all use cases below, the **System** is `Harmonia` and the **Actor** is the `user`, unless specified otherwise)
@@ -1006,17 +1062,15 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
 
 1. Initial launch
-
     1. Download harmonia.jar and move it into an empty folder.
 
     2. Run the application.
 
         * For **Windows** user：Double-click harmonia.jar.
         * For **Mac/Linux** user: Open the terminal, navigate to the directory where harmonia.jar is located, then run `java -jar harmonia.jar` in the terminal.
-        
+
         * Expected: Shows the GUI with a set of sample tasks. The window size may not be optimum.
 
 2. Saving window preferences
@@ -1025,7 +1079,138 @@ testers are expected to do more *exploratory* testing.
 
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-    
+
+### Adding a task into Harmonia
+
+1. Test case: `add n/Review PRs d/To review PRs assigned to me dl/2022-04-10 p/high t/CS2103T t/review`<br>
+   Expected: The new task is added to the task list. Details of the newly added task is also shown in the status message.
+
+2. Test case: `add n/Review PRs d/To review PRs assigned to me dl/2022-04-10 p/high t/CS2103T t/review` (adding a task that already exists in Harmonia) <br>
+   Expected: No task is added. Error details shown in the status message.
+
+3. Test case: `add n/CS2103T PE dl/2022-04-16 p/high t/CS2103T` (with one of the compulsory fields: `n/`, `d/`, `dl/`, `p/` removed) <br>
+   Expected: No task is added. Error details shown in the status message.
+
+4. Other incorrect add commands to try:
+    1. `add`
+    2. `add n/CS2103T d/This coming sat PE dl/2022-04-16 p/low t/#CS2103T` (`t/` only takes alphanumeric characters)
+    3. `add n/CS2103T d/This coming sat PE dl/2022-04-16 p/none t/CS2103T` (invalid priority, which only accepts `low`, `medium` or `high`)
+    4. `add n/CS2103T d/This coming sat PE dl/2022 p/high t/CS2103T` (invalid date format for the `dl` field)
+       Expected: No task is added. Error details are shown in the status message.
+
+### Editing an existing task in Harmonia
+1. Editing a task while all tasks are being shown
+   1. Prerequisites: List all tasks using the `list` command. Multiple tasks are shown in the list.
+
+   2. Test case: `edit 2 d/Practice with group dl/2022-04-01`<br>
+      Expected: The description of the second task in the task list is edited. Details of the newly edited task is also shown in the status message.
+
+   3. Test case: `edit 2 d/Practi/ce` (including `/` in `n/` or `d/`) <br>
+      Expected: No task is edited. Error details shown in the status message.
+
+   4. Test case: `edit 2 dl/2022-13-13` (invalid date) <br>
+      Expected: No task is edited. Error details shown in the status message.
+
+   5. Test case: `edit 0 n/Testing` (invalid index)<br>
+      Expected: No task is edited. Error details shown in the status message.
+
+   6. Other incorrect add commands to try:
+       1. `edit`
+       2. `edit x t/tag` (where x is larger than the list size)<br>
+       3. `edit 2 t/#CS2103T` (`t/` only takes alphanumeric characters)
+       4. `edit 2 p/none` (invalid priority, which only accepts `low`, `medium` or `high`)
+          Expected: No task is edited. Error details are shown in the status message.
+
+1. Editing a task while filtered tasks are being shown
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks are shown in the list.
+
+    2. Test case: `edit 2 d/Practice with group`<br>
+       Expected: The description of the second task in the filtered task list is edited. Details of the newly edited task is also shown in the status message.
+
+    3. Test case: `edit 2 d/Practi/ce` (including `/` in `n/` or `d/`) <br>
+       Expected: No task is edited. Error details shown in the status message.
+
+    4. Test case: `edit 2 dl/2022-13-13` (invalid date) <br>
+       Expected: No task is edited. Error details shown in the status message.
+
+    5. Test case: `edit 0 n/Testing` (invalid index)<br>
+       Expected: No task is edited. Error details shown in the status message.
+
+    6. Other incorrect add commands to try:
+        1. `edit`
+        2. `edit x t/tag` (where x is larger than the filtered list size)<br>
+        3. `edit 2 t/#CS2103T` (`t/` only takes alphanumeric characters)
+        4. `edit 2 p/none` (invalid priority, which only accepts `low`, `medium` or `high`)
+           Expected: No task is edited. Error details are shown in the status message.
+
+
+### Listing all tasks in Harmonia
+
+1. Test case: `list`
+   Expected: All tasks in Harmonia are listed. Multiple tasks are shown in the list. Success message displayed.
+
+### Listing all tags in Harmonia
+
+1. Test case: `list t/`
+   Expected: All tags are listed in the results display.
+2. Test case: `list t/test`
+   Expected: No tags are listed. Error details are shown in the status message.
+
+### Marking/Unmarking a task
+
+1. Marking a task while all tasks are being shown
+
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks are shown in the list.
+
+    2. Test case: `mark 1`<br>
+       Expected: Completion status of the first task in the list is changed to `Completed`. Details of the completed task are shown in the status message.
+
+    3. Test case: `mark 0`<br>
+       Expected: No task is marked. Error details are shown in the status message.
+
+    4. Other incorrect mark commands to try: `mark`, `mark x` (where x is larger than the list size)<br>
+       Expected: No task is marked. Error details are shown in the status message.
+
+2. Marking a task while filtered tasks are shown
+
+    1. Prerequisites: Filter the incomplete tasks using the `find c/false` command. Multiple tasks are shown in the list.
+
+    2. Test case: `mark 1`<br>
+       Expected: Completion status of the first task in the filtered list is changed to `Completed`. Details of the marked task are shown in the status message.
+
+    3. Test case: `mark 0`<br>
+       Expected: No task is marked. Error details are shown in the status message.
+
+    4. Other incorrect mark commands to try: `mark`, `mark x` (where x is larger than the filtered list size)<br>
+       Expected: No task is marked. Error details are shown in the status message.
+
+3. Mark multiple tasks while all tasks are being shown
+
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks are shown in the list.
+
+    2. Test case: `mark 2 1 3`<br>
+       Expected: Completion status of the first, second and third tasks in the list are changed to `Completed`. Details of the marked tasks are shown in the status message.
+
+    3. Test case: `mark 0 2 3`<br>
+       Expected: No task is marked. Error details are shown in the status message.
+
+    4. Other incorrect mark commands to try: `mark`, `mark x y z` (where x, y, and/or z is larger than the list size)<br>
+       Expected: No task is marked. Error details are shown in the status message.
+
+4. Marking multiple tasks while filtered tasks are shown
+
+    1. Prerequisites: Filter the incomplete tasks using the `find c/false` command. Multiple tasks are shown in the list.
+
+    2. Test case: `mark 1 2`<br>
+       Expected: Completion status of the first and second tasks in the list are changed to `Completed`. Details of the marked tasks are shown in the status message.
+
+    3. Test case: `mark 0 1`<br>
+       Expected: No task is marked. Error details are shown in the status message.
+
+    4. Other incorrect mark commands to try: `mark`, `mark x y z`, `...` (where x, y, and/or z is larger than the filtered list size)<br>
+       Expected: No task is marked. Error details are shown in the status message.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The `unmark` command is similar to the `mark` command, you can refer to the steps here to test for the `unmarking` of tasks by just changing `mark` to `unmark`. When filtering the tasks, remember to use `find c/true` instead to see a list of all the completed tasks that you can unmark.</div>
 
 ### Deleting a task
 
@@ -1052,11 +1237,11 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `delete 0`<br>
       Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the filtered list size)<br>
       Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
 
 3. Delete multiple tasks while all tasks are being shown
-    
+
     1. Prerequisites: List all tasks using the `list` command. Multiple tasks are shown in the list.
 
     2. Test case: `delete 2 1 3`<br>
@@ -1078,22 +1263,28 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `delete 0 1`<br>
        Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
 
-    4. Other incorrect delete commands to try: `delete`, `delete x y z`, `...` (where x, y, and/or z is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `delete`, `delete x y z`, `...` (where x, y, and/or z is larger than the filtered list size)<br>
        Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
+
+### Help
+
+1. Opening the help window for Harmonia's user guide.
+   1. Test case: `help`<br>
+      Expected: The help window pops up with the URL to Harmonia's User Guide. Status message explains that command was a success.
 
 ### Saving data
 
 1. Dealing with missing data files
 
     * Expected: Default tasks are loaded instead. Upon an operation that attempts to interact with the tasks, e.g. add/delete/edit/mark/unmark tasks, the data will then be saved as data/harmonia.json.
-   
+
 2. Dealing with corrupted data files
-    
-    * Expected: An empty list of tasks is loaded instead. 
+
+    * Expected: An empty list of tasks is loaded instead.
        1. Upon an operation that attempts to interact with the tasks, e.g. add/delete/edit/mark/unmark tasks, the corrupted data will then be overwritten.
        2. If Harmonia is closed before any attempt to interact the tasks, the data file will not be overwritten.
 
-3. Dealing with data files with incorrect format
+4. Dealing with data files with incorrect format
 
     * Example: The deadline for a task is inputted as `2022-09-32`.
     * Expected: An empty list of tasks is loaded instead.

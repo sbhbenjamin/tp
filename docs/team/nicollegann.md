@@ -22,8 +22,8 @@ Given below are my contributions to the project.
 **Enhancement to the `help` feature:** [#188](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/188)
 - What it does: Gives users the option to open the user guide using their default browser
 - Justification: This enhancement provides convenience for users as they can choose to view the user guide by clicking the button instead of copying and pasting the url into another browser window
-- Credits: Code to open url using default browser adapted from [here](https://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java) 
-    
+- Credits: Code to open url using default browser adapted from [here](https://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java)
+
 **Enhancement to the `list` feature:** [#196](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/196)
 - What it does: Allows user to view a list of tags currently used in the task list
 - Justification: This enhancement complements other features whereby users can view the currently used tags in the task list before executing the other commands such as `add`, `edit` and `find`
@@ -39,9 +39,9 @@ Given below are my contributions to the project.
 **Code contributed:** [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=nicollegann&breakdown=true)
 
 **Project management:**
-- Managed release [`v1.2`](https://github.com/AY2122S2-CS2103T-T09-1/tp/releases/tag/v1.2) 
+- Managed release [`v1.2`](https://github.com/AY2122S2-CS2103T-T09-1/tp/releases/tag/v1.2)
 - Helped to wrap up and close milestone `v1.3`
-  
+
 **Documentation:**
 - User Guide [#186](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/186), [#200](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/200), [#276](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/276)
   - Added documentation for sections Getting Started and Command format
@@ -55,7 +55,7 @@ Given below are my contributions to the project.
   - Added implementation details for list tags [#320](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/320)
   - Updated proposed implementation of undo/redo feature
   - Added documentation for use cases [#61](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/61)
-  
+
 **Team:**
 - Updated the README [#59](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/59)
 - Identified and fixed bugs: [#204](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/204), [#322](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/322), [#326](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/326)

@@ -37,4 +37,17 @@ public class DeadlineTest {
         // valid deadlines
         assertAllTrue(Deadline::isValidDeadline, getValidDeadlines());
     }
+
+    @Test
+    public void equals() {
+
+        // null case
+        assertAllFalse(Deadline::isValidDeadline, NULL_DATE);
+
+        // invalid deadlines
+        assertAllFalse(Deadline::isValidDeadline, getInvalidDeadlines());
+
+        // valid deadlines
+        assertAllTrue(Deadline::isValidDeadline, getValidDeadlines());
+    }
 }

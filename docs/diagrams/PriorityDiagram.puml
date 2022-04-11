@@ -1,5 +1,6 @@
 @startuml
-enum Priority {
+skinparam classAttributeIconSize 0
+enum Priority <<enumeration>> {
     LOW
     MEDIUM
     HIGH
@@ -7,4 +8,5 @@ enum Priority {
     + {method} isValidPriority : boolean
     + {method} valueOfLabel : Priority
 }
+hide Priority circle
 @enduml

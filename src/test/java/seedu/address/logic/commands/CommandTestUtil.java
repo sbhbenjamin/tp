@@ -155,9 +155,7 @@ public class CommandTestUtil {
      * in the {@code model}'s task list.
      */
     public static void showTaskWithKeywords(Model model, String... keywords) {
-
         Set<Keyword> set = new HashSet<>();
-
         for (String keyword : keywords) {
             set.add(new Keyword(keyword));
         }
