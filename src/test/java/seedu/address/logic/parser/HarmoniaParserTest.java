@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.keyword.Keyword;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -82,10 +83,12 @@ public class HarmoniaParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> nameKeywords = Arrays.asList("foo", "bar", "baz");
-        List<String> tagKeywords = Arrays.asList("tag1", "tag2");
-        List<String> tagKeywordsWithPrefix = tagKeywords.stream().map(k -> PREFIX_TAG + k).collect(Collectors.toList());
-        List<String> nameKeywordsWithPrefix = nameKeywords.stream().map(k -> PREFIX_NAME + k)
+        List<Keyword> nameKeywords = Arrays.asList(new Keyword("foo"), new Keyword("bar"),
+                new Keyword("baz"));
+        List<Keyword> tagKeywords = Arrays.asList(new Keyword("tag1"), new Keyword("tag2"));
+        List<String> tagKeywordsWithPrefix = tagKeywords.stream().map(k -> PREFIX_TAG + k.getValue()).collect(
+                Collectors.toList());
+        List<String> nameKeywordsWithPrefix = nameKeywords.stream().map(k -> PREFIX_NAME + k.getValue())
                 .collect(Collectors.toList());
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " "

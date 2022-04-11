@@ -3,7 +3,7 @@ package seedu.address.model.tag;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.core.keyword.Keyword;
 import seedu.address.model.task.Task;
 
 /**
@@ -11,14 +11,14 @@ import seedu.address.model.task.Task;
  */
 public class TagContainsKeywordsPredicate implements Predicate<Task> {
 
-    private final Set<String> keywords;
+    private final Set<Keyword> keywords;
 
     /**
      * Constructor for TagContainsKeywordsPredicate.
      *
      * @param keywords The set of keywords to search for.
      */
-    public TagContainsKeywordsPredicate(Set<String> keywords) {
+    public TagContainsKeywordsPredicate(Set<Keyword> keywords) {
         this.keywords = keywords;
     }
 
@@ -30,7 +30,7 @@ public class TagContainsKeywordsPredicate implements Predicate<Task> {
         Set<Tag> tags = task.getTags();
         for (Tag tag : tags) {
             boolean containsKeyword = keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword));
+                .anyMatch(keyword -> Keyword.containsKeywordIgnorePunctuationAndCase(tag.tagName, keyword));
             if (containsKeyword) {
                 return true;
             }
