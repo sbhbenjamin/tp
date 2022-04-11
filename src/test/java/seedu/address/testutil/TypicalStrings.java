@@ -204,4 +204,42 @@ public class TypicalStrings {
             INVALID_SORT_KEY
         };
     }
+
+
+    /**
+     * Retrieves all valid labels from this class.
+     *
+     * @return a list of valid keyword strings
+     */
+    public static String[] getValidStringsForKeyword() {
+        return new String[] {
+            DIGITS,
+            LONG_STRING_50_CHAR,
+            LONG_STRING_51_CHAR,
+            LONG_STRING_63_CHAR,
+            ONE_LETTER_1,
+            ONE_LETTER_2,
+            START_WITH_DIGIT_STRING
+        };
+    }
+
+    /**
+     * Retrieves all valid labels from this class.
+     *
+     * @return a list of invalid keyword strings
+     */
+    public static String[] getInvalidStringsForKeyword() {
+        return new String[] {
+            EMPTY_STRING,
+            WHITESPACES_ONLY_STRING,
+            EMOJI_STRING,
+            SYMBOLS_STRING,
+            PUNCTUATION_STRING,
+            NON_ENGLISH_STRING,
+            LONG_STRING_64_CHAR,
+            LONG_STRING_256_CHAR,
+            CONTAIN_SLASH_STRING,
+            START_WITH_PUNCTUATION_STRING
+        };
+    }
 }
