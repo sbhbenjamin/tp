@@ -142,8 +142,7 @@
 }
 
 .stack-pane {
-
-     -fx-background-color: white;
+    -fx-background-color: white;
     -fx-text-fill: black;
 }
 
@@ -162,16 +161,9 @@
 }
 
 .result-display {
-    /*-fx-text-box-border: transparent;*/
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: black;
-}
-
-.result-display:focused {
-    /*-fx-text-box-border: transparent;*/
-    /*-fx-focus-color: transparent;*/
-    /*-fx-faint-focus-color: transparent;*/
 }
 
 .result-display .label {

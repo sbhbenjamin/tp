@@ -45,7 +45,6 @@ public class DeleteCommandTest {
         ModelManager expectedModel = new ModelManager(model.getTaskList(), new UserPrefs());
         expectedModel.deleteTask(taskToDelete);
 
-        System.out.println(expectedMessage);
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
