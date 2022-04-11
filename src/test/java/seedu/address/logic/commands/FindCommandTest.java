@@ -73,7 +73,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywordsAndVeryLargeDateRange_noTaskFound() {
-        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 5);
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 6);
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(" ");
         TagContainsKeywordsPredicate tagPredicate = prepareTagPredicate(" ");
         DeadlineInRangePredicate deadlinePredicate =
