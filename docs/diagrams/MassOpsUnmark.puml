@@ -7,10 +7,10 @@
  participant ":UnmarkCommandParser" as UnmarkCommandParser LOGIC_COLOR
  participant "t:UnmarkCommand" as UnmarkCommand LOGIC_COLOR
  participant "result:CommandResult" as CommandResult LOGIC_COLOR
+ participant "p:MassOpsParser" as MassOpsParser LOGIC_COLOR
  end box
 
  box Model MODEL_COLOR_T1
- participant "p:MassOpsParser" as MassOpsParser MODEL_COLOR
  participant ":Model" as Model MODEL_COLOR
  end box
 
@@ -34,7 +34,7 @@
  UnmarkCommandParser -> MassOpsParser : massOpsProcessor(" 1 2 3")
  activate MassOpsParser
 
- MassOpsParser --> UnmarkCommandParser : l
+ MassOpsParser --> UnmarkCommandParser
  deactivate MassOpsParser
 
  create UnmarkCommand
@@ -56,7 +56,7 @@
  LogicManager -> UnmarkCommand : execute(model)
  activate UnmarkCommand
 
- UnmarkCommand -> Model : getFilteredTaskList(l)
+ UnmarkCommand -> Model : getSortedTaskList()
  activate Model
 
  Model --> UnmarkCommand
