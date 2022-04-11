@@ -169,7 +169,6 @@ Step 1. User inputs `mark 1 2 3` to mark the tasks at the first, second and thir
 Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
 
 Step 3. The first word of the user input is `mark`, which matches the command for `MarkCommand`.
-Step 3. The first word of the user input is `mark`, which matches the command for `MarkCommand`.
 
 Step 4. `MarkCommandParser#parse()` is called and `MassOpsParser#massOpsProcessor` is invoked to process the user input into a list of `Indexes`.
 
