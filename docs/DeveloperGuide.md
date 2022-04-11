@@ -338,7 +338,7 @@ Step 6. After `SortCommand#execute()` is called, `model#updateSortedTaskList(Com
 
 The following activity diagram summarizes what happens when a user inputs `sort` command:
 
-<img src="images/SortequenceDiagram.png" width="574" />
+<img src="images/SortSequenceDiagram.png" width="574" />
 
 #### Why it is implemented that way
 The underlying `UniqueTaskList` uses an `ObservableList` and therefore it allows the application listen to changes and render according specified requirements. One such abstraction used in the initial implementation is the `FilteredList`. With the `FilteredList` the application grants the ability to filter the list using a `Predicate`. Sorting was designed to be an extension of this concept using `SortedList` abstraction where the application can sort the list by a given `Comparator` and render its output instantaneously.
