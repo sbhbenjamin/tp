@@ -107,4 +107,5 @@ public class Keyword {
         String preppedWord = keyword.getValue();
         return Arrays.stream(sentence.split("[^\\p{Alnum}]+")).anyMatch(preppedWord::equalsIgnoreCase);
     }
+
 }

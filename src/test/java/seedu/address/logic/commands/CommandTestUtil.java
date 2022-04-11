@@ -12,7 +12,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -156,7 +155,10 @@ public class CommandTestUtil {
      * in the {@code model}'s task list.
      */
     public static void showTaskWithKeywords(Model model, String... keywords) {
-        Set<String> set = new HashSet<>(Arrays.asList(keywords));
+        Set<Keyword> set = new HashSet<>();
+        for (String keyword : keywords) {
+            set.add(new Keyword(keyword));
+        }
         model.updateFilteredTaskList(new NameContainsKeywordsPredicate(set));
         assertTrue(0 < model.getFilteredTaskList().size());
     }
