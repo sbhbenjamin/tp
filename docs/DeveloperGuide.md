@@ -246,11 +246,11 @@ This feature provides a way for users to `mark`, `unmark` and `delete` multiple 
 
 These features are implemented with the addition of a `MassOpsParser` class which parses through user inputs, consisting of multiple indexes. `MassOpsParser` processes the indexes to return an `ArrayList` of `Indexes` for `MarkCommand`, `UnmarkCommand` or `DeleteCommand` to execute.
 
-It is designed to preserve the Command Design Pattern. Through the implementation of the `MarkCommmandParser` and `UnmarkCommandParser`, we can enforce the input format of mark command. Furthermore, isolating `MarkCommand` and `UnmarkCommand` into separate classes, we narrow down functionality of each class. This gives the application more control by limiting the outcome in successful execution. For example, successful execution of MarkCommand will only lead to the task being marked as complete.Whereas an alternative design combining mark and unmark functionality together will lead vague outcome (application unaware whether the task is marked as complete or incomplete after execution).
+It is designed to preserve the Command Design Pattern. Through the implementation of the `MarkCommmandParser` and `UnmarkCommandParser`, we can enforce the input format of mark command. Furthermore, by isolating `MarkCommand` and `UnmarkCommand` into separate classes, we narrow down functionality of each class. This gives the application more control by limiting the outcome in successful execution. For example, successful execution of MarkCommand will only lead to the task being marked as completed. Whereas an alternative design combining mark and unmark functionality together will lead vague outcome (application unaware whether the task is marked as complete or incomplete after execution).
 
 Given below is an example usage scenario of how the MassOps mechanism behaves at each step to `mark` tasks in the task list.
 
-Step 1. User inputs `mark 1 2 3` to mark the tasks at the first, second and third index of the task list as complete.
+Step 1. User inputs `mark 1 2 3` to mark the tasks at the first, second and third index of the task list as completed.
 
 Step 2. Upon receiving the user's input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
 
@@ -278,25 +278,6 @@ The `delete` feature follows a similar implementation as well, involving `Delete
 
 ![MassOpsDelete](images/MassOpsDelete.png)
 
-
-#### Design considerations:
-
-**Aspect: The number of indexes to be marked/unmarked/deleted at a time**
-
-* **Alternative 1 (current choice):** Implement MassOps and allow users to mark, unmark or delete multiple tasks at a time.
-    * Pros:
-        * User-friendly, user can conduct mass operations and not have to do similar operations repetitively.
-        * Conducive for fast-typers who value efficiency
-    * Cons:
-        * May be confusing for new users as they may not understand the concept of conducting mass operations in a single command.
-
-* **Alternative 2:** Only allow users to mark, unmark or delete tasks one task at a time.
-    * Pros:
-        * Easier to implement.
-        * Reduces chance of users becoming confused with how to use the command as the command is straightforward and direct, only targeting one index at a time.
-    * Cons:
-        * May be very time-consuming for the user and becomes less user-friendly, especially if they are using the same operation, as the user has to manually key in commands one at a time.
-
 **Aspect: How the functionality of mark/unmark is broken down:**
 
 * **Alternative 1 (current choice):** Use two separate Command classes: `MarkCommand` and `UnmarkCommand`.
@@ -313,7 +294,7 @@ The `delete` feature follows a similar implementation as well, involving `Delete
     * Cons:
         * No exact knowledge whether the execution of command mark task as complete or incomplete
 
-**Aspect: How the user input is parsed:**
+**Aspect: How the user input is processed:**
 
 * **Alternative 1 (current choice):** Create a separate `MassOpsParser` class to parse the user input
     * Pros:
@@ -321,7 +302,7 @@ The `delete` feature follows a similar implementation as well, involving `Delete
       * Easier to introduce mass operations into other features in future
       * Abstracts the processing of user input from the respective commands, reducing chances of introducing errors into the different commands.
     * Cons: -
-* **Alternative 2:** Process the user input in command's parser function itself
+* **Alternative 2:** Process the user input using the respective command parser functions themselves
     * Pros:
       * More control over the way the indexes are processed (can order the indexes in a specific format for execution according to the command)
     * Cons:
