@@ -496,8 +496,6 @@ Overall, the workflow of finding a task can be generalized into 3 steps:
 
 3. Finally, the chained predicate is used to filter the tasks, and the tasks with the criteria met are displayed on the screen.
 
-The search by tags feature uses the `find` command and prefix `t/` before the keyword.
-
 Given below is an example usage scenario of how the find mechanism behaves at each step to search for tasks:
 
 Step 1. User inputs `find t/CS2103T t/CS2105 p/low` to find tasks that have a 'CS2103T' or 'CS2105' tag, and with a low priority.
