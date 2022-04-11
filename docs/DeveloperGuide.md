@@ -891,10 +891,8 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
 
 1. Initial launch
-
     1. Download harmonia.jar and move it into an empty folder.
 
     2. Run the application.
@@ -910,7 +908,25 @@ testers are expected to do more *exploratory* testing.
 
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-    
+
+### Adding a task into Harmonia
+
+1. Test case: `add n/Review PRs d/To review PRs assigned to me dl/2022-04-10 p/high t/CS2103T t/review`<br>
+   Expected: The new task is added to the task list. Details of the newly added task is also shown in the status message.
+
+2. Test case: `add n/Review PRs d/To review PRs assigned to me dl/2022-04-10 p/high t/CS2103T t/review` (adding a task that already exists in Harmonia) <br>
+   Expected: No task is added. Error details shown in the status message.
+
+3. Test case: `add n/CS2103T PE dl/2022-04-16 p/high t/CS2103T` (with one of the compulsory fields: `n/`, `d/`, `dl/`, `p/` removed) <br>
+   Expected: No task is added. Error details shown in the status message.
+
+4. Other incorrect add commands to try:
+    1. `add`
+    2. `add n/CS2103T d/This coming sat PE dl/2022-04-16 p/low t/#CS2103T` (`t/` only takes alphanumeric characters)
+    3. `add n/CS2103T d/This coming sat PE dl/2022-04-16 p/none t/CS2103T` (invalid priority, which only accepts `low`, `medium` or `high`)
+    4. `add n/CS2103T d/This coming sat PE dl/2022 p/high t/CS2103T` (invalid date format for the `dl` field)
+       Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
+ 
 
 ### Deleting a task
 
@@ -984,3 +1000,4 @@ testers are expected to do more *exploratory* testing.
     * Expected: An empty list of tasks is loaded instead.
        1. Upon an operation that attempts to interact with the tasks, e.g. add/delete/edit/mark/unmark tasks, the data file will then be overwritten.
        2. If Harmonia is closed before any attempt to interact the tasks, the data file will not be overwritten.
+       
