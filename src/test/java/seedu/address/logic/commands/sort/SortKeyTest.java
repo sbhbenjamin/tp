@@ -3,7 +3,17 @@ package seedu.address.logic.commands.sort;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertAllFalse;
+import static seedu.address.testutil.Assert.assertAllThrows;
+import static seedu.address.testutil.Assert.assertAllTrue;
+import static seedu.address.testutil.TypicalStrings.SORT_KEY_DEADLINE;
+import static seedu.address.testutil.TypicalStrings.SORT_KEY_DEADLINE_STRING;
+import static seedu.address.testutil.TypicalStrings.SORT_KEY_NAME;
+import static seedu.address.testutil.TypicalStrings.SORT_KEY_NAME_STRING;
+import static seedu.address.testutil.TypicalStrings.SORT_KEY_PRIORITY;
+import static seedu.address.testutil.TypicalStrings.SORT_KEY_PRIORITY_STRING;
+import static seedu.address.testutil.TypicalStrings.getInvalidStringsForSortKey;
+import static seedu.address.testutil.TypicalStrings.getValidStringsForSortKey;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,22 +23,13 @@ public class SortKeyTest {
     public void isValidSortKey() {
 
         // null sort label
-        assertThrows(NullPointerException.class, () -> SortKey.isValidSortKey(null));
+        assertFalse(SortKey.isValidSortKey(null));
 
-        assertFalse(SortKey.isValidSortKey("")); // empty String
-        assertFalse(SortKey.isValidSortKey(" ")); // spaces only
-        assertFalse(SortKey.isValidSortKey(" deadline")); // first character whitespace
-        assertFalse(SortKey.isValidSortKey("123")); // digits
-        assertFalse(SortKey.isValidSortKey("asc")); // valid sort order
-        assertFalse(SortKey.isValidSortKey("desc")); // valid sort order
-        assertFalse(SortKey.isValidSortKey("dl")); // abbreviation of deadline
-        assertFalse(SortKey.isValidSortKey("p")); // abbreviation of priority
-        assertFalse(SortKey.isValidSortKey("n")); // abbreviation of name
+        // invalid sort key
+        assertAllFalse(SortKey::isValidSortKey, getInvalidStringsForSortKey());
 
         // valid sort key
-        assertTrue(SortKey.isValidSortKey("deadline"));
-        assertTrue(SortKey.isValidSortKey("name"));
-        assertTrue(SortKey.isValidSortKey("priority"));
+        assertAllTrue(SortKey::isValidSortKey, getValidStringsForSortKey());
     }
 
 
@@ -39,37 +40,30 @@ public class SortKeyTest {
 
     @Test
     public void valueOfLabel_invalidSortKeyLabel_throwsIllegalArgumentException() {
-        String emptyLabel = "";
-        assertThrows(IllegalArgumentException.class, () -> SortKey.valueOfLabel(emptyLabel));
-
-        String spacedLabel = " ";
-        assertThrows(IllegalArgumentException.class, () -> SortKey.valueOfLabel(spacedLabel));
-
-        String undefinedSortKeyLabel = "description";
-        assertThrows(IllegalArgumentException.class, () -> SortKey.valueOfLabel(undefinedSortKeyLabel));
+        assertAllThrows(IllegalArgumentException.class, SortKey::valueOfLabel, getInvalidStringsForSortKey());
     }
 
     @Test
     public void valueOfLabel_validSortKeyLabel_returnsValidSortKey() {
-        String deadlineLabel = "deadline";
+        String deadlineLabel = SORT_KEY_DEADLINE;
         assertEquals(SortKey.DEADLINE, SortKey.valueOfLabel(deadlineLabel));
 
-        String nameLabel = "name";
+        String nameLabel = SORT_KEY_NAME;
         assertEquals(SortKey.NAME, SortKey.valueOfLabel(nameLabel));
 
-        String priorityLabel = "priority";
+        String priorityLabel = SORT_KEY_PRIORITY;
         assertEquals(SortKey.PRIORITY, SortKey.valueOfLabel(priorityLabel));
     }
 
     @Test
     public void toString_validSortKey_validLabel() {
-        String deadlineExpected = "deadline";
+        String deadlineExpected = SORT_KEY_DEADLINE_STRING;
         assertEquals(SortKey.DEADLINE.toString(), deadlineExpected);
 
-        String nameExpected = "name";
+        String nameExpected = SORT_KEY_NAME_STRING;
         assertEquals(SortKey.NAME.toString(), nameExpected);
 
-        String priorityExpected = "priority";
+        String priorityExpected = SORT_KEY_PRIORITY_STRING;
         assertEquals(SortKey.PRIORITY.toString(), priorityExpected);
     }
 }
