@@ -403,6 +403,8 @@ The following is the sequence diagram summarizing the above steps:
 
 ![SearchSequenceDiagram](images/SearchSequenceDiagram.png)
 
+Note: the creation process of some predicates is omitted, to simplify the diagram. In the diagram, only the creation process of `TagContainsKeywordPredicate` and `PriorityMatchedPredicate` are included.
+
 #### Design considerations:
 
 **Aspect: Command to be used for searching various fields:**

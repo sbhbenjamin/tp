@@ -11,12 +11,8 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant "p:NameContainsKeywordPredicate" as NameContainsKeywordPredicate MODEL_COLOR
-participant "p:DescriptionContainsKeywordPredicate" as DescriptionContainsKeywordPredicate MODEL_COLOR
 participant "p:TagContainsKeywordPredicate" as TagContainsKeywordPredicate MODEL_COLOR
-participant "p:DeadlineInRangePredicate" as DeadlineInRangePredicate MODEL_COLOR
 participant "p:PriorityMatchedPredicate" as PriorityMatchedPredicate MODEL_COLOR
-participant "p:CompletionStatusPredicate" as CompletionStatusPredicate MODEL_COLOR
 end box
 
 [-> LogicManager : execute("find t/CS2103T t/CS2105 p/low")
@@ -35,23 +31,6 @@ deactivate FindCommandParser
 HarmoniaParser -> FindCommandParser : parse("find t/CS2103T t/CS2105 p/low")
 activate FindCommandParser
 
-
-create NameContainsKeywordPredicate
-FindCommandParser -> NameContainsKeywordPredicate
-activate NameContainsKeywordPredicate
-
-NameContainsKeywordPredicate --> FindCommandParser : namePredicate
-deactivate NameContainsKeywordPredicate
-
-
-create DescriptionContainsKeywordPredicate
-FindCommandParser -> DescriptionContainsKeywordPredicate
-activate DescriptionContainsKeywordPredicate
-
-DescriptionContainsKeywordPredicate --> FindCommandParser : descriptionPredicate
-deactivate DescriptionContainsKeywordPredicate
-
-
 create TagContainsKeywordPredicate
 FindCommandParser -> TagContainsKeywordPredicate
 activate TagContainsKeywordPredicate
@@ -59,28 +38,12 @@ activate TagContainsKeywordPredicate
 TagContainsKeywordPredicate --> FindCommandParser : tagPredicate
 deactivate TagContainsKeywordPredicate
 
-create DeadlineInRangePredicate
-FindCommandParser -> DeadlineInRangePredicate
-activate DeadlineInRangePredicate
-
-DeadlineInRangePredicate --> FindCommandParser : deadlinePredicate
-deactivate DeadlineInRangePredicate
-
-
 create PriorityMatchedPredicate
 FindCommandParser -> PriorityMatchedPredicate
 activate PriorityMatchedPredicate
 
 PriorityMatchedPredicate --> FindCommandParser : priorityPredicate
 deactivate PriorityMatchedPredicate
-
-
-create CompletionStatusPredicate
-FindCommandParser -> CompletionStatusPredicate
-activate CompletionStatusPredicate
-
-CompletionStatusPredicate --> FindCommandParser : completionStatusPredicate
-deactivate CompletionStatusPredicate
 
 
 create FindCommand
