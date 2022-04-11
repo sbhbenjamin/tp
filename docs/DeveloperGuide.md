@@ -895,41 +895,92 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download harmonia.jar and move it into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Run the application.
 
-1. Saving window preferences
+        * For **Windows** user：Double-click harmonia.jar.
+        * For **Mac/Linux** user: Open the terminal, navigate to the directory where harmonia.jar is located, then run `java -jar harmonia.jar` in the terminal.
+        
+        * Expected: Shows the GUI with a set of sample tasks. The window size may not be optimum.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+2. Saving window preferences
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+    
 
-1. _{ more test cases …​ }_
+### Deleting a task
 
-### Deleting a person
+1. Deleting a task while all tasks are being shown
 
-1. Deleting a person while all persons are being shown
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks are shown in the list.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    2. Test case: `delete 1`<br>
+        Expected: First task is deleted from the list. Details of the deleted task are shown in the status message.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    3. Test case: `delete 0`<br>
+        Expected: No task is deleted. Error details are shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+        Expected: No task is deleted. Error details are shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+2. Deleting a task while filtered tasks are shown
 
-2. _{ more test cases …​ }_
+   1. Prerequisites: Filter the not-yet-completed tasks using the `find c/false` command. Multiple tasks are shown in the list.
+
+   2. Test case: `delete 1`<br>
+        Expected: The first task shown in the filtered list is deleted. Details of the deleted task are shown in the status message. The rest of the filtered tasks remain in the list.
+
+   3. Test case: `delete 0`<br>
+      Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
+
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
+
+3. Delete multiple tasks while all tasks are being shown
+    
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks are shown in the list.
+
+    2. Test case: `delete 2 1 3`<br>
+       Expected: The first, second, and third tasks are deleted from the list. Details of the deleted tasks are shown in the status message.
+
+    3. Test case: `delete 0 2 3`<br>
+       Expected: No task is deleted. Error details are shown in the status message.
+
+    4. Other incorrect delete commands to try: `delete`, `delete x y z`, `...` (where x, y, and/or z is larger than the list size)<br>
+       Expected: No task is deleted. Error details are shown in the status message.
+
+4. Deleting multiple tasks while filtered tasks are shown
+
+    1. Prerequisites: Filter the not-yet-completed tasks using the `find c/false` command. Multiple tasks are shown in the list.
+
+    2. Test case: `delete 1 2`<br>
+       Expected: The first and second tasks shown in the filtered list are deleted. Details of the deleted tasks are shown in the status message. The rest of the filtered tasks remain in the list.
+
+    3. Test case: `delete 0 1`<br>
+       Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
+
+    4. Other incorrect delete commands to try: `delete`, `delete x y z`, `...` (where x, y, and/or z is larger than the list size)<br>
+       Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    * Expected: Default tasks are loaded instead. Upon an operation that attempts to interact with the tasks, e.g. add/delete/edit/mark/unmark tasks, the data will then be saved as data/harmonia.json.
+   
+2. Dealing with corrupted data files
+    
+    * Expected: An empty list of tasks is loaded instead. 
+       1. Upon an operation that attempts to interact with the tasks, e.g. add/delete/edit/mark/unmark tasks, the corrupted data will then be overwritten.
+       2. If Harmonia is closed before any attempt to interact the tasks, the data file will not be overwritten.
 
-1. _{ more test cases …​ }_
+3. Dealing with data files with incorrect format
 
+    * Example: The deadline for a task is inputted as `2022-12-32`.
+    * Expected: An empty list of tasks is loaded instead.
+       1. Upon an operation that attempts to interact with the tasks, e.g. add/delete/edit/mark/unmark tasks, the data file will then be overwritten.
+       2. If Harmonia is closed before any attempt to interact the tasks, the data file will not be overwritten.
