@@ -146,7 +146,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -375,6 +375,8 @@ The first stage of the implementation `mark` feature involves parsing the user i
 
 The `unmark` feature follows a similar implementation involving `UnmarkCommandParser`, `UnmarkCommand`.
 
+The following activity diagram summarizes what happens when a user inputs `mark` command:
+
 <img src="images/MarkSequenceDiagram.png" width="574" />
 
 #### Why it is implemented that way
@@ -419,6 +421,10 @@ Step 4. `SortCommandParser#parse()` is called. `SORT_KEY` with prefix `by/` and 
 Step 5. A `SortCommand` is initialised using the `SortKey` and `SortOrder`. The `SortCommand` constructor creates a `Comparator` used for sorting the list. `SortCommand` is returned to `LogicManager` for execution.
 
 Step 6. After `SortCommand#execute()` is called, `model#updateSortedTaskList(Comparator)` is invoked to sort the task list using the created `Comparator`. The command result is returned and displayed to the user.
+
+The following activity diagram summarizes what happens when a user inputs `sort` command:
+
+<img src="images/SortequenceDiagram.png" width="574" />
 
 #### Why it is implemented that way
 The underlying `UniqueTaskList` uses an `ObservableList` and therefore it allows the application listen to changes and render according specified requirements. One such abstraction used in the initial implementation is the `FilteredList`. With the `FilteredList` the application grants the ability to filter the list using a `Predicate`. Sorting was designed to be an extension of this concept using `SortedList` abstraction where the application can sort the list by a given `Comparator` and render its output instantaneously.
