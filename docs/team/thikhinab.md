@@ -18,8 +18,7 @@ Given below are my contributions to the project.
 - Added `JsonAdaptedTask` to store Task in `Jackson` friendly format
 - Updated `Storage` to implement API for Storage component
 - Updated `StorageManager` to manage `TaskList` data in local storage
-- Updated `Deadline` to support its storage
-- Updated `CompletionStatus` to support its storage
+- Updated `Deadline`, `CompletionStatus` to support its storage
 
 **Add Mark Command:** [#129](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/129)
 - Added `MarkCommand` to mark a specified task as complete
@@ -35,33 +34,24 @@ Given below are my contributions to the project.
 - Updated `Model`, `ModelManager`, `TaskList` and `UniqueTaskList` to abstract out the logic need for both `MarkCommand` and `UnmarkCommand`
 
 **Test MarkCommand and MarkCommandParser:** [#142](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/142)
-- Tested `MarkCommand`
-- Tested `MarkCommandParser`
+- Tested `MarkCommand` and `MarkCommandParser`
 - Updated `HarmoniaParserTest`
 
 **Test Storage:** [#144](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/144)
 - Tested `AddSerializableTaskList`
-- Updated `StorageManagerTest`
-- Updated `JsonAdaptedTask`
+- Updated `StorageManagerTest` and `JsonAdaptedTask`
 - Added and updated JSON files required for testing
 
 **Test JsonUserPrefsStorage and JsonTaskListStorage:** [#149](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/149)
 - Tested `JsonTaskListStorage`
-- Updated `JsonUserPrefsStorageTest`
-- Updated JSON files required for testing
+- Updated `JsonUserPrefsStorageTest` and JSON files required for testing
 
 **Test UnmarkCommand and UnmarkCommand:** [#150](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/150)
-- Tested `UnmarkCommandParser`
-- Tested `UnmarkCommand`
-- Updated `HarmoniaParserTest`
-- Updated helper classes and files: `TypicalTasks`, `TypicalIndexes`, and `typicalTaskList.json`
+- Tested `UnmarkCommandParser` and `UnmarkCommand`
+- Updated `HarmoniaParserTest` and helper classes and files: `TypicalTasks`, `TypicalIndexes`, and `typicalTaskList.json`
 
 **Test Sorting functionality:** [#327](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/327)
-- Tested `SortKey` and `SortOrder`
-- Tested `ComparatorFactory`
-- Tested `SortCommand`
-- Tested `SortCommandParser`
-- Tested `sort` in `HarmoniaParser`
+- Tested `SortKey`, `SortOrder`, `ComparatorFactory`, `SortCommand`, `SortCommandParser` and `sort` in `HarmoniaParser`
 
 **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=thikhinab&breakdown=true)
 
@@ -77,7 +67,7 @@ Given below are my contributions to the project.
   - Added section on `Sorting`, updated `Storage Component`, `Logic` and `UI` sections and improve readability [#296](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/296)
 
 **Team**
-- PRs reviewed: [#108](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/108)
+- PRs reviewed (with non-trivial comments): [#115](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/115), [#128](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/128), [#261](https://github.com/AY2122S2-CS2103T-T09-1/tp/pull/261)
 - Provided suggestions on implementations to other team members
 
 **Bugs Fixed**
