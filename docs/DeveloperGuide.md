@@ -276,6 +276,8 @@ The `delete` feature follows a similar implementation as well, involving `Delete
 
 ![MassOpsDelete](images/MassOpsDelete.png)
 
+#### Design considerations:
+
 **Aspect: How the user input is processed:**
 
 * **Alternative 1 (current choice):** Create a separate `MassOpsParser` class to parse the user input
