@@ -156,7 +156,12 @@ public class CommandTestUtil {
      * in the {@code model}'s task list.
      */
     public static void showTaskWithKeywords(Model model, String... keywords) {
-        Set<String> set = new HashSet<>(Arrays.asList(keywords));
+
+        Set<Keyword> set = new HashSet<>();
+
+        for (String keyword : keywords) {
+            set.add(new Keyword(keyword));
+        }
         model.updateFilteredTaskList(new NameContainsKeywordsPredicate(set));
         assertTrue(0 < model.getFilteredTaskList().size());
     }
