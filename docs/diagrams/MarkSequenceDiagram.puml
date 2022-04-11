@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":HarmoniaParser" as HarmoniaParser LOGIC_COLOR
 participant ":MarkCommandParser" as MarkCommandParser LOGIC_COLOR
 participant "m:MarkCommand" as MarkCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -16,17 +16,17 @@ end box
 [-> LogicManager : execute("mark 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("mark 1")
-activate AddressBookParser
+LogicManager -> HarmoniaParser : parseCommand("mark 1")
+activate HarmoniaParser
 
 create MarkCommandParser
-AddressBookParser -> MarkCommandParser
+HarmoniaParser -> MarkCommandParser
 activate MarkCommandParser
 
-MarkCommandParser --> AddressBookParser
+MarkCommandParser --> HarmoniaParser
 deactivate MarkCommandParser
 
-AddressBookParser -> MarkCommandParser : parse("1")
+HarmoniaParser -> MarkCommandParser : parse("1")
 activate MarkCommandParser
 
 create MarkCommand
@@ -36,14 +36,14 @@ activate MarkCommand
 MarkCommand --> MarkCommandParser : m
 deactivate MarkCommand
 
-MarkCommandParser --> AddressBookParser : m
+MarkCommandParser --> HarmoniaParser : m
 deactivate MarkCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-MarkCommandParser -[hidden]-> AddressBookParser
+MarkCommandParser -[hidden]-> HarmoniaParser
 destroy MarkCommandParser
 
-AddressBookParser --> LogicManager : m
-deactivate AddressBookParser
+HarmoniaParser --> LogicManager : m
+deactivate HarmoniaParser
 
 LogicManager -> MarkCommand : execute()
 activate MarkCommand
