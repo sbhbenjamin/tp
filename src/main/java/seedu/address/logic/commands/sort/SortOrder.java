@@ -24,7 +24,10 @@ public enum SortOrder {
      * Returns true if {@code String sorOrder} is a valid {@code SortOrder}, false otherwise.
      */
     public static boolean isValidSortOrder(String sortOrder) {
-        requireNonNull(sortOrder);
+        if (sortOrder == null) {
+            return false;
+        }
+
         for (SortOrder s : SortOrder.values()) {
             if (s.label.equals(sortOrder)) {
                 return true;

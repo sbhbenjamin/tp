@@ -68,7 +68,7 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different task -> returns false
+        // different find command -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
