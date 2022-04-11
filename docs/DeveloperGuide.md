@@ -980,7 +980,7 @@ testers are expected to do more *exploratory* testing.
 
 3. Dealing with data files with incorrect format
 
-    * Example: The deadline for a task is inputted as `2022-12-32`.
+    * Example: The deadline for a task is inputted as `2022-09-32`.
     * Expected: An empty list of tasks is loaded instead.
        1. Upon an operation that attempts to interact with the tasks, e.g. add/delete/edit/mark/unmark tasks, the data file will then be overwritten.
        2. If Harmonia is closed before any attempt to interact the tasks, the data file will not be overwritten.
