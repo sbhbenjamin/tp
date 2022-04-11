@@ -22,17 +22,16 @@ public class SampleDataUtil {
         return new Task[] {
             new Task(new Name("Complete Tutorial"), new Description("Hand draw UML diagrams"),
                 new CompletionStatus("true"), new Deadline("2022-03-10"), Priority.LOW, getTagSet("CS2103T")),
-            new Task(new Name("Prepare for Presentation"), new Description("Finalise slides and memorise script"),
-                new CompletionStatus("false"), new Deadline("2022-03-12"), Priority.LOW, getTagSet("CS2101")),
             new Task(new Name("Review individual projects"),
-                new Description("Review two ips that are sent to my email, for 4 participation points"),
-                new CompletionStatus("true"), new Deadline("2022-03-13"), Priority.LOW,
+                new Description("To review two ips that are sent to my email, for 4 participation points"),
+                new CompletionStatus("true"), new Deadline("2022-03-12"), Priority.LOW,
                 getTagSet("CS2103T", "participation")),
-            new Task(new Name("Revise for Midterm Test"), new Description("Chapters 1-5"),
-                new CompletionStatus("false"), new Deadline("2022-03-25"), Priority.LOW, getTagSet("CS2102")),
             new Task(new Name("Complete Assignment"),
                 new Description("Name submission file as assignment1_name and upload to Luminus folder"),
-                new CompletionStatus("false"), new Deadline("2022-04-01"), Priority.LOW, getTagSet("CS2105"))
+                new CompletionStatus("false"), new Deadline("2022-04-01"), Priority.LOW, getTagSet("CS2105")),
+            new Task(new Name("Complete CS3240 Milestone G1"),
+                new Description("Interview users, analyse responses and create wireframes"),
+                new CompletionStatus("true"), new Deadline("2022-11-22"), Priority.LOW, getTagSet("CS3240"))
         };
     }
 

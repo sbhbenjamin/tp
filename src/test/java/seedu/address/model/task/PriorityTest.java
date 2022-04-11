@@ -3,7 +3,6 @@ package seedu.address.model.task;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TestUtil.assertAllFalse;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,9 +23,6 @@ public class PriorityTest {
     public void isValidPriority() {
         // null priority
         assertThrows(NullPointerException.class, () -> Priority.isValidPriority(null));
-
-        // test all common string restrictions
-        assertAllFalse(Priority::isValidPriority);
 
         // invalid priority
         assertFalse(Priority.isValidPriority("highest")); // invalid enum

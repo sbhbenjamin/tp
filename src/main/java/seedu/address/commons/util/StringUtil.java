@@ -12,17 +12,6 @@ import java.util.Arrays;
  */
 public class StringUtil {
 
-    public static final String EMPTY_KEYWORD_MESSAGE = "A keyword can't be empty!";
-    public static final String INVALID_KEYWORD_MESSAGE = "Only alphanumeric characters (letters and digits) are"
-            + " allowed in a keyword, and a keyword should be no longer than 63 characters.";
-
-    /*
-     * The first character of the name must not be a whitespace,
-     * and only alphanumeric characters are allowed.
-     * The maximum number of characters allowed is 63.
-     */
-    private static final String KEYWORD_VALIDATION_REGEX = "\\p{Alnum}{1,63}";
-
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
@@ -48,42 +37,6 @@ public class StringUtil {
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(preppedWord::equalsIgnoreCase);
     }
-
-    /**
-     * Returns true if the {@code sentence} contains the {@code word}.
-     *   Ignores case and punctuations, but a full match is required. However, if a word is separated by punctuation(s),
-     *   it is split by the punctuations.
-     *   <br>examples:<pre>
-     *       containsWordIgnorePunctuationAndCase("ABc def", "abc") == true
-     *       containsWordIgnorePunctuationAndCase("ABc, def", "abc") == true
-     *       containsWordIgnorePunctuationAndCase("ABc,def", "abc") == true
-     *       containsWordIgnorePunctuationAndCase("ABc-def", "abcdef") == false // "ABc-def" is split into two words
-     *       containsWordIgnorePunctuationAndCase("ABc def", "AB") == false //not a full word match
-     *       </pre>
-     * @param sentence cannot be null
-     * @param word cannot be null, cannot be empty, must be a single word without punctuation(s)
-     */
-    public static boolean containsWordIgnorePunctuationAndCase(String sentence, String word) {
-        requireNonNull(sentence);
-        validateKeyword(word);
-
-        String preppedWord = word.trim();
-        return Arrays.stream(sentence.split("[^\\p{Alnum}]+")).anyMatch(preppedWord::equalsIgnoreCase);
-    }
-
-    /**
-     * Validates a keyword. A keyword should be alphanumeric, and its length should be 1 to 63.
-     *
-     * @param keyword the keyword to be checked
-     */
-    private static void validateKeyword(String keyword) {
-        requireNonNull(keyword);
-        String trimmedKeyword = keyword.trim();
-
-        // If the regex is matched, it ensures that there's only one keyword.
-        checkArgument(trimmedKeyword.matches(KEYWORD_VALIDATION_REGEX), INVALID_KEYWORD_MESSAGE);
-    }
-
 
     /**
      * Returns a detailed message of the t, including the stack trace.

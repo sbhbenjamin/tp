@@ -4,16 +4,16 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.core.keyword.Keyword;
 
 /**
  * Tests that a {@code Task}'s {@code Description} matches any of the keywords given.
  */
 public class DescriptionContainsKeywordsPredicate implements Predicate<Task> {
 
-    private final Set<String> keywords;
+    private final Set<Keyword> keywords;
 
-    public DescriptionContainsKeywordsPredicate(Set<String> keywords) {
+    public DescriptionContainsKeywordsPredicate(Set<Keyword> keywords) {
         this.keywords = new HashSet<>(keywords);
     }
 
@@ -23,8 +23,8 @@ public class DescriptionContainsKeywordsPredicate implements Predicate<Task> {
             return true;
         }
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil
-                        .containsWordIgnorePunctuationAndCase(task.getDescription().value, keyword));
+                .anyMatch(keyword -> Keyword
+                        .containsKeywordIgnorePunctuationAndCase(task.getDescription().value, keyword));
     }
 
     @Override

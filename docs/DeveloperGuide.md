@@ -154,6 +154,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -232,13 +233,9 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 ### Mass Operations
+
 
 #### What is the feature about
 This feature provides a way for users to `mark`, `unmark` and `delete` multiple `Tasks` at a time. For the previous implementation of `mark`, `unmark` and `delete`, users had to type in a command for each task that they wished to `mark`, `unmark` or `delete` one at a time.   
@@ -369,25 +366,6 @@ In this case, the `enum` type also increases the extensibility of the feature. I
       * Possibly increases memory use. If we use `String` or `int` types, we might have to instantiate new `Priority` classes every time we create a new `Task` object.
 
 
-### Mark/unmark feature
-
-#### What is the feature about
-Provides a way to mark `Task` objects as either completed or uncompleted.
-
-#### How the feature is implemented
-The first stage of the implementation `mark` feature involves parsing the user input. `MarkCommandParser` is used to parse and check whether the user input is valid. After which a `MarkCommand` object is created with the respective task index. The second stage requires `MarkCommand#execute()` to be called. The execution would update `TaskList` by replacing task to be marked by the copy of it with the `CompletionStatus` set to `true`.
-
-The `unmark` feature follows a similar implementation involving `UnmarkCommandParser`, `UnmarkCommand`.
-
-<img src="images/MarkSequenceDiagram.png" width="574" />
-
-#### Why it is implemented that way
-It is designed to preserve the Command Design Pattern. Through the implementation of the `MarkCommmandParser` and `UnmarkCommandParser`, we can enforce the input format of mark command. Furthermore, isolating `MarkCommand` and `UnmarkCommand` into separate classes, we narrow down functionality of each class. This gives the application more control by limiting the outcome in successful execution. For example, successful execution of MarkCommand will only lead to the task being marked as complete.Whereas an alternative design combining mark and unmark functionality together will lead vague outcome (application unaware whether the task is marked as complete or incomplete after execution).
-
-#### Design considerations:
-
-
-
 ### \[Proposed\] Search by date
 
 #### What is the feature about
@@ -480,6 +458,129 @@ The following is the sequence diagram summarising the above steps:
     * Cons:
       * Other valid tags are not matched until user corrects command.
 
+
+### List Tags
+
+#### What is the feature about
+
+Provides a way to view a list of all tags currently in use in the task list. This feature complements the other features where users can view the tags that are in use before executing the other commands such as `add`, `edit` and `find`.
+
+#### How the feature is implemented
+
+This feature enhances the `list` command, with an additional parameter `t/`. There is a `TagList` that stores all tags currently in use in the task list. This `TagList` is initialised upon start-up of Harmonia and is updated accordingly after every `add`, `edit` and `clear` command. When the user inputs the `list t/` command, the `TagList` is retrieved and displayed to the user.
+
+Given below is an example usage scenario of how the list tags feature behaves at each step:
+
+Step 1. User inputs `list t/` to view all tags that are used in the task list.
+
+Step 2. Upon receiving the user input, `LogicManager` calls `HarmoniaParser#parseCommand()` to parse the user input.
+
+Step 3. As the first word of the user input is `list`, `ListCommandParser` is initialised.
+
+Step 4. `ListCommandParser#parse()` is called. Since `t/` is specified in the user input, a `ListCommand` is initialised, with `isListTag` set to `true`. `isListTag` is a boolean which specifies whether the user’s input is a command to list tags (`isListTag = true`) or to list tasks (`isListTag = false`). The `ListCommand` is then returned to `LogicManager` for execution.
+
+Step 5. `ListCommand#execute()` is called. Since `isListTag` is set to `true`, `model#getTagList()` is invoked to get the list of tags currently in use in the task list. This list of tags is used to initialise a `CommandResult`, which is returned and displayed to the user.
+
+The following is the sequence diagram summarising the above steps:
+
+![ListTagsSequenceDiagram](images/ListTagsSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How the tag list is initialised:**
+
+* **Alternative 1 (current choice):** Initialise the tag list upon start-up of Harmonia based on the stored task list.
+    * Pros:
+      * Easier to implement.
+      * Ensures that the tag list will be consistent with the data in task list.
+    * Cons:
+      * Upon each start-up of Harmonia, all tasks in the task list have to be iterated through to retrieve their tags so as to initialise the tag list. This may increase the start-up duration of the application.
+
+* **Alternative 2:** Store the data of the tag list as a separate JSON file and load the data upon start-up of Harmonia.
+    * Pros:
+      * Reduces the application start-up duration as the data of the tag list can directly be loaded from the JSON file.
+    * Cons:
+      * May result in inconsistencies between tags stored in the tag list and tags used in the task list. For example, if the user were to manually make changes to one of the JSON files without making the corresponding changes to the other JSON file. As such, additional checks may need to be put in place to ensure that the data in the tag list is consistent with that of the task list.
+
+
+### \[Proposed\] Undo/redo feature
+
+#### Proposed Implementation
+
+The proposed undo/redo mechanism is facilitated by `VersionedTaskList`. It extends `TaskList` with an undo/redo history, stored internally as a `taskListStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `VersionedTaskList#commit()` — Saves the current task list state in its history.
+* `VersionedTaskList#undo()` — Restores the previous task list state from its history.
+* `VersionedTaskList#redo()` — Restores a previously undone task list state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitTaskList()`, `Model#undoTaskList()` and `Model#redoTaskList()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step:
+
+Step 1. The user launches the application for the first time. The `VersionedTaskList` will be initialized with the initial task list state, and the `currentStatePointer` pointing to that single task list state.
+
+![UndoRedoState0](images/UndoRedoState0.png)
+
+Step 2. The user executes `delete 5` command to delete the 5th task in the task list. The `delete` command calls `Model#commitTaskList()`, causing the modified state of the task list after the `delete 5` command executes to be saved in the `taskListStateList`, and the `currentStatePointer` is shifted to the newly inserted task list state.
+
+![UndoRedoState1](images/UndoRedoState1.png)
+
+Step 3. The user executes `add n/tutorial …​` to add a new task. The `add` command also calls `Model#commitTaskList()`, causing another modified task list state to be saved into the `taskListStateList`.
+
+![UndoRedoState2](images/UndoRedoState2.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitTaskList()`, so the task list state will not be saved into the `taskListStateList`.
+
+</div>
+
+Step 4. The user now decides that adding the task was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoTaskList()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous task list state, and restores the task list to that state.
+
+![UndoRedoState3](images/UndoRedoState3.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial TaskList state, then there are no previous TaskList states to restore. The `undo` command uses `Model#canUndoTaskList()` to check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the undo.
+
+</div>
+
+The following sequence diagram shows how the undo operation works:
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The `redo` command does the opposite — it calls `Model#redoTaskList()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the task list to that state.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `taskListStateList.size() - 1`, pointing to the latest task list state, then there are no undone TaskList states to restore. The `redo` command uses `Model#canRedoTaskList()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</div>
+
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the task list, such as `list`, will usually not call `Model#commitTaskList()`, `Model#undoTaskList()` or `Model#redoTaskList()`. Thus, the `taskListStateList` remains unchanged.
+
+![UndoRedoState4](images/UndoRedoState4.png)
+
+Step 6. The user executes `clear`, which calls `Model#commitTaskList()`. Since the `currentStatePointer` is not pointing at the end of the `taskListStateList`, all task list states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/tutorial …​` command. This is the behavior that most modern desktop applications follow.
+
+![UndoRedoState5](images/UndoRedoState5.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<img src="images/CommitActivityDiagram.png" width="250" />
+
+#### Design considerations:
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire task list.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+    * Pros: Will use less memory (e.g. for `delete`, just save the task being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -557,7 +658,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
     Steps 2a1-2a2 are repeated until valid request is inputted.
     Use case resumes from step 3.
 
@@ -576,7 +677,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -595,7 +696,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -614,7 +715,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -633,7 +734,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -652,7 +753,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -670,33 +771,32 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
 <br/>
 
-**Use case: UC08 - Search for a task by keyword/tag**
+**Use case: UC08 - Search for tasks by keyword**
 
 **MSS**
-1. User enters the request to search for task(s) by keyword/tag.
-2. Harmonia shows a list of tasks that match the specified keyword/tag.
-3. Harmonia informs the user that the search result has been displayed successfully.
+1. User chooses to search for tasks which contain a specific keyword.
+2. User enters the request to search for tasks by the specified keyword.
+3. Harmonia shows a list of tasks that match the specified keyword.
+4. Harmonia informs the user that the search result has been displayed successfully.
 
     Use case ends.
 
 **Extensions**
-* 2a. Harmonia detects that the keyword is missing.
+* 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new command.
-  Steps 2a1-2a2 are repeated until valid data is inputted.
+    * 2a2. User enters a new request.<br>
+  Steps 2a1-2a2 are repeated until valid request is inputted. 
   Use case resumes from step 3.
 
-* 2b. Harmonia detects that the tag does not exist.
-    * 2b1. Harmonia outputs an error message.
-    * 2b2. User enters a new command.
-  Steps 2a1-2a2 are repeated until valid data is inputted.
-  Use case resumes from step 3.
+* 2b. Harmonia detects that there are no tasks which contain the specified keyword.
+    * 2b1. Harmonia shows an empty list.<br>
+  Use case resumes from step 4.
 
 <br/>
 
@@ -714,7 +814,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia is unable to recognize the request entered by the user.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -733,7 +833,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request. <br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -752,7 +852,7 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
+    * 2a2. User enters a new request.<br>
   Steps 2a1-2a2 are repeated until valid request is inputted.
   Use case resumes from step 3.
 
@@ -771,9 +871,9 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
-      Steps 2a1-2a2 are repeated until valid request is inputted.
-      Use case resumes from step 3.
+    * 2a2. User enters a new request.<br>
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
 
 <br/>
 
@@ -790,9 +890,9 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
-      Steps 2a1-2a2 are repeated until valid request is inputted.
-      Use case resumes from step 3.
+    * 2a2. User enters a new request.<br>
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
 
 <br/>
 
@@ -809,9 +909,9 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
-      Steps 2a1-2a2 are repeated until valid request is inputted.
-      Use case resumes from step 3.
+    * 2a2. User enters a new request.<br>
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
 
 <br/>
 
@@ -828,9 +928,9 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 **Extensions**
 * 2a. Harmonia detects an error in the entered request.
     * 2a1. Harmonia outputs an error message.
-    * 2a2. User enters a new request.
-      Steps 2a1-2a2 are repeated until valid request is inputted.
-      Use case resumes from step 3.
+    * 2a2. User enters a new request.<br>
+  Steps 2a1-2a2 are repeated until valid request is inputted.
+  Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
@@ -863,41 +963,92 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download harmonia.jar and move it into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Run the application.
 
-1. Saving window preferences
+        * For **Windows** user：Double-click harmonia.jar.
+        * For **Mac/Linux** user: Open the terminal, navigate to the directory where harmonia.jar is located, then run `java -jar harmonia.jar` in the terminal.
+        
+        * Expected: Shows the GUI with a set of sample tasks. The window size may not be optimum.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+2. Saving window preferences
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+    
 
-1. _{ more test cases …​ }_
+### Deleting a task
 
-### Deleting a person
+1. Deleting a task while all tasks are being shown
 
-1. Deleting a person while all persons are being shown
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks are shown in the list.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    2. Test case: `delete 1`<br>
+        Expected: First task is deleted from the list. Details of the deleted task are shown in the status message.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    3. Test case: `delete 0`<br>
+        Expected: No task is deleted. Error details are shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+        Expected: No task is deleted. Error details are shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+2. Deleting a task while filtered tasks are shown
 
-2. _{ more test cases …​ }_
+   1. Prerequisites: Filter the not-yet-completed tasks using the `find c/false` command. Multiple tasks are shown in the list.
+
+   2. Test case: `delete 1`<br>
+        Expected: The first task shown in the filtered list is deleted. Details of the deleted task are shown in the status message. The rest of the filtered tasks remain in the list.
+
+   3. Test case: `delete 0`<br>
+      Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
+
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
+
+3. Delete multiple tasks while all tasks are being shown
+    
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks are shown in the list.
+
+    2. Test case: `delete 2 1 3`<br>
+       Expected: The first, second, and third tasks are deleted from the list. Details of the deleted tasks are shown in the status message.
+
+    3. Test case: `delete 0 2 3`<br>
+       Expected: No task is deleted. Error details are shown in the status message.
+
+    4. Other incorrect delete commands to try: `delete`, `delete x y z`, `...` (where x, y, and/or z is larger than the list size)<br>
+       Expected: No task is deleted. Error details are shown in the status message.
+
+4. Deleting multiple tasks while filtered tasks are shown
+
+    1. Prerequisites: Filter the not-yet-completed tasks using the `find c/false` command. Multiple tasks are shown in the list.
+
+    2. Test case: `delete 1 2`<br>
+       Expected: The first and second tasks shown in the filtered list are deleted. Details of the deleted tasks are shown in the status message. The rest of the filtered tasks remain in the list.
+
+    3. Test case: `delete 0 1`<br>
+       Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
+
+    4. Other incorrect delete commands to try: `delete`, `delete x y z`, `...` (where x, y, and/or z is larger than the list size)<br>
+       Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    * Expected: Default tasks are loaded instead. Upon an operation that attempts to interact with the tasks, e.g. add/delete/edit/mark/unmark tasks, the data will then be saved as data/harmonia.json.
+   
+2. Dealing with corrupted data files
+    
+    * Expected: An empty list of tasks is loaded instead. 
+       1. Upon an operation that attempts to interact with the tasks, e.g. add/delete/edit/mark/unmark tasks, the corrupted data will then be overwritten.
+       2. If Harmonia is closed before any attempt to interact the tasks, the data file will not be overwritten.
 
-1. _{ more test cases …​ }_
+3. Dealing with data files with incorrect format
 
+    * Example: The deadline for a task is inputted as `2022-09-32`.
+    * Expected: An empty list of tasks is loaded instead.
+       1. Upon an operation that attempts to interact with the tasks, e.g. add/delete/edit/mark/unmark tasks, the data file will then be overwritten.
+       2. If Harmonia is closed before any attempt to interact the tasks, the data file will not be overwritten.

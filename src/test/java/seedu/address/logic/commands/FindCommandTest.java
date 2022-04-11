@@ -18,6 +18,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.keyword.Keyword;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -36,13 +37,13 @@ public class FindCommandTest {
     @Test
     public void equals() {
         NameContainsKeywordsPredicate firstNamePredicate =
-                new NameContainsKeywordsPredicate(Collections.singleton("firstName"));
+                new NameContainsKeywordsPredicate(Collections.singleton(new Keyword("firstName")));
         NameContainsKeywordsPredicate secondNamePredicate =
-                new NameContainsKeywordsPredicate(Collections.singleton("secondName"));
+                new NameContainsKeywordsPredicate(Collections.singleton(new Keyword("secondName")));
         TagContainsKeywordsPredicate firstTagPredicate =
-                new TagContainsKeywordsPredicate(new HashSet<>(Collections.singletonList("firstTag")));
+                new TagContainsKeywordsPredicate(new HashSet<>(Collections.singletonList(new Keyword("firstTag"))));
         TagContainsKeywordsPredicate secondTagPredicate =
-                new TagContainsKeywordsPredicate(new HashSet<>(Collections.singletonList("secondTag")));
+                new TagContainsKeywordsPredicate(new HashSet<>(Collections.singletonList(new Keyword("secondTag"))));
         DeadlineInRangePredicate firstDeadlinePredicate =
                 new DeadlineInRangePredicate(new Deadline("2022-03-04"), new Deadline("2022-03-05"));
         DeadlineInRangePredicate secondDeadlinePredicate =
@@ -67,13 +68,13 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different task -> returns false
+        // different find command -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
     @Test
     public void execute_zeroKeywordsAndVeryLargeDateRange_noTaskFound() {
-        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 5);
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 6);
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(" ");
         TagContainsKeywordsPredicate tagPredicate = prepareTagPredicate(" ");
         DeadlineInRangePredicate deadlinePredicate =
@@ -128,13 +129,26 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
     private NameContainsKeywordsPredicate prepareNamePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Set.of(userInput.split("\\s+")));
+
+        String[] splitInputs = userInput.split("\\s+");
+        Set<Keyword> keywordSet = new HashSet<>();
+
+        for (String s : splitInputs) {
+            keywordSet.add(new Keyword(s));
+        }
+        return new NameContainsKeywordsPredicate(keywordSet);
     }
 
     /**
      * Parses {@code userInput} into a {@code TagContainsKeywordsPredicate}.
      */
     private TagContainsKeywordsPredicate prepareTagPredicate(String userInput) {
-        return new TagContainsKeywordsPredicate(new HashSet<>(Arrays.asList(userInput.split("\\s+"))));
+        String[] splitInputs = userInput.split("\\s+");
+        Set<Keyword> keywordSet = new HashSet<>();
+
+        for (String s : splitInputs) {
+            keywordSet.add(new Keyword(s));
+        }
+        return new TagContainsKeywordsPredicate(keywordSet);
     }
 }

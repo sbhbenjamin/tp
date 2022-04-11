@@ -2,6 +2,7 @@ package seedu.address.model.tag;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.StringUtil.isSameStringIgnoreCases;
 
 /**
  * Represents a Tag in the task list.
@@ -42,12 +43,13 @@ public class Tag implements Comparable<Tag> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Tag // instanceof handles nulls
-                && tagName.equals(((Tag) other).tagName)); // state check
+                && isSameStringIgnoreCases(tagName, ((Tag) other).tagName)); // state check
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        requireNonNull(this.tagName);
+        return tagName.toLowerCase().hashCode();
     }
 
     /**

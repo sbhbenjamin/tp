@@ -10,14 +10,16 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.keyword.Keyword;
 import seedu.address.testutil.TaskBuilder;
 
 public class TagContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
-        Set<String> firstPredicateKeywordList = new HashSet<>(Arrays.asList("first"));
-        Set<String> secondPredicateKeywordList = new HashSet<>(Arrays.asList("first", "second"));
+        Set<Keyword> firstPredicateKeywordList = new HashSet<>(Arrays.asList(new Keyword("first")));
+        Set<Keyword> secondPredicateKeywordList = new HashSet<>(Arrays.asList(new Keyword("first"),
+                new Keyword("second")));
 
         TagContainsKeywordsPredicate firstPredicate = new TagContainsKeywordsPredicate(firstPredicateKeywordList);
         TagContainsKeywordsPredicate secondPredicate = new TagContainsKeywordsPredicate(secondPredicateKeywordList);
@@ -49,19 +51,22 @@ public class TagContainsKeywordsPredicateTest {
         assertTrue(predicate.test(new TaskBuilder().withTags("CS3240").build()));
         // One keyword
         predicate = new TagContainsKeywordsPredicate(
-                Collections.singleton("CS2103T"));
+                Collections.singleton(new Keyword("CS2103T")));
         assertTrue(predicate.test(new TaskBuilder().withTags("CS2103T").build()));
 
         // Multiple keywords
-        predicate = new TagContainsKeywordsPredicate(new HashSet<>(Arrays.asList("CS2103T", "Tutorial")));
+        predicate = new TagContainsKeywordsPredicate(new HashSet<>(Arrays.asList(new Keyword("CS2103T"),
+                new Keyword("Tutorial"))));
         assertTrue(predicate.test(new TaskBuilder().withTags("CS2103T", "Tutorial").build()));
 
         // Only one matching keyword
-        predicate = new TagContainsKeywordsPredicate(new HashSet<>(Arrays.asList("CS2103T", "CS3240")));
+        predicate = new TagContainsKeywordsPredicate(new HashSet<>(Arrays.asList(new Keyword("CS2103T"),
+                new Keyword("CS3240"))));
         assertTrue(predicate.test(new TaskBuilder().withTags("CS3240").build()));
 
         // Mixed-case keywords
-        predicate = new TagContainsKeywordsPredicate(new HashSet<>(Arrays.asList("TutoriaL", "cs3240")));
+        predicate = new TagContainsKeywordsPredicate(new HashSet<>(Arrays.asList(new Keyword("TutoriaL"),
+                new Keyword("cs3240"))));
         assertTrue(predicate.test(new TaskBuilder().withTags("CS3240", "tutorial").build()));
     }
 
@@ -69,12 +74,14 @@ public class TagContainsKeywordsPredicateTest {
     public void test_tagDoesNotContainKeywords_returnsFalse() {
 
         // Non-matching keyword
-        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Collections.singleton("CS3240"));
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Collections.singleton(
+                new Keyword("CS3240")));
         assertFalse(predicate.test(new TaskBuilder().withTags("CS2103T", "Tutorial").build()));
 
-        // Keywords match name, description, completion status and deadline, but does not match tag
+        // Keywords match name, description, completion status, but does not match tag
         predicate = new TagContainsKeywordsPredicate(
-                new HashSet<>(Arrays.asList("Tutorial", "G1", "true", "2022-10-22")));
+                new HashSet<>(Arrays.asList(new Keyword("Tutorial"), new Keyword("G1"),
+                        new Keyword("true"))));
         assertFalse(predicate.test(new TaskBuilder()
                 .withName("Complete Tutorial")
                 .withDescription("Finish 3 parts of G1")
