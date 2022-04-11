@@ -899,7 +899,7 @@ testers are expected to do more *exploratory* testing.
 
         * For **Windows** user：Double-click harmonia.jar.
         * For **Mac/Linux** user: Open the terminal, navigate to the directory where harmonia.jar is located, then run `java -jar harmonia.jar` in the terminal.
-        
+
         * Expected: Shows the GUI with a set of sample tasks. The window size may not be optimum.
 
 2. Saving window preferences
@@ -1070,7 +1070,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No task is deleted. Error details are shown in the status message. The filtered tasks remain in the list.
 
 3. Delete multiple tasks while all tasks are being shown
-    
+
     1. Prerequisites: List all tasks using the `list` command. Multiple tasks are shown in the list.
 
     2. Test case: `delete 2 1 3`<br>
@@ -1106,17 +1106,16 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing data files
 
     * Expected: Default tasks are loaded instead. Upon an operation that attempts to interact with the tasks, e.g. add/delete/edit/mark/unmark tasks, the data will then be saved as data/harmonia.json.
-   
+
 2. Dealing with corrupted data files
-    
-    * Expected: An empty list of tasks is loaded instead. 
+
+    * Expected: An empty list of tasks is loaded instead.
        1. Upon an operation that attempts to interact with the tasks, e.g. add/delete/edit/mark/unmark tasks, the corrupted data will then be overwritten.
        2. If Harmonia is closed before any attempt to interact the tasks, the data file will not be overwritten.
 
-3. Dealing with data files with incorrect format
+4. Dealing with data files with incorrect format
 
     * Example: The deadline for a task is inputted as `2022-09-32`.
     * Expected: An empty list of tasks is loaded instead.
        1. Upon an operation that attempts to interact with the tasks, e.g. add/delete/edit/mark/unmark tasks, the data file will then be overwritten.
        2. If Harmonia is closed before any attempt to interact the tasks, the data file will not be overwritten.
-       
