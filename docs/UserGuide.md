@@ -98,8 +98,9 @@ Figure 1.5 depicts the user interface of Harmonia. The following descriptions ex
 
 3. Copy the file to the folder you want to use as the home folder for Harmonia.
 
-4. * For **Windows** user: double-click the file to start the app.
-   * For **Mac/Linux** user: open the terminal, navigate to the directory where harmonia.jar is located, then run `java -jar harmonia.jar` in the terminal.
+4. To run Harmonia, follow the instructions below according to your operating system.
+   * For **Windows** users: double-click the file to start the app.
+   * For **Mac/Linux** users: open the terminal, navigate to the directory where harmonia.jar is located, then run `java -jar harmonia.jar` in the terminal.
    * The [GUI](#54-gui) similar to *Figure 1.5* should appear in a few seconds.
 
 5. Type the command in the command box and press <kbd>↵Enter</kbd> to execute it.<br>
